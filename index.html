@@ -1747,7 +1747,7 @@
   .activity-reminder {
     position: fixed;
     left: 50%;
-    bottom: max(18px, calc(env(safe-area-inset-bottom, 0px) + 14px));
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 96px);
     transform: translate(-50%, 130%);
     width: min(92vw, 520px);
     z-index: 48;
@@ -1776,8 +1776,25 @@
   .reminder-kicker { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.08em; color:#7b746a; margin:0 0 2px; }
   .reminder-title { font-size:17px; font-weight:800; color:#2C2A4A; margin:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
   .reminder-detail { font-size:12px; color:#6e685f; margin:2px 0 0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-  .reminder-actions { display:flex; gap:6px; }
-  .reminder-actions button { min-width:44px; min-height:44px; border-radius:14px; border:1px solid rgba(184,134,11,.3); background:#fffaf0; font-weight:800; color:#2C2A4A; padding:0 9px; }
+  .reminder-actions {
+    display:grid;
+    grid-template-columns:repeat(4, minmax(0,1fr));
+    gap:6px;
+  }
+  .reminder-actions button {
+    min-width:0;
+    min-height:42px;
+    border-radius:13px;
+    border:1px solid rgba(184,134,11,.3);
+    background:#fffaf0;
+    font-weight:800;
+    color:#2C2A4A;
+    padding:0 7px;
+    font-size:12px;
+    white-space:nowrap;
+  }
+  .reminder-actions .reminder-edit { background:#f7f0df; }
+  .reminder-actions .reminder-delete { color:#8b3427; border-color:rgba(139,52,39,.34); }
   .reminder-actions .reminder-done { background:#1f7668; color:white; border-color:#1f7668; }
   .activity-reminder.swiping { transition:none; }
   html[dir=rtl] .activity-reminder { direction:rtl; grid-template-columns:auto minmax(0,1fr) 78px; }
@@ -1785,9 +1802,19 @@
   html[dir=rtl] .reminder-main { grid-column:2; grid-row:1; }
   html[dir=rtl] .reminder-actions { grid-column:1; grid-row:1; }
   @media (max-width: 430px) {
-    .activity-reminder { grid-template-columns:68px minmax(0,1fr); }
-    .reminder-actions { grid-column:1 / -1; width:100%; }
-    .reminder-actions button { flex:1; }
+    .activity-reminder {
+      width:calc(100vw - 24px);
+      grid-template-columns:68px minmax(0,1fr);
+      padding:9px;
+      border-radius:22px;
+      gap:8px;
+    }
+    .reminder-actions {
+      grid-column:1 / -1;
+      width:100%;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+    }
+    .reminder-actions button { min-height:40px; font-size:12px; }
     html[dir=rtl] .activity-reminder { grid-template-columns:minmax(0,1fr) 68px; }
     html[dir=rtl] .reminder-time { grid-column:2; }
     html[dir=rtl] .reminder-main { grid-column:1; }
@@ -1856,9 +1883,6 @@
           <svg viewBox="0 0 840 840" id="svg"></svg>
         </div>
       </div>
-      <p class="tap-hint" id="tapHint" data-i18n="tapHint">Tap the center label to mark the current activity done</p>
-
-
       <div class="activity-reminder" id="activityReminder" role="status" aria-live="polite" aria-label="Activity reminder">
         <div class="reminder-time" id="reminderTimeBox">
           <span class="clock-glyph" aria-hidden="true">◷</span>
@@ -1871,22 +1895,13 @@
         </div>
         <div class="reminder-actions">
           <button type="button" id="reminderSnooze">Snooze</button>
+          <button type="button" class="reminder-edit" id="reminderEdit">Edit</button>
+          <button type="button" class="reminder-delete" id="reminderDelete">Delete</button>
           <button type="button" class="reminder-done" id="reminderDone">Done</button>
         </div>
       </div>
     </div>
   </section>
-
-  <!-- Quick-action popover for the CURRENT activity, opened by tapping the dial's center badge -->
-  <div class="quick-sheet-backdrop" id="quickBackdrop"></div>
-  <div class="quick-sheet" id="quickSheet" role="dialog" aria-modal="true">
-    <p class="quick-sheet-label" data-i18n="quickNowLabel">Right now</p>
-    <p class="quick-sheet-title" id="quickTitle">—</p>
-    <div class="quick-sheet-actions">
-      <button id="quickDoneBtn" class="primary-btn" type="button" data-i18n="markDone">Mark done</button>
-      <button id="quickCloseBtn" type="button" data-i18n="close">Close</button>
-    </div>
-  </div>
 
   <!-- Moon detail popover, opened by tapping the moon icon on the dial rim -->
   <div class="quick-sheet-backdrop" id="moonBackdrop"></div>
@@ -2699,14 +2714,6 @@
   handPath.setAttribute('d', buildHandShape());
 
   // badge group (position updates via transform translate; text stays upright)
-  const badgeGroup = el('g', { class: 'badge-group' });
-  const badgeRect = el('rect', { x: -BADGE_W/2, y: -BADGE_H/2, width: BADGE_W, height: BADGE_H, rx: BADGE_H/2, class: 'badge-rect' });
-  const badgeText = el('text', { x: 0, y: -7, class: 'badge-text' });
-  const badgeTimeText = el('text', { x: 0, y: 15, class: 'badge-time-text' });
-  badgeGroup.appendChild(badgeRect);
-  badgeGroup.appendChild(badgeText);
-  badgeGroup.appendChild(badgeTimeText);
-  svg.appendChild(badgeGroup);
 
   // legend rows
   const legend = document.getElementById('legend');
@@ -2957,8 +2964,6 @@
 
     handGroup.setAttribute('transform', `rotate(${deg} ${CX} ${CY})`);
 
-    badgeGroup.setAttribute('transform', `translate(${CX} ${BADGE_CENTER_Y})`);
-
     const idx = activeIndex(hf);
     const activeBlock = idx >= 0 ? blocks[idx] : null;
     const activeId = activeBlock ? activeBlock.id : null;
@@ -2966,9 +2971,6 @@
       lastDialActiveId = activeId;
       renderSegments(activeId);
     }
-    badgeText.textContent = activeBlock ? blockDisplayLabel(activeBlock.label) : STRINGS[currentLang].freeTime;
-    badgeTimeText.textContent = activeBlock ? `${fmtClock12(activeBlock.start)}–${fmtClock12(activeBlock.end)}` : '';
-
     document.getElementById('clockLine').textContent = fmtClock12(hf);
     const dateLocale = currentLang === 'ar' ? 'ar' : 'en';
     document.getElementById('dateLine').textContent = now.toLocaleDateString(dateLocale, { weekday: 'short', month: 'short', day: 'numeric' });
@@ -3041,8 +3043,39 @@
   function normalizeDigits(s) {
     return s.replace(/[٠-٩]/g, ch => AR_DIGIT_MAP[ch] || ch);
   }
+  function normalizeArabicClockWords(s) {
+    let t = String(s || '');
+    // Spoken Arabic clock forms, including common speech-to-text variants.
+    // Examples: الساعة الحادية عشر والنصف -> 11:30, الساعة الرابعة والربع -> 4:15.
+    const hourWords = [
+      ['الثانية عشرة','الثاني عشر','الثانية عشر','اثنتا عشرة','اثنا عشر','اتناشر','12'],
+      ['الحادية عشرة','الحادي عشر','الحادية عشر','احدى عشرة','إحدى عشرة','حداشر','11'],
+      ['العاشرة','العاشر','10'],
+      ['التاسعة','التاسع','9'],
+      ['الثامنة','الثامن','8'],
+      ['السابعة','السابع','7'],
+      ['السادسة','السادس','6'],
+      ['الخامسة','الخامس','5'],
+      ['الرابعة','الرابع','4'],
+      ['الثالثة','الثالث','3'],
+      ['الثانية','الثاني','2'],
+      ['الواحدة','الأولى','الاولى','الواحد','1']
+    ];
+    const esc = x => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    for (const row of hourWords) {
+      const n = row[row.length - 1];
+      const variants = row.slice(0, -1).map(esc).join('|');
+      if (!variants) continue;
+      // half / quarter / three quarters, with or without و
+      t = t.replace(new RegExp(`(?:الساعة\\s+)?(?:${variants})\\s*(?:و)?النصف`, 'g'), `${n}:30`);
+      t = t.replace(new RegExp(`(?:الساعة\\s+)?(?:${variants})\\s*(?:و)?الربع`, 'g'), `${n}:15`);
+      t = t.replace(new RegExp(`(?:الساعة\\s+)?(?:${variants})\\s*(?:و)?ثلاثة\\s+أرباع`, 'g'), `${n}:45`);
+      t = t.replace(new RegExp(`(?:الساعة\\s+)?(?:${variants})`, 'g'), `${n}`);
+    }
+    return t;
+  }
   function normalizeTimePhrase(s) {
-    return normalizeDigits(String(s || ''))
+    return normalizeArabicClockWords(normalizeDigits(String(s || '')))
       .replace(/o['’]?clock/ig, '')
       .replace(/\bin\s+the\s+morning\b/ig, ' am')
       .replace(/\bin\s+the\s+afternoon\b/ig, ' pm')
@@ -3287,6 +3320,22 @@
       if (PRAYER_LABELS_AR[l] && inputWords.includes(PRAYER_LABELS_AR[l])) return l;
     }
     return null;
+  }
+  function isDuhaPrayer(text) {
+    const t = String(text || '').replace(/[ًٌٍَُِّْ]/g, '');
+    return /(?:صلاة\s*)?ال?ضحى/.test(t);
+  }
+  function extractDuhaTime(text) {
+    const normalized = normalizeTimePhrase(text);
+    const m = normalized.match(/(?:في\s+|الساعة\s*)?(\d{1,2}(?::\d{2})?\s*(?:am|pm|ص|م)?)/i);
+    if (!m) return null;
+    let token = m[1].trim();
+    // Duha is a morning prayer. If no period was spoken, interpret 1–11 as AM.
+    if (!/(?:am|pm|ص|م)/i.test(token)) {
+      const h = parseInt(token, 10);
+      if (h >= 1 && h <= 11) token += ' am';
+    }
+    return parseTimeToken(token);
   }
   function parsePrayerTime(token, label) {
     token = normalizeDigits(token.trim());
@@ -3626,6 +3675,29 @@
       return pendingPrompt('update-time', blockDisplayLabel(match.label));
     }
 
+    // Optional prayer completion/report: Duha is not one of the five fixed prayer markers,
+    // but users can log it naturally, e.g. "صليت الضحى الساعة الحادية عشر والنصف".
+    if (isDuhaPrayer(text) && hasCompletionIntent(text)) {
+      const reportedTime = extractDuhaTime(text);
+      if (reportedTime !== null) {
+        const duhaName = currentLang === 'ar' ? 'صلاة الضحى' : 'Duha prayer';
+        const existing = blocks.find(b => isDuhaPrayer(b.label) && Math.abs(b.start - reportedTime) < 0.75);
+        const block = existing || { id: nextId(), start: reportedTime, end: reportedTime + 0.5, label: duhaName, color: PALETTE[blocks.length % PALETTE.length], done: true, note: '' };
+        block.start = reportedTime;
+        block.end = reportedTime + 0.5;
+        block.label = duhaName;
+        block.done = true;
+        block.note = '';
+        if (!existing) blocks.push(block);
+        sortBlocks(); saveBlocks(); renderAll();
+        const desc = currentLang === 'ar'
+          ? `تم تسجيل صلاة الضحى كمكتملة · ${fmtClock12(reportedTime)}`
+          : `Logged Duha prayer as completed · ${fmtClock12(reportedTime)}`;
+        addLog('Activity', desc, block.id);
+        return desc;
+      }
+    }
+
     // prayer completion/report (e.g. "صليت الفجر الساعة ٥:٣٠")
     const reportedPrayer = findMatchingPrayerLabel(text);
     const isCompletionReport = /\b(?:prayed|completed|finished|did)\b/i.test(text) || /(?:صليت|أديت|أديت صلاة|انتهيت|أكملت)/.test(text);
@@ -3795,7 +3867,6 @@
       sheet.classList.add('open');
       backdrop.classList.add('open');
       if (onOpen) onOpen();
-      dismissTapHint();
     }
     function close() {
       sheet.classList.remove('open');
@@ -3815,9 +3886,6 @@
   const voiceSheet = makeSheet('voiceSheet', 'voiceBackdrop', 'openVoiceBtn', 'voiceCloseBtn', () => { setTimeout(() => commandInput.focus(), 250); });
   openSheets = [scheduleSheet, logsSheet, voiceSheet];
 
-  // ---- Quick-action popover for the CURRENT activity (tap the dial's center label) ----
-  const quickSheet = document.getElementById('quickSheet');
-
   // ---- Activity reminder bubble + best-effort browser notification ----
   const REMINDER_STATE_KEY = 'dailyRhythmReminderState_v1';
   let reminderState = { date: '', ignored: {}, snoozedUntil: {} };
@@ -3829,6 +3897,8 @@
   const reminderDetail = document.getElementById('reminderDetail');
   const reminderTime = document.getElementById('reminderTime');
   const reminderSnooze = document.getElementById('reminderSnooze');
+  const reminderEdit = document.getElementById('reminderEdit');
+  const reminderDelete = document.getElementById('reminderDelete');
   const reminderDone = document.getElementById('reminderDone');
 
   function todayKey(d = new Date()) {
@@ -3912,6 +3982,8 @@
     reminderDetail.textContent = reminderText(hit);
     document.getElementById('reminderKicker').textContent = currentLang === 'ar' ? 'تذكير' : 'Reminder';
     reminderSnooze.textContent = currentLang === 'ar' ? 'غفوة ١٠د' : 'Snooze 10m';
+    reminderEdit.textContent = currentLang === 'ar' ? 'تعديل' : 'Edit';
+    reminderDelete.textContent = currentLang === 'ar' ? 'حذف' : 'Delete';
     reminderDone.textContent = currentLang === 'ar' ? 'تم' : 'Done';
     reminderEl.classList.add('show');
     maybeBrowserNotify(hit);
@@ -3935,6 +4007,27 @@
   reminderSnooze?.addEventListener('click', e => {
     e.stopPropagation(); if (!reminderVisibleBlockId) return;
     reminderState.snoozedUntil[reminderVisibleBlockId] = Date.now() + 10*60*1000; saveReminderState(); hideActivityReminder();
+  });
+  reminderEdit?.addEventListener('click', e => {
+    e.stopPropagation();
+    const id = reminderVisibleBlockId;
+    const b = blocks.find(x => x.id === id);
+    if (!b) return;
+    if (typeof scheduleSheet?.open === 'function') scheduleSheet.open();
+    else {
+      document.getElementById('scheduleSheet')?.classList.add('open');
+      document.getElementById('scheduleBackdrop')?.classList.add('open');
+    }
+    hideActivityReminder();
+    setTimeout(() => openActivityEditor(b), 120);
+  });
+  reminderDelete?.addEventListener('click', e => {
+    e.stopPropagation();
+    const b = blocks.find(x => x.id === reminderVisibleBlockId);
+    if (!b) return;
+    const id = b.id;
+    deleteScheduledBlock(b);
+    if (!blocks.some(x => x.id === id)) hideActivityReminder();
   });
   reminderDone?.addEventListener('click', e => {
     e.stopPropagation(); const b = blocks.find(x => x.id === reminderVisibleBlockId); if (!b) return;
@@ -3965,44 +4058,6 @@
     const end=()=>{ if(!tracking)return; tracking=false; reminderEl.classList.remove('swiping'); reminderEl.style.transform=''; const rtl=document.documentElement.dir==='rtl'; const ignored=rtl?dx>70:dx<-70; if(ignored&&reminderVisibleBlockId){ reminderState.ignored[reminderVisibleBlockId]=true; saveReminderState(); hideActivityReminder(); } };
     reminderEl.addEventListener('pointerup',end); reminderEl.addEventListener('pointercancel',end);
   })();
-
-  const quickBackdrop = document.getElementById('quickBackdrop');
-  const quickTitle = document.getElementById('quickTitle');
-  const quickDoneBtn = document.getElementById('quickDoneBtn');
-  let quickActiveBlockId = null;
-
-  function openQuickSheet() {
-    const hf = currentHourFraction(new Date());
-    const idx = activeIndex(hf);
-    if (idx < 0) return; // free time — nothing to mark
-    const b = blocks[idx];
-    quickActiveBlockId = b.id;
-    quickTitle.textContent = blockDisplayLabel(b.label);
-    quickDoneBtn.textContent = b.done
-      ? (currentLang === 'ar' ? 'إلغاء الإكمال' : 'Unmark done')
-      : (currentLang === 'ar' ? 'تسجيل كمكتمل' : 'Mark done');
-    quickSheet.classList.add('open');
-    quickBackdrop.classList.add('open');
-    dismissTapHint();
-  }
-  function closeQuickSheet() {
-    quickSheet.classList.remove('open');
-    quickBackdrop.classList.remove('open');
-    quickActiveBlockId = null;
-  }
-  quickDoneBtn.addEventListener('click', () => {
-    const b = blocks.find(x => x.id === quickActiveBlockId);
-    if (b) {
-      b.done = !b.done;
-      saveBlocks(); renderLegend();
-      addLog(b.done ? 'Activity' : 'Edit', b.done ? `Marked "${b.label}" done` : `Unmarked "${b.label}"`);
-    }
-    closeQuickSheet();
-  });
-  document.getElementById('quickCloseBtn').addEventListener('click', closeQuickSheet);
-  quickBackdrop.addEventListener('click', closeQuickSheet);
-  badgeGroup.style.cursor = 'pointer';
-  badgeGroup.addEventListener('click', openQuickSheet);
 
   // ---- Moon detail popover: tap the moon icon on the dial rim ----
   const moonSheet = document.getElementById('moonSheet');
@@ -4099,20 +4154,6 @@
     dialWrapEl.addEventListener('touchend', end);
     dialWrapEl.addEventListener('touchcancel', end);
   })();
-
-  // ---- One-time hint (fades after first interaction or a few seconds) ----
-  const TAP_HINT_KEY = "dailyRhythmTapHintSeen_v1";
-  const tapHintEl = document.getElementById('tapHint');
-  let tapHintDismissed = false;
-  try { tapHintDismissed = !!localStorage.getItem(TAP_HINT_KEY); } catch (e) { /* default false */ }
-  if (tapHintDismissed && tapHintEl) tapHintEl.classList.add('hidden');
-  function dismissTapHint() {
-    if (tapHintDismissed) return;
-    tapHintDismissed = true;
-    if (tapHintEl) tapHintEl.classList.add('hidden');
-    try { localStorage.setItem(TAP_HINT_KEY, '1'); } catch (e) { /* unavailable */ }
-  }
-  setTimeout(dismissTapHint, 7000);
 
   const langToggleBtn = document.getElementById('langToggle');
   langToggleBtn.addEventListener('click', () => {
