@@ -1321,10 +1321,11 @@
     background-image: var(--moon-current-image) !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
-    background-size: cover !important;
+    background-size: 92% 92% !important;
     background-color: transparent !important;
     border-radius: 50% !important;
     overflow: hidden !important;
+    image-rendering: auto !important;
   }
   .sky-moon-badge::after { display: none !important; }
   .sm-sun, .sm-moon { display: none !important; }
@@ -1333,7 +1334,7 @@
     background-image: var(--moon-current-image) !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
-    background-size: contain !important;
+    background-size: 92% 92% !important;
     background-color: transparent !important;
     box-shadow: none !important;
     border: none !important;
@@ -1409,10 +1410,10 @@
   }
 
   .sky-moon-badge {
-    width: 44px !important;
-    height: 44px !important;
+    width: 56px !important;
+    height: 56px !important;
     background-image: var(--moon-current-image) !important;
-    background-size: cover !important;
+    background-size: 92% 92% !important;
     background-position: center !important;
     border: 2px solid #C9A227 !important;
     box-shadow: 0 8px 18px rgba(44,42,74,0.20), 0 0 0 3px rgba(243,233,210,0.94) !important;
@@ -1485,9 +1486,9 @@
   }
 
   #moonSheet .moon-phase-art {
-    width: 124px !important;
-    height: 124px !important;
-    min-height: 124px !important;
+    width: 136px !important;
+    height: 136px !important;
+    min-height: 136px !important;
     margin: 10px auto 14px !important;
     border-radius: 50%;
     background-size: contain !important;
@@ -1519,8 +1520,8 @@
     min-width: 110px;
   }
   .sky-moon-badge {
-    width: 44px !important;
-    height: 44px !important;
+    width: 56px !important;
+    height: 56px !important;
     transform: translate(-50%, -50%) !important;
   }
   .sky-moon-badge:hover,
@@ -1536,12 +1537,12 @@
   /* --- final moon orbit polish --- */
   .sky-moon-badge {
     z-index: 9 !important;
-    box-shadow: 0 6px 16px rgba(44,42,74,0.24), 0 0 0 3px rgba(201,162,39,0.68) !important;
+    box-shadow: 0 6px 16px rgba(44,42,74,0.22), 0 0 0 2px rgba(201,162,39,0.62) !important;
   }
   .sky-moon-badge::before {
     content: '';
     position: absolute;
-    inset: -8px;
+    inset: -6px;
     border-radius: 50%;
   }
 
@@ -1740,7 +1741,62 @@
   .activity-edit-actions button { min-height:44px; border-radius:11px; padding:0 14px; border:1px solid var(--line); font-weight:800; }
   #activityEditSave { background:var(--andalus-green); color:#FFF9EC; border-color:var(--andalus-green); }
   @media (max-width:420px) { .activity-edit-times { grid-template-columns:1fr; } }
+
+
+  /* --- activity reminder bubble --- */
+  .activity-reminder {
+    position: fixed;
+    left: 50%;
+    bottom: max(18px, calc(env(safe-area-inset-bottom, 0px) + 14px));
+    transform: translate(-50%, 130%);
+    width: min(92vw, 520px);
+    z-index: 48;
+    display: grid;
+    grid-template-columns: 78px minmax(0,1fr) auto;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 24px;
+    border: 1px solid rgba(184,134,11,.42);
+    background: rgba(255,251,240,.97);
+    box-shadow: 0 18px 42px rgba(44,42,74,.22);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .22s ease, opacity .22s ease;
+    touch-action: pan-y;
+  }
+  .activity-reminder.show { transform: translate(-50%,0); opacity: 1; pointer-events: auto; }
+  .reminder-time {
+    min-height: 58px; border-radius: 18px; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    border:1px solid rgba(184,134,11,.35); background:rgba(201,162,39,.11); color:#2C2A4A; font-weight:800;
+  }
+  .reminder-time .clock-glyph { font-size: 18px; line-height:1; }
+  .reminder-time .time-copy { font-size: 13px; margin-top:3px; white-space:nowrap; }
+  .reminder-main { min-width:0; cursor:pointer; }
+  .reminder-kicker { font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.08em; color:#7b746a; margin:0 0 2px; }
+  .reminder-title { font-size:17px; font-weight:800; color:#2C2A4A; margin:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .reminder-detail { font-size:12px; color:#6e685f; margin:2px 0 0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .reminder-actions { display:flex; gap:6px; }
+  .reminder-actions button { min-width:44px; min-height:44px; border-radius:14px; border:1px solid rgba(184,134,11,.3); background:#fffaf0; font-weight:800; color:#2C2A4A; padding:0 9px; }
+  .reminder-actions .reminder-done { background:#1f7668; color:white; border-color:#1f7668; }
+  .activity-reminder.swiping { transition:none; }
+  html[dir=rtl] .activity-reminder { direction:rtl; grid-template-columns:auto minmax(0,1fr) 78px; }
+  html[dir=rtl] .reminder-time { grid-column:3; grid-row:1; }
+  html[dir=rtl] .reminder-main { grid-column:2; grid-row:1; }
+  html[dir=rtl] .reminder-actions { grid-column:1; grid-row:1; }
+  @media (max-width: 430px) {
+    .activity-reminder { grid-template-columns:68px minmax(0,1fr); }
+    .reminder-actions { grid-column:1 / -1; width:100%; }
+    .reminder-actions button { flex:1; }
+    html[dir=rtl] .activity-reminder { grid-template-columns:minmax(0,1fr) 68px; }
+    html[dir=rtl] .reminder-time { grid-column:2; }
+    html[dir=rtl] .reminder-main { grid-column:1; }
+    html[dir=rtl] .reminder-actions { grid-column:1 / -1; grid-row:2; }
+  }
+
 </style>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#F3E9D2">
 </head>
 <body>
 <noscript>
@@ -1801,6 +1857,23 @@
         </div>
       </div>
       <p class="tap-hint" id="tapHint" data-i18n="tapHint">Tap the center label to mark the current activity done</p>
+
+
+      <div class="activity-reminder" id="activityReminder" role="status" aria-live="polite" aria-label="Activity reminder">
+        <div class="reminder-time" id="reminderTimeBox">
+          <span class="clock-glyph" aria-hidden="true">◷</span>
+          <span class="time-copy" id="reminderTime">--:--</span>
+        </div>
+        <div class="reminder-main" id="reminderMain" role="button" tabindex="0">
+          <p class="reminder-kicker" id="reminderKicker">Reminder</p>
+          <p class="reminder-title" id="reminderTitle">—</p>
+          <p class="reminder-detail" id="reminderDetail">—</p>
+        </div>
+        <div class="reminder-actions">
+          <button type="button" id="reminderSnooze">Snooze</button>
+          <button type="button" class="reminder-done" id="reminderDone">Done</button>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1870,6 +1943,7 @@
         <div id="suggestionsList"></div>
       </div>
       <button class="reset-link" id="resetBtn" data-i18n="resetBtn">Reset to default schedule</button>
+      <button class="reset-link" id="enableReminderNotifications" type="button" data-i18n="enableReminders">Enable lock-screen reminders</button>
     </div>
   </div>
 
@@ -1994,6 +2068,7 @@
       todayRhythm: "Today's rhythm",
       suggestionsTitle: "Activities not in the list",
       resetBtn: "Reset to default schedule",
+      enableReminders: "Enable lock-screen reminders",
       activityLogTitle: "Activity log",
       logSearchPlaceholder: 'Search logs — e.g. "fajr" or "gym"',
       filterAll: "All", filterAdd: "Add", filterEdit: "Edit", filterDelete: "Delete", filterActivity: "Activity",
@@ -2022,6 +2097,7 @@
       todayRhythm: "إيقاع اليوم",
       suggestionsTitle: "أنشطة غير مدرجة",
       resetBtn: "إعادة ضبط الجدول الافتراضي",
+      enableReminders: "تفعيل تذكيرات شاشة القفل",
       activityLogTitle: "سجل النشاط",
       logSearchPlaceholder: 'ابحث في السجل — مثال "الفجر" أو "الجيم"',
       filterAll: "الكل", filterAdd: "إضافة", filterEdit: "تعديل", filterDelete: "حذف", filterActivity: "نشاط",
@@ -2927,6 +3003,7 @@
       const row = legend.querySelector(`.row[data-id="${b.id}"]`);
       if (row) row.classList.toggle('active', i === idx);
     });
+    updateActivityReminder(now);
   }
 
   function updateDialScale() {
@@ -2951,8 +3028,23 @@
   function normalizeDigits(s) {
     return s.replace(/[٠-٩]/g, ch => AR_DIGIT_MAP[ch] || ch);
   }
+  function normalizeTimePhrase(s) {
+    return normalizeDigits(String(s || ''))
+      .replace(/o['’]?clock/ig, '')
+      .replace(/\bin\s+the\s+morning\b/ig, ' am')
+      .replace(/\bin\s+the\s+afternoon\b/ig, ' pm')
+      .replace(/\bin\s+the\s+evening\b/ig, ' pm')
+      .replace(/\bat\s+night\b/ig, ' pm')
+      .replace(/(?:في\s+)?الصباح|صباح[اً]?|صباحا/ig, ' am')
+      .replace(/(?:في\s+)?المساء|مساء[ًاأ]?|مساءا/ig, ' pm')
+      .replace(/بعد\s+الظهر|ظهر[اً]?|ظهرا/ig, ' pm')
+      .replace(/منتصف\s+الليل/ig, ' 12 am')
+      .replace(/الظهر/ig, ' 12 pm')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
   function parseTimeToken(token) {
-    token = normalizeDigits(token.trim());
+    token = normalizeTimePhrase(token.trim());
     const m = token.match(/(\d{1,2})(?::(\d{2}))?\s*(am|pm|ص|م)?/i);
     if (!m) return null;
     let hour = parseInt(m[1], 10);
@@ -2965,16 +3057,32 @@
     if (period === 'م') period = 'pm';
     if (period === 'pm' && hour !== 12) hour += 12;
     if (period === 'am' && hour === 12) hour = 0;
-    if (!period && hour >= 1 && hour <= 5) hour += 12; // heuristic: bare "1-5" usually means afternoon
+    if (!period && hour >= 1 && hour <= 5) hour += 12;
     return hour + min / 60;
   }
   const TIME_TOKEN = '\\d{1,2}(?::\\d{2})?\\s*(?:am|pm|ص|م)?';
   function extractTimeRange(text) {
-    text = normalizeDigits(text);
-    const re = new RegExp(`(${TIME_TOKEN})\\s*(?:to|-|–|until|till|إلى|حتى)\\s*(${TIME_TOKEN})`, 'i');
+    text = normalizeTimePhrase(text);
+    const re = /(?:\bbetween\s+|\bfrom\s+|من\s+)?(\d{1,2}(?::\d{2})?\s*(?:am|pm|ص|م)?)\s*(?:to|and|-|–|until|till|إلى|حتى|و)\s*(?:الساعة\s+)?(\d{1,2}(?::\d{2})?\s*(?:am|pm|ص|م)?)/i;
     const m = text.match(re);
     if (m) {
-      const start = parseTimeToken(m[1]), end = parseTimeToken(m[2]);
+      let a = m[1].trim(), b = m[2].trim();
+      const pa = a.match(/\b(am|pm|ص|م)\b/i);
+      const pb = b.match(/\b(am|pm|ص|م)\b/i);
+      const h1 = parseInt(a, 10), h2 = parseInt(b, 10);
+      if (!pa && pb) {
+        const p2 = pb[1].toLowerCase();
+        if ((p2 === 'pm' || p2 === 'م') && h2 === 12 && h1 >= 10 && h1 <= 11) a += ' am';
+        else if ((p2 === 'am' || p2 === 'ص') && h2 === 12 && h1 >= 10 && h1 <= 11) a += ' pm';
+        else a += ' ' + pb[1];
+      }
+      if (pa && !pb) {
+        const p1 = pa[1].toLowerCase();
+        if ((p1 === 'am' || p1 === 'ص') && h1 >= 10 && h1 <= 11 && h2 === 12) b += ' pm';
+        else if ((p1 === 'pm' || p1 === 'م') && h1 >= 10 && h1 <= 11 && h2 === 12) b += ' am';
+        else b += ' ' + pa[1];
+      }
+      const start = parseTimeToken(a), end = parseTimeToken(b);
       if (start !== null && end !== null) return { start, end: end <= start ? end + 24 : end };
     }
     return null;
@@ -2990,8 +3098,8 @@
     return null;
   }
   function extractSingleTime(text) {
-    text = normalizeDigits(text);
-    const re = new RegExp(`\\b(?:at|في|الساعة)\\s+(${TIME_TOKEN})`, 'i');
+    text = normalizeTimePhrase(text);
+    const re = /\b(?:at|في|الساعة)\s+(\d{1,2}(?::\d{2})?\s*(?:am|pm|ص|م)?)/i;
     const m = text.match(re);
     return m ? parseTimeToken(m[1]) : null;
   }
@@ -3002,7 +3110,7 @@
     "Walk": ["walk", "walking", "stroll"],
     "App development": ["app", "application", "coding", "development", "programming"],
     "Qur'an & reading": ["quran", "qur'an", "reading", "read"],
-    "Sleep": ["sleep", "bed", "bedtime"],
+    "Sleep": ["sleep", "bed", "bedtime", "nap", "napping", "siesta"],
     "Call home": ["call home", "family call", "call family"],
     "Wind down": ["wind down", "relax", "relaxing", "rest"],
     "Job search / swim": ["job search", "job hunting", "swim", "swimming"]
@@ -3024,7 +3132,7 @@
     "Walk": ["المشي", "مشي", "المشية"],
     "App development": ["التطبيق", "تطبيقي", "البرمجة", "تطوير", "التطبيق الخاص بي"],
     "Qur'an & reading": ["القرآن", "قرآن", "قراءة", "القراءة"],
-    "Sleep": ["النوم", "نوم"],
+    "Sleep": ["النوم", "نوم", "قيلولة", "غفوة"],
     "Call home": ["اتصال", "العائلة", "الاهل", "أهلي"],
     "Wind down": ["استرخاء", "راحة"],
     "Job search / swim": ["السباحة", "سباحة", "وظيفة", "عمل جديد", "البحث عن عمل"],
@@ -3247,18 +3355,42 @@
     return joined.charAt(0).toUpperCase() + joined.slice(1);
   }
 
+  function cleanActivityPhrase(text) {
+    let t = normalizeTimePhrase(text)
+      .replace(/^(?:please\s+)?(?:i\s+(?:want|would like)\s+to\s+|i\s+want\s+|أنا\s+)/i, '')
+      .replace(/^(?:add|schedule|set|put|insert|create)\s+/i, '')
+      .trim();
+    const rangeRe = /(?:\bbetween\s+|\bfrom\s+)?(\d{1,2}(?::\d{2})?\s*(?:am|pm|ص|م)?)\s*(?:to|and|-|–|until|till|إلى|حتى|و)\s*(\d{1,2}(?::\d{2})?\s*(?:am|pm|ص|م)?)/ig;
+    t = t.replace(rangeRe, ' ');
+    t = t.replace(/\b(?:for|لمدة)\s+\d+(?:\.\d+)?\s*(?:hour|hr|hours|hrs|minute|min|minutes|mins|ساعة|ساعات|دقيقة|دقائق)\b/ig, ' ');
+    t = t.replace(/\b(?:at|from|في|الساعة|من)\s+\d{1,2}(?::\d{2})?\s*(?:am|pm|ص|م)?/ig, ' ');
+    t = t.replace(/\b(?:today|this morning|this afternoon|this evening|tonight)\b/ig, ' ');
+    t = t.replace(/\b(?:completed|finished|done|أنجزت|أكملت|كملت)\b.*/i, ' ');
+    return t.replace(/[,.،]+/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+
+  function semanticActivityName(text) {
+    const raw = cleanActivityPhrase(text);
+    const low = raw.toLowerCase();
+    if (!raw) return 'Activity';
+    if (/\b(?:take|have)?\s*(?:a\s+)?(?:nap|napping|siesta)\b/i.test(low)) return 'Nap';
+    if (/\b(?:go\s+)?(?:swim|swimming)\b/i.test(low)) return 'Swimming';
+    if (/\b(?:go\s+to\s+the\s+)?gym\b/i.test(low) || /\b(?:workout|exercise|fitness|weight training|strength training|sport class|sports class)\b/i.test(low)) return 'Gym';
+    if (/\b(?:walk|walking|stroll)\b/i.test(low)) return 'Walk';
+    if (/\b(?:run|running|jog|jogging)\b/i.test(low)) return 'Run';
+    if (/\b(?:dinner|supper|evening meal)\b/i.test(low)) return 'Dinner';
+    if (/\b(?:lunch|midday meal)\b/i.test(low)) return 'Lunch';
+    if (/[\u0600-\u06FF]/.test(raw)) {
+      if (/(قيلولة|غفوة)/.test(raw)) return 'قيلولة';
+      if (/(سباحة|اسبح|أسبح)/.test(raw)) return 'سباحة';
+      if (/(جيم|النادي|نادي رياضي|تمرين رياضي|تمارين|رياضة|لياقة)/.test(raw)) return 'Gym';
+      return raw.charAt(0).toUpperCase() + raw.slice(1);
+    }
+    return normalizeActionName(raw);
+  }
+
   function guessActivityName(text) {
-    let t = text.replace(/^(i|أنا)\s+/i, '');
-    const re = new RegExp(`(${TIME_TOKEN})\\s*(?:to|-|–|until|till|إلى|حتى)\\s*(${TIME_TOKEN})`, 'ig');
-    t = t.replace(re, '');
-    t = t.replace(/\b(?:for|لمدة)\s+\d+(?:\.\d+)?\s*(?:hour|hr|hours|hrs|minute|min|minutes|mins|ساعة|ساعات|دقيقة|دقائق)\b/ig, '');
-    t = t.replace(/\b(at|from|في|الساعة|من)\s+\d{1,2}(?::\d{2})?\s*(?:am|pm|ص|م)?/ig, '');
-    t = t.replace(/\b(completed|finished|أنجزت|أكملت|كملت)\b.*/i, '');
-    t = t.replace(/[,.،]+$/, '').trim();
-    if (!t) return "Activity";
-    // Arabic verb conjugation normalization isn't implemented yet — pass Arabic text through as-is.
-    if (/[\u0600-\u06FF]/.test(t)) return t.charAt(0).toUpperCase() + t.slice(1);
-    return normalizeActionName(t);
+    return semanticActivityName(text);
   }
 
   const AR_REMOVE_WORDS = ['احذف', 'امسح', 'ازل', 'إزالة', 'الغاء', 'ألغِ', 'الغِ', 'شيل', 'شيله', 'احذفه'];
@@ -3294,9 +3426,108 @@
     return T[key][L](...vars);
   }
 
+  function hasCompletionIntent(text) {
+    return /\b(?:done|did|completed|finished|marked|actually did|actually done|worked on|prayed)\b/i.test(text)
+      || /(?:أنجزت|أكملت|كملت|خلصت|انتهيت|فعلت|عملت|صليت)/.test(text);
+  }
+
+  function hasSchedulingIntent(text) {
+    if (isExplicitCommand(text)) return true;
+    const normalized = normalizeTimePhrase(text);
+    const hasRangeLanguage = /\b(?:between|from)\b/i.test(normalized) || extractTimeRange(normalized) !== null;
+    const hasAtTime = extractSingleTime(normalized) !== null;
+    return !hasCompletionIntent(normalized) && (hasRangeLanguage || hasAtTime);
+  }
+
+  function addOrReplaceScheduledActivity(name, start, end) {
+    const EPS = 1 / 120;
+    const sameSlot = blocks.find(b => Math.abs(b.start - start) < EPS && Math.abs(b.end - end) < EPS);
+    if (sameSlot) {
+      const oldName = blockDisplayLabel(sameSlot.label);
+      sameSlot.label = name;
+      sameSlot.done = false;
+      sameSlot.note = '';
+      sortBlocks(); saveBlocks(); renderAll();
+      const m = currentLang === 'ar'
+        ? `تم تحديث الفترة ${fmtClock12(start)}–${fmtClock12(end)} من "${oldName}" إلى "${name}".`
+        : `Updated the ${fmtClock12(start)}–${fmtClock12(end)} slot from "${oldName}" to "${name}".`;
+      addLog('Edit', m, sameSlot.id);
+      return m;
+    }
+    const color = PALETTE[blocks.length % PALETTE.length];
+    const block = { id: nextId(), start, end, label: name, color, done: false, note: '' };
+    blocks.push(block);
+    sortBlocks(); saveBlocks(); renderAll();
+    const m = msg('added', name, fmtClock12(start), fmtClock12(end));
+    addLog('Add', m, block.id);
+    return m;
+  }
+
+
+  let pendingScheduleIntent = null;
+
+  function extractLooseTime(text) {
+    const normalized = normalizeTimePhrase(text);
+    const direct = normalized.match(/^\s*(?:to\s+|إلى\s+)?(\d{1,2}(?::\d{2})?\s*(?:am|pm|ص|م)?)\s*$/i);
+    if (direct) return parseTimeToken(direct[1]);
+    const anywhere = normalized.match(/(?:to|إلى|at|في|الساعة)\s+(\d{1,2}(?::\d{2})?\s*(?:am|pm|ص|م)?)/i);
+    return anywhere ? parseTimeToken(anywhere[1]) : null;
+  }
+
+  function pendingPrompt(kind, label = '') {
+    if (currentLang === 'ar') {
+      if (kind === 'add-time') return `في أي وقت تريد جدولة «${label}»؟ يمكنك قول: من ٤ إلى ٥ مساءً.`;
+      if (kind === 'update-time') return `ما الوقت الجديد لـ «${label}»؟ يمكنك قول: إلى ٦ مساءً أو من ٦ إلى ٧ مساءً.`;
+      return 'أي نشاط تريد تحديث وقته؟';
+    }
+    if (kind === 'add-time') return `What time should I schedule “${label}”? You can say “4 PM to 5 PM”.`;
+    if (kind === 'update-time') return `What is the new time for “${label}”? You can say “to 6 PM” or “6 PM to 7 PM”.`;
+    return 'Which activity do you want to update?';
+  }
+
+  function resolvePendingScheduleIntent(text) {
+    if (!pendingScheduleIntent) return null;
+    const p = pendingScheduleIntent;
+    const range = extractTimeRange(text);
+    const single = extractSingleTime(text) ?? extractLooseTime(text);
+
+    if (p.type === 'add-time' && (range || single !== null)) {
+      pendingScheduleIntent = null;
+      const start = range ? range.start : single;
+      const end = range ? range.end : start + 0.5;
+      return addOrReplaceScheduledActivity(p.name, start, end);
+    }
+
+    if (p.type === 'update-time' && p.blockId && (range || single !== null)) {
+      const block = blocks.find(b => b.id === p.blockId);
+      pendingScheduleIntent = null;
+      if (!block) return msg('updateNotFound');
+      if (range) { block.start = range.start; block.end = range.end; }
+      else {
+        const duration = Math.max(0.25, block.end - block.start);
+        block.start = single; block.end = single + duration;
+      }
+      sortBlocks(); saveBlocks(); renderAll();
+      const m = msg('updated', blockDisplayLabel(block.label), fmtClock12(block.start), fmtClock12(block.end));
+      addLog('Edit', m, block.id);
+      return m;
+    }
+
+    if (p.type === 'choose-update-target') {
+      const match = findMatchingBlock(text);
+      if (match) {
+        pendingScheduleIntent = { type: 'update-time', blockId: match.id };
+        return resolvePendingScheduleIntent(p.range ? `${fmtClock12(p.range.start)} to ${fmtClock12(p.range.end)}` : p.single !== null ? fmtClock12(p.single) : '');
+      }
+    }
+    return null;
+  }
+
   function parseCommand(raw, forcedLabel = null) {
     const text = normalizeDigits(raw.trim());
     const lower = text.toLowerCase();
+    const pendingResult = resolvePendingScheduleIntent(text);
+    if (pendingResult) return pendingResult;
 
     // ---- remove ----
     const arRemoveRest = stripLeadingArabicKeyword(text, AR_REMOVE_WORDS);
@@ -3324,17 +3555,15 @@
       if (range) { start = range.start; end = range.end; }
       else if (singleStart !== null && duration !== null) { start = singleStart; end = singleStart + duration; }
       else if (singleStart !== null) { start = singleStart; end = singleStart + 0.5; }
-      else return msg('addNoTime');
-      let name = forcedLabel || rest.split(/\b(at|from|for|في|الساعة|من|لمدة)\b/i)[0].trim().replace(/[,.،]$/, '');
-      if (!name) name = "Activity";
-      if (!forcedLabel && !/[\u0600-\u06FF]/.test(name)) name = normalizeActionName(name);
-      name = (name.charAt(0).toUpperCase() + name.slice(1)).slice(0, 80);
-      const color = PALETTE[blocks.length % PALETTE.length];
-      blocks.push({ id: nextId(), start, end, label: name, color, done: false, note: "" });
-      sortBlocks(); saveBlocks(); renderAll();
-      const m = msg('added', name, fmtClock12(start), fmtClock12(end));
-      addLog('Add', m);
-      return m;
+      else {
+        let pendingName = forcedLabel || semanticActivityName(rest);
+        pendingName = (pendingName || 'Activity').slice(0, 80);
+        pendingScheduleIntent = { type: 'add-time', name: pendingName };
+        return pendingPrompt('add-time', pendingName);
+      }
+      let name = forcedLabel || semanticActivityName(rest);
+      name = (name || 'Activity').slice(0, 80);
+      return addOrReplaceScheduledActivity(name, start, end);
     }
 
     // ---- change / update ----
@@ -3355,17 +3584,33 @@
         return msg('prayerNoTime', prayerDisplayLabel(prayerLabel));
       }
 
-      const match = findMatchingBlock(rest, forcedLabel);
-      if (!match) return msg('updateNotFound');
       const range = extractTimeRange(rest);
+      const singleNewTime = extractSingleTime(rest) ?? extractLooseTime(rest);
+      const match = findMatchingBlock(rest, forcedLabel);
+      if (!match) {
+        if (range || singleNewTime !== null) {
+          pendingScheduleIntent = { type: 'choose-update-target', range, single: singleNewTime };
+          return pendingPrompt('choose-update-target');
+        }
+        return msg('updateNotFound');
+      }
       if (range) {
         match.start = range.start; match.end = range.end;
         sortBlocks(); saveBlocks(); renderAll();
         const m = msg('updated', blockDisplayLabel(match.label), fmtClock12(range.start), fmtClock12(range.end));
-        addLog('Edit', m);
+        addLog('Edit', m, match.id);
         return m;
       }
-      return msg('updateNoTime', blockDisplayLabel(match.label));
+      if (singleNewTime !== null) {
+        const duration = Math.max(0.25, match.end - match.start);
+        match.start = singleNewTime; match.end = singleNewTime + duration;
+        sortBlocks(); saveBlocks(); renderAll();
+        const m = msg('updated', blockDisplayLabel(match.label), fmtClock12(match.start), fmtClock12(match.end));
+        addLog('Edit', m, match.id);
+        return m;
+      }
+      pendingScheduleIntent = { type: 'update-time', blockId: match.id };
+      return pendingPrompt('update-time', blockDisplayLabel(match.label));
     }
 
     // prayer completion/report (e.g. "صليت الفجر الساعة ٥:٣٠")
@@ -3381,13 +3626,37 @@
       return desc;
     }
 
+    // A phrase with a concrete time is a scheduling request unless the user
+    // clearly reports completion. This prevents a timed swim/nap request from
+    // marking a semantically-related existing block as done.
+    if (hasSchedulingIntent(text) && !hasCompletionIntent(text)) {
+      const range = extractTimeRange(text);
+      const duration = extractDuration(text);
+      const singleStart = extractSingleTime(text);
+      let start = null, end = null;
+      if (range) { start = range.start; end = range.end; }
+      else if (singleStart !== null) {
+        start = singleStart;
+        end = duration !== null ? singleStart + duration : singleStart + 0.5;
+      }
+      if (start !== null && end !== null) {
+        const name = forcedLabel || semanticActivityName(text);
+        return addOrReplaceScheduledActivity(name, start, end);
+      }
+    }
+
     // default: treat as a completion report if it mentions a known activity
     const match = findMatchingBlock(text, forcedLabel);
     if (match) {
       const range = extractTimeRange(text);
       const duration = extractDuration(text);
       match.done = true;
-      const note = extractNote(text);
+      let note = extractNote(text);
+      if (note) {
+        const noteLow = note.toLowerCase();
+        const aliases = activityAliases(match.label);
+        if (aliases.some(a => noteLow === a || noteLow === a.replace(/^(the|a|an)\s+/i, ''))) note = '';
+      }
       if (note) match.note = note;
       else if (range) match.note = msg('actuallyDone', fmtClock12(range.start), fmtClock12(range.end));
       else if (duration) match.note = msg('tookAbout', duration < 1 ? Math.round(duration * 60) + (currentLang === 'ar' ? ' دقيقة' : ' min') : duration + (currentLang === 'ar' ? ' ساعة' : ' hr'));
@@ -3464,7 +3733,7 @@
     const text = (options.text !== undefined ? options.text : commandInput.value).trim();
     if (!text) return;
     hideCommandConfirmation();
-    if (!options.forcedLabel) {
+    if (!options.forcedLabel && !options.skipSuggestion) {
       const suggestion = suggestActivity(text);
       if (suggestion) {
         showCommandConfirmation(text, suggestion);
@@ -3482,9 +3751,10 @@
     submitCommand({ text: pending.text, forcedLabel: pending.label });
   });
   commandConfirmNo.addEventListener('click', () => {
+    if (!pendingCommand) return;
+    const pending = { ...pendingCommand };
     hideCommandConfirmation();
-    commandStatus.textContent = currentLang === 'ar' ? 'حسنًا — لم يتم تنفيذ الأمر. حاول مرة أخرى أو اكتب الاسم.' : 'Okay — nothing was changed. Try again or type the activity name.';
-    commandInput.focus();
+    submitCommand({ text: pending.text, skipSuggestion: true });
   });
   sendBtn.addEventListener('click', submitCommand);
   commandInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') submitCommand(); });
@@ -3534,6 +3804,155 @@
 
   // ---- Quick-action popover for the CURRENT activity (tap the dial's center label) ----
   const quickSheet = document.getElementById('quickSheet');
+
+  // ---- Activity reminder bubble + best-effort browser notification ----
+  const REMINDER_STATE_KEY = 'dailyRhythmReminderState_v1';
+  let reminderState = { date: '', ignored: {}, snoozedUntil: {} };
+  let reminderVisibleBlockId = null;
+  let reminderNotifiedKey = '';
+  const reminderEl = document.getElementById('activityReminder');
+  const reminderMain = document.getElementById('reminderMain');
+  const reminderTitle = document.getElementById('reminderTitle');
+  const reminderDetail = document.getElementById('reminderDetail');
+  const reminderTime = document.getElementById('reminderTime');
+  const reminderSnooze = document.getElementById('reminderSnooze');
+  const reminderDone = document.getElementById('reminderDone');
+
+  function todayKey(d = new Date()) {
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  }
+  function loadReminderState() {
+    try { reminderState = JSON.parse(localStorage.getItem(REMINDER_STATE_KEY) || '{}') || {}; } catch (e) { reminderState = {}; }
+    const key = todayKey();
+    if (reminderState.date !== key) reminderState = { date:key, ignored:{}, snoozedUntil:{} };
+    reminderState.ignored ||= {}; reminderState.snoozedUntil ||= {};
+  }
+  function saveReminderState() { try { localStorage.setItem(REMINDER_STATE_KEY, JSON.stringify(reminderState)); } catch (e) {} }
+  loadReminderState();
+
+  function reminderCandidate(now = new Date()) {
+    if (reminderState.date !== todayKey(now)) { reminderState = { date:todayKey(now), ignored:{}, snoozedUntil:{} }; saveReminderState(); }
+    const hf = currentHourFraction(now);
+    const nowMs = now.getTime();
+    const upcoming = blocks.filter(b => !b.done && !reminderState.ignored[b.id]).map(b => {
+      let deltaMin = (b.start - hf) * 60;
+      if (deltaMin < -720) deltaMin += 1440;
+      return { b, deltaMin };
+    }).filter(x => x.deltaMin <= 5 && x.deltaMin >= -Math.max(5, (x.b.end-x.b.start)*60));
+    upcoming.sort((a,b) => Math.abs(a.deltaMin)-Math.abs(b.deltaMin));
+    const hit = upcoming[0];
+    if (!hit) return null;
+    if ((reminderState.snoozedUntil[hit.b.id] || 0) > nowMs) return null;
+    return hit;
+  }
+
+  function hideActivityReminder() {
+    reminderVisibleBlockId = null;
+    reminderEl?.classList.remove('show');
+  }
+  function reminderText(hit) {
+    const mins = Math.round(hit.deltaMin);
+    if (currentLang === 'ar') {
+      if (mins > 0) return `يبدأ خلال ${mins} د · حتى ${fmtClock12(hit.b.end)}`;
+      if (mins >= -1) return `يبدأ الآن · حتى ${fmtClock12(hit.b.end)}`;
+      return `جارٍ الآن · حتى ${fmtClock12(hit.b.end)}`;
+    }
+    if (mins > 0) return `Starts in ${mins} min · until ${fmtClock12(hit.b.end)}`;
+    if (mins >= -1) return `Starts now · until ${fmtClock12(hit.b.end)}`;
+    return `In progress · until ${fmtClock12(hit.b.end)}`;
+  }
+  async function maybeBrowserNotify(hit) {
+    if (!document.hidden || !('Notification' in window) || Notification.permission !== 'granted') return;
+    const key = `${todayKey()}-${hit.b.id}-${Math.round(hit.b.start*60)}`;
+    if (reminderNotifiedKey === key) return;
+    reminderNotifiedKey = key;
+    const title = blockDisplayLabel(hit.b.label);
+    const body = reminderText(hit);
+    try {
+      if ('serviceWorker' in navigator) {
+        const reg = await navigator.serviceWorker.ready;
+        await reg.showNotification(title, {
+          body,
+          tag: `daily-rhythm-${hit.b.id}`,
+          renotify: false,
+          data: { blockId: hit.b.id },
+          actions: [
+            { action: 'done', title: currentLang === 'ar' ? 'تم' : 'Done' },
+            { action: 'snooze', title: currentLang === 'ar' ? 'غفوة' : 'Snooze' },
+            { action: 'ignore', title: currentLang === 'ar' ? 'تجاهل' : 'Ignore' }
+          ]
+        });
+      } else {
+        const n = new Notification(title, { body, tag: `daily-rhythm-${hit.b.id}` });
+        n.onclick = () => { window.focus(); openReminderActivity(hit.b.id); n.close(); };
+      }
+    } catch (e) { /* notification support varies by browser/PWA mode */ }
+  }
+
+  function updateActivityReminder(now = new Date()) {
+    if (!reminderEl) return;
+    const hit = reminderCandidate(now);
+    if (!hit) { hideActivityReminder(); return; }
+    reminderVisibleBlockId = hit.b.id;
+    reminderTime.textContent = fmtClock12(hit.b.start).replace(/\s(?:AM|PM|صباحًا|مساءً)$/,'');
+    reminderTitle.textContent = blockDisplayLabel(hit.b.label);
+    reminderDetail.textContent = reminderText(hit);
+    document.getElementById('reminderKicker').textContent = currentLang === 'ar' ? 'تذكير' : 'Reminder';
+    reminderSnooze.textContent = currentLang === 'ar' ? 'غفوة ١٠د' : 'Snooze 10m';
+    reminderDone.textContent = currentLang === 'ar' ? 'تم' : 'Done';
+    reminderEl.classList.add('show');
+    maybeBrowserNotify(hit);
+  }
+  function openReminderActivity(id) {
+    const block = blocks.find(b => b.id === id);
+    if (!block) return;
+    if (typeof scheduleSheet?.open === 'function') scheduleSheet.open();
+    else {
+      document.getElementById('scheduleSheet')?.classList.add('open');
+      document.getElementById('scheduleBackdrop')?.classList.add('open');
+    }
+    setTimeout(() => {
+      const row = legend.querySelector(`.row[data-id="${id}"]`);
+      row?.scrollIntoView({ behavior:'smooth', block:'center' });
+      row?.classList.add('active');
+    }, 100);
+  }
+  reminderMain?.addEventListener('click', () => reminderVisibleBlockId && openReminderActivity(reminderVisibleBlockId));
+  reminderMain?.addEventListener('keydown', e => { if ((e.key==='Enter'||e.key===' ') && reminderVisibleBlockId) { e.preventDefault(); openReminderActivity(reminderVisibleBlockId); } });
+  reminderSnooze?.addEventListener('click', e => {
+    e.stopPropagation(); if (!reminderVisibleBlockId) return;
+    reminderState.snoozedUntil[reminderVisibleBlockId] = Date.now() + 10*60*1000; saveReminderState(); hideActivityReminder();
+  });
+  reminderDone?.addEventListener('click', e => {
+    e.stopPropagation(); const b = blocks.find(x => x.id === reminderVisibleBlockId); if (!b) return;
+    b.done = true; saveBlocks(); renderAll(); addLog('Activity', `Marked "${b.label}" done from reminder`, b.id); hideActivityReminder();
+  });
+  document.getElementById('enableReminderNotifications')?.addEventListener('click', async () => {
+    const btn = document.getElementById('enableReminderNotifications');
+    if (!('Notification' in window)) {
+      btn.textContent = currentLang === 'ar' ? 'الإشعارات غير مدعومة في هذا المتصفح' : 'Notifications are not supported in this browser';
+      return;
+    }
+    try {
+      const permission = await Notification.requestPermission();
+      btn.textContent = permission === 'granted'
+        ? (currentLang === 'ar' ? 'تم تفعيل الإشعارات' : 'Notifications enabled')
+        : (currentLang === 'ar' ? 'لم يتم السماح بالإشعارات' : 'Notifications not allowed');
+    } catch (e) {
+      btn.textContent = currentLang === 'ar' ? 'تعذّر تفعيل الإشعارات' : 'Could not enable notifications';
+    }
+  });
+  (function setupReminderSwipe(){
+    if (!reminderEl) return; let sx=0, sy=0, dx=0, tracking=false;
+    reminderEl.addEventListener('pointerdown', e => { sx=e.clientX; sy=e.clientY; dx=0; tracking=true; reminderEl.classList.add('swiping'); });
+    reminderEl.addEventListener('pointermove', e => {
+      if (!tracking) return; const mx=e.clientX-sx, my=e.clientY-sy; if (Math.abs(mx) < Math.abs(my)+6) return;
+      dx=mx; const rtl=document.documentElement.dir==='rtl'; const move=rtl?Math.max(0,mx):Math.min(0,mx); reminderEl.style.transform=`translate(calc(-50% + ${move}px),0)`;
+    });
+    const end=()=>{ if(!tracking)return; tracking=false; reminderEl.classList.remove('swiping'); reminderEl.style.transform=''; const rtl=document.documentElement.dir==='rtl'; const ignored=rtl?dx>70:dx<-70; if(ignored&&reminderVisibleBlockId){ reminderState.ignored[reminderVisibleBlockId]=true; saveReminderState(); hideActivityReminder(); } };
+    reminderEl.addEventListener('pointerup',end); reminderEl.addEventListener('pointercancel',end);
+  })();
+
   const quickBackdrop = document.getElementById('quickBackdrop');
   const quickTitle = document.getElementById('quickTitle');
   const quickDoneBtn = document.getElementById('quickDoneBtn');
@@ -3689,6 +4108,28 @@
     applyLanguage();
   });
   applyLanguage();
+
+
+  function applyReminderActionFromUrl() {
+    try {
+      const u = new URL(window.location.href);
+      const action = u.searchParams.get('reminderAction');
+      const blockId = u.searchParams.get('blockId');
+      if (!action || !blockId) return;
+      const b = blocks.find(x => x.id === blockId);
+      if (action === 'done' && b) { b.done = true; saveBlocks(); renderAll(); addLog('Activity', `Marked "${b.label}" done from notification`, b.id); }
+      if (action === 'snooze') { reminderState.snoozedUntil[blockId] = Date.now() + 10*60*1000; saveReminderState(); }
+      if (action === 'ignore') { reminderState.ignored[blockId] = true; saveReminderState(); }
+      if (action === 'open' && b) openReminderActivity(blockId);
+      u.searchParams.delete('reminderAction'); u.searchParams.delete('blockId');
+      history.replaceState({}, '', u.pathname + u.search + u.hash);
+    } catch (e) {}
+  }
+  applyReminderActionFromUrl();
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+  }
 
   tick();
   setInterval(tick, 1000);
