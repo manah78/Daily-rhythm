@@ -349,8 +349,8 @@
     padding-bottom: max(32px, 6vh);
   }
 
-  button, input { touch-action: manipulation; }
-  button:focus-visible, input:focus-visible, summary:focus-visible {
+  button, input, textarea { touch-action: manipulation; }
+  button:focus-visible, input:focus-visible, textarea:focus-visible, summary:focus-visible {
     outline: 3px solid var(--andalus-gold, #6E9179);
     outline-offset: 2px;
   }
@@ -698,6 +698,29 @@
     stroke: rgba(122,90,42,0.45);
     stroke-width: 1.5;
   }
+  .prayer-period-text {
+    font-size: 8.5px;
+    font-weight: 800;
+    letter-spacing: .02em;
+    opacity: .78;
+  }
+  .prayer-location-card {
+    margin-top: 14px;
+    padding: 13px 14px;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: color-mix(in srgb, var(--bg-panel) 92%, transparent);
+  }
+  .prayer-location-head { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
+  .prayer-location-copy { min-width:0; }
+  .prayer-location-title { display:block; font-size:.84rem; font-weight:800; color:var(--ink); }
+  .prayer-location-status { display:block; margin-top:3px; font-size:.72rem; line-height:1.35; color:var(--ink-dim); overflow-wrap:anywhere; }
+  .prayer-location-actions { display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+  .prayer-location-actions button {
+    appearance:none; border:1px solid var(--line); border-radius:999px; padding:8px 11px;
+    background:var(--bg); color:var(--ink); font:inherit; font-size:.72rem; font-weight:750; cursor:pointer;
+  }
+  .prayer-location-actions button.primary { border-color:rgba(184,134,11,.45); color:#8A6514; }
   .quick-sheet.moon-popover {
     top: calc(50% - min(29vh, 180px));
     width: min(320px, 84vw);
@@ -788,6 +811,11 @@
   #commandInput {
     flex: 1;
     min-width: 0;
+    width: 100%;
+    min-height: 124px;
+    max-height: min(34vh, 280px);
+    resize: vertical;
+    overflow-y: auto;
     padding: 1rem 1.15rem;
     border-radius: 14px;
     border: 1.5px solid var(--line);
@@ -795,7 +823,21 @@
     color: var(--ink);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
     font-size: 1rem;
+    line-height: 1.45;
     box-shadow: 0 2px 8px rgba(23,48,31,0.06);
+  }
+  .command-input-wrap {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .command-edit-hint {
+    margin: 0;
+    font-size: 0.74rem;
+    line-height: 1.35;
+    color: var(--ink-dim);
   }
   #commandInput:focus { outline: 2px solid var(--andalus-gold, #6E9179); border-color: var(--andalus-gold, #6E9179); }
   :root { --btn-sm: 48px; }
@@ -1110,7 +1152,7 @@
     border-color: color-mix(in srgb, var(--andalus-gold) 55%, var(--line));
   }
   .dock-btn:hover, .dock-btn:focus-visible { color: var(--andalus-green); }
-  button:focus-visible, input:focus-visible, summary:focus-visible { outline-color: var(--andalus-gold); }
+  button:focus-visible, input:focus-visible, textarea:focus-visible, summary:focus-visible { outline-color: var(--andalus-gold); }
   .command-bar, .logs-panel, .legend, .row, .suggestion-row {
     border-color: color-mix(in srgb, var(--andalus-gold) 32%, var(--line));
   }
@@ -1821,6 +1863,184 @@
     html[dir=rtl] .reminder-actions { grid-column:1 / -1; grid-row:2; }
   }
 
+
+
+  /* --- phone frame fit: keep top cards and dial inside viewport --- */
+  .stage {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: clip;
+  }
+  .status-strip {
+    box-sizing: border-box;
+    max-width: min(560px, 100%);
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, .9fr) minmax(0, 1.15fr);
+  }
+  .status-tile,
+  .status-copy,
+  .prayer-tile .next-prayer {
+    min-width: 0;
+    max-width: 100%;
+  }
+  .status-tile { overflow: hidden; }
+  .status-strip .date,
+  .status-strip .hijri-date,
+  .status-strip .clock,
+  .prayer-name,
+  .prayer-time,
+  .prayer-countdown {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .next-up-card {
+    box-sizing: border-box;
+    width: min(100%, 480px);
+    max-width: 100%;
+    min-width: 0;
+  }
+  .dial-only-wrap {
+    box-sizing: border-box;
+    max-width: 100%;
+    overflow: visible;
+  }
+  .dial-wrap {
+    width: min(calc(54vh * var(--dial-scale, 1)), calc(92vw * var(--dial-scale, 1)), calc(520px * var(--dial-scale, 1))) !important;
+    max-width: 100%;
+    margin-inline: auto !important;
+  }
+
+  @media (max-width: 430px) {
+    .stage {
+      padding-inline: 12px !important;
+      gap: 10px !important;
+      padding-top: max(62px, calc(env(safe-area-inset-top, 0px) + 54px)) !important;
+    }
+    .status-strip {
+      width: 100%;
+      grid-template-columns: minmax(0, 1fr) minmax(0, .86fr) minmax(0, 1.08fr);
+      gap: 5px;
+    }
+    .status-tile {
+      min-height: 54px;
+      padding: 6px 7px;
+      border-radius: 14px;
+      gap: 5px;
+    }
+    .status-icon {
+      width: 20px;
+      height: 20px;
+      flex-basis: 20px;
+      font-size: 11px;
+    }
+    .status-strip .date { font-size: .61rem !important; }
+    .status-strip .hijri-date { font-size: .54rem !important; }
+    .status-strip .clock { font-size: .88rem !important; }
+    .prayer-tile .next-prayer { font-size: .56rem !important; column-gap: 3px; }
+    .next-up-card {
+      padding: 8px 11px;
+      border-radius: 15px;
+      gap: 8px;
+    }
+    .nu-now { flex-basis: 31%; }
+    .nu-now-text { font-size: .84rem; }
+    .nu-next-text { font-size: clamp(.96rem, 4.2vw, 1.16rem); }
+    .nu-countdown { font-size: .82rem; margin-top: 2px; }
+    .dial-wrap {
+      width: min(calc(49vh * var(--dial-scale, 1)), calc(88vw * var(--dial-scale, 1)), calc(390px * var(--dial-scale, 1))) !important;
+      margin-top: 8px !important;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .stage { padding-inline: 9px !important; }
+    .status-strip { gap: 4px; }
+    .status-tile { padding: 5px 6px; }
+    .status-icon { display: none; }
+    .dial-wrap {
+      width: min(calc(47vh * var(--dial-scale, 1)), calc(86vw * var(--dial-scale, 1))) !important;
+    }
+  }
+
+
+  /* --- adaptive viewport sizing: use actual available screen space, not device-specific pixels --- */
+  :root {
+    --app-vw: 100vw;
+    --app-vh: 100dvh;
+    --page-gutter: clamp(9px, 3vw, 18px);
+  }
+  .app-shell,
+  .stage {
+    width: 100%;
+    max-width: var(--app-vw);
+    box-sizing: border-box;
+  }
+  .stage {
+    padding-inline: var(--page-gutter) !important;
+    overflow-x: clip;
+  }
+  .status-strip {
+    width: 100% !important;
+    max-width: min(560px, calc(var(--app-vw) - (2 * var(--page-gutter)))) !important;
+    margin-inline: auto !important;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, .9fr) minmax(0, 1.15fr) !important;
+  }
+  .status-tile {
+    min-width: 0 !important;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .next-up-card {
+    width: 100% !important;
+    max-width: min(480px, calc(var(--app-vw) - (2 * var(--page-gutter)))) !important;
+    margin-inline: auto !important;
+  }
+  .dial-only-wrap {
+    width: 100%;
+    max-width: calc(var(--app-vw) - (2 * var(--page-gutter)));
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+  .dial-wrap {
+    /* Width is constrained by BOTH horizontal room and remaining vertical room. */
+    width: min(
+      calc((var(--app-vw) - (2 * var(--page-gutter))) * .92),
+      calc((var(--app-vh) - 350px) * .94),
+      560px
+    ) !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    aspect-ratio: 1 / 1;
+    margin-inline: auto !important;
+  }
+
+  @media (max-width: 430px) {
+    :root { --page-gutter: clamp(9px, 3vw, 12px); }
+    .status-strip {
+      grid-template-columns: minmax(0, 1fr) minmax(0, .86fr) minmax(0, 1.08fr) !important;
+    }
+    .dial-wrap {
+      width: min(
+        calc((var(--app-vw) - (2 * var(--page-gutter))) * .90),
+        calc((var(--app-vh) - 345px) * .93),
+        410px
+      ) !important;
+    }
+  }
+
+  @media (orientation: landscape) and (max-height: 600px) {
+    .stage { gap: 6px !important; }
+    .status-tile { min-height: 48px !important; padding-block: 5px !important; }
+    .next-up-card { padding-block: 6px !important; }
+    .dial-wrap {
+      width: min(
+        calc((var(--app-vw) - (2 * var(--page-gutter))) * .66),
+        calc(var(--app-vh) - 245px),
+        430px
+      ) !important;
+    }
+  }
 </style>
   <link rel="manifest" href="./manifest.webmanifest">
   <meta name="theme-color" content="#F3E9D2">
@@ -1959,6 +2179,18 @@
       </div>
       <button class="reset-link" id="resetBtn" data-i18n="resetBtn">Reset to default schedule</button>
       <button class="reset-link" id="enableReminderNotifications" type="button" data-i18n="enableReminders">Enable lock-screen reminders</button>
+      <div class="prayer-location-card" id="prayerLocationCard">
+        <div class="prayer-location-head">
+          <div class="prayer-location-copy">
+            <strong class="prayer-location-title" id="prayerLocationTitle">Prayer times</strong>
+            <span class="prayer-location-status" id="prayerLocationStatus">Checking location…</span>
+          </div>
+        </div>
+        <div class="prayer-location-actions">
+          <button type="button" class="primary" id="prayerUseCurrent">Use current location</button>
+          <button type="button" id="prayerChooseCity">Choose city</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1996,7 +2228,10 @@
       <div class="command-bar">
         <p class="command-label" data-i18n="commandLabel">What are you adding or reporting?</p>
         <div class="command-row">
-          <input type="text" id="commandInput" placeholder="Tell it what to add or what you did — e.g. &quot;add gym at 7:30 to 8:30&quot;" data-i18n-placeholder="commandPlaceholder" />
+          <div class="command-input-wrap">
+            <textarea id="commandInput" rows="4" maxlength="1200" spellcheck="true" placeholder="Tell it what to add, change, remove, or report. You can include several requests at once." data-i18n-placeholder="commandPlaceholder"></textarea>
+            <p class="command-edit-hint" data-i18n="commandEditHint">Review or edit everything before sending. Use multiple lines if that is easier.</p>
+          </div>
           <button id="sendBtn" class="icon-btn" title="Submit" aria-label="Submit">➤</button>
         </div>
         <p class="command-status" id="commandStatus" data-i18n="commandStatusDefault">Add, edit, remove, or report activities anytime — your list, your words.</p>
@@ -2012,6 +2247,14 @@
           <div class="example-row">
             <span class="example-in">"add gym at 7:30 to 8:30"</span>
             <span class="example-out">Add · Gym · 7:30–8:30</span>
+          </div>
+          <div class="example-row">
+            <span class="example-in">"add swimming 5–6pm and also add cooking 6–7pm"</span>
+            <span class="example-out">Two commands · Add Swimming · Add Cooking</span>
+          </div>
+          <div class="example-row">
+            <span class="example-in">"add walk 6–6:30pm and change dinner to 7:30pm"</span>
+            <span class="example-out">Mixed commands · Add + Change</span>
           </div>
           <div class="example-row">
             <span class="example-in">"remove lunch"</span>
@@ -2040,6 +2283,14 @@
           <div class="example-row">
             <span class="example-in">"صليت الفجر الساعة ٥:٣٠"</span>
             <span class="example-out">Logged prayer · Fajr · 5:30am</span>
+          </div>
+          <div class="example-row">
+            <span class="example-in">"أضف السباحة من ٤ إلى ٥ ثم أضف الطبخ من ٥ إلى ٦"</span>
+            <span class="example-out">أمران · إضافة السباحة · إضافة الطبخ</span>
+          </div>
+          <div class="example-row">
+            <span class="example-in">"إعادة ضبط جدولي"</span>
+            <span class="example-out">إعادة ضبط · يتطلب تأكيداً قبل الحذف</span>
           </div>
           <p class="examples-note" data-i18n="examplesNote">It only recognizes an activity already sitting in "Today's rhythm" — add it first with an "add" command if it's not there yet.</p>
         </details>
@@ -2084,11 +2335,15 @@
       suggestionsTitle: "Activities not in the list",
       resetBtn: "Reset to default schedule",
       enableReminders: "Enable lock-screen reminders",
+      prayerLocationTitle: "Prayer times", prayerUseCurrent: "Use current location", prayerChooseCity: "Choose city",
+      prayerCheckingLocation: "Checking location…", prayerAutomatic: "Automatic", prayerDefaultLocation: "Default location", prayerLocationDenied: "Location unavailable — choose your city",
+      prayerCityPrompt: "Enter your city for prayer times", prayerCityNotFound: "City not found. Try city + country.", prayerCityError: "Could not look up that city right now.",
       activityLogTitle: "Activity log",
       logSearchPlaceholder: 'Search logs — e.g. "fajr" or "gym"',
       filterAll: "All", filterAdd: "Add", filterEdit: "Edit", filterDelete: "Delete", filterActivity: "Activity",
       talkTitle: "Talk to your schedule",
-      commandPlaceholder: 'Tell it what to add or what you did — e.g. "add gym at 7:30 to 8:30"',
+      commandPlaceholder: 'Tell it what to add, change, remove, or report. You can include several requests at once.',
+      commandEditHint: 'Review or edit everything before sending. Use multiple lines if that is easier.',
       commandLabel: "What are you adding or reporting?",
       sendBtn: "Go",
       commandStatusDefault: "Add, edit, remove, or report activities anytime — your list, your words.",
@@ -2113,11 +2368,15 @@
       suggestionsTitle: "أنشطة غير مدرجة",
       resetBtn: "إعادة ضبط الجدول الافتراضي",
       enableReminders: "تفعيل تذكيرات شاشة القفل",
+      prayerLocationTitle: "مواقيت الصلاة", prayerUseCurrent: "استخدم موقعي الحالي", prayerChooseCity: "اختر المدينة",
+      prayerCheckingLocation: "جارٍ التحقق من الموقع…", prayerAutomatic: "تلقائي", prayerDefaultLocation: "الموقع الافتراضي", prayerLocationDenied: "الموقع غير متاح — اختر مدينتك",
+      prayerCityPrompt: "أدخل مدينتك لمواقيت الصلاة", prayerCityNotFound: "لم يتم العثور على المدينة. جرّب المدينة + الدولة.", prayerCityError: "تعذر البحث عن المدينة الآن.",
       activityLogTitle: "سجل النشاط",
       logSearchPlaceholder: 'ابحث في السجل — مثال "الفجر" أو "الجيم"',
       filterAll: "الكل", filterAdd: "إضافة", filterEdit: "تعديل", filterDelete: "حذف", filterActivity: "نشاط",
       talkTitle: "تحدث إلى جدولك",
-      commandPlaceholder: 'أخبره بما تريد إضافته أو ما أنجزته — مثال "أضف الجيم الساعة 7:30 إلى 8:30"',
+      commandPlaceholder: 'اكتب ما تريد إضافته أو تعديله أو حذفه أو تسجيله. يمكنك إدخال عدة طلبات معًا.',
+      commandEditHint: 'راجع أو عدّل كل ما كتبته قبل الإرسال. يمكنك استخدام عدة أسطر إذا كان ذلك أسهل.',
       commandLabel: "ما الذي تريد إضافته أو تسجيله؟",
       sendBtn: "إرسال",
       commandStatusDefault: "أضف أو عدّل أو احذف أو سجّل الأنشطة في أي وقت — جدولك، بكلماتك.",
@@ -2180,6 +2439,13 @@
     if (statusEl && (statusEl.textContent === STRINGS.en.commandStatusDefault || statusEl.textContent === STRINGS.ar.commandStatusDefault)) {
       statusEl.textContent = S.commandStatusDefault;
     }
+    const prayerLocationTitle = document.getElementById('prayerLocationTitle');
+    const prayerUseCurrent = document.getElementById('prayerUseCurrent');
+    const prayerChooseCity = document.getElementById('prayerChooseCity');
+    if (prayerLocationTitle) prayerLocationTitle.textContent = S.prayerLocationTitle;
+    if (prayerUseCurrent) prayerUseCurrent.textContent = S.prayerUseCurrent;
+    if (prayerChooseCity) prayerChooseCity.textContent = S.prayerChooseCity;
+    if (typeof updatePrayerLocationUI === 'function') updatePrayerLocationUI();
     renderAll();
     renderPrayerMarkers();
     renderLogs();
@@ -2188,10 +2454,46 @@
 
 
   // Live prayer time calculation (sun-angle method, ISNA convention:
-  // Fajr/Isha 15°, Asr Standard/Shafii). Location defaults to the
-  // West Island of Montreal; recalculated automatically each day using
-  // the viewer's own device date/timezone (DST-aware).
-  const LOCATION = { lat: 45.449, lng: -73.855 };
+  // Fajr/Isha 15°, Asr Standard/Shafii). Prayer times follow the user's
+  // coordinates plus the appropriate timezone. A visible Montreal fallback
+  // is retained only until the user grants location or chooses a city.
+  const DEFAULT_PRAYER_LOCATION = { lat: 45.449, lng: -73.855, name: 'Montréal', timezone: 'America/Toronto', mode: 'default' };
+  const PRAYER_LOCATION_KEY = 'dailyRhythmPrayerLocation_v1';
+  let prayerLocation = { ...DEFAULT_PRAYER_LOCATION };
+
+  function deviceTimeZone() {
+    try { return Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC'; } catch (e) { return 'UTC'; }
+  }
+  function loadPrayerLocation() {
+    try {
+      const raw = localStorage.getItem(PRAYER_LOCATION_KEY);
+      if (!raw) return;
+      const saved = JSON.parse(raw);
+      if (Number.isFinite(saved.lat) && Number.isFinite(saved.lng)) prayerLocation = { ...DEFAULT_PRAYER_LOCATION, ...saved };
+    } catch (e) { /* keep fallback */ }
+  }
+  function savePrayerLocation() {
+    try { localStorage.setItem(PRAYER_LOCATION_KEY, JSON.stringify(prayerLocation)); } catch (e) { /* unavailable */ }
+  }
+  loadPrayerLocation();
+
+  function partsInTimeZone(date, timeZone) {
+    try {
+      const parts = new Intl.DateTimeFormat('en-CA', {
+        timeZone, year:'numeric', month:'2-digit', day:'2-digit', hour:'2-digit', minute:'2-digit', second:'2-digit', hourCycle:'h23'
+      }).formatToParts(date);
+      const out = {};
+      for (const part of parts) if (part.type !== 'literal') out[part.type] = Number(part.value);
+      return out;
+    } catch (e) {
+      return { year:date.getFullYear(), month:date.getMonth()+1, day:date.getDate(), hour:date.getHours(), minute:date.getMinutes(), second:date.getSeconds() };
+    }
+  }
+  function timezoneOffsetHours(date, timeZone) {
+    const p = partsInTimeZone(date, timeZone);
+    const asUTC = Date.UTC(p.year, p.month - 1, p.day, p.hour, p.minute, p.second || 0);
+    return (asUTC - date.getTime()) / 3600000;
+  }
 
   function julianDate(year, month, day) {
     if (month <= 2) { year -= 1; month += 12; }
@@ -2223,10 +2525,11 @@
     const t = factor + Math.tan(diff*Math.PI/180);
     return (180/Math.PI) * Math.atan(1/t);
   }
-  function computePrayerTimes(date, lat, lng) {
-    const jd = julianDate(date.getFullYear(), date.getMonth()+1, date.getDate());
+  function computePrayerTimes(date, lat, lng, timeZone = deviceTimeZone()) {
+    const local = partsInTimeZone(date, timeZone);
+    const jd = julianDate(local.year, local.month, local.day);
     const { decl, eqt } = sunPosition(jd + 0.5 - lng/360);
-    const tzOffset = -date.getTimezoneOffset()/60;
+    const tzOffset = timezoneOffsetHours(date, timeZone);
     const dhuhr = 12 - eqt - lng/15 + tzOffset;
     const fajr = dhuhr - deltaT(15, lat, decl);
     const sunrise = dhuhr - deltaT(0.833, lat, decl);
@@ -2319,6 +2622,73 @@
   }
   loadPrayerOverrides();
 
+  function prayerLocationKey(now = new Date()) {
+    const tz = prayerLocation.timezone || deviceTimeZone();
+    const d = partsInTimeZone(now, tz);
+    return `${d.year}-${d.month}-${d.day}|${Number(prayerLocation.lat).toFixed(3)}|${Number(prayerLocation.lng).toFixed(3)}|${tz}`;
+  }
+  function updatePrayerLocationUI(message = '') {
+    const el = document.getElementById('prayerLocationStatus');
+    if (!el) return;
+    const S = STRINGS[currentLang];
+    if (message) { el.textContent = message; return; }
+    const tz = prayerLocation.timezone || deviceTimeZone();
+    const place = prayerLocation.mode === 'auto' ? S.prayerAutomatic : (prayerLocation.name || S.prayerDefaultLocation);
+    const prefix = prayerLocation.mode === 'default' ? `${S.prayerDefaultLocation}: ` : '';
+    el.textContent = `${prefix}${place} · ${tz}`;
+  }
+  function distanceKm(aLat, aLng, bLat, bLng) {
+    const R = 6371, rad = Math.PI / 180;
+    const dLat = (bLat-aLat)*rad, dLng=(bLng-aLng)*rad;
+    const x = Math.sin(dLat/2)**2 + Math.cos(aLat*rad)*Math.cos(bLat*rad)*Math.sin(dLng/2)**2;
+    return 2*R*Math.asin(Math.sqrt(x));
+  }
+  function applyPrayerLocation(next) {
+    const moved = distanceKm(Number(prayerLocation.lat), Number(prayerLocation.lng), Number(next.lat), Number(next.lng));
+    const tzChanged = (prayerLocation.timezone || '') !== (next.timezone || '');
+    prayerLocation = { ...prayerLocation, ...next };
+    savePrayerLocation();
+    updatePrayerLocationUI();
+    if (moved >= 10 || tzChanged || lastPrayerDateKey === null) {
+      lastPrayerDateKey = null;
+      refreshPrayersIfNeeded(new Date());
+    }
+  }
+  function requestCurrentPrayerLocation({ quiet = false } = {}) {
+    const S = STRINGS[currentLang];
+    if (!navigator.geolocation) {
+      if (!quiet) updatePrayerLocationUI(S.prayerLocationDenied);
+      return;
+    }
+    if (!quiet) updatePrayerLocationUI(S.prayerCheckingLocation);
+    navigator.geolocation.getCurrentPosition(pos => {
+      applyPrayerLocation({
+        lat: pos.coords.latitude, lng: pos.coords.longitude,
+        name: S.prayerAutomatic, timezone: deviceTimeZone(), mode: 'auto', updatedAt: Date.now()
+      });
+    }, () => {
+      if (!quiet) updatePrayerLocationUI(S.prayerLocationDenied);
+    }, { enableHighAccuracy:false, timeout:8000, maximumAge:15*60*1000 });
+  }
+  async function choosePrayerCity() {
+    const S = STRINGS[currentLang];
+    const city = window.prompt(S.prayerCityPrompt, prayerLocation.mode === 'manual' ? (prayerLocation.name || '') : '');
+    if (!city || !city.trim()) return;
+    updatePrayerLocationUI(S.prayerCheckingLocation);
+    try {
+      const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city.trim())}&count=1&language=${currentLang === 'ar' ? 'ar' : 'en'}&format=json`;
+      const res = await fetch(url, { headers: { 'Accept':'application/json' } });
+      if (!res.ok) throw new Error('geocoding failed');
+      const data = await res.json();
+      const hit = data && Array.isArray(data.results) ? data.results[0] : null;
+      if (!hit) { updatePrayerLocationUI(S.prayerCityNotFound); return; }
+      const name = [hit.name, hit.admin1, hit.country].filter(Boolean).join(', ');
+      applyPrayerLocation({ lat:Number(hit.latitude), lng:Number(hit.longitude), name, timezone:hit.timezone || deviceTimeZone(), mode:'manual', updatedAt:Date.now() });
+    } catch (e) {
+      updatePrayerLocationUI(S.prayerCityError);
+    }
+  }
+
   const PRAYER_TICK_OUT = 239;
   const PRAYER_R_NEAR = 282, PRAYER_R_FAR = 312;
 
@@ -2360,7 +2730,8 @@
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw);
-        if (Array.isArray(parsed) && parsed.length) {
+        if (Array.isArray(parsed)) {
+          if (parsed.length === 0) { blocks = []; return; }
           const cleaned = parsed.map((b, i) => {
             const start = Number(b.start), end = Number(b.end);
             if (!Number.isFinite(start) || !Number.isFinite(end) || end <= start || end - start > 24) return null;
@@ -2657,12 +3028,19 @@
       const labelGroup = el('g', {});
       labelGroup.appendChild(el('circle', { cx: lp.x, cy: lp.y - 16, r: 5.5, class: 'prayer-label-dot' }));
 
+      const cue = ({ Fajr:'◔', Sunrise:'☀', Maghrib:'◕', Isha:'☾' })[p.label] || '';
       const t1 = el('text', { x: lp.x, y: lp.y - 1, class: 'prayer-label-text', 'text-anchor': anchor });
-      t1.textContent = prayerDisplayLabel(p.label);
+      t1.textContent = `${cue ? cue + ' ' : ''}${prayerDisplayLabel(p.label)}`;
       labelGroup.appendChild(t1);
 
+      const h24 = normalizeHour(p.time);
+      let h12 = Math.floor(h24) % 12; if (h12 === 0) h12 = 12;
+      const mins = Math.round((h24 - Math.floor(h24)) * 60) % 60;
+      const period = currentLang === 'ar' ? (h24 < 12 ? 'ص' : 'م') : (h24 < 12 ? 'AM' : 'PM');
       const t2 = el('text', { x: lp.x, y: lp.y + 17, class: 'prayer-time-text', 'text-anchor': anchor });
-      t2.textContent = fmtClock12(p.time);
+      const main = el('tspan', {}); main.textContent = `${h12}:${String(mins).padStart(2,'0')} `;
+      const suffix = el('tspan', { class:'prayer-period-text' }); suffix.textContent = period;
+      t2.appendChild(main); t2.appendChild(suffix);
       labelGroup.appendChild(t2);
       prayerGroup.appendChild(labelGroup);
     });
@@ -2670,12 +3048,13 @@
   svg.appendChild(prayerGroup);
 
   function refreshPrayersIfNeeded(now) {
-    const key = now.toDateString();
+    const key = prayerLocationKey(now);
     if (key !== lastPrayerDateKey) {
-      prayers = computePrayerTimes(now, LOCATION.lat, LOCATION.lng);
+      prayers = computePrayerTimes(now, prayerLocation.lat, prayerLocation.lng, prayerLocation.timezone || deviceTimeZone());
       prayers.forEach(p => { if (prayerOverrides[p.label] !== undefined) p.time = prayerOverrides[p.label]; });
       lastPrayerDateKey = key;
       renderPrayerMarkers();
+      updatePrayerLocationUI();
     }
   }
   function setPrayerOverride(label, time) {
@@ -3585,6 +3964,89 @@
     return null;
   }
 
+  function isScheduleResetIntent(raw) {
+    const text = normalizeDigits(String(raw || '').trim());
+    const lower = text.toLowerCase().replace(/[.!?،؛]+$/g, '').trim();
+    if (!lower) return false;
+    // Standalone reset / start-over requests are safe because execution always
+    // requires a second confirmation. For longer phrases, require schedule/day context.
+    if (/^(?:reset|start over|start again|clear everything|erase everything|delete everything)$/i.test(lower)) return true;
+    if (/\b(?:reset|clear|erase|wipe|delete)\b[\s\S]*\b(?:my\s+)?(?:daily\s+)?(?:schedule|rhythm|day|activities)\b/i.test(lower)) return true;
+    if (/\b(?:reset|clear|erase|wipe)\b[\s\S]*\b(?:everything|all activities|whole schedule|entire schedule)\b/i.test(lower)) return true;
+    if (/^(?:إعادة\s*ضبط|اعادة\s*ضبط|صف[ّ]?ر|صفر|امسح|إمسح|افرغ|أفرغ|احذف|إحذف)\s*(?:لي\s*)?(?:كل\s*)?(?:ال)?(?:جدول|جدولي|الجدول|يومي|اليوم|أنشطتي|الأنشطة)/.test(text)) return true;
+    if (/(?:ابدأ|إبدأ|ابدا)\s+(?:من\s+)?(?:جديد|البداية)/.test(text)) return true;
+    if (/(?:امسح|إمسح|احذف|إحذف)\s+(?:كل|جميع)\s+(?:الأنشطة|انشطتي|أنشطتي|الجدول)/.test(text)) return true;
+    return false;
+  }
+
+  function splitCompoundCommands(raw) {
+    const text = normalizeDigits(String(raw || '').trim());
+    if (!text) return [];
+
+    // Strong separators are always command boundaries.
+    let parts = text.split(/\s*(?:[;؛\n]+|\bthen\b|\band\s+also\b|\balso\s+(?=(?:add|schedule|set|put|insert|create|remove|delete|cancel|erase|drop|change|move|update|rename|modify|edit|shift)\b)|ثم|وبعدها|وبعدين)\s*/i)
+      .map(x => x.trim()).filter(Boolean);
+
+    const commandStart = /^(?:add|schedule|set|put|insert|create|remove|delete|cancel|erase|drop|change|move|update|rename|modify|edit|shift)\b/i;
+    const arCommandStart = /^(?:أضف|اضف|ضع|جدول|جدولة|ضيف|زِد|زد|حط|احذف|امسح|ازل|إزالة|الغاء|ألغِ|الغِ|شيل|شيله|احذفه|غير|غيّر|عدل|عدّل|حرك|حرّك|غيّره|عدله|قدّم|قدم|أخّر|اخر)(?:\s|$)/;
+
+    // Split "... and change ..." / "... و أضف ..." while preserving time
+    // ranges such as "between 5 and 6" because the word after "and" must be a verb.
+    const refined = [];
+    for (const part of parts) {
+      let chunks = part.split(/\s+(?:and\s+|و\s*)(?=(?:add|schedule|set|put|insert|create|remove|delete|cancel|erase|drop|change|move|update|rename|modify|edit|shift)\b|(?:أضف|اضف|ضع|جدول|جدولة|ضيف|زد|حط|احذف|امسح|ازل|غير|غيّر|عدل|عدّل|حرك|حرّك|قدم|قدّم|اخر|أخّر)(?:\s|$))/i)
+        .map(x => x.trim()).filter(Boolean);
+      // Natural add lists may omit the second verb: "add swimming 5–6 and cooking 6–7".
+      // Split only when the text after AND looks like a named activity followed by
+      // its own time phrase; this intentionally does not split "between 5 and 6".
+      const implicit = [];
+      for (const chunk of chunks) {
+        const more = chunk.split(/\s+and\s+(?=[a-z][a-z '\/&-]{1,45}\s+(?:from|between|at)\s+\d)/i)
+          .flatMap(x => x.split(/\s+و\s*(?=[\u0600-\u06FF][\u0600-\u06FF\s]{1,45}(?:من|بين|الساعة|في)\s*[٠-٩0-9])/))
+          .map(x => x.trim()).filter(Boolean);
+        implicit.push(...more);
+      }
+      refined.push(...implicit);
+    }
+
+    // If the first clause establishes ADD intent, allow natural follow-ons like
+    // "add swimming 5 to 6 and cooking 6 to 7" without forcing the word add twice.
+    const out = [];
+    let inherited = null;
+    for (let i = 0; i < refined.length; i++) {
+      let clause = refined[i];
+      if (commandStart.test(clause) || arCommandStart.test(clause)) {
+        if (/^(?:add|schedule|set|put|insert|create)\b/i.test(clause) || stripLeadingArabicKeyword(clause, AR_ADD_WORDS) !== null) inherited = 'add';
+        else inherited = null;
+      } else if (i > 0 && inherited === 'add' && (extractTimeRange(clause) || extractSingleTime(clause) !== null)) {
+        clause = (/[\u0600-\u06FF]/.test(clause) ? 'أضف ' : 'add ') + clause;
+      }
+      out.push(clause);
+    }
+    return out;
+  }
+
+  function parseCommandBatch(raw) {
+    const commands = splitCompoundCommands(raw);
+    if (commands.length <= 1) return parseCommand(raw);
+    const results = [];
+    let successful = 0;
+    for (const command of commands) {
+      const beforeSignature = JSON.stringify(blocks.map(b => [b.id,b.start,b.end,b.label,b.done,b.note]));
+      const result = parseCommand(command);
+      const afterSignature = JSON.stringify(blocks.map(b => [b.id,b.start,b.end,b.label,b.done,b.note]));
+      if (beforeSignature !== afterSignature) successful++;
+      results.push(result);
+      // A missing detail creates a follow-up intent. Stop here rather than apply
+      // later clauses against an ambiguous state.
+      if (pendingScheduleIntent) break;
+    }
+    const prefix = currentLang === 'ar'
+      ? `تم تنفيذ ${successful} من ${results.length} أوامر. `
+      : `Processed ${successful} of ${results.length} commands. `;
+    return prefix + results.join(currentLang === 'ar' ? ' • ' : ' • ');
+  }
+
   function parseCommand(raw, forcedLabel = null) {
     const text = normalizeDigits(raw.trim());
     const lower = text.toLowerCase();
@@ -3805,7 +4267,7 @@
   }
 
   function showCommandConfirmation(text, suggestion) {
-    pendingCommand = { text, label: suggestion.label };
+    pendingCommand = { type: 'suggestion', text, label: suggestion.label };
     const label = blockDisplayLabel(suggestion.label);
     commandConfirmText.textContent = currentLang === 'ar' ? `هل تقصد «${label}»؟` : `Did you mean “${label}”?`;
     commandConfirmYes.textContent = currentLang === 'ar' ? 'نعم' : 'Yes';
@@ -3814,35 +4276,98 @@
     commandStatus.textContent = currentLang === 'ar' ? 'لن أنفّذ الأمر حتى تؤكد.' : 'I won’t run it until you confirm.';
   }
 
+  function showResetConfirmation(text) {
+    pendingCommand = { type: 'reset', text };
+    commandConfirmText.textContent = currentLang === 'ar'
+      ? 'سيؤدي هذا إلى حذف جميع الأنشطة من جدولك اليومي. ستبقى مواقيت الصلاة وإعدادات الموقع. هل تريد المتابعة؟'
+      : 'This will remove every activity from your daily schedule. Prayer times and location settings will stay. Continue?';
+    commandConfirmYes.textContent = currentLang === 'ar' ? 'نعم، إعادة الضبط' : 'Yes, reset';
+    commandConfirmNo.textContent = currentLang === 'ar' ? 'إلغاء' : 'Cancel';
+    commandConfirm.classList.add('show');
+    commandStatus.textContent = currentLang === 'ar' ? 'لم يتم تغيير أي شيء بعد.' : 'Nothing has been changed yet.';
+  }
+
+  function executeScheduleReset() {
+    const removed = blocks.length;
+    blocks = [];
+    pendingScheduleIntent = null;
+    saveBlocks(); renderAll();
+    const m = currentLang === 'ar'
+      ? `تمت إعادة ضبط الجدول وحذف ${removed} من الأنشطة.`
+      : `Schedule reset. Removed ${removed} activities.`;
+    addLog('Delete', m);
+    return m;
+  }
+
   function submitCommand(options = {}) {
     const text = (options.text !== undefined ? options.text : commandInput.value).trim();
     if (!text) return;
     hideCommandConfirmation();
+
+    // Reset is deliberately intercepted before any other command so a compound
+    // sentence can never clear the schedule as a side effect.
+    if (!options.skipResetCheck && isScheduleResetIntent(text)) {
+      showResetConfirmation(text);
+      commandInput.value = '';
+      resizeCommandInput();
+      return;
+    }
+
     if (!options.forcedLabel && !options.skipSuggestion) {
-      const suggestion = suggestActivity(text);
-      if (suggestion) {
-        showCommandConfirmation(text, suggestion);
-        return;
+      const commands = splitCompoundCommands(text);
+      // Fuzzy confirmation is only meaningful for a single command. Compound
+      // commands are independently parsed so one fuzzy guess cannot rewrite all clauses.
+      if (commands.length <= 1) {
+        const suggestion = suggestActivity(text);
+        if (suggestion) {
+          showCommandConfirmation(text, suggestion);
+          return;
+        }
       }
     }
-    commandStatus.textContent = parseCommand(text, options.forcedLabel || null);
+    commandStatus.textContent = options.forcedLabel
+      ? parseCommand(text, options.forcedLabel)
+      : parseCommandBatch(text);
     commandInput.value = '';
+    resizeCommandInput();
   }
 
   commandConfirmYes.addEventListener('click', () => {
     if (!pendingCommand) return;
     const pending = { ...pendingCommand };
     hideCommandConfirmation();
-    submitCommand({ text: pending.text, forcedLabel: pending.label });
+    if (pending.type === 'reset') {
+      commandStatus.textContent = executeScheduleReset();
+      return;
+    }
+    submitCommand({ text: pending.text, forcedLabel: pending.label, skipResetCheck: true });
   });
   commandConfirmNo.addEventListener('click', () => {
     if (!pendingCommand) return;
     const pending = { ...pendingCommand };
     hideCommandConfirmation();
-    submitCommand({ text: pending.text, skipSuggestion: true });
+    if (pending.type === 'reset') {
+      commandStatus.textContent = currentLang === 'ar' ? 'تم إلغاء إعادة الضبط. لم يتغير الجدول.' : 'Reset cancelled. Your schedule was not changed.';
+      return;
+    }
+    submitCommand({ text: pending.text, skipSuggestion: true, skipResetCheck: true });
   });
+  function resizeCommandInput() {
+    commandInput.style.height = 'auto';
+    const maxPx = Math.min(window.innerHeight * 0.34, 280);
+    commandInput.style.height = `${Math.min(Math.max(commandInput.scrollHeight, 124), maxPx)}px`;
+  }
   sendBtn.addEventListener('click', submitCommand);
-  commandInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') submitCommand(); });
+  commandInput.addEventListener('input', resizeCommandInput);
+  commandInput.addEventListener('keydown', (e) => {
+    // Enter creates a new line so longer/multi-command requests remain easy to review.
+    // Cmd/Ctrl+Enter submits for keyboard users.
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+      e.preventDefault();
+      submitCommand();
+    }
+  });
+  resizeCommandInput();
 
   resetBtn.addEventListener('click', () => {
     const confirmMsg = currentLang === 'ar'
@@ -4186,7 +4711,47 @@
   }
 
   tick();
+  const prayerUseCurrentBtn = document.getElementById('prayerUseCurrent');
+  const prayerChooseCityBtn = document.getElementById('prayerChooseCity');
+  if (prayerUseCurrentBtn) prayerUseCurrentBtn.addEventListener('click', () => requestCurrentPrayerLocation());
+  if (prayerChooseCityBtn) prayerChooseCityBtn.addEventListener('click', choosePrayerCity);
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      const tz = deviceTimeZone();
+      if (prayerLocation.mode === 'auto' && prayerLocation.timezone !== tz) {
+        prayerLocation.timezone = tz; savePrayerLocation(); lastPrayerDateKey = null;
+      }
+      if (prayerLocation.mode === 'auto') requestCurrentPrayerLocation({ quiet:true });
+      refreshPrayersIfNeeded(new Date());
+    }
+  });
+  // On first use, ask for current location. Browsers remember the user's choice;
+  // if denied, the visible city fallback remains available in Schedule settings.
+  if (prayerLocation.mode === 'default') requestCurrentPrayerLocation();
+  else if (prayerLocation.mode === 'auto') requestCurrentPrayerLocation({ quiet:true });
+  updatePrayerLocationUI();
+
   setInterval(tick, 1000);
+</script>
+
+<script>
+(function syncAdaptiveViewport(){
+  const root = document.documentElement;
+  const apply = () => {
+    const vv = window.visualViewport;
+    const w = Math.max(280, Math.round(vv ? vv.width : window.innerWidth));
+    const h = Math.max(420, Math.round(vv ? vv.height : window.innerHeight));
+    root.style.setProperty('--app-vw', w + 'px');
+    root.style.setProperty('--app-vh', h + 'px');
+  };
+  apply();
+  window.addEventListener('resize', apply, {passive:true});
+  window.addEventListener('orientationchange', apply, {passive:true});
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', apply, {passive:true});
+    window.visualViewport.addEventListener('scroll', apply, {passive:true});
+  }
+})();
 </script>
 </body>
 </html>
