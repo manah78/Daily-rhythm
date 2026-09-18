@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'daily-rhythm-v2';
+const CACHE_VERSION = 'daily-rhythm-v3-moon-assets';
 const APP_CACHE = `${CACHE_VERSION}-app`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -6,32 +6,19 @@ const APP_SHELL = [
   './',
   './index.html',
   './manifest.webmanifest',
-  './assets/img-80997302b9dd.webp',
-  './assets/img-a48e38a2ee45.jpg',
-  './assets/img-ecbb509ed6d7.webp',
-  './assets/img-b4806657f5c1.jpg',
-  './assets/img-ec37f878fd57.webp',
-  './assets/img-8277f6848c60.png',
-  './assets/img-ad6a3594d6f9.webp',
-  './assets/img-602aeaafd195.webp',
-  './assets/img-7c7d6a20b96b.webp',
-  './assets/img-744a017c18ed.png',
-  './assets/img-e57d969fd333.png',
-  './assets/img-693b6daa601b.png',
-  './assets/img-05dab10648c7.png',
-  './assets/img-adb1deaa79e8.png',
-  './assets/img-8f78f11bbb4b.png',
-  './assets/img-df7ff90653fc.png',
-  './assets/img-0c823d1fafc7.png',
-  './assets/img-01e664b5fffe.png',
-  './assets/img-6dc593d4e650.webp',
-  './assets/img-b4914b15689d.webp',
-  './assets/img-c1130f847fef.webp',
-  './assets/img-a8c20542a64c.webp',
-  './assets/img-3e60ebf52765.webp',
-  './assets/img-e16cc7c88bd6.webp',
-  './assets/img-0c0185c7926e.webp',
-  './assets/img-aa6157a8c4b7.webp'
+  './assets/scholar-biruni-measurement.webp',
+  './assets/scholar-haytham-optics.webp',
+  './assets/scholar-khwarizmi-algebra.webp',
+  './assets/scholar-zahrawi-instruments.webp',
+  './assets/scholar-idrisi-cartography.webp',
+  './assets/moon-new.webp',
+  './assets/moon-waxing-crescent.webp',
+  './assets/moon-first-quarter.webp',
+  './assets/moon-waxing-gibbous.webp',
+  './assets/moon-full.webp',
+  './assets/moon-waning-gibbous.webp',
+  './assets/moon-last-quarter.webp',
+  './assets/moon-waning-crescent.webp'
 ];
 
 self.addEventListener('install', event => {
