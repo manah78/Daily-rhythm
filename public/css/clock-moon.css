@@ -92,3 +92,43 @@ html[dir="rtl"] .home-day-empty{text-align:right;}
   .next-up-card{min-height:96px !important;padding:14px 15px !important;}
   .home-day-preview{padding:12px !important;border-radius:19px !important;}
 }
+
+
+/* Daily Rhythm 1.0 stabilization: lighter unified dock. */
+.dock{
+  gap:0 !important;
+  padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px)) !important;
+  background:linear-gradient(180deg,rgba(6,28,45,.94),rgba(5,22,37,.985)) !important;
+  border-top:1px solid rgba(227,183,93,.22) !important;
+  box-shadow:0 -8px 22px rgba(0,0,0,.22) !important;
+}
+.dock-btn{
+  position:relative !important;
+  min-height:58px !important;
+  border:0 !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  color:#aebdc2 !important;
+  gap:3px !important;
+}
+.dock-btn .dock-icon{
+  width:30px !important;height:30px !important;
+  border:0 !important;background:transparent !important;
+  box-shadow:none !important;color:inherit !important;
+}
+#openScheduleBtn{color:#f0cf7c !important;}
+#openScheduleBtn::after{
+  content:"";position:absolute;left:50%;bottom:1px;transform:translateX(-50%);
+  width:24px;height:2px;border-radius:999px;background:#dfbd6b;
+  box-shadow:0 0 8px rgba(223,189,107,.38);
+}
+.fab{
+  width:60px !important;height:60px !important;min-width:60px !important;min-height:60px !important;
+  margin-top:-24px !important;border-width:3px !important;
+}
+@media(max-width:390px){
+  .dock{padding-inline:8px !important;}
+  .dock-btn{font-size:.62rem !important;}
+  .fab{width:56px !important;height:56px !important;min-width:56px !important;min-height:56px !important;}
+}

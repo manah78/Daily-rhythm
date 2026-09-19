@@ -4684,7 +4684,7 @@
     },
     ar: {
       langToggleLabel: "English",
-      navClock: "الساعة", navSchedule: "يومي", navLogs: "السجل السابق", navVoice: "الصوت", navSettings: "الإعدادات",
+      navClock: "الساعة", navSchedule: "يومي", navLogs: "السجل", navVoice: "الصوت", navSettings: "الإعدادات",
       settingsTitle: "الإعدادات", settingsAppearance: "المظهر", settingsTheme: "النمط", settingsLanguage: "اللغة",
       themeAuto: "تلقائي", themeDay: "نهاري", themeNight: "ليلي", settingsMoon: "القمر", moonShow: "إظهار القمر على الساعة", moonPosition: "موضع القمر",
       moonPositionAuto: "يتبع طور القمر", moonTopRight: "أعلى اليمين", moonTopLeft: "أعلى اليسار", moonBottomRight: "أسفل اليمين", moonBottomLeft: "أسفل اليسار",
@@ -6340,7 +6340,7 @@
       document.getElementById('nuNextText').textContent = blockDisplayLabel(nb);
       document.getElementById('nuCountdown').textContent = `${S0.inLabel} ${nbDiffStr} · ${fmtClock12(nb.start)}`;
     } else {
-      document.getElementById('nuNextText').textContent = currentLang === 'ar' ? 'أضف ما تريد عندما تكون جاهزاً' : 'Add something when you’re ready';
+      document.getElementById('nuNextText').textContent = currentLang === 'ar' ? 'أضف نشاطاً' : 'Add an activity';
       document.getElementById('nuCountdown').textContent = '';
     }
 
