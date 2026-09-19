@@ -96,3 +96,28 @@ Regression cases to test after deployment:
 - Speech/fuzzy substitutions such as `Jim/Gem/Gim` should be confirmed before AI/local execution when they match an existing activity.
 
 UI: phone clock proportions are unchanged. Tablet portrait (700px+) and landscape (1024px+) allow a larger watch face while retaining proportional moon and magnifier controls.
+
+## v22 conversational multi-intent command engine
+- Mixed Arabic/English utterances can contain add + delete + edit operations in one command.
+- The AI endpoint now receives a compact snapshot of today's schedule for semantic context; the browser still resolves actual targets and never trusts AI to invent schedule state.
+- Arabic clear-day phrases such as `إلغاء الجدول`, `ألغي الجدول`, and `امسح جدول اليوم` are intercepted locally and require confirmation.
+- An incomplete edit does not block later valid operations. Valid operations execute; the edit becomes a conversational clarification.
+- Untimed adds are accepted and placed in the app's existing unmatched/suggestion lane for later timing rather than inventing a clock time.
+- Regression fixtures: `tests/arabic-command-cases.json`.
+- Cache: `daily-rhythm-v22-conversational-multi-intent`.
+
+## v6 — Dialect-agnostic conversational scheduling
+- Arabic no longer needs to begin with a formal command verb to reach the semantic interpreter.
+- Workers AI prompt explicitly covers MSA, Egyptian, Levantine (Palestinian/Jordanian/Lebanese/Syrian), Gulf/Saudi, Iraqi/common Arabic, slang and Arabic-English code-switching.
+- Contextual phrases such as `السباحة خليها عالسبعة`, `ما بدي المشي اليوم`, `عايز سباحة`, and mixed multi-intent speech are supported by the semantic layer.
+- Low-confidence destructive interpretations are blocked and converted into clarification instead of deletion.
+- Completion phrases remain outside delete semantics.
+- Added `tests/arabic-dialect-regression.json` with 80 regression fixtures across 16 coverage groups plus `tests/TEST-PLAN.md` and a runnable test harness.
+- PWA cache: `daily-rhythm-v23-dialect-conversation`.
+
+
+## Production baseline — 1.0.0
+
+This package is the formal Daily Rhythm 1.0.0 production baseline. Settings → About Daily Rhythm shows Version 1.0.0, Build 2026.09.19, and Production channel. Release metadata is also stored in `release.json`. The PWA cache identifier is `daily-rhythm-v1.0.0-production`.
+
+Version policy: MAJOR.MINOR.PATCH. Major = incompatible/product-generation change; minor = backward-compatible feature; patch = backward-compatible bug/hotfix.

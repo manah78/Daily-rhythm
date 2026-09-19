@@ -1,0 +1,9 @@
+{
+  "name": "Daily Rhythm",
+  "short_name": "Daily Rhythm",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#F3E9D2",
+  "theme_color": "#F3E9D2",
+  "description": "Daily schedule, prayer times, moon phase and activity reminders."
+}
