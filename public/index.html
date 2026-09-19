@@ -4195,6 +4195,13 @@
           <p class="nu-countdown" id="nuCountdown">—</p>
         </div>
       </div>
+      <section class="home-day-preview" id="homeDayPreview" aria-label="Today’s schedule">
+        <div class="home-day-preview-head">
+          <span id="homeDayPreviewTitle">Today</span>
+          <button type="button" id="homeDayPreviewOpen">View day</button>
+        </div>
+        <div class="home-day-preview-list" id="homeDayPreviewList"></div>
+      </section>
       <div class="dial-only-wrap">
         <div class="dial-wrap">
           <div class="andalus-inner-art" aria-hidden="true"></div>
@@ -6320,7 +6327,7 @@
 
     // ---- Now / Up Next card ----
     const S0 = STRINGS[currentLang];
-    document.getElementById('nuNowText').textContent = activeBlock ? blockDisplayLabel(activeBlock) : S0.freeTime;
+    document.getElementById('nuNowText').textContent = activeBlock ? blockDisplayLabel(activeBlock) : (currentLang === 'ar' ? 'يومك مفتوح' : 'Your day is open');
     const nb = nextBlockAfter(hf);
     if (nb) {
       let nbDiff = nb.start - hf;
@@ -6333,7 +6340,7 @@
       document.getElementById('nuNextText').textContent = blockDisplayLabel(nb);
       document.getElementById('nuCountdown').textContent = `${S0.inLabel} ${nbDiffStr} · ${fmtClock12(nb.start)}`;
     } else {
-      document.getElementById('nuNextText').textContent = '—';
+      document.getElementById('nuNextText').textContent = currentLang === 'ar' ? 'أضف ما تريد عندما تكون جاهزاً' : 'Add something when you’re ready';
       document.getElementById('nuCountdown').textContent = '';
     }
 
@@ -6387,10 +6394,43 @@
     document.documentElement.style.setProperty('--dial-scale', scale.toFixed(3));
   }
 
+  function renderHomeDayPreview() {
+    const wrap = document.getElementById('homeDayPreview');
+    const list = document.getElementById('homeDayPreviewList');
+    const title = document.getElementById('homeDayPreviewTitle');
+    const open = document.getElementById('homeDayPreviewOpen');
+    if (!wrap || !list) return;
+    if (title) title.textContent = currentLang === 'ar' ? 'اليوم' : 'Today';
+    if (open) {
+      open.textContent = currentLang === 'ar' ? 'عرض اليوم' : 'View day';
+      open.onclick = () => document.getElementById('openScheduleBtn')?.click();
+    }
+    list.innerHTML = '';
+    const visible = blocks.filter(b => !b.skipped).slice().sort((a,b) => a.start-b.start).slice(0,5);
+    if (!visible.length) {
+      const empty = document.createElement('button');
+      empty.type = 'button';
+      empty.className = 'home-day-empty';
+      empty.innerHTML = `<strong>${currentLang === 'ar' ? 'يومك مفتوح' : 'Your day is open'}</strong><span>${currentLang === 'ar' ? 'اضغط لإضافة نشاط بصوتك أو بكلماتك.' : 'Tap to add an activity in your own words.'}</span>`;
+      empty.addEventListener('click', () => document.getElementById('openVoiceBtn')?.click());
+      list.appendChild(empty);
+      return;
+    }
+    visible.forEach(b => {
+      const row = document.createElement('button');
+      row.type = 'button';
+      row.className = 'home-day-row' + (b.done ? ' is-done' : '');
+      row.innerHTML = `<span class="home-day-time">${escapeHtml(fmtClock12(b.start))}</span><span class="home-day-name">${escapeHtml(blockDisplayLabel(b))}</span><span class="home-day-arrow" aria-hidden="true">›</span>`;
+      row.addEventListener('click', () => document.getElementById('openScheduleBtn')?.click());
+      list.appendChild(row);
+    });
+  }
+
   function renderAll() {
     updateDialScale();
     renderSegments(lastDialActiveId);
     renderLegend();
+    renderHomeDayPreview();
   }
 
   // ---- Natural-language schedule commands ----
