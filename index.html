@@ -3712,6 +3712,165 @@
   }
 </style>
 
+
+<style id="heritage-story-bank-v2-style">
+  #storiesSheet .story-hero-wrap{
+    min-height:190px !important;
+    height:clamp(190px,29vh,245px) !important;
+    max-height:245px !important;
+    aspect-ratio:auto !important;
+  }
+  #storiesSheet .heritage-story-card[data-story-page="1"] .story-hero-wrap,
+  #storiesSheet .heritage-story-card[data-story-page="2"] .story-hero-wrap{
+    height:clamp(128px,20vh,160px) !important;
+    min-height:128px !important;
+    max-height:160px !important;
+  }
+  #storiesSheet .story-hero-image{
+    filter:saturate(1.06) contrast(1.04) !important;
+  }
+  #storiesSheet .story-page-headline{
+    font-size:clamp(1.08rem,4.8vw,1.4rem) !important;
+    line-height:1.18 !important;
+    color:#fff1cf !important;
+    margin-top:12px !important;
+  }
+  #storiesSheet .story-copy{
+    font-size:.94rem !important;
+    line-height:1.58 !important;
+  }
+  #storiesSheet .story-section-title{
+    color:#dfbd6b !important;
+    letter-spacing:.07em !important;
+  }
+  #storiesSheet .story-hero-badge{
+    border-radius:999px !important;
+  }
+  .heritage-recent{
+    flex:0 0 auto;
+    margin:2px 0 6px;
+    padding:10px 12px;
+    border:1px solid rgba(145,174,186,.18);
+    border-radius:16px;
+    background:rgba(6,29,45,.50);
+  }
+  .heritage-recent summary{
+    cursor:pointer;
+    color:#d7e1e4;
+    font-size:.78rem;
+    font-weight:800;
+  }
+  .heritage-recent-row{
+    display:flex;
+    gap:7px;
+    overflow-x:auto;
+    padding-top:9px;
+    scrollbar-width:none;
+  }
+  .heritage-recent-row::-webkit-scrollbar{display:none;}
+  .heritage-recent-chip{
+    flex:0 0 auto;
+    max-width:220px;
+    min-height:38px;
+    padding:7px 11px;
+    border-radius:999px;
+    border:1px solid rgba(227,183,93,.24);
+    background:rgba(8,40,58,.80);
+    color:#f6ead0;
+    font-size:.72rem;
+    line-height:1.2;
+    text-align:start;
+  }
+  html[dir="rtl"] .heritage-recent-chip{text-align:right;}
+  @media(max-width:390px){
+    #storiesSheet .story-hero-wrap{
+      height:178px !important;min-height:178px !important;max-height:178px !important;
+    }
+    #storiesSheet .heritage-story-card[data-story-page="1"] .story-hero-wrap,
+    #storiesSheet .heritage-story-card[data-story-page="2"] .story-hero-wrap{
+      height:120px !important;min-height:120px !important;max-height:120px !important;
+    }
+  }
+</style>
+
+
+<style id="recurrence-ui-v1">
+  .recurrence-badge{
+    display:inline-flex;
+    align-items:center;
+    width:max-content;
+    max-width:100%;
+    margin-top:3px;
+    padding:2px 7px;
+    border-radius:999px;
+    border:1px solid rgba(227,183,93,.24);
+    background:rgba(227,183,93,.08);
+    color:#d7bd79;
+    font-size:.68rem;
+    line-height:1.25;
+    font-weight:750;
+  }
+  .activity-edit-scope select{
+    width:100%;
+    min-height:42px;
+    border-radius:12px;
+    border:1px solid rgba(145,174,186,.26);
+    background:rgba(7,31,48,.88);
+    color:#f3ead8;
+    padding:8px 10px;
+  }
+</style>
+
+
+<style id="missed-reminder-intelligence-v1">
+  .row.missed{
+    opacity:.82;
+    border-color:rgba(190,161,104,.24) !important;
+    background:linear-gradient(90deg,rgba(130,96,43,.07),rgba(8,34,50,.35)) !important;
+  }
+  .row.skipped{
+    opacity:.52;
+    filter:saturate(.7);
+  }
+  .activity-state-badge{
+    display:inline-flex;
+    align-items:center;
+    width:max-content;
+    margin-top:4px;
+    padding:2px 7px;
+    border-radius:999px;
+    border:1px solid rgba(196,170,111,.28);
+    color:#d9c391;
+    background:rgba(115,87,39,.12);
+    font-size:.64rem;
+    font-weight:800;
+    letter-spacing:.02em;
+  }
+  .activity-state-badge[hidden]{display:none !important;}
+  .missed-actions{
+    display:flex;
+    gap:7px;
+    padding:6px 10px 10px 44px;
+  }
+  html[dir="rtl"] .missed-actions{padding:6px 44px 10px 10px;}
+  .missed-actions[hidden]{display:none !important;}
+  .missed-actions button{
+    min-height:32px;
+    padding:6px 10px;
+    border-radius:999px;
+    border:1px solid rgba(145,174,186,.22);
+    background:rgba(7,34,51,.66);
+    color:#dce7ea;
+    font-size:.7rem;
+    font-weight:800;
+  }
+  .missed-actions .missed-do-now{
+    border-color:rgba(227,183,93,.36);
+    color:#f3d88f;
+  }
+  #activityReminder #reminderSnooze[hidden]{display:none !important;}
+</style>
+
 </head>
 <body>
 <noscript>
@@ -3917,6 +4076,13 @@
         <label class="activity-edit-field">
           <span id="activityEditNoteLabel">Description / note</span>
           <input type="text" id="activityEditNote" maxlength="160" autocomplete="off" />
+        </label>
+        <label class="activity-edit-field activity-edit-scope" id="activityEditScopeWrap" hidden>
+          <span id="activityEditScopeLabel">Apply change to</span>
+          <select id="activityEditScope">
+            <option value="today">Only today</option>
+            <option value="future">This and future occurrences</option>
+          </select>
         </label>
         <div class="activity-edit-actions">
           <button type="button" id="activityEditCancel">Cancel</button>
@@ -4711,7 +4877,11 @@
               labelAr: String(b.labelAr || '').slice(0, 80),
               color: (typeof b.color === 'string' && b.color) ? b.color : PALETTE[i % PALETTE.length],
               done: !!b.done,
-              note: String(b.note || '').slice(0, 160)
+              note: String(b.note || '').slice(0, 160),
+              seriesId: typeof b.seriesId === 'string' ? b.seriesId : '',
+              occurrenceDate: typeof b.occurrenceDate === 'string' ? b.occurrenceDate : '',
+              recurrence: (b.recurrence && typeof b.recurrence === 'object') ? b.recurrence : null,
+              recurrenceGenerated: !!b.recurrenceGenerated
             };
           }).filter(Boolean).map((b, i) => ensureActivityPair(b, `Activity ${i + 1}`));
           if (cleaned.length) { blocks = cleaned; saveBlocks(); return; }
@@ -5122,6 +5292,16 @@
     document.getElementById('activityEditNoteLabel').textContent = ar ? 'الوصف / الملاحظة' : 'Description / note';
     document.getElementById('activityEditCancel').textContent = ar ? 'إلغاء' : 'Cancel';
     document.getElementById('activityEditSave').textContent = ar ? 'حفظ التغييرات' : 'Save changes';
+    const scopeWrap = document.getElementById('activityEditScopeWrap');
+    const scope = document.getElementById('activityEditScope');
+    const scopeLabel = document.getElementById('activityEditScopeLabel');
+    if (scopeWrap && scope) {
+      scopeWrap.hidden = !block.seriesId;
+      scope.value = 'today';
+      if (scopeLabel) scopeLabel.textContent = ar ? 'تطبيق التغيير على' : 'Apply change to';
+      scope.options[0].textContent = ar ? 'اليوم فقط' : 'Only today';
+      scope.options[1].textContent = ar ? 'اليوم والتكرارات القادمة' : 'This and future occurrences';
+    }
     panel.hidden = false;
     closeAllScheduleSwipes();
     setTimeout(() => document.getElementById('activityEditName').focus(), 0);
@@ -5133,11 +5313,30 @@
   }
 
   function deleteScheduledBlock(block) {
+    if (block.seriesId) {
+      const question = currentLang === 'ar'
+        ? `تخطي "${blockDisplayLabel(block)}" لليوم فقط؟ سيبقى التكرار للأيام القادمة.`
+        : `Skip "${blockDisplayLabel(block)}" for today only? Its recurring schedule will stay.`;
+      if (!window.confirm(question)) return;
+      recurringExceptions[recurrenceExceptionKey(block.seriesId, recurrenceDateKey())] = { type:'skip' };
+      saveRecurringExceptions();
+      blocks = blocks.filter(x => x.id !== block.id);
+      clearReminderStateForBlock(block.id);
+      saveBlocks();
+      closeActivityEditor();
+      renderAll();
+      const desc = currentLang === 'ar'
+        ? `تم تخطي "${blockDisplayLabel(block)}" لليوم فقط`
+        : `Skipped "${blockDisplayLabel(block)}" for today only`;
+      addLog('Delete', desc);
+      return;
+    }
     const question = currentLang === 'ar'
       ? `حذف "${blockDisplayLabel(block)}" من ${fmtClock12(block.start)} إلى ${fmtClock12(block.end)}؟`
       : `Delete "${blockDisplayLabel(block)}" from ${fmtClock12(block.start)} to ${fmtClock12(block.end)}?`;
     if (!window.confirm(question)) return;
     blocks = blocks.filter(x => x.id !== block.id);
+    clearReminderStateForBlock(block.id);
     saveBlocks();
     closeActivityEditor();
     renderAll();
@@ -5182,6 +5381,72 @@
     row.addEventListener('pointercancel', finish);
   }
 
+
+  function blockIsSkipped(b) {
+    return !!b?.skipped;
+  }
+
+  function blockIsMissed(b, now = new Date()) {
+    if (!b || b.done || blockIsSkipped(b)) return false;
+    const hf = currentHourFraction(now);
+    return Number.isFinite(Number(b.end)) && hf >= Number(b.end);
+  }
+
+  function missedStatusText(b) {
+    if (blockIsSkipped(b)) return currentLang === 'ar' ? 'تم التخطي' : 'Skipped';
+    if (blockIsMissed(b)) return currentLang === 'ar' ? 'فات الموعد' : 'Missed';
+    return '';
+  }
+
+  function doMissedActivityNow(b) {
+    if (!b) return;
+    const now = new Date();
+    const hf = currentHourFraction(now);
+    const duration = Math.max(.25, Number(b.end) - Number(b.start));
+    const start = Math.min(23.75, Math.max(0, hf));
+    const end = Math.min(24, start + duration);
+
+    if (b.seriesId) {
+      recurringExceptions[recurrenceExceptionKey(b.seriesId, recurrenceDateKey())] = {
+        type:'override', start, end,
+        labelEn:b.labelEn || b.label, labelAr:b.labelAr || b.label, note:b.note || ''
+      };
+      saveRecurringExceptions();
+      materializeRecurringForDate();
+      const updated = blocks.find(x => x.seriesId === b.seriesId && x.occurrenceDate === recurrenceDateKey());
+      if (updated) clearReminderStateForBlock(updated.id);
+    } else {
+      b.start = start;
+      b.end = end;
+      b.skipped = false;
+      clearReminderStateForBlock(b.id);
+      saveBlocks();
+    }
+    renderAll();
+    addLog('Edit', currentLang === 'ar'
+      ? `تم نقل "${blockDisplayLabel(b)}" إلى الآن`
+      : `Moved "${blockDisplayLabel(b)}" to now`, b.id);
+  }
+
+  function skipMissedActivity(b) {
+    if (!b) return;
+    if (b.seriesId) {
+      recurringExceptions[recurrenceExceptionKey(b.seriesId, recurrenceDateKey())] = { type:'skip' };
+      saveRecurringExceptions();
+      blocks = blocks.filter(x => x.id !== b.id);
+      clearReminderStateForBlock(b.id);
+      saveBlocks();
+    } else {
+      b.skipped = true;
+      clearReminderStateForBlock(b.id);
+      saveBlocks();
+    }
+    renderAll();
+    addLog('Edit', currentLang === 'ar'
+      ? `تم تخطي "${blockDisplayLabel(b)}" لليوم`
+      : `Skipped "${blockDisplayLabel(b)}" for today`, b.id);
+  }
+
   function renderLegend() {
     legend.innerHTML = '';
     blocks.forEach((b) => {
@@ -5199,17 +5464,41 @@
       `;
 
       const row = document.createElement('div');
-      row.className = 'row' + (b.done ? ' done' : '');
+      row.className = 'row' + (b.done ? ' done' : '') + (blockIsSkipped(b) ? ' skipped' : '') + (blockIsMissed(b) ? ' missed' : '');
       row.dataset.id = b.id;
       row.innerHTML = `
         <span class="swatch" style="background:${resolveVar(b.color)}"></span>
         <span class="time">${fmtClock12(b.start)}<br><small>${fmtClock12(b.end)}</small></span>
         <span class="row-text">
           <span class="label">${escapeHtml(blockDisplayLabel(b))}</span>
+          ${b.seriesId ? `<span class="recurrence-badge">${escapeHtml(recurrenceLabel(b.recurrence))}</span>` : ''}
+          <span class="activity-state-badge" ${missedStatusText(b) ? '' : 'hidden'}>${escapeHtml(missedStatusText(b))}</span>
           ${b.note ? `<span class="row-note">${escapeHtml(b.note)}</span>` : ''}
         </span>
       `;
+
+      const missedActions = document.createElement('div');
+      missedActions.className = 'missed-actions';
+      missedActions.hidden = !blockIsMissed(b);
+      missedActions.innerHTML = `
+        <button type="button" class="missed-do-now">${currentLang === 'ar' ? 'افعلها الآن' : 'Do now'}</button>
+        <button type="button" class="missed-move">${currentLang === 'ar' ? 'نقل' : 'Move'}</button>
+        <button type="button" class="missed-skip">${currentLang === 'ar' ? 'تخطي' : 'Skip'}</button>
+      `;
+      missedActions.querySelector('.missed-do-now').addEventListener('click', e => { e.stopPropagation(); doMissedActivityNow(b); });
+      missedActions.querySelector('.missed-move').addEventListener('click', e => {
+        e.stopPropagation();
+        if (typeof scheduleSheet?.open === 'function') scheduleSheet.open();
+        openActivityEditor(b);
+      });
+      missedActions.querySelector('.missed-skip').addEventListener('click', e => { e.stopPropagation(); skipMissedActivity(b); });
+
       row.addEventListener('click', () => {
+        if (blockIsSkipped(b)) return;
+        if (blockIsMissed(b)) {
+          missedActions.hidden = !missedActions.hidden;
+          return;
+        }
         if (wrapper.dataset.justSwiped || wrapper.classList.contains('is-open')) {
           wrapper.classList.remove('is-open');
           return;
@@ -5218,6 +5507,7 @@
         saveBlocks();
         renderLegend();
         addLog(b.done ? 'Activity' : 'Edit', b.done ? `Marked "${b.label}" done` : `Unmarked "${b.label}"`);
+        if (b.done) document.dispatchEvent(new CustomEvent('dailyRhythm:activityCompleted',{detail:{block:{...b}}}));
       });
       actions.querySelector('.schedule-edit-btn').addEventListener('click', (e) => {
         e.stopPropagation();
@@ -5230,6 +5520,7 @@
       attachSwipeGesture(wrapper, row);
       wrapper.appendChild(actions);
       wrapper.appendChild(row);
+      wrapper.appendChild(missedActions);
       legend.appendChild(wrapper);
     });
   }
@@ -5307,6 +5598,7 @@
   function activeIndex(hf) {
     for (let i = 0; i < blocks.length; i++) {
       const b = blocks[i];
+      if (b.done || blockIsSkipped(b)) continue;
       if ((hf >= b.start && hf < Math.min(b.end, 24)) || (b.end > 24 && hf < b.end - 24)) return i;
     }
     return -1;
@@ -5315,9 +5607,10 @@
   function nextBlockAfter(hf) {
     if (!blocks.length) return null;
     for (const b of blocks) {
+      if (b.done || blockIsSkipped(b)) continue;
       if (b.start > hf) return b;
     }
-    return blocks[0]; // wraps to the first item tomorrow
+    return null;
   }
 
   function fmtClock12(t) {
@@ -5403,7 +5696,21 @@
 
     blocks.forEach((b, i) => {
       const row = legend.querySelector(`.row[data-id="${b.id}"]`);
-      if (row) row.classList.toggle('active', i === idx);
+      if (!row) return;
+      row.classList.toggle('active', i === idx);
+      row.classList.toggle('missed', blockIsMissed(b, now));
+      row.classList.toggle('skipped', blockIsSkipped(b));
+      const badge = row.querySelector('.activity-state-badge');
+      if (badge) {
+        const txt = missedStatusText(b);
+        badge.hidden = !txt;
+        badge.textContent = txt;
+      }
+      const wrapper = row.closest('.schedule-swipe');
+      const missedActions = wrapper?.querySelector('.missed-actions');
+      if (missedActions && !missedActions.dataset.userToggled) {
+        missedActions.hidden = !blockIsMissed(b, now);
+      }
     });
     updateActivityReminder(now);
   }
@@ -5532,9 +5839,13 @@
   }
   function extractSingleTime(text) {
     text = normalizeTimePhrase(text);
-    const re = /\b(?:at|في|الساعة)\s+(\d{1,2}(?::\d{2})?\s*(?:am|pm|ص|م)?)/i;
-    const m = text.match(re);
-    return m ? parseTimeToken(m[1]) : null;
+    // Arabic letters are not treated as JS \b word characters, so keep the Arabic
+    // prepositions outside the ASCII word-boundary branch. Also accept a bare time
+    // when it carries an explicit AM/PM marker: "8 مساء", "8 م", "8 pm".
+    const anchored = text.match(/(?:\bat\b|في|الساعة)\s*(\d{1,2}(?::\d{2})?\s*(?:am|pm|ص|م)?)/i);
+    if (anchored) return parseTimeToken(anchored[1]);
+    const explicitPeriod = text.match(/(?:^|\s)(\d{1,2}(?::\d{2})?\s*(?:am|pm|ص|م))(?=$|\s|[،,.])/i);
+    return explicitPeriod ? parseTimeToken(explicitPeriod[1]) : null;
   }
   const SYNONYMS_EN = {
     "Gym": ["gym", "workout", "exercise", "training", "fitness"],
@@ -5816,7 +6127,8 @@
     t = t.replace(rangeRe, ' ');
     t = t.replace(/\b(?:for|لمدة)\s+\d+(?:\.\d+)?\s*(?:hour|hr|hours|hrs|minute|min|minutes|mins|ساعة|ساعات|دقيقة|دقائق)\b/ig, ' ');
     t = t.replace(/\b(?:at|from|في|الساعة|من)\s+\d{1,2}(?::\d{2})?\s*(?:am|pm|ص|م)?/ig, ' ');
-    t = t.replace(/\b(?:today|this morning|this afternoon|this evening|tonight)\b/ig, ' ');
+    t = t.replace(/\b(?:today|this morning|this afternoon|this evening|tonight|sometime|some time)\b/ig, ' ');
+    t = t.replace(/(?:الليلة|هذا المساء|مساء اليوم|في المساء)/g, ' ');
     t = t.replace(/\b(?:completed|finished|done|أنجزت|أكملت|كملت)\b.*/i, ' ');
     return t.replace(/[,.،]+/g, ' ').replace(/\s+/g, ' ').trim();
   }
@@ -5888,7 +6200,8 @@
     const normalized = normalizeTimePhrase(text);
     const hasRangeLanguage = /\b(?:between|from)\b/i.test(normalized) || extractTimeRange(normalized) !== null;
     const hasAtTime = extractSingleTime(normalized) !== null;
-    return !hasCompletionIntent(normalized) && (hasRangeLanguage || hasAtTime);
+    const hasRelative = !!relativeAnchor(normalized) || !!extractDaypartIntent(normalized);
+    return !hasCompletionIntent(normalized) && (hasRangeLanguage || hasAtTime || hasRelative);
   }
 
   function addOrReplaceScheduledActivity(name, start, end) {
@@ -5920,6 +6233,69 @@
   }
 
 
+  function affirmativeReply(raw) {
+    const t = normalizeDigits(String(raw || '')).trim().toLowerCase();
+    return /^(?:yes|yep|yeah|sure|ok|okay|confirm|do it|نعم|اي|أجل|اجل|تمام|موافق)$/.test(t);
+  }
+  function negativeReply(raw) {
+    const t = normalizeDigits(String(raw || '')).trim().toLowerCase();
+    return /^(?:no|nope|cancel|not now|لا|كلا|الغ|إلغاء|الغاء)$/.test(t);
+  }
+  function extractDaypartIntent(raw) {
+    const t = normalizeTimePhrase(raw).toLowerCase();
+    if (/\b(?:tonight|this evening)\b/.test(t) || /(?:الليلة|هذا المساء|مساء اليوم)/.test(String(raw || ''))) return 'tonight';
+    if (/\bthis morning\b/.test(t) || /(?:هذا الصباح|صباح اليوم)/.test(String(raw || ''))) return 'morning';
+    if (/\bthis afternoon\b/.test(t) || /(?:بعد الظهر اليوم|هذا بعد الظهر)/.test(String(raw || ''))) return 'afternoon';
+    return null;
+  }
+  function daypartPrompt(kind, label='') {
+    const q = kind === 'morning' ? (currentLang==='ar'?'هذا الصباح':'this morning')
+      : kind === 'afternoon' ? (currentLang==='ar'?'بعد الظهر':'this afternoon')
+      : (currentLang==='ar'?'هذا المساء':'tonight');
+    return currentLang === 'ar'
+      ? `ما الوقت بالتحديد لـ «${label}» ${q}؟ مثلاً: الساعة 8 مساءً.`
+      : `What exact time should I use for “${label}” ${q}? For example, 8 PM.`;
+  }
+  function relativeAnchor(raw) {
+    const source = String(raw || '');
+    const m = source.match(/\b(after|before)\s+(.+?)(?=$|[,.،])/i) || source.match(/(?:^|\s)(بعد|قبل)\s+(.+?)(?=$|[,.،])/);
+    if (!m) return null;
+    const relation = /^(?:after|بعد)$/i.test(m[1]) ? 'after' : 'before';
+    let anchorText = String(m[2] || '').trim()
+      .replace(/\b(?:today|tonight|this evening|this morning|this afternoon)\b/ig,' ')
+      .replace(/(?:اليوم|الليلة|هذا المساء|هذا الصباح)/g,' ')
+      .trim();
+    if (!anchorText) return null;
+    const prayer = findMatchingPrayerLabel(anchorText);
+    if (prayer) {
+      const p = prayers.find(x => x.label === prayer);
+      if (p) return { relation, type:'prayer', anchorText, anchorLabel:prayerDisplayLabel(prayer), time:Number(p.time) };
+    }
+    const block = findMatchingBlock(anchorText);
+    if (block) return { relation, type:'activity', anchorText, anchorLabel:blockDisplayLabel(block), block };
+    return { relation, type:'unknown', anchorText, anchorLabel:anchorText };
+  }
+  function relativeTimes(relative, duration=.5) {
+    if (!relative || relative.type === 'unknown') return null;
+    const gap=.25; // 15-minute breathing room between linked activities.
+    if (relative.type === 'prayer') {
+      const anchor=Number(relative.time);
+      const start = relative.relation === 'after' ? anchor + gap : anchor - gap - duration;
+      return { start:Math.max(0,start), end:Math.max(0,start)+duration };
+    }
+    const b=relative.block;
+    const start = relative.relation === 'after' ? Number(b.end)+gap : Number(b.start)-gap-duration;
+    return { start:Math.max(0,start), end:Math.max(0,start)+duration };
+  }
+  function relativeConfirmPrompt(label, rel, times) {
+    const relationText = currentLang === 'ar'
+      ? (rel.relation === 'after' ? 'بعد' : 'قبل')
+      : rel.relation;
+    return currentLang === 'ar'
+      ? `هل تريد «${label}» الساعة ${fmtClock12(times.start)}، أي ${relationText} «${rel.anchorLabel}» بـ 15 دقيقة؟ قل نعم أو أعطني وقتاً آخر.`
+      : `Schedule “${label}” at ${fmtClock12(times.start)}, 15 minutes ${relationText} “${rel.anchorLabel}”? Say yes or give me another time.`;
+  }
+
   let pendingScheduleIntent = null;
 
   function extractLooseTime(text) {
@@ -5944,6 +6320,44 @@
   function resolvePendingScheduleIntent(text) {
     if (!pendingScheduleIntent) return null;
     const p = pendingScheduleIntent;
+
+    if (p.type === 'confirm-relative-add' || p.type === 'confirm-relative-update') {
+      if (affirmativeReply(text)) {
+        pendingScheduleIntent = null;
+        if (p.type === 'confirm-relative-add') return addOrReplaceScheduledActivity(p.name, p.start, p.end);
+        const block = blocks.find(b => b.id === p.blockId);
+        if (!block) return msg('updateNotFound');
+        block.start=p.start; block.end=p.end;
+        clearReminderStateForBlock(block.id); sortBlocks(); saveBlocks(); renderAll();
+        const m=msg('updated', blockDisplayLabel(block), fmtClock12(block.start), fmtClock12(block.end));
+        addLog('Edit',m,block.id); return m;
+      }
+      if (negativeReply(text)) {
+        const label = p.name || blockDisplayLabel(blocks.find(b=>b.id===p.blockId) || {label:'Activity'});
+        pendingScheduleIntent = { type: p.type === 'confirm-relative-add' ? 'add-time' : 'update-time', name:p.name, blockId:p.blockId };
+        return pendingPrompt(p.type === 'confirm-relative-add' ? 'add-time' : 'update-time', label);
+      }
+      // A concrete replacement time can override the suggestion immediately.
+      const replacementRange=extractTimeRange(text);
+      const replacementSingle=extractSingleTime(text) ?? extractLooseTime(text);
+      if (replacementRange || replacementSingle !== null) {
+        if (p.type === 'confirm-relative-add') {
+          pendingScheduleIntent=null;
+          const s=replacementRange?replacementRange.start:replacementSingle;
+          const e=replacementRange?replacementRange.end:s+Math.max(.25,p.end-p.start);
+          return addOrReplaceScheduledActivity(p.name,s,e);
+        }
+        const block=blocks.find(b=>b.id===p.blockId); pendingScheduleIntent=null;
+        if(!block)return msg('updateNotFound');
+        const duration=Math.max(.25,block.end-block.start);
+        block.start=replacementRange?replacementRange.start:replacementSingle;
+        block.end=replacementRange?replacementRange.end:block.start+duration;
+        clearReminderStateForBlock(block.id); sortBlocks(); saveBlocks(); renderAll();
+        const m=msg('updated',blockDisplayLabel(block),fmtClock12(block.start),fmtClock12(block.end)); addLog('Edit',m,block.id); return m;
+      }
+      return p.prompt;
+    }
+
     const range = extractTimeRange(text);
     const single = extractSingleTime(text) ?? extractLooseTime(text);
 
@@ -6062,11 +6476,291 @@
     return prefix + results.join(currentLang === 'ar' ? ' • ' : ' • ');
   }
 
+
+  // ---- Recurring activities + today/future exceptions ----
+  const RECURRING_SERIES_KEY = 'dailyRhythmRecurringSeries_v1';
+  const RECURRING_EXCEPTIONS_KEY = 'dailyRhythmRecurringExceptions_v1';
+  let recurringSeries = [];
+  let recurringExceptions = {};
+  let recurrenceLastDate = '';
+
+  function recurrenceDateKey(d = new Date()) {
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  }
+  function recurrenceExceptionKey(seriesId, dateKey) { return `${seriesId}|${dateKey}`; }
+  function loadRecurringSeries() {
+    try {
+      const parsed = JSON.parse(localStorage.getItem(RECURRING_SERIES_KEY) || '[]');
+      recurringSeries = Array.isArray(parsed) ? parsed.filter(s => s && s.id && s.rule) : [];
+    } catch (_) { recurringSeries = []; }
+    try {
+      const parsed = JSON.parse(localStorage.getItem(RECURRING_EXCEPTIONS_KEY) || '{}');
+      recurringExceptions = parsed && typeof parsed === 'object' ? parsed : {};
+    } catch (_) { recurringExceptions = {}; }
+  }
+  function saveRecurringSeries() {
+    try { localStorage.setItem(RECURRING_SERIES_KEY, JSON.stringify(recurringSeries)); } catch (_) {}
+  }
+  function saveRecurringExceptions() {
+    try { localStorage.setItem(RECURRING_EXCEPTIONS_KEY, JSON.stringify(recurringExceptions)); } catch (_) {}
+  }
+  function recurrenceRuleMatches(rule, d = new Date()) {
+    if (!rule) return false;
+    const day = d.getDay();
+    if (rule.type === 'daily') return true;
+    if (rule.type === 'weekdays') return day >= 1 && day <= 5;
+    if (rule.type === 'weekly') return Array.isArray(rule.days) && rule.days.includes(day);
+    return false;
+  }
+  function recurrenceLabel(rule) {
+    if (!rule) return currentLang === 'ar' ? 'متكرر' : 'Repeats';
+    if (rule.type === 'daily') return currentLang === 'ar' ? '↻ يومياً' : '↻ Every day';
+    if (rule.type === 'weekdays') return currentLang === 'ar' ? '↻ أيام الأسبوع' : '↻ Weekdays';
+    if (rule.type === 'weekly') {
+      const en=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      const ar=['أحد','اثن','ثلا','أرب','خمي','جمع','سبت'];
+      return `↻ ${(rule.days||[]).map(i => (currentLang === 'ar' ? ar : en)[i]).join(' · ')}`;
+    }
+    return currentLang === 'ar' ? '↻ متكرر' : '↻ Repeats';
+  }
+  function parseRecurrenceRule(raw) {
+    const t = normalizeDigits(String(raw || '')).toLowerCase();
+    if (/\b(?:every\s*day|daily)\b/.test(t) || /(?:كل\s*يوم|يومي[ًاا]?)/.test(t)) return {type:'daily'};
+    if (/\b(?:every\s*weekday|weekdays?)\b/.test(t) || /(?:أيام\s*الأسبوع|ايام\s*الاسبوع)/.test(t)) return {type:'weekdays'};
+    const dayDefs = [
+      [0, /\b(?:sun(?:day)?s?)\b/i, /(?:الأحد|الاحد)/],
+      [1, /\b(?:mon(?:day)?s?)\b/i, /(?:الاثنين|الإثنين)/],
+      [2, /\b(?:tue(?:sday)?s?)\b/i, /(?:الثلاثاء)/],
+      [3, /\b(?:wed(?:nesday)?s?)\b/i, /(?:الأربعاء|الاربعاء)/],
+      [4, /\b(?:thu(?:rsday)?s?)\b/i, /(?:الخميس)/],
+      [5, /\b(?:fri(?:day)?s?)\b/i, /(?:الجمعة)/],
+      [6, /\b(?:sat(?:urday)?s?)\b/i, /(?:السبت)/]
+    ];
+    const repeatContext = /\b(?:every|each|on)\b/i.test(t) || /(?:كل|أيام|ايام)/.test(t);
+    const days = dayDefs.filter(([_,en,ar]) => en.test(t) || ar.test(t)).map(([i]) => i);
+    if (repeatContext && days.length) return {type:'weekly', days:[...new Set(days)]};
+    return null;
+  }
+  function stripRecurrenceLanguage(raw) {
+    return String(raw || '')
+      .replace(/\b(?:every\s*day|daily|every\s*weekday|weekdays?)\b/ig,' ')
+      .replace(/\b(?:every|each|on)\s+(?:sun(?:day)?s?|mon(?:day)?s?|tue(?:sday)?s?|wed(?:nesday)?s?|thu(?:rsday)?s?|fri(?:day)?s?|sat(?:urday)?s?)(?:\s*(?:,|and|&)\s*(?:sun(?:day)?s?|mon(?:day)?s?|tue(?:sday)?s?|wed(?:nesday)?s?|thu(?:rsday)?s?|fri(?:day)?s?|sat(?:urday)?s?))*/ig,' ')
+      .replace(/(?:كل\s*يوم|يومي[ًاا]?|أيام\s*الأسبوع|ايام\s*الاسبوع)/g,' ')
+      .replace(/\s+/g,' ').trim();
+  }
+  function normalizedActivityNeedle(s) {
+    return normalizeDigits(String(s || '')).toLowerCase()
+      .replace(/\b(?:add|schedule|set|put|insert|create|move|change|update|edit|shift|skip|cancel|delete|remove|stop|today|from now on|future|occurrences?|repeat(?:ing)?)\b/g,' ')
+      .replace(/(?:أضف|اضف|جدول|غيّر|غير|حرّك|حرك|عدّل|عدل|تخطى|تجاوز|ألغ|الغ|اليوم|من الآن|من الان|القادمة|التكرار)/g,' ')
+      .replace(/\b(?:at|from|to|until|for)\b/g,' ')
+      .replace(/\d{1,2}(?::\d{2})?\s*(?:am|pm)?/ig,' ')
+      .replace(/\s+/g,' ').trim();
+  }
+  function findRecurringSeries(raw, forcedLabel = null) {
+    const source = forcedLabel || normalizedActivityNeedle(stripRecurrenceLanguage(raw));
+    const low = String(source || '').toLowerCase();
+    if (!low) return null;
+    const exact = recurringSeries.find(s => [s.labelEn,s.labelAr].some(v => String(v||'').toLowerCase() === low));
+    if (exact) return exact;
+    return recurringSeries.find(s => {
+      const labels=[s.labelEn,s.labelAr].filter(Boolean).map(v=>String(v).toLowerCase());
+      return labels.some(v => low.includes(v) || v.includes(low));
+    }) || null;
+  }
+  function materializeRecurringForDate(d = new Date()) {
+    const dateKey = recurrenceDateKey(d);
+    recurrenceLastDate = dateKey;
+    blocks = blocks.filter(b => !b.recurrenceGenerated || b.occurrenceDate === dateKey);
+
+    recurringSeries.forEach((series, idx) => {
+      if (series.activeFrom && series.activeFrom > dateKey) return;
+      if (!recurrenceRuleMatches(series.rule, d)) return;
+      const ex = recurringExceptions[recurrenceExceptionKey(series.id, dateKey)];
+      if (ex?.type === 'skip') {
+        blocks = blocks.filter(b => !(b.seriesId === series.id && b.occurrenceDate === dateKey));
+        return;
+      }
+      let block = blocks.find(b => b.seriesId === series.id && b.occurrenceDate === dateKey);
+      const start = ex?.type === 'override' && Number.isFinite(Number(ex.start)) ? Number(ex.start) : Number(series.start);
+      const end = ex?.type === 'override' && Number.isFinite(Number(ex.end)) ? Number(ex.end) : Number(series.end);
+      const labelEn = ex?.type === 'override' && ex.labelEn ? ex.labelEn : series.labelEn;
+      const labelAr = ex?.type === 'override' && ex.labelAr ? ex.labelAr : series.labelAr;
+      const note = ex?.type === 'override' && typeof ex.note === 'string' ? ex.note : (series.note || '');
+
+      if (!block) {
+        block = {
+          id:`r_${series.id}_${dateKey}`,
+          start,end,label:labelEn,labelEn,labelAr,
+          color:series.color || PALETTE[idx % PALETTE.length],
+          done:false,note,
+          seriesId:series.id,occurrenceDate:dateKey,recurrence:series.rule,recurrenceGenerated:true
+        };
+        blocks.push(block);
+      } else {
+        block.start=start; block.end=end; block.label=labelEn; block.labelEn=labelEn; block.labelAr=labelAr;
+        block.note=note; block.recurrence=series.rule; block.recurrenceGenerated=true;
+      }
+    });
+    sortBlocks();
+    saveBlocks();
+  }
+  function createRecurringSeries(name, start, end, rule) {
+    const pair = makeActivityPair(name, currentLang);
+    const existing = recurringSeries.find(s => String(s.labelEn || '').toLowerCase() === String(pair.labelEn || '').toLowerCase());
+    if (existing) {
+      existing.start=start; existing.end=end; existing.rule=rule;
+      existing.labelEn=pair.labelEn; existing.labelAr=pair.labelAr;
+      saveRecurringSeries();
+      materializeRecurringForDate();
+      renderAll();
+      return currentLang === 'ar'
+        ? `تم تحديث تكرار "${existing.labelAr || existing.labelEn}" · ${recurrenceLabel(rule)} · ${fmtClock12(start)}`
+        : `Updated recurring "${existing.labelEn}" · ${recurrenceLabel(rule)} · ${fmtClock12(start)}`;
+    }
+    const series = {
+      id:'s_'+Date.now()+'_'+Math.random().toString(36).slice(2,7),
+      labelEn:pair.labelEn,labelAr:pair.labelAr,start,end,rule,
+      color:PALETTE[recurringSeries.length % PALETTE.length],
+      note:'',activeFrom:recurrenceDateKey()
+    };
+    recurringSeries.push(series);
+    saveRecurringSeries();
+    materializeRecurringForDate();
+    renderAll();
+    addLog('Add', currentLang === 'ar'
+      ? `تمت إضافة "${series.labelAr || series.labelEn}" كتكرار · ${recurrenceLabel(rule)}`
+      : `Added recurring "${series.labelEn}" · ${recurrenceLabel(rule)}`);
+    return currentLang === 'ar'
+      ? `تمت إضافة "${series.labelAr || series.labelEn}" · ${recurrenceLabel(rule)} · ${fmtClock12(start)}`
+      : `Added "${series.labelEn}" · ${recurrenceLabel(rule)} · ${fmtClock12(start)}`;
+  }
+  function clearReminderStateForBlock(id) {
+    try {
+      if (typeof reminderState !== 'undefined' && reminderState) {
+        if (reminderState.ignored) delete reminderState.ignored[id];
+        if (reminderState.snoozedUntil) delete reminderState.snoozedUntil[id];
+        if (reminderState.snoozeCount) delete reminderState.snoozeCount[id];
+        if (reminderState.lastNotifyAt) delete reminderState.lastNotifyAt[id];
+        if (typeof saveReminderState === 'function') saveReminderState();
+        if (typeof hideActivityReminder === 'function' && reminderVisibleBlockId === id) hideActivityReminder();
+      }
+      if (typeof reminderNotifiedKey !== 'undefined' && reminderNotifiedKey && reminderNotifiedKey.includes(id)) reminderNotifiedKey='';
+      if (typeof updateActivityReminder === 'function') setTimeout(() => updateActivityReminder(new Date()), 0);
+    } catch (_) {}
+  }
+  function handleRecurringCommand(text, forcedLabel = null) {
+    const low = text.toLowerCase();
+    const series = findRecurringSeries(text, forcedLabel);
+    const todayIntent = /\btoday\b/i.test(text) || /اليوم/.test(text);
+    const futureIntent = /\b(?:from now on|future occurrences?|going forward)\b/i.test(text) || /(?:من الآن|من الان|من الآن فصاعدا|من الان فصاعدا|القادمة)/.test(text);
+
+    if (series && (futureIntent || /\b(?:stop repeating|delete series|remove series)\b/i.test(low)) &&
+        /\b(?:delete|remove|cancel|stop|drop)\b/i.test(low)) {
+      recurringSeries = recurringSeries.filter(s => s.id !== series.id);
+      Object.keys(recurringExceptions).filter(k => k.startsWith(series.id+'|')).forEach(k => delete recurringExceptions[k]);
+      blocks = blocks.filter(b => b.seriesId !== series.id);
+      saveRecurringSeries(); saveRecurringExceptions(); saveBlocks(); renderAll();
+      const m = currentLang === 'ar'
+        ? `تم إيقاف تكرار "${series.labelAr || series.labelEn}" من الآن فصاعداً.`
+        : `Stopped recurring "${series.labelEn}" from now on.`;
+      addLog('Delete', m); return m;
+    }
+
+    const skipIntent = /\b(?:skip|cancel)\b/i.test(low) || /(?:تخطى|تجاوز|ألغي|الغِ|الغ)/.test(text);
+    if (series && todayIntent && skipIntent) {
+      recurringExceptions[recurrenceExceptionKey(series.id, recurrenceDateKey())]={type:'skip'};
+      saveRecurringExceptions();
+      const current=blocks.find(b=>b.seriesId===series.id && b.occurrenceDate===recurrenceDateKey());
+      if (current) clearReminderStateForBlock(current.id);
+      materializeRecurringForDate(); renderAll();
+      const m=currentLang==='ar'
+        ? `تم تخطي "${series.labelAr || series.labelEn}" لليوم فقط. سيبقى التكرار للأيام القادمة.`
+        : `Skipped "${series.labelEn}" for today only. Future occurrences stay scheduled.`;
+      addLog('Edit',m); return m;
+    }
+
+    const changeIntent = /\b(?:change|move|update|edit|shift|set)\b/i.test(low) || (futureIntent && /\bis\s+(?:at|from)\b/i.test(low)) || /(?:غيّر|غير|حرّك|حرك|عدّل|عدل)/.test(text);
+    if (series && futureIntent && changeIntent) {
+      const range=extractTimeRange(text);
+      const single=extractSingleTime(text) ?? extractLooseTime(text);
+      if (!range && single===null) return currentLang==='ar' ? 'ما الوقت الجديد؟' : 'What time should future occurrences use?';
+      const duration=Math.max(.25,Number(series.end)-Number(series.start));
+      series.start=range ? range.start : single;
+      series.end=range ? range.end : single+duration;
+      saveRecurringSeries();
+      delete recurringExceptions[recurrenceExceptionKey(series.id, recurrenceDateKey())];
+      saveRecurringExceptions();
+      materializeRecurringForDate();
+      const current=blocks.find(b=>b.seriesId===series.id && b.occurrenceDate===recurrenceDateKey());
+      if (current) clearReminderStateForBlock(current.id);
+      renderAll();
+      const m=currentLang==='ar'
+        ? `تم تحديث "${series.labelAr || series.labelEn}" من الآن فصاعداً إلى ${fmtClock12(series.start)}.`
+        : `Updated "${series.labelEn}" from now on to ${fmtClock12(series.start)}.`;
+      addLog('Edit',m,current?.id); return m;
+    }
+
+    if (series && todayIntent && changeIntent) {
+      const range=extractTimeRange(text);
+      const single=extractSingleTime(text) ?? extractLooseTime(text);
+      if (!range && single===null) return currentLang==='ar' ? 'ما الوقت الجديد لليوم؟' : 'What time should it use today?';
+      const current=blocks.find(b=>b.seriesId===series.id && b.occurrenceDate===recurrenceDateKey());
+      const duration=Math.max(.25,Number(current?.end ?? series.end)-Number(current?.start ?? series.start));
+      const start=range ? range.start : single;
+      const end=range ? range.end : single+duration;
+      recurringExceptions[recurrenceExceptionKey(series.id,recurrenceDateKey())]={type:'override',start,end};
+      saveRecurringExceptions();
+      materializeRecurringForDate();
+      const updated=blocks.find(b=>b.seriesId===series.id && b.occurrenceDate===recurrenceDateKey());
+      if (updated) clearReminderStateForBlock(updated.id);
+      renderAll();
+      const m=currentLang==='ar'
+        ? `تم نقل "${series.labelAr || series.labelEn}" لليوم فقط إلى ${fmtClock12(start)}.`
+        : `Moved "${series.labelEn}" to ${fmtClock12(start)} for today only.`;
+      addLog('Edit',m,updated?.id); return m;
+    }
+
+    const rule=parseRecurrenceRule(text);
+    if (rule) {
+      const addLike = /\b(?:add|schedule|set|put|insert|create)\b/i.test(low) || hasSchedulingIntent(text) || /(?:أضف|اضف|جدول|ضع)/.test(text);
+      if (!addLike) return null;
+      const range=extractTimeRange(text);
+      const duration=extractDuration(text);
+      const single=extractSingleTime(text) ?? extractLooseTime(text);
+      let start=null,end=null;
+      if (range) {start=range.start;end=range.end;}
+      else if (single!==null) {start=single;end=duration!==null ? single+duration : single+.5;}
+      if (start===null) return currentLang==='ar' ? 'ما وقت هذا النشاط المتكرر؟' : 'What time should this recurring activity start?';
+      let clean=stripRecurrenceLanguage(text)
+        .replace(/^(?:add|schedule|set|put|insert|create)\b/i,'')
+        .replace(/(?:^|\s)(?:أضف|اضف|جدول|ضع)(?:\s|$)/g,' ')
+        .trim();
+      let name=forcedLabel || semanticActivityName(clean);
+      name=(name||'Activity').slice(0,80);
+      return createRecurringSeries(name,start,end,rule);
+    }
+    return null;
+  }
+
+  loadRecurringSeries();
+  materializeRecurringForDate();
+  renderAll();
+  setInterval(() => {
+    const key=recurrenceDateKey();
+    if (key !== recurrenceLastDate) {
+      materializeRecurringForDate();
+      renderAll();
+    }
+  }, 60000);
+
   function parseCommand(raw, forcedLabel = null) {
     const text = normalizeDigits(raw.trim());
     const lower = text.toLowerCase();
     const pendingResult = resolvePendingScheduleIntent(text);
     if (pendingResult) return pendingResult;
+
+    const recurrenceResult = handleRecurringCommand(text, forcedLabel);
+    if (recurrenceResult) return recurrenceResult;
 
     // ---- remove ----
     const arRemoveRest = stripLeadingArabicKeyword(text, AR_REMOVE_WORDS);
@@ -6089,16 +6783,26 @@
       const rest = arAddRest !== null ? arAddRest : text.replace(/^(add|schedule|set|put|insert|create)\b/i, '').trim();
       const range = extractTimeRange(rest);
       const duration = extractDuration(rest);
-      const singleStart = extractSingleTime(rest);
+      const singleStart = extractSingleTime(rest) ?? extractLooseTime(rest);
+      const relative = relativeAnchor(rest);
       let start, end;
       if (range) { start = range.start; end = range.end; }
       else if (singleStart !== null && duration !== null) { start = singleStart; end = singleStart + duration; }
       else if (singleStart !== null) { start = singleStart; end = singleStart + 0.5; }
-      else {
+      else if (relative && relative.type !== 'unknown') {
+        let pendingName = forcedLabel || semanticActivityName(rest.replace(/\b(?:after|before)\b[\s\S]*$/i,'').replace(/(?:بعد|قبل)[\s\S]*$/,'').trim());
+        pendingName=(pendingName||'Activity').slice(0,80);
+        const times=relativeTimes(relative,duration!==null?duration:.5);
+        const prompt=relativeConfirmPrompt(pendingName,relative,times);
+        pendingScheduleIntent={type:'confirm-relative-add',name:pendingName,start:times.start,end:times.end,prompt};
+        return prompt;
+      } else {
         let pendingName = forcedLabel || semanticActivityName(rest);
         pendingName = (pendingName || 'Activity').slice(0, 80);
         pendingScheduleIntent = { type: 'add-time', name: pendingName };
-        return pendingPrompt('add-time', pendingName);
+        return relative && relative.type === 'unknown'
+          ? (currentLang==='ar' ? `لم أجد «${relative.anchorLabel}» في جدول اليوم. ما الوقت الذي تريده؟` : `I couldn't find “${relative.anchorLabel}” in today's schedule. What time should I use?`)
+          : pendingPrompt('add-time', pendingName);
       }
       let name = forcedLabel || semanticActivityName(rest);
       name = (name || 'Activity').slice(0, 80);
@@ -6125,7 +6829,11 @@
 
       const range = extractTimeRange(rest);
       const singleNewTime = extractSingleTime(rest) ?? extractLooseTime(rest);
-      const match = findMatchingBlock(rest, forcedLabel);
+      const relative = relativeAnchor(rest);
+      // Remove the anchor phrase before matching the activity being moved, so
+      // "move walk after work" targets Walk, not Work.
+      const targetText = relative ? rest.replace(/\b(?:after|before)\s+.+$/i,'').replace(/(?:بعد|قبل)\s+.+$/,'').trim() : rest;
+      const match = findMatchingBlock(targetText || rest, forcedLabel);
       if (!match) {
         if (range || singleNewTime !== null) {
           pendingScheduleIntent = { type: 'choose-update-target', range, single: singleNewTime };
@@ -6133,8 +6841,22 @@
         }
         return msg('updateNotFound');
       }
+      if (!range && singleNewTime === null && relative && relative.type !== 'unknown') {
+        const duration=Math.max(.25,match.end-match.start);
+        const times=relativeTimes(relative,duration);
+        const prompt=relativeConfirmPrompt(blockDisplayLabel(match),relative,times);
+        pendingScheduleIntent={type:'confirm-relative-update',blockId:match.id,start:times.start,end:times.end,prompt};
+        return prompt;
+      }
+      if (!range && singleNewTime === null && relative && relative.type === 'unknown') {
+        pendingScheduleIntent={type:'update-time',blockId:match.id};
+        return currentLang==='ar'
+          ? `لم أجد «${relative.anchorLabel}» في جدول اليوم. ما الوقت الجديد لـ «${blockDisplayLabel(match)}»؟`
+          : `I couldn't find “${relative.anchorLabel}” in today's schedule. What time should I use for “${blockDisplayLabel(match)}”?`;
+      }
       if (range) {
         match.start = range.start; match.end = range.end;
+        clearReminderStateForBlock(match.id);
         sortBlocks(); saveBlocks(); renderAll();
         const m = msg('updated', blockDisplayLabel(match), fmtClock12(range.start), fmtClock12(range.end));
         addLog('Edit', m, match.id);
@@ -6143,6 +6865,7 @@
       if (singleNewTime !== null) {
         const duration = Math.max(0.25, match.end - match.start);
         match.start = singleNewTime; match.end = singleNewTime + duration;
+        clearReminderStateForBlock(match.id);
         sortBlocks(); saveBlocks(); renderAll();
         const m = msg('updated', blockDisplayLabel(match), fmtClock12(match.start), fmtClock12(match.end));
         addLog('Edit', m, match.id);
@@ -6150,6 +6873,15 @@
       }
       pendingScheduleIntent = { type: 'update-time', blockId: match.id };
       return pendingPrompt('update-time', blockDisplayLabel(match));
+    }
+
+    // Broad dayparts are intentionally clarified instead of silently inventing a time.
+    const broadDaypart = extractDaypartIntent(text);
+    if (broadDaypart && !hasCompletionIntent(text)) {
+      let name = forcedLabel || semanticActivityName(text);
+      name=(name||'Activity').slice(0,80);
+      pendingScheduleIntent={type:'add-time',name};
+      return daypartPrompt(broadDaypart,name);
     }
 
     // Optional prayer completion/report: Duha is not one of the five fixed prayer markers,
@@ -6171,6 +6903,7 @@
           ? `تم تسجيل صلاة الضحى كمكتملة · ${fmtClock12(reportedTime)}`
           : `Logged Duha prayer as completed · ${fmtClock12(reportedTime)}`;
         addLog('Activity', desc, block.id);
+        document.dispatchEvent(new CustomEvent('dailyRhythm:activityCompleted',{detail:{block:{...block}}}));
         return desc;
       }
     }
@@ -6213,6 +6946,7 @@
       const range = extractTimeRange(text);
       const duration = extractDuration(text);
       match.done = true;
+      document.dispatchEvent(new CustomEvent('dailyRhythm:activityCompleted',{detail:{block:{...match}}}));
       let note = extractNote(text);
       if (note) {
         const noteLow = note.toLowerCase();
@@ -6261,12 +6995,34 @@
     if (end - start > 24) return;
     const before = `${blockDisplayLabel(block)} ${fmtClock12(block.start)}–${fmtClock12(block.end)}`;
     const pair = makeActivityPair(name, currentLang);
+    const scope = document.getElementById('activityEditScope')?.value || 'today';
+
+    if (block.seriesId && scope === 'future') {
+      const series = recurringSeries.find(s => s.id === block.seriesId);
+      if (series) {
+        series.labelEn = pair.labelEn;
+        series.labelAr = pair.labelAr;
+        series.start = start;
+        series.end = end;
+        series.note = note;
+        saveRecurringSeries();
+        delete recurringExceptions[recurrenceExceptionKey(series.id, recurrenceDateKey())];
+        saveRecurringExceptions();
+      }
+    } else if (block.seriesId) {
+      recurringExceptions[recurrenceExceptionKey(block.seriesId, recurrenceDateKey())] = {
+        type:'override', start, end, labelEn:pair.labelEn, labelAr:pair.labelAr, note
+      };
+      saveRecurringExceptions();
+    }
+
     block.label = pair.labelEn;
     block.labelEn = pair.labelEn;
     block.labelAr = pair.labelAr;
     block.start = start;
     block.end = end;
     block.note = note;
+    clearReminderStateForBlock(block.id);
     sortBlocks(); saveBlocks(); closeActivityEditor(); renderAll();
     const after = `${blockDisplayLabel(block)} ${fmtClock12(block.start)}–${fmtClock12(block.end)}`;
     addLog('Edit', currentLang === 'ar' ? `تم تعديل ${before} إلى ${after}` : `Updated ${before} to ${after}`);
@@ -6308,6 +7064,10 @@
   function executeScheduleReset() {
     const removed = blocks.length;
     blocks = [];
+    recurringSeries = [];
+    recurringExceptions = {};
+    saveRecurringSeries();
+    saveRecurringExceptions();
     pendingScheduleIntent = null;
     saveBlocks(); renderAll();
     const m = currentLang === 'ar'
@@ -6463,7 +7223,7 @@
 
   // ---- Activity reminder bubble + best-effort browser notification ----
   const REMINDER_STATE_KEY = 'dailyRhythmReminderState_v1';
-  let reminderState = { date: '', ignored: {}, snoozedUntil: {} };
+  let reminderState = { date: '', ignored: {}, snoozedUntil: {}, snoozeCount: {}, lastNotifyAt: {} };
   let reminderVisibleBlockId = null;
   let reminderNotifiedKey = '';
   const reminderEl = document.getElementById('activityReminder');
@@ -6482,17 +7242,23 @@
   function loadReminderState() {
     try { reminderState = JSON.parse(localStorage.getItem(REMINDER_STATE_KEY) || '{}') || {}; } catch (e) { reminderState = {}; }
     const key = todayKey();
-    if (reminderState.date !== key) reminderState = { date:key, ignored:{}, snoozedUntil:{} };
-    reminderState.ignored ||= {}; reminderState.snoozedUntil ||= {};
+    if (reminderState.date !== key) reminderState = { date:key, ignored:{}, snoozedUntil:{}, snoozeCount:{}, lastNotifyAt:{} };
+    reminderState.ignored ||= {};
+    reminderState.snoozedUntil ||= {};
+    reminderState.snoozeCount ||= {};
+    reminderState.lastNotifyAt ||= {};
   }
   function saveReminderState() { try { localStorage.setItem(REMINDER_STATE_KEY, JSON.stringify(reminderState)); } catch (e) {} }
   loadReminderState();
 
   function reminderCandidate(now = new Date()) {
-    if (reminderState.date !== todayKey(now)) { reminderState = { date:todayKey(now), ignored:{}, snoozedUntil:{} }; saveReminderState(); }
+    if (reminderState.date !== todayKey(now)) {
+      reminderState = { date:todayKey(now), ignored:{}, snoozedUntil:{}, snoozeCount:{}, lastNotifyAt:{} };
+      saveReminderState();
+    }
     const hf = currentHourFraction(now);
     const nowMs = now.getTime();
-    const upcoming = blocks.filter(b => !b.done && !reminderState.ignored[b.id]).map(b => {
+    const upcoming = blocks.filter(b => !b.done && !blockIsSkipped(b) && !reminderState.ignored[b.id]).map(b => {
       let deltaMin = (b.start - hf) * 60;
       if (deltaMin < -720) deltaMin += 1440;
       return { b, deltaMin };
@@ -6522,8 +7288,11 @@
   async function maybeBrowserNotify(hit) {
     if (!document.hidden || !('Notification' in window) || Notification.permission !== 'granted') return;
     const key = `${todayKey()}-${hit.b.id}-${Math.round(hit.b.start*60)}`;
-    if (reminderNotifiedKey === key) return;
+    const lastAt = Number(reminderState.lastNotifyAt?.[hit.b.id] || 0);
+    if (reminderNotifiedKey === key || Date.now() - lastAt < 15*60*1000) return;
     reminderNotifiedKey = key;
+    reminderState.lastNotifyAt[hit.b.id] = Date.now();
+    saveReminderState();
     const title = blockDisplayLabel(hit.b);
     const body = reminderText(hit);
     try {
@@ -6560,7 +7329,11 @@
       ? 'لحظة للتوقف والحضور ومواصلة يومك بنية واضحة.'
       : 'Pause. Be present. Continue with intention.';
     document.getElementById('reminderKicker').textContent = currentLang === 'ar' ? 'لحظة في يومك' : 'A moment in your day';
-    reminderSnooze.textContent = currentLang === 'ar' ? 'غفوة ١٠د' : 'Snooze 10m';
+    const snoozeCount = Number(reminderState.snoozeCount?.[hit.b.id] || 0);
+    reminderSnooze.hidden = snoozeCount >= 2;
+    reminderSnooze.textContent = currentLang === 'ar'
+      ? `غفوة ١٠د (${Math.min(snoozeCount+1,2)}/٢)`
+      : `Snooze 10m (${Math.min(snoozeCount+1,2)}/2)`;
     reminderEdit.textContent = currentLang === 'ar' ? 'تعديل' : 'Edit';
     reminderDelete.textContent = currentLang === 'ar' ? 'حذف' : 'Delete';
     reminderDone.textContent = currentLang === 'ar' ? 'تم' : 'Done';
@@ -6585,7 +7358,13 @@
   reminderMain?.addEventListener('keydown', e => { if ((e.key==='Enter'||e.key===' ') && reminderVisibleBlockId) { e.preventDefault(); openReminderActivity(reminderVisibleBlockId); } });
   reminderSnooze?.addEventListener('click', e => {
     e.stopPropagation(); if (!reminderVisibleBlockId) return;
-    reminderState.snoozedUntil[reminderVisibleBlockId] = Date.now() + 10*60*1000; saveReminderState(); hideActivityReminder();
+    const id = reminderVisibleBlockId;
+    const count = Number(reminderState.snoozeCount?.[id] || 0);
+    if (count >= 2) return;
+    reminderState.snoozeCount[id] = count + 1;
+    reminderState.snoozedUntil[id] = Date.now() + 10*60*1000;
+    saveReminderState();
+    hideActivityReminder();
   });
   reminderEdit?.addEventListener('click', e => {
     e.stopPropagation();
@@ -6610,7 +7389,9 @@
   });
   reminderDone?.addEventListener('click', e => {
     e.stopPropagation(); const b = blocks.find(x => x.id === reminderVisibleBlockId); if (!b) return;
-    b.done = true; saveBlocks(); renderAll(); addLog('Activity', `Marked "${b.label}" done from reminder`, b.id); hideActivityReminder();
+    b.done = true; saveBlocks(); renderAll(); addLog('Activity', `Marked "${b.label}" done from reminder`, b.id);
+    document.dispatchEvent(new CustomEvent('dailyRhythm:activityCompleted',{detail:{block:{...b}}}));
+    hideActivityReminder();
   });
   document.getElementById('enableReminderNotifications')?.addEventListener('click', async () => {
     const btn = document.getElementById('enableReminderNotifications');
@@ -6706,8 +7487,17 @@
       const blockId = u.searchParams.get('blockId');
       if (!action || !blockId) return;
       const b = blocks.find(x => x.id === blockId);
-      if (action === 'done' && b) { b.done = true; saveBlocks(); renderAll(); addLog('Activity', `Marked "${b.label}" done from notification`, b.id); }
-      if (action === 'snooze') { reminderState.snoozedUntil[blockId] = Date.now() + 10*60*1000; saveReminderState(); }
+      if (action === 'done' && b) { b.done = true; saveBlocks(); renderAll(); addLog('Activity', `Marked "${b.label}" done from notification`, b.id); document.dispatchEvent(new CustomEvent('dailyRhythm:activityCompleted',{detail:{block:{...b}}})); }
+      if (action === 'snooze') {
+        const count = Number(reminderState.snoozeCount?.[blockId] || 0);
+        if (count < 2) {
+          reminderState.snoozeCount[blockId] = count + 1;
+          reminderState.snoozedUntil[blockId] = Date.now() + 10*60*1000;
+        } else {
+          reminderState.ignored[blockId] = true;
+        }
+        saveReminderState();
+      }
       if (action === 'ignore') { reminderState.ignored[blockId] = true; saveReminderState(); }
       if (action === 'open' && b) openReminderActivity(blockId);
       u.searchParams.delete('reminderAction'); u.searchParams.delete('blockId');
@@ -6764,223 +7554,442 @@
 })();
 </script>
 
-<script id="heritage-experience-v1">
+<script id="heritage-experience-v2">
 (function(){
-  const H_KEY='dailyRhythmHeritageSettings_v1';
-  const LAST_KEY='dailyRhythmHeritageLastShown_v1';
-  let settings={enabled:true,frequency:'daily',onCompletion:true};
-  try { settings={...settings,...JSON.parse(localStorage.getItem(H_KEY)||'{}')}; } catch(_){ }
+  const SETTINGS_KEY='dailyRhythmHeritageSettings_v1';
+  const HISTORY_KEY='dailyRhythmHeritageStoryHistory_v2';
+  let settings={enabled:true,frequency:'few',onCompletion:true};
+  try { settings={...settings,...JSON.parse(localStorage.getItem(SETTINGS_KEY)||'{}')}; } catch(_){}
 
-  const stories=[
+  const $=id=>document.getElementById(id);
+  const ar=()=>document.documentElement.lang==='ar';
+  const t=(en,arText)=>ar()?arText:en;
+  const AS='assets/';
+
+  const scholars=[
+    {id:'biruni',monogram:'ب',name:'Al-Biruni',nameAr:'البيروني',meta:'973–1048 · Astronomy · Mathematics · Geography'},
+    {id:'haytham',monogram:'هـ',name:'Ibn al-Haytham',nameAr:'ابن الهيثم',meta:'c. 965–1040 · Optics · Mathematics · Astronomy'},
+    {id:'khwarizmi',monogram:'خ',name:'Al-Khwarizmi',nameAr:'الخوارزمي',meta:'c. 780–850 · Mathematics · Astronomy · Geography'},
+    {id:'zahrawi',monogram:'ز',name:'Al-Zahrawi',nameAr:'الزهراوي',meta:'936–1013 · Medicine · Surgery · Al-Andalus'},
+    {id:'idrisi',monogram:'إ',name:'Al-Idrisi',nameAr:'الإدريسي',meta:'c. 1100–1165 · Geography · Cartography · Al-Andalus/Sicily'}
+  ];
+
+  const storyBank=[
     {
-      id:'biruni', monogram:'ب', image:'assets/scholar-biruni-measurement.webp', name:'Al-Biruni', nameAr:'البيروني', meta:'973–1048 · Astronomy · Mathematics · Geography',
-      contextEn:'You opened the moon. Al-Biruni studied the sky, time and the Earth with mathematics and observation.',
-      contextAr:'فتحتَ تفاصيل القمر. درس البيروني السماء والوقت والأرض بالاعتماد على الرياضيات والملاحظة.',
-      contributionEn:'He wrote extensively on astronomy and devised a geometric method for estimating the Earth’s radius from observations made from a mountain.',
-      contributionAr:'كتب بإسهاب في علم الفلك وطوّر طريقة هندسية لتقدير نصف قطر الأرض انطلاقاً من قياسات أُجريت من جبل.',
-      legacyEn:'His work shows how careful measurement can connect the sky above us with the world beneath our feet.',
-      legacyAr:'يُظهر إرثه كيف يمكن للقياس الدقيق أن يربط بين السماء التي نراها والعالم الذي نعيش فيه.'
+      id:'biruni-earth-radius',scholarId:'biruni',image:AS+'story-biruni-earth-radius.webp',
+      categories:['moon','astronomy','prayer','science','measurement'],
+      titleEn:'How could a mountain help measure the Earth?',titleAr:'كيف يمكن لجبل أن يساعد في قياس الأرض؟',
+      hookEn:'Imagine standing high above the horizon with no satellite, no GPS and one difficult question: how large is the Earth?',
+      hookAr:'تخيّل أنك تقف فوق جبل عالٍ بلا أقمار صناعية ولا نظام تحديد مواقع، ومعك سؤال صعب: ما حجم الأرض؟',
+      contributionEn:'Al-Biruni described a geometric method that used the height of a mountain and the angle to the horizon to estimate the Earth’s radius.',
+      contributionAr:'وصف البيروني طريقة هندسية تستخدم ارتفاع الجبل وزاوية النظر إلى الأفق لتقدير نصف قطر الأرض.',
+      legacyEn:'The idea is powerful because the instrument was not the impressive part—the reasoning was. Careful angles could turn one visible horizon into a measurement of the planet.',
+      legacyAr:'قوة الفكرة لم تكن في فخامة الأداة، بل في الاستدلال: زوايا دقيقة حوّلت الأفق المرئي إلى قياس لكوكب كامل.'
     },
     {
-      id:'haytham', monogram:'هـ', image:'assets/scholar-haytham-optics.webp', name:'Ibn al-Haytham', nameAr:'ابن الهيثم', meta:'c. 965–1040 · Optics · Mathematics · Astronomy',
-      contextEn:'A story for moments of curiosity: Ibn al-Haytham asked how sight and light actually work, then tested ideas through observation and experiment.',
-      contextAr:'قصة للحظات الفضول: تساءل ابن الهيثم كيف يعمل البصر والضوء فعلاً، ثم اختبر الأفكار بالملاحظة والتجربة.',
-      contributionEn:'His Book of Optics developed an influential account of vision and used systematic experiments to investigate light.',
-      contributionAr:'قدّم كتاب المناظر دراسة مؤثرة للبصر واستخدم تجارب منهجية لدراسة الضوء.',
-      legacyEn:'His example links curiosity with evidence: observe carefully, test an idea, then revise what you think you know.',
-      legacyAr:'يربط مثاله الفضول بالدليل: راقب بعناية، اختبر الفكرة، ثم راجع ما تظن أنك تعرفه.'
+      id:'biruni-mountain-angle',scholarId:'biruni',image:AS+'story-biruni-mountain-angle.webp',
+      categories:['hiking','walk','outdoors','measurement','travel'],
+      titleEn:'A horizon became a measuring instrument',titleAr:'حين أصبح الأفق أداة قياس',
+      hookEn:'A walk to high ground can change what you notice. For Al-Biruni, elevation, distance and angle were pieces of the same puzzle.',
+      hookAr:'قد تغيّر المرتفعات ما تلاحظه في العالم. عند البيروني كان الارتفاع والمسافة والزاوية أجزاءً من لغز واحد.',
+      contributionEn:'His work in mathematical geography connected observations of landscapes with trigonometric calculation and astronomical measurement.',
+      contributionAr:'ربط عمله في الجغرافيا الرياضية بين ملاحظة التضاريس والحساب المثلثي والقياس الفلكي.',
+      legacyEn:'It is a reminder that mathematics can begin with something ordinary: a mountain, a line of sight and the discipline to measure carefully.',
+      legacyAr:'إنها تذكير بأن الرياضيات قد تبدأ من شيء مألوف: جبل وخط نظر وانضباط في القياس.'
     },
     {
-      id:'khwarizmi', monogram:'خ', image:'assets/scholar-khwarizmi-algebra.webp', name:'Al-Khwarizmi', nameAr:'الخوارزمي', meta:'c. 780–850 · Mathematics · Astronomy · Geography',
-      contextEn:'You completed a task. Al-Khwarizmi’s work is a fitting reminder that difficult problems become manageable when they are broken into clear steps.',
-      contextAr:'أكملتَ مهمة. يذكّرنا عمل الخوارزمي بأن المسائل الصعبة تصبح أسهل عندما نقسمها إلى خطوات واضحة.',
-      contributionEn:'His mathematical writings helped establish algebra as a systematic discipline; his Latinized name also became the source of the word “algorithm.”',
-      contributionAr:'ساعدت مؤلفاته الرياضية على ترسيخ الجبر كعلم منظم، كما أصبح اسمه بعد نقله إلى اللاتينية أصلاً لكلمة «خوارزمية».',
-      legacyEn:'Every time software follows a sequence of steps to solve a problem, the word “algorithm” carries an echo of his name.',
-      legacyAr:'كلما اتبع برنامج سلسلة خطوات لحل مشكلة، تحمل كلمة «خوارزمية» صدى اسمه.'
+      id:'biruni-sky-measurement',scholarId:'biruni',image:AS+'story-biruni-sky-measurement.webp',
+      categories:['prayer','moon','sky','astronomy','time'],
+      titleEn:'Time was read from the sky',titleAr:'كان الزمن يُقرأ من السماء',
+      hookEn:'Before a phone could tell you the hour, the sky itself was a clock, calendar and compass.',
+      hookAr:'قبل أن يخبرك الهاتف بالوقت، كانت السماء نفسها ساعةً وتقويماً وبوصلة.',
+      contributionEn:'Al-Biruni wrote extensively about astronomy, calendars and methods of observation, comparing systems of time used by different cultures.',
+      contributionAr:'كتب البيروني بإسهاب عن الفلك والتقاويم وطرق الرصد، وقارن بين أنظمة الزمن لدى ثقافات مختلفة.',
+      legacyEn:'Every prayer time, lunar month and changing shadow carries a small echo of that older habit: look up, observe, calculate.',
+      legacyAr:'يحمل كل وقت صلاة وشهر قمري وظل متغيّر صدىً لتلك العادة القديمة: انظر، راقب، واحسب.'
     },
     {
-      id:'zahrawi', monogram:'ز', image:'assets/scholar-zahrawi-instruments.webp', name:'Al-Zahrawi', nameAr:'الزهراوي', meta:'936–1013 · Medicine · Surgery · Al-Andalus',
-      contextEn:'A health-related routine can open a story from medicine. Al-Zahrawi worked in al-Andalus and documented surgical practice in remarkable detail.',
-      contextAr:'يمكن لروتين صحي أن يفتح قصة من تاريخ الطب. عمل الزهراوي في الأندلس ووثّق الممارسة الجراحية بتفصيل لافت.',
-      contributionEn:'The surgical volume of his medical encyclopedia described and illustrated a large range of instruments and procedures.',
-      contributionAr:'وصف الجزء الجراحي من موسوعته الطبية عدداً كبيراً من الأدوات والإجراءات الجراحية وضم رسوماً لها.',
-      legacyEn:'His work became influential well beyond al-Andalus through later translations and medical teaching.',
-      legacyAr:'امتد تأثير عمله إلى ما وراء الأندلس عبر الترجمات اللاحقة والتعليم الطبي.'
+      id:'haytham-camera-obscura',scholarId:'haytham',image:AS+'story-haytham-camera-obscura.webp',
+      categories:['reading','study','science','camera','light','curiosity'],
+      titleEn:'A tiny opening could project an entire scene',titleAr:'فتحة صغيرة يمكن أن تسقط مشهداً كاملاً',
+      hookEn:'Darken a room, allow light through a small opening, and an outside scene can appear inside—upside down.',
+      hookAr:'أظلم غرفة واترك الضوء يمر عبر فتحة صغيرة، فيظهر مشهد الخارج في الداخل مقلوباً.',
+      contributionEn:'Ibn al-Haytham used dark-room observations while studying how rays of light travel, an important part of the history of the camera obscura and optics.',
+      contributionAr:'استخدم ابن الهيثم ملاحظات الغرفة المظلمة أثناء دراسته لمسار أشعة الضوء، وهي محطة مهمة في تاريخ البصريات والكاميرا المظلمة.',
+      legacyEn:'The image feels almost magical, but the lesson is scientific: surprising effects become understandable when you control the conditions and observe carefully.',
+      legacyAr:'تبدو الصورة كأنها سحر، لكن الدرس علمي: الظواهر المدهشة تصبح مفهومة عندما تضبط الظروف وتراقب بعناية.'
     },
     {
-      id:'idrisi', monogram:'إ', image:'assets/scholar-idrisi-cartography.webp', name:'Al-Idrisi', nameAr:'الإدريسي', meta:'c. 1100–1165 · Geography · Cartography · Al-Andalus/Sicily',
-      contextEn:'Travel and movement can reveal a geography story. Al-Idrisi gathered reports from travellers and earlier sources to describe the known world.',
-      contextAr:'يمكن للسفر والحركة أن يكشفا قصة في الجغرافيا. جمع الإدريسي روايات الرحالة والمصادر السابقة لوصف العالم المعروف في عصره.',
-      contributionEn:'For Roger II of Sicily, he produced a major geographical work in 1154 accompanied by a set of regional maps.',
-      contributionAr:'أعد لروجر الثاني في صقلية عملاً جغرافياً مهماً سنة 1154 مصحوباً بمجموعة من الخرائط الإقليمية.',
-      legacyEn:'His project shows how maps are built from observation, travel, comparison and the sharing of knowledge across cultures.',
-      legacyAr:'يُظهر مشروعه كيف تُبنى الخرائط من الملاحظة والسفر والمقارنة وتبادل المعرفة بين الثقافات.'
+      id:'haytham-light-rays',scholarId:'haytham',image:AS+'story-haytham-light-rays.webp',
+      categories:['science','study','reading','photo','light'],
+      titleEn:'Does sight leave the eye—or does light enter it?',titleAr:'هل يخرج البصر من العين أم يدخلها الضوء؟',
+      hookEn:'For centuries, thinkers argued about vision. Ibn al-Haytham challenged explanations that treated sight as something emitted by the eye.',
+      hookAr:'لُقرون اختلف المفكرون في تفسير الإبصار. تحدّى ابن الهيثم الآراء التي اعتبرت الرؤية شيئاً يخرج من العين.',
+      contributionEn:'In the Book of Optics, he developed an influential account in which light from objects reaches the eye and investigated reflection and refraction experimentally.',
+      contributionAr:'قدّم في كتاب المناظر تصوراً مؤثراً يصل فيه الضوء من الأجسام إلى العين، ودرس الانعكاس والانكسار بالتجربة.',
+      legacyEn:'That shift matters beyond optics: a confident explanation is not enough. The world has to agree with it.',
+      legacyAr:'هذا التحول يتجاوز البصريات: لا يكفي أن يبدو التفسير مقنعاً، بل يجب أن يوافق ما نراه في الواقع.'
+    },
+    {
+      id:'haytham-experiment-evidence',scholarId:'haytham',image:AS+'story-haytham-experiment-evidence.webp',
+      categories:['study','learning','work','science','research'],
+      titleEn:'What if the experiment disagrees with you?',titleAr:'ماذا لو خالفت التجربة فكرتك؟',
+      hookEn:'The difficult part of learning is not finding evidence for what you already believe. It is letting evidence change your mind.',
+      hookAr:'أصعب ما في التعلم ليس إيجاد دليل لما تؤمن به مسبقاً، بل السماح للدليل بأن يغيّر رأيك.',
+      contributionEn:'Ibn al-Haytham repeatedly paired mathematical reasoning with controlled observation in his investigations of light and vision.',
+      contributionAr:'جمع ابن الهيثم مراراً بين الاستدلال الرياضي والملاحظة المضبوطة في أبحاثه عن الضوء والإبصار.',
+      legacyEn:'That attitude still feels modern: form a question, isolate what matters, observe, and be willing to revise.',
+      legacyAr:'لا يزال هذا الموقف حديثاً: ضع سؤالاً، اعزل ما يهم، راقب، وكن مستعداً للمراجعة.'
+    },
+    {
+      id:'khwarizmi-algebra-steps',scholarId:'khwarizmi',image:AS+'story-khwarizmi-algebra-steps.webp',
+      categories:['math','study','work','planning','coding','problem'],
+      titleEn:'A hard problem becomes a sequence of steps',titleAr:'المسألة الصعبة تصبح سلسلة خطوات',
+      hookEn:'When a task feels tangled, one of the oldest useful tricks is still the same: name the unknown, then work step by step.',
+      hookAr:'عندما تبدو المهمة متشابكة، تبقى إحدى أقدم الحيل المفيدة كما هي: حدّد المجهول ثم تقدّم خطوةً خطوة.',
+      contributionEn:'Al-Khwarizmi’s algebraic writing presented systematic procedures for solving classes of equations rather than treating each example as an isolated puzzle.',
+      contributionAr:'عرضت كتابات الخوارزمي في الجبر إجراءات منهجية لحل أنواع من المعادلات بدلاً من التعامل مع كل مسألة كحالة منفصلة.',
+      legacyEn:'That procedural way of thinking is why his work feels unexpectedly close to modern problem solving.',
+      legacyAr:'لهذا يبدو التفكير الإجرائي في عمله قريباً على نحو مدهش من حل المشكلات اليوم.'
+    },
+    {
+      id:'khwarizmi-algorithm-name',scholarId:'khwarizmi',image:AS+'story-khwarizmi-algorithm-name.webp',
+      categories:['coding','software','work','technology','study'],
+      titleEn:'His name is hidden inside a word you use every day',titleAr:'اسمه مختبئ في كلمة نستخدمها كل يوم',
+      hookEn:'Search results, navigation and software all depend on algorithms. The word itself carries a trace of Al-Khwarizmi’s name.',
+      hookAr:'تعتمد نتائج البحث والملاحة والبرمجيات على الخوارزميات. والكلمة نفسها تحمل أثراً من اسم الخوارزمي.',
+      contributionEn:'Latin versions of his name, associated with works on calculation, eventually gave rise to the European term that became “algorithm.”',
+      contributionAr:'أدت الصيغ اللاتينية لاسمه، المرتبطة بمؤلفاته في الحساب، إلى المصطلح الأوروبي الذي تطور إلى كلمة «algorithm».',
+      legacyEn:'A medieval scholar’s name now sits quietly inside the vocabulary of computing.',
+      legacyAr:'أصبح اسم عالم من العصور الوسطى حاضراً بهدوء داخل مفردات الحوسبة الحديثة.'
+    },
+    {
+      id:'khwarizmi-calculation-tables',scholarId:'khwarizmi',image:AS+'story-khwarizmi-calculation-tables.webp',
+      categories:['planning','finance','work','math','numbers'],
+      titleEn:'Calculation was also a practical technology',titleAr:'كان الحساب أيضاً تقنية عملية',
+      hookEn:'Numbers were not abstract decoration. They helped people calculate trade, inheritance, land and astronomy.',
+      hookAr:'لم تكن الأرقام زينةً مجردة؛ فقد ساعدت الناس في حساب التجارة والميراث والأرض والفلك.',
+      contributionEn:'Al-Khwarizmi wrote on calculation with Hindu-Arabic numerals as well as algebra and astronomical tables.',
+      contributionAr:'كتب الخوارزمي في الحساب بالأرقام الهندية العربية، إضافة إلى الجبر والجداول الفلكية.',
+      legacyEn:'The heritage here is not only a theorem. It is the idea that reliable methods can make everyday decisions clearer.',
+      legacyAr:'التراث هنا ليس نظرية فقط، بل فكرة أن الطرق الموثوقة تجعل القرارات اليومية أوضح.'
+    },
+    {
+      id:'zahrawi-surgical-tools',scholarId:'zahrawi',image:AS+'story-zahrawi-surgical-tools.webp',
+      categories:['health','doctor','medicine','recovery','care'],
+      titleEn:'Why draw the instrument?',titleAr:'لماذا ترسم الأداة؟',
+      hookEn:'A medical instruction can be dangerously vague if the reader cannot see the tool being described.',
+      hookAr:'قد تكون التعليمات الطبية غامضة وخطيرة إذا لم يستطع القارئ رؤية الأداة المقصودة.',
+      contributionEn:'The surgical section of Al-Zahrawi’s medical encyclopedia described many instruments and included illustrations to help explain their use.',
+      contributionAr:'وصف القسم الجراحي من موسوعة الزهراوي عدداً كبيراً من الأدوات وتضمّن رسوماً تساعد على شرح استخدامها.',
+      legacyEn:'It is an early reminder that good technical knowledge needs more than words: design, illustration and precise explanation matter.',
+      legacyAr:'إنها تذكير مبكر بأن المعرفة التقنية الجيدة تحتاج إلى أكثر من الكلمات: التصميم والرسم والشرح الدقيق مهمون.'
+    },
+    {
+      id:'zahrawi-instrument-design',scholarId:'zahrawi',image:AS+'story-zahrawi-instrument-design.webp',
+      categories:['health','design','craft','medicine','work'],
+      titleEn:'A tool is part of the treatment',titleAr:'الأداة جزء من العلاج',
+      hookEn:'Sometimes progress is not a new theory. It is a better instrument in the practitioner’s hand.',
+      hookAr:'أحياناً لا يكون التقدم نظرية جديدة، بل أداة أفضل في يد الممارس.',
+      contributionEn:'Al-Zahrawi documented specialized surgical instruments and techniques, preserving practical details for later physicians.',
+      contributionAr:'وثّق الزهراوي أدوات جراحية متخصصة وتقنيات عملية، وحفظ تفاصيلها للأطباء الذين جاءوا بعده.',
+      legacyEn:'The connection to modern design is immediate: the shape of a tool changes what a skilled person can do safely and precisely.',
+      legacyAr:'الصلة بالتصميم الحديث مباشرة: شكل الأداة يغيّر ما يستطيع المختص إنجازه بأمان ودقة.'
+    },
+    {
+      id:'zahrawi-medical-encyclopedia',scholarId:'zahrawi',image:AS+'story-zahrawi-medical-encyclopedia.webp',
+      categories:['reading','health','learning','medicine'],
+      titleEn:'Thirty volumes built a medical memory',titleAr:'ثلاثون جزءاً صنعت ذاكرة طبية',
+      hookEn:'Knowledge disappears easily when it stays only in one practitioner’s hands.',
+      hookAr:'تضيع المعرفة بسهولة عندما تبقى في يد ممارس واحد فقط.',
+      contributionEn:'Al-Zahrawi’s Al-Tasrif was a large medical encyclopedia covering many areas of medicine; its surgical material later circulated through Latin translation.',
+      contributionAr:'كان «التصريف» للزهراوي موسوعة طبية كبيرة تناولت مجالات متعددة، وانتشر قسمها الجراحي لاحقاً عبر الترجمة اللاتينية.',
+      legacyEn:'Writing turned individual experience into something that could travel farther than its author.',
+      legacyAr:'حوّلت الكتابة الخبرة الفردية إلى معرفة تستطيع السفر أبعد من صاحبها.'
+    },
+    {
+      id:'idrisi-world-map',scholarId:'idrisi',image:AS+'story-idrisi-world-map.webp',
+      categories:['travel','map','geography','commute','walk'],
+      titleEn:'What would the world look like without satellite maps?',titleAr:'كيف سيبدو العالم بلا خرائط الأقمار الصناعية؟',
+      hookEn:'Imagine building a picture of distant coasts and cities from travellers, books and careful comparison.',
+      hookAr:'تخيّل أن تبني صورة للسواحل والمدن البعيدة من روايات الرحالة والكتب والمقارنة الدقيقة.',
+      contributionEn:'Al-Idrisi produced a major geographical work for Roger II of Sicily in 1154, accompanied by regional maps.',
+      contributionAr:'أعد الإدريسي عملاً جغرافياً مهماً لروجر الثاني في صقلية سنة 1154، وصحبته خرائط إقليمية.',
+      legacyEn:'Every map is an argument about where things are. Al-Idrisi’s project shows how much collaboration and verification that argument requires.',
+      legacyAr:'كل خريطة هي حجة حول موقع الأشياء. ويُظهر مشروع الإدريسي مقدار التعاون والتحقق اللازمين لبنائها.'
+    },
+    {
+      id:'idrisi-traveller-reports',scholarId:'idrisi',image:AS+'story-idrisi-traveller-reports.webp',
+      categories:['travel','commute','walk','people','geography'],
+      titleEn:'A traveller’s story became geographic data',titleAr:'تحولت رواية المسافر إلى بيانات جغرافية',
+      hookEn:'A road, river or port described by one traveller is a story. Compared with many reports, it can become a map.',
+      hookAr:'طريق أو نهر أو ميناء يصفه مسافر واحد هو رواية؛ وعندما تقارنه بروايات كثيرة يمكن أن يتحول إلى خريطة.',
+      contributionEn:'Al-Idrisi drew on earlier written sources and reports associated with travellers while compiling descriptions of regions and routes.',
+      contributionAr:'اعتمد الإدريسي على مصادر مكتوبة سابقة وعلى روايات مرتبطة بالرحالة أثناء جمع أوصاف الأقاليم والطرق.',
+      legacyEn:'The method feels familiar today: gather observations, compare sources, look for contradictions, then build the clearest model you can.',
+      legacyAr:'تبدو الطريقة مألوفة اليوم: اجمع الملاحظات، قارن المصادر، ابحث عن التناقضات، ثم ابنِ أوضح نموذج ممكن.'
+    },
+    {
+      id:'idrisi-regional-maps',scholarId:'idrisi',image:AS+'story-idrisi-regional-maps.webp',
+      categories:['planning','travel','geography','navigation'],
+      titleEn:'The world was easier to understand in pieces',titleAr:'كان فهم العالم أسهل عندما يُقسّم إلى أجزاء',
+      hookEn:'One giant map can overwhelm. Regional maps let a reader inspect routes, coasts and places at a more useful scale.',
+      hookAr:'قد تربكك خريطة واحدة ضخمة؛ أما الخرائط الإقليمية فتسمح بفحص الطرق والسواحل والأماكن بمقياس أكثر فائدة.',
+      contributionEn:'Al-Idrisi’s geographical project included a set of sectional maps that together described the inhabited world known to his compilers.',
+      contributionAr:'تضمن مشروع الإدريسي الجغرافي مجموعة من الخرائط المقطعية التي وصفت معاً العالم المأهول المعروف لدى جامعيه.',
+      legacyEn:'It is the same design principle behind modern zoom levels: show the right amount of world for the question at hand.',
+      legacyAr:'إنه المبدأ نفسه وراء مستويات التكبير الحديثة: اعرض من العالم القدر المناسب للسؤال الذي تريد الإجابة عنه.'
     }
   ];
 
-  let storyIndex=0;
+  let activeStoryId=storyBank[0].id;
   let storyPage=0;
-  const $=id=>document.getElementById(id);
-  const ar=()=>document.documentElement.lang==='ar';
-  function save(){ try{localStorage.setItem(H_KEY,JSON.stringify(settings));}catch(_){ } }
-  function text(en,arText){ return ar()?arText:en; }
+
+  function saveSettings(){try{localStorage.setItem(SETTINGS_KEY,JSON.stringify(settings));}catch(_){}}
+  function loadHistory(){try{return JSON.parse(localStorage.getItem(HISTORY_KEY)||'[]')||[]}catch(_){return []}}
+  function saveHistory(h){try{localStorage.setItem(HISTORY_KEY,JSON.stringify(h.slice(-120)))}catch(_){}}
+  function activeStory(){return storyBank.find(s=>s.id===activeStoryId)||storyBank[0]}
+  function scholarOf(id){return scholars.find(s=>s.id===id)||scholars[0]}
+  function storiesForScholar(id){return storyBank.filter(s=>s.scholarId===id)}
+  function historyTime(id){
+    const rows=loadHistory().filter(h=>h.storyId===id);
+    return rows.length?Math.max(...rows.map(h=>h.shownAt||0)):0;
+  }
+  function leastRecent(list){
+    return [...list].sort((a,b)=>historyTime(a.id)-historyTime(b.id))[0]||list[0];
+  }
+  function pickForScholar(id){return leastRecent(storiesForScholar(id));}
+
+  function categoryFor(block){
+    const raw=((block?.label||'')+' '+(block?.labelAr||'')+' '+(block?.note||'')).toLowerCase();
+    const tests=[
+      ['prayer',/prayer|fajr|dhuhr|asr|maghrib|isha|quran|قرآن|صلاة|فجر|ظهر|عصر|مغرب|عشاء/],
+      ['coding',/code|coding|program|software|developer|برمج|كود/],
+      ['math',/math|algebra|calculate|finance|budget|رياض|حساب|ميزان/],
+      ['study',/study|learn|school|homework|read|reading|بحث|دراسة|تعلم|مدرس|قراءة/],
+      ['health',/doctor|health|medicine|therapy|recovery|medical|طبيب|صحة|دواء|علاج/],
+      ['travel',/travel|flight|drive|commute|trip|walk|hike|سفر|رحلة|قيادة|مشي/],
+      ['work',/work|plan|meeting|project|task|عمل|اجتماع|مشروع|تخطيط/],
+      ['science',/science|experiment|photo|camera|light|علم|تجرب|صورة|ضوء/]
+    ];
+    for(const [cat,re] of tests) if(re.test(raw)) return cat;
+    return 'general';
+  }
+
+  function eligibleByFrequency(){
+    if(!settings.enabled||!settings.onCompletion||settings.frequency==='manual') return false;
+    const h=loadHistory();
+    const now=Date.now();
+    const day=86400000;
+    if(settings.frequency==='daily') return !h.some(x=>x.trigger==='completion'&&now-(x.shownAt||0)<20*60*60*1000);
+    if(settings.frequency==='few'){
+      const recent=h.filter(x=>x.trigger==='completion'&&now-(x.shownAt||0)<7*day);
+      return recent.length<3 && !recent.some(x=>now-(x.shownAt||0)<36*60*60*1000);
+    }
+    return false;
+  }
+
+  function pickContextual(block){
+    const cat=categoryFor(block);
+    const matching=storyBank.filter(s=>s.categories.includes(cat));
+    const pool=matching.length?matching:storyBank;
+    const now=Date.now(), month=30*86400000;
+    const h=loadHistory();
+    const fresh=pool.filter(s=>!h.some(x=>x.storyId===s.id&&now-(x.shownAt||0)<month));
+    return leastRecent(fresh.length?fresh:pool);
+  }
+
+  function recordStory(story,trigger='manual',block=null,opened=false){
+    const h=loadHistory();
+    const existing=h.findLast?.(x=>x.storyId===story.id&&x.trigger===trigger&&Date.now()-(x.shownAt||0)<30000);
+    if(existing){
+      if(opened) existing.openedAt=Date.now();
+    }else{
+      h.push({
+        storyId:story.id,scholarId:story.scholarId,shownAt:Date.now(),
+        openedAt:opened?Date.now():0,trigger,
+        activityId:block?.id||'',activityLabel:block?.label||'',category:categoryFor(block)
+      });
+    }
+    saveHistory(h);
+    renderRecent();
+  }
 
   function renderScholarStrip(){
-    const strip=$('scholarStrip');
-    if(!strip) return;
+    const strip=$('scholarStrip'); if(!strip)return;
     strip.innerHTML='';
-    stories.forEach((s,i)=>{
+    const current=activeStory();
+    scholars.forEach(sc=>{
       const btn=document.createElement('button');
-      btn.type='button'; btn.className='scholar-chip'+(i===storyIndex?' active':'');
-      btn.setAttribute('aria-label',text('Open story for '+s.name,'افتح قصة '+s.nameAr));
-      const avatar=document.createElement('span'); avatar.className='scholar-chip-avatar';
-      if(s.image){ const img=document.createElement('img'); img.src=s.image; img.alt=''; avatar.appendChild(img); }
-      else avatar.textContent=s.monogram;
-      const name=document.createElement('span'); name.className='scholar-chip-name'; name.textContent=ar()?s.nameAr:s.name;
+      btn.type='button';btn.className='scholar-chip'+(sc.id===current.scholarId?' active':'');
+      btn.setAttribute('aria-label',t('Explore '+sc.name,'استكشف '+sc.nameAr));
+      const avatar=document.createElement('span');avatar.className='scholar-chip-avatar';avatar.textContent=sc.monogram;
+      const name=document.createElement('span');name.className='scholar-chip-name';name.textContent=ar()?sc.nameAr:sc.name;
       btn.append(avatar,name);
-      btn.addEventListener('click',()=>renderStory(i,0));
+      btn.addEventListener('click',()=>{const s=pickForScholar(sc.id);renderStory(s.id,0,true);});
       strip.appendChild(btn);
     });
   }
 
-  function renderStory(index=storyIndex, page=storyPage){
-    storyIndex=(index+stories.length)%stories.length;
+  function renderRecent(){
+    const body=$('storiesSheet')?.querySelector('.sheet-body');
+    if(!body)return;
+    let details=$('heritageRecent');
+    const hist=loadHistory().filter(x=>x.openedAt||x.shownAt).slice(-8).reverse();
+    const unique=[];const seen=new Set();
+    for(const h of hist){if(!seen.has(h.storyId)){seen.add(h.storyId);unique.push(h);}}
+    if(!unique.length){details?.remove();return;}
+    if(!details){
+      details=document.createElement('details');details.id='heritageRecent';details.className='heritage-recent';
+      const summary=document.createElement('summary');summary.id='heritageRecentSummary';details.appendChild(summary);
+      const row=document.createElement('div');row.className='heritage-recent-row';row.id='heritageRecentRow';details.appendChild(row);
+      body.appendChild(details);
+    }
+    $('heritageRecentSummary').textContent=t('Recently discovered','اكتشفتها مؤخراً');
+    const row=$('heritageRecentRow');row.innerHTML='';
+    unique.slice(0,4).forEach(h=>{
+      const s=storyBank.find(x=>x.id===h.storyId);if(!s)return;
+      const b=document.createElement('button');b.type='button';b.className='heritage-recent-chip';
+      b.textContent=ar()?s.titleAr:s.titleEn;
+      b.addEventListener('click',()=>renderStory(s.id,0,true));
+      row.appendChild(b);
+    });
+  }
+
+  function renderStory(storyId=activeStoryId,page=storyPage,markOpened=false){
+    if(storyBank.some(s=>s.id===storyId))activeStoryId=storyId;
     storyPage=Math.max(0,Math.min(2,page));
-    const s=stories[storyIndex];
+    const s=activeStory(),sc=scholarOf(s.scholarId);
     renderScholarStrip();
-    if(!$('storyName')) return;
-    const card=$('heritageStoryCard');
-    if(card) card.dataset.storyPage=String(storyPage);
-    $('storyMedallion').textContent=s.monogram;
-    const heroImg=$('storyHeroImage'), heroMono=$('storyHeroMonogram'), heroBadge=$('storyHeroBadge');
-    if(heroImg && heroMono){
-      if(s.image){ heroImg.src=s.image; heroImg.alt=text('Visual of '+s.name+'’s work and instruments','تصوير لأعمال وأدوات '+s.nameAr); heroImg.hidden=false; heroMono.hidden=true; }
-      else { heroImg.hidden=true; heroMono.hidden=false; heroMono.textContent=s.monogram; }
+    if(!$('storyName'))return;
+    const card=$('heritageStoryCard');if(card)card.dataset.storyPage=String(storyPage);
+    $('storyMedallion').textContent=sc.monogram;
+    const hero=$('storyHeroImage'),mono=$('storyHeroMonogram'),badge=$('storyHeroBadge');
+    if(hero&&mono){
+      hero.src=s.image;hero.alt=ar()?s.titleAr:s.titleEn;hero.hidden=false;mono.hidden=true;
+      hero.onerror=()=>{hero.hidden=true;mono.hidden=false;mono.textContent=sc.monogram;};
     }
-    if(heroBadge) heroBadge.textContent=text(`${storyPage+1} of 3`,`${storyPage+1} من 3`);
-    $('storyName').textContent=s.name;
-    $('storyNameAr').textContent=s.nameAr;
-    $('storyMeta').textContent=s.meta;
-
-    const section1=$('storySectionTitle'), copy1=$('storyContext');
-    const section2=$('storyContributionTitle'), copy2=$('storyContribution');
-    const section3=$('storyLegacyTitle'), copy3=$('storyLegacy');
-    const headline=$('storyPageHeadline');
-    const hint=$('storySwipeHint');
-    [section1,copy1,section2,copy2,section3,copy3].forEach(el=>{ if(el) el.hidden=true; });
-
+    if(badge)badge.textContent=t(`${storyPage+1} of 3`,`${storyPage+1} من 3`);
+    $('storyName').textContent=sc.name;$('storyNameAr').textContent=sc.nameAr;$('storyMeta').textContent=sc.meta;
+    const headline=$('storyPageHeadline'),hint=$('storySwipeHint');
+    const a=$('storySectionTitle'),ac=$('storyContext'),b=$('storyContributionTitle'),bc=$('storyContribution'),c=$('storyLegacyTitle'),cc=$('storyLegacy');
+    [a,ac,b,bc,c,cc].forEach(x=>{if(x)x.hidden=true;});
     if(storyPage===0){
-      if(headline) headline.textContent=text('The story begins with a question','تبدأ القصة بسؤال');
-      section1.textContent=text('Why you are seeing this','لماذا تظهر هذه القصة الآن');
-      copy1.textContent=ar()?s.contextAr:s.contextEn;
-      section1.hidden=false; copy1.hidden=false;
-    } else if(storyPage===1){
-      if(headline) headline.textContent=text('What did they contribute?','ماذا قدّموا؟');
-      section2.textContent=text('Key contribution','الإسهام الرئيسي');
-      copy2.textContent=ar()?s.contributionAr:s.contributionEn;
-      section2.hidden=false; copy2.hidden=false;
-    } else {
-      if(headline) headline.textContent=text('Why it still matters today','لماذا ما زال مهماً اليوم');
-      section3.textContent=text('A lasting legacy','أثر مستمر');
-      copy3.textContent=ar()?s.legacyAr:s.legacyEn;
-      section3.hidden=false; copy3.hidden=false;
+      headline.textContent=ar()?s.titleAr:s.titleEn;
+      a.textContent=t('The moment','اللحظة');ac.textContent=ar()?s.hookAr:s.hookEn;a.hidden=false;ac.hidden=false;
+    }else if(storyPage===1){
+      headline.textContent=t('What happened next?','ماذا حدث بعد ذلك؟');
+      b.textContent=t('The contribution','الإسهام');bc.textContent=ar()?s.contributionAr:s.contributionEn;b.hidden=false;bc.hidden=false;
+    }else{
+      headline.textContent=t('Why it still feels close to us','لماذا ما زال قريباً منا');
+      c.textContent=t('The connection','الصلة اليوم');cc.textContent=ar()?s.legacyAr:s.legacyEn;c.hidden=false;cc.hidden=false;
     }
-    if(hint) hint.textContent=text(storyPage<2?'Swipe to continue':'Swipe for another story',storyPage<2?'اسحب للمتابعة':'اسحب لقصة أخرى');
-
-    $('storyPrev').textContent=text(storyPage===0?'← Previous story':'← Back',storyPage===0?'القصة السابقة →':'السابق →');
-    $('storyNext').textContent=text(storyPage===2?'Next story →':'Next →',storyPage===2?'← القصة التالية':'← التالي');
-    $('storiesHeader').textContent=text('Stories from our heritage','قصص من تراثنا');
-    $('navStoriesLabel').textContent=text('Stories','قصص');
-    const dots=$('storyDots'); dots.innerHTML='';
+    hint.textContent=t(storyPage<2?'Swipe to continue':'Swipe for another discovery',storyPage<2?'اسحب للمتابعة':'اسحب لاكتشاف آخر');
+    $('storyPrev').textContent=t(storyPage===0?'← Previous':'← Back',storyPage===0?'السابق →':'رجوع →');
+    $('storyNext').textContent=t(storyPage===2?'Another story →':'Next →',storyPage===2?'← قصة أخرى':'← التالي');
+    $('storiesHeader').textContent=t('Stories from our heritage','قصص من تراثنا');
+    $('navStoriesLabel').textContent=t('Stories','قصص');
+    const dots=$('storyDots');dots.innerHTML='';
     for(let i=0;i<3;i++){
-      const d=document.createElement('button');
-      d.type='button'; d.className='story-dot'+(i===storyPage?' active':'');
-      d.setAttribute('aria-label',text(`Story page ${i+1}`,`صفحة القصة ${i+1}`));
-      d.addEventListener('click',()=>renderStory(storyIndex,i));
-      dots.appendChild(d);
+      const d=document.createElement('button');d.type='button';d.className='story-dot'+(i===storyPage?' active':'');
+      d.setAttribute('aria-label',t(`Story page ${i+1}`,`صفحة القصة ${i+1}`));
+      d.addEventListener('click',()=>renderStory(activeStoryId,i,true));dots.appendChild(d);
     }
+    if(markOpened)recordStory(s,'manual',null,true);
+    renderRecent();
+  }
+
+  function nextStory(step=1){
+    const i=storyBank.findIndex(s=>s.id===activeStoryId);
+    return storyBank[(i+step+storyBank.length)%storyBank.length];
+  }
+
+  function openStories(storyId=activeStoryId,page=0,trigger='manual',block=null){
+    const candidate=storyBank.find(s=>s.id===storyId)||storyBank[0];
+    activeStoryId=candidate.id;storyPage=page;renderStory(activeStoryId,page,false);
+    recordStory(candidate,trigger,block,true);
+    storiesExperience.open();
   }
 
   function syncHeritageUI(){
-    if($('heritageEnabled')) $('heritageEnabled').checked=!!settings.enabled;
-    if($('heritageFrequency')) $('heritageFrequency').value=settings.frequency;
-    if($('heritageOnCompletion')) $('heritageOnCompletion').checked=!!settings.onCompletion;
-    if($('heritageTeaser')) $('heritageTeaser').style.display=settings.enabled && settings.frequency!=='manual' ? '' : 'none';
-    $('heritageSettingsTitle').textContent=text('Heritage stories','قصص التراث');
-    $('heritageEnabledLabel').textContent=text('Show heritage stories','إظهار قصص التراث');
-    $('heritageFrequencyLabel').textContent=text('Story frequency','تكرار القصص');
-    $('heritageCompletionLabel').textContent=text('Include after activity completion','إظهار قصة بعد إكمال نشاط');
-    const freq=$('heritageFrequency'); if(freq){
-      freq.options[0].textContent=text('About once a day','مرة تقريباً كل يوم');
-      freq.options[1].textContent=text('A few times a week','بضع مرات في الأسبوع');
-      freq.options[2].textContent=text('Only when I open Stories','فقط عندما أفتح القصص');
+    if($('heritageEnabled'))$('heritageEnabled').checked=!!settings.enabled;
+    if($('heritageFrequency'))$('heritageFrequency').value=settings.frequency;
+    if($('heritageOnCompletion'))$('heritageOnCompletion').checked=!!settings.onCompletion;
+    if($('heritageTeaser'))$('heritageTeaser').style.display=settings.enabled&&settings.frequency!=='manual'?'':'none';
+    $('heritageSettingsTitle').textContent=t('Heritage stories','قصص التراث');
+    $('heritageEnabledLabel').textContent=t('Show heritage stories','إظهار قصص التراث');
+    $('heritageFrequencyLabel').textContent=t('Story frequency','تكرار القصص');
+    $('heritageCompletionLabel').textContent=t('Include after activity completion','إظهار قصة بعد إكمال نشاط');
+    const f=$('heritageFrequency');if(f){
+      f.options[0].textContent=t('About once a day','مرة تقريباً كل يوم');
+      f.options[1].textContent=t('A few times a week','بضع مرات في الأسبوع');
+      f.options[2].textContent=t('Only when I open Stories','فقط عندما أفتح القصص');
     }
-    $('heritageTeaserKicker').textContent=text('A moment from our heritage','لحظة من تراثنا');
-    $('heritageTeaserTitle').textContent=text('How did Muslim astronomers measure the sky?','كيف قاس علماء المسلمين السماء؟');
-    $('moonHeritageKicker').textContent=text('A moment from our heritage','لحظة من تراثنا');
-    $('moonHeritageTitle').textContent=text('The moon, light, and Ibn al-Haytham','القمر والضوء وابن الهيثم');
-    $('moonHeritageCopy').textContent=text('A short story about observation, light, and how careful questions changed science.','قصة قصيرة عن الملاحظة والضوء وكيف غيّرت الأسئلة الدقيقة مسار العلم.');
-    $('moonHeritageOpen').textContent=text('Discover the story','اكتشف القصة');
-    renderStory(storyIndex);
+    $('heritageTeaserKicker').textContent=t('A moment from our heritage','لحظة من تراثنا');
+    $('heritageTeaserTitle').textContent=t('How could a mountain help measure the Earth?','كيف يمكن لجبل أن يساعد في قياس الأرض؟');
+    $('moonHeritageKicker').textContent=t('A moment from our heritage','لحظة من تراثنا');
+    $('moonHeritageTitle').textContent=t('A tiny opening could project an entire scene','فتحة صغيرة يمكن أن تسقط مشهداً كاملاً');
+    $('moonHeritageCopy').textContent=t('A visual story about Ibn al-Haytham, light and the camera obscura.','قصة بصرية عن ابن الهيثم والضوء والكاميرا المظلمة.');
+    $('moonHeritageOpen').textContent=t('Discover the story','اكتشف القصة');
+    renderStory(activeStoryId,storyPage,false);
   }
 
-  function openStories(index=storyIndex,page=0){ storyIndex=index; storyPage=page; renderStory(storyIndex,storyPage); storiesExperience.open(); }
-
-  // Register with the app's existing sheet manager.
-  const storiesExperience=makeSheet('storiesSheet','storiesBackdrop','openStoriesBtn','storiesCloseBtn',()=>renderStory());
+  const storiesExperience=makeSheet('storiesSheet','storiesBackdrop','openStoriesBtn','storiesCloseBtn',()=>renderStory(activeStoryId,storyPage,false));
   openSheets.push(storiesExperience);
 
-  $('heritageTeaser')?.addEventListener('click',()=>openStories(0,0));
-  $('moonHeritageOpen')?.addEventListener('click',()=>{ document.getElementById('moonSheet')?.classList.remove('open'); document.getElementById('moonBackdrop')?.classList.remove('open'); openStories(1,0); });
-  $('storyPrev')?.addEventListener('click',()=>{ if(storyPage>0) renderStory(storyIndex,storyPage-1); else renderStory(storyIndex-1,2); });
-  $('storyNext')?.addEventListener('click',()=>{ if(storyPage<2) renderStory(storyIndex,storyPage+1); else renderStory(storyIndex+1,0); });
-  $('heritageEnabled')?.addEventListener('change',e=>{settings.enabled=!!e.target.checked;save();syncHeritageUI();});
-  $('heritageFrequency')?.addEventListener('change',e=>{settings.frequency=e.target.value;save();syncHeritageUI();});
-  $('heritageOnCompletion')?.addEventListener('change',e=>{settings.onCompletion=!!e.target.checked;save();});
+  $('heritageTeaser')?.addEventListener('click',()=>openStories('biruni-earth-radius',0,'home'));
+  $('moonHeritageOpen')?.addEventListener('click',()=>{
+    $('moonSheet')?.classList.remove('open');$('moonBackdrop')?.classList.remove('open');
+    openStories('haytham-camera-obscura',0,'moon');
+  });
+  $('storyPrev')?.addEventListener('click',()=>{
+    if(storyPage>0)renderStory(activeStoryId,storyPage-1,true);
+    else renderStory(nextStory(-1).id,2,true);
+  });
+  $('storyNext')?.addEventListener('click',()=>{
+    if(storyPage<2)renderStory(activeStoryId,storyPage+1,true);
+    else renderStory(nextStory(1).id,0,true);
+  });
+  $('heritageEnabled')?.addEventListener('change',e=>{settings.enabled=!!e.target.checked;saveSettings();syncHeritageUI();});
+  $('heritageFrequency')?.addEventListener('change',e=>{settings.frequency=e.target.value;saveSettings();syncHeritageUI();});
+  $('heritageOnCompletion')?.addEventListener('change',e=>{settings.onCompletion=!!e.target.checked;saveSettings();});
 
-  // Swipe through each three-part story without turning Stories into a hidden library.
-  (function setupStoryGestures(){
-    const card=$('heritageStoryCard'); if(!card) return;
-    let startX=0,startY=0,tracking=false;
-    card.addEventListener('pointerdown',e=>{ if(e.pointerType==='mouse' && e.button!==0) return; startX=e.clientX; startY=e.clientY; tracking=true; });
+  (function gestures(){
+    const card=$('heritageStoryCard');if(!card)return;
+    let sx=0,sy=0,tracking=false;
+    card.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button!==0)return;sx=e.clientX;sy=e.clientY;tracking=true;});
     card.addEventListener('pointerup',e=>{
-      if(!tracking) return; tracking=false;
-      const dx=e.clientX-startX, dy=e.clientY-startY;
-      if(Math.abs(dx)<48 || Math.abs(dx)<Math.abs(dy)*1.2) return;
-      if(dx<0){ if(storyPage<2) renderStory(storyIndex,storyPage+1); else renderStory(storyIndex+1,0); }
-      else { if(storyPage>0) renderStory(storyIndex,storyPage-1); else renderStory(storyIndex-1,2); }
+      if(!tracking)return;tracking=false;
+      const dx=e.clientX-sx,dy=e.clientY-sy;
+      if(Math.abs(dx)<48||Math.abs(dx)<Math.abs(dy)*1.2)return;
+      const forward=ar()?dx>0:dx<0;
+      if(forward){if(storyPage<2)renderStory(activeStoryId,storyPage+1,true);else renderStory(nextStory(1).id,0,true);}
+      else {if(storyPage>0)renderStory(activeStoryId,storyPage-1,true);else renderStory(nextStory(-1).id,2,true);}
     });
-    card.addEventListener('pointercancel',()=>{tracking=false;});
+    card.addEventListener('pointercancel',()=>tracking=false);
     document.addEventListener('keydown',e=>{
-      if(!$('storiesSheet')?.classList.contains('open')) return;
-      if(e.key==='ArrowRight'){ e.preventDefault(); if(ar()){ if(storyPage>0) renderStory(storyIndex,storyPage-1); else renderStory(storyIndex-1,2); } else { if(storyPage<2) renderStory(storyIndex,storyPage+1); else renderStory(storyIndex+1,0); } }
-      if(e.key==='ArrowLeft'){ e.preventDefault(); if(ar()){ if(storyPage<2) renderStory(storyIndex,storyPage+1); else renderStory(storyIndex+1,0); } else { if(storyPage>0) renderStory(storyIndex,storyPage-1); else renderStory(storyIndex-1,2); } }
+      if(!$('storiesSheet')?.classList.contains('open'))return;
+      if(e.key==='ArrowRight'){e.preventDefault();if(ar()){if(storyPage>0)renderStory(activeStoryId,storyPage-1,true);else renderStory(nextStory(-1).id,2,true);}else{if(storyPage<2)renderStory(activeStoryId,storyPage+1,true);else renderStory(nextStory(1).id,0,true);}}
+      if(e.key==='ArrowLeft'){e.preventDefault();if(ar()){if(storyPage<2)renderStory(activeStoryId,storyPage+1,true);else renderStory(nextStory(1).id,0,true);}else{if(storyPage>0)renderStory(activeStoryId,storyPage-1,true);else renderStory(nextStory(-1).id,2,true);}}
     });
   })();
 
-  function maybeCompletionStory(){
-    if(!settings.enabled || !settings.onCompletion || settings.frequency==='manual') return;
-    const today=new Date().toISOString().slice(0,10);
-    let last=''; try{last=localStorage.getItem(LAST_KEY)||''}catch(_){ }
-    if(settings.frequency==='daily' && last===today) return;
-    const idx=2; // Al-Khwarizmi: a natural completion/problem-solving connection.
-    const s=stories[idx];
-    $('heritageToastTitle').textContent=text('A moment from our heritage','لحظة من تراثنا');
-    $('heritageToastCopy').textContent=ar()?s.contextAr:s.contextEn;
-    $('heritageToastOpen').textContent=text('View story','شاهد القصة');
-    const toast=$('heritageCompletionToast');
-    toast.classList.add('show');
-    try{localStorage.setItem(LAST_KEY,today)}catch(_){ }
-    setTimeout(()=>toast.classList.remove('show'),8500);
-    $('heritageToastOpen').onclick=()=>{toast.classList.remove('show');openStories(idx,0);};
+  function offerCompletionStory(block){
+    if(!eligibleByFrequency())return;
+    const s=pickContextual(block);
+    recordStory(s,'completion',block,false);
+    $('heritageToastTitle').textContent=t('A discovery from your heritage','اكتشاف من تراثك');
+    $('heritageToastCopy').textContent=ar()?s.titleAr:s.titleEn;
+    $('heritageToastOpen').textContent=t('Discover','اكتشف');
+    const toast=$('heritageCompletionToast');toast.classList.add('show');
+    const hide=setTimeout(()=>toast.classList.remove('show'),9000);
+    $('heritageToastOpen').onclick=()=>{clearTimeout(hide);toast.classList.remove('show');openStories(s.id,0,'completion-open',block);};
   }
-  $('reminderDone')?.addEventListener('click',()=>setTimeout(maybeCompletionStory,120));
 
-  // Keep bilingual microcopy synchronized whenever language changes.
-  const langObserver=new MutationObserver(syncHeritageUI);
-  langObserver.observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
-  document.getElementById('openSettingsBtn')?.addEventListener('click',()=>setTimeout(syncHeritageUI,0));
+  document.addEventListener('dailyRhythm:activityCompleted',e=>setTimeout(()=>offerCompletionStory(e.detail?.block||null),180));
+
+  new MutationObserver(syncHeritageUI).observe(document.documentElement,{attributes:true,attributeFilter:['lang','dir']});
+  $('openSettingsBtn')?.addEventListener('click',()=>setTimeout(syncHeritageUI,0));
   syncHeritageUI();
 })();
 </script>
@@ -7428,12 +8437,15 @@
       let pref='auto';try{pref=localStorage.getItem('dailyRhythmMoonPosition_v1')||'auto'}catch(_){ }
       if(pref==='auto'){
         const phase=typeof moonPhaseFraction==='function'?moonPhaseFraction(now):idx/8;
-        const a=(phase*360-90)*Math.PI/180,radius=43;
+        const a=(phase*360-90)*Math.PI/180,radius=46;
         const x=50+radius*Math.cos(a),y=50+radius*Math.sin(a);
         badge.style.left=`${Math.max(7,Math.min(93,x))}%`;badge.style.top=`${Math.max(7,Math.min(93,y))}%`;badge.style.right='auto';badge.style.transform='translate(-50%,-50%)';
       }
     }
-    const art=$('moonPhaseArt'); if(art) art.style.setProperty('--moon-current-image',`url("${src}")`);
+    const art=$('moonPhaseArt'); if(art){
+      art.style.setProperty('--moon-current-image',`url("${src}")`);
+      art.style.backgroundImage=`url("${src}")`;
+    }
     const strip=$('moonPhaseStrip');if(strip)[...strip.children].forEach((el,i)=>el.classList.toggle('active',i===idx));
   }
   syncMoonEverywhere();setInterval(()=>syncMoonEverywhere(new Date()),60000);
@@ -7584,6 +8596,568 @@
     z-index:3 !important;
   }
 </style>
+
+
+<style id="live-screenshot-fixes-v2">
+  /* Moon sheet: eliminate the inherited ornamental oval around the heading. */
+  #moonSheet.moon-guide{
+    width:min(94vw,460px) !important;
+    padding:0 16px calc(18px + env(safe-area-inset-bottom,0px)) !important;
+  }
+  #moonSheet .moon-guide-head{
+    position:sticky !important;
+    top:0 !important;
+    min-height:72px !important;
+    padding:22px 58px 10px 0 !important;
+    border:0 !important;
+    outline:0 !important;
+    box-shadow:none !important;
+  }
+  #moonSheet .moon-guide-head::before,
+  #moonSheet .moon-guide-head::after{display:none !important;content:none !important;}
+  #moonSheet .moon-guide-head h2{
+    display:block !important;
+    width:100% !important;
+    margin:0 !important;
+    padding:0 !important;
+    font-size:clamp(1.22rem,5.2vw,1.68rem) !important;
+    line-height:1.08 !important;
+    text-align:left !important;
+    white-space:normal !important;
+    overflow:visible !important;
+    text-overflow:clip !important;
+  }
+  #moonSheet .moon-guide-close{
+    top:17px !important;
+    right:0 !important;
+    width:44px !important;height:44px !important;
+    min-width:44px !important;min-height:44px !important;
+  }
+  html[dir="rtl"] #moonSheet .moon-guide-head{
+    padding:22px 0 10px 58px !important;
+  }
+  html[dir="rtl"] #moonSheet .moon-guide-head h2{text-align:right !important;}
+  html[dir="rtl"] #moonSheet .moon-guide-close{right:auto !important;left:0 !important;}
+
+  /* Hero: real transparent moon disc, no surrounding black crop. */
+  #moonSheet .moon-guide-hero{
+    display:grid !important;
+    grid-template-columns:minmax(130px,.9fr) minmax(0,1.1fr) !important;
+    gap:14px !important;
+    align-items:center !important;
+    padding:4px 2px 16px !important;
+    direction:ltr !important;
+  }
+  #moonSheet .moon-guide-summary{direction:inherit !important;}
+  html[dir="rtl"] #moonSheet .moon-guide-summary{direction:rtl !important;text-align:right !important;}
+  #moonSheet .moon-phase-art{
+    width:min(42vw,176px) !important;
+    height:min(42vw,176px) !important;
+    min-width:130px !important;min-height:130px !important;
+    border-radius:50% !important;
+    background-color:transparent !important;
+    background-size:contain !important;
+    background-position:center !important;
+    background-repeat:no-repeat !important;
+    border:0 !important;
+    box-shadow:none !important;
+  }
+
+  /* Statistics remain three equal, readable columns. */
+  #moonSheet .moon-guide-stats{
+    grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+    overflow:hidden !important;
+  }
+  #moonSheet .moon-stat{min-width:0 !important;}
+  #moonSheet .moon-stat strong,
+  #moonSheet .moon-stat span{overflow-wrap:anywhere !important;}
+
+  /* Heritage image is a tool/contribution visual; keep it visible and proportional. */
+  #moonSheet .moon-heritage-card{
+    grid-template-columns:112px minmax(0,1fr) 38px !important;
+    gap:10px !important;
+    align-items:center !important;
+  }
+  #moonSheet .moon-scholar-avatar{
+    display:block !important;
+    width:112px !important;
+    height:78px !important;
+    min-width:112px !important;
+    object-fit:cover !important;
+    object-position:center !important;
+    border-radius:14px !important;
+    background:#0a2438 !important;
+  }
+
+  /* Phase strip: actual moon discs with transparent surroundings; no empty black rings. */
+  #moonSheet .moon-phase-strip{
+    grid-template-columns:repeat(8,minmax(0,1fr)) !important;
+    gap:7px !important;
+    align-items:center !important;
+  }
+  #moonSheet .moon-phase-thumb{
+    display:block !important;
+    box-sizing:border-box !important;
+    width:100% !important;
+    aspect-ratio:1 / 1 !important;
+    height:auto !important;
+    border-radius:50% !important;
+    background-color:transparent !important;
+    background-size:contain !important;
+    background-repeat:no-repeat !important;
+    background-position:center !important;
+    border:1px solid rgba(231,207,148,.10) !important;
+    opacity:.7 !important;
+  }
+  #moonSheet .moon-phase-thumb.active{
+    opacity:1 !important;
+    border-color:#f0c865 !important;
+    box-shadow:0 0 0 2px #f0c865,0 0 0 4px rgba(240,200,101,.08) !important;
+  }
+
+  /* Every pager mark is a real circle in Moon and Scholar views. */
+  #moonSheet .moon-story-pager,
+  #storiesSheet .story-dots{
+    display:flex !important;
+    justify-content:center !important;
+    align-items:center !important;
+    gap:10px !important;
+  }
+  #moonSheet .moon-story-dot,
+  #moonSheet .moon-story-dot.active,
+  #storiesSheet .story-dot,
+  #storiesSheet .story-dot.active{
+    display:block !important;
+    flex:0 0 10px !important;
+    width:10px !important;min-width:10px !important;max-width:10px !important;
+    height:10px !important;min-height:10px !important;max-height:10px !important;
+    padding:0 !important;margin:0 !important;
+    aspect-ratio:1 / 1 !important;
+    border-radius:50% !important;
+    transform:none !important;
+  }
+
+  /* Scholar contribution images. */
+  #storiesSheet .story-hero-wrap{
+    background:#071d2e !important;
+  }
+  #storiesSheet .story-hero-image{
+    display:block !important;
+    width:100% !important;height:100% !important;
+    object-fit:cover !important;object-position:center !important;
+  }
+  #storiesSheet .scholar-chip-avatar img{
+    display:block !important;width:100% !important;height:100% !important;
+    object-fit:cover !important;
+  }
+
+  /* The live clock is the only clock artwork on My Day. */
+  .clock-home{
+    background-image:
+      radial-gradient(circle at 12% 16%,rgba(228,184,91,.07),transparent 16%),
+      radial-gradient(circle at 85% 34%,rgba(71,138,165,.12),transparent 24%),
+      linear-gradient(180deg,rgba(5,25,42,.96),rgba(6,27,42,.98)) !important;
+  }
+
+  /* Main moon stays on the outer orbit and shows only its disc. */
+  #skyMoonBadge{
+    width:46px !important;height:46px !important;
+    border-radius:50% !important;
+    overflow:visible !important;
+    background:transparent !important;
+    border:0 !important;
+    box-shadow:none !important;
+  }
+  #skyMoonBadge .moon-badge-disc{
+    display:block !important;width:100% !important;height:100% !important;
+    border-radius:50% !important;
+    background-color:transparent !important;
+    background-size:contain !important;
+    background-repeat:no-repeat !important;
+    background-position:center !important;
+    filter:drop-shadow(0 0 5px rgba(184,218,236,.22));
+  }
+
+  /* Magnifier: exact touched pixel, lens visibly left of the finger. */
+  #magnifier.press-visible{z-index:80 !important;}
+
+  @media(max-width:390px){
+    #moonSheet .moon-guide-head h2{font-size:1.22rem !important;}
+    #moonSheet .moon-guide-hero{grid-template-columns:132px minmax(0,1fr) !important;gap:10px !important;}
+    #moonSheet .moon-phase-art{width:132px !important;height:132px !important;min-width:132px !important;min-height:132px !important;}
+    #moonSheet .moon-heritage-card{grid-template-columns:88px minmax(0,1fr) 34px !important;}
+    #moonSheet .moon-scholar-avatar{width:88px !important;height:66px !important;min-width:88px !important;}
+    #moonSheet .moon-phase-strip{gap:5px !important;}
+  }
+</style>
+
+<script id="live-screenshot-fixes-v2-script">
+(function(){
+  const $=id=>document.getElementById(id);
+  const ar=()=>document.documentElement.lang==='ar';
+
+  const assetRoot = 'assets/';
+  const scholars = {
+    biruni:'scholar-biruni-measurement.webp',
+    haytham:'scholar-haytham-optics.webp',
+    khwarizmi:'scholar-khwarizmi-algebra.webp',
+    zahrawi:'scholar-zahrawi-instruments.webp',
+    idrisi:'scholar-idrisi-cartography.webp'
+  };
+
+  function localizeMoonStatic(){
+    const title=$('moonGuideTitle');
+    const heritage=$('moonHeritageHeading');
+    const sub=document.querySelector('#moonSheet .moon-guide-subtitle');
+    const hint=document.querySelector('#moonSheet .moon-swipe-hint');
+    if(title) title.textContent=ar()?'القمر: دليل عبر الزمن':'The Moon: A Timeless Guide';
+    if(heritage) heritage.textContent=ar()?'التراث':'Heritage';
+    if(sub) sub.textContent=ar()?'القمر في التراث الإسلامي':'The Moon in Islamic Tradition';
+    if(hint) hint.textContent=ar()?'اسحب للمتابعة':'Swipe to continue';
+  }
+
+  // Fix all contribution-image URLs and avoid Safari's broken-image badge.
+  function repairScholarImages(){
+    try{
+      if(typeof stories!=='undefined' && Array.isArray(stories)){
+        stories.forEach(s=>{
+          if(s && scholars[s.id]) s.image=assetRoot+scholars[s.id];
+        });
+      }
+    }catch(_){}
+    const moonImg=document.querySelector('#moonSheet .moon-scholar-avatar');
+    if(moonImg){
+      moonImg.src=assetRoot+scholars.haytham;
+      moonImg.onerror=()=>{ moonImg.style.visibility='hidden'; };
+      moonImg.onload=()=>{ moonImg.style.visibility='visible'; };
+    }
+    document.querySelectorAll('#storiesSheet img').forEach(img=>{
+      img.addEventListener('error',()=>{img.style.visibility='hidden';},{once:true});
+      img.addEventListener('load',()=>{img.style.visibility='visible';},{once:true});
+    });
+  }
+
+  // Always use the clean transparent moon assets in phase order.
+  const cleanMoon=[
+    assetRoot+'moon-new.webp',
+    assetRoot+'moon-waxing-crescent.webp',
+    assetRoot+'moon-first-quarter.webp',
+    assetRoot+'moon-waxing-gibbous.webp',
+    assetRoot+'moon-full.webp',
+    assetRoot+'moon-waning-gibbous.webp',
+    assetRoot+'moon-last-quarter.webp',
+    assetRoot+'moon-waning-crescent.webp'
+  ];
+  function repairMoonAssets(){
+    try{
+      if(typeof MOON_PHASE_IMAGES!=='undefined' && Array.isArray(MOON_PHASE_IMAGES)){
+        cleanMoon.forEach((src,i)=>MOON_PHASE_IMAGES[i]=src);
+      }
+      if(typeof moonPhaseIndex!=='function') return;
+      const idx=moonPhaseIndex(new Date());
+      const src=cleanMoon[idx];
+      const art=$('moonPhaseArt');
+      if(art){
+        art.style.backgroundImage=`url("${src}")`;
+        art.style.setProperty('--moon-current-image',`url("${src}")`);
+      }
+      const badge=$('skyMoonBadge');
+      if(badge){
+        let disc=badge.querySelector('.moon-badge-disc');
+        if(!disc){badge.innerHTML='';disc=document.createElement('span');disc.className='moon-badge-disc';badge.appendChild(disc);}
+        disc.style.backgroundImage=`url("${src}")`;
+      }
+      const strip=$('moonPhaseStrip');
+      if(strip){
+        strip.innerHTML='';
+        cleanMoon.forEach((phaseSrc,i)=>{
+          const dot=document.createElement('span');
+          dot.className='moon-phase-thumb'+(i===idx?' active':'');
+          dot.style.backgroundImage=`url("${phaseSrc}")`;
+          dot.setAttribute('aria-hidden','true');
+          strip.appendChild(dot);
+        });
+      }
+    }catch(_){}
+  }
+
+  function refresh(){
+    localizeMoonStatic();
+    repairScholarImages();
+    repairMoonAssets();
+  }
+  refresh();
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)refresh();});
+  new MutationObserver(refresh).observe(document.documentElement,{attributes:true,attributeFilter:['lang','dir']});
+  const moon=$('moonSheet');
+  if(moon)new MutationObserver(()=>{if(moon.classList.contains('open'))refresh();}).observe(moon,{attributes:true,attributeFilter:['class']});
+})();
+</script>
+
+
+<style id="ui-ux-simplification-v1">
+  /* HOME: let the analog clock be the time. */
+  #homeTopTime{display:none !important;}
+
+  /* Remove legacy full-screen concept/reference artwork behind the live UI. */
+  .app-shell::before{display:none !important;content:none !important;}
+  .clock-home{
+    background:
+      radial-gradient(circle at 50% 8%,rgba(34,88,112,.14),transparent 28%),
+      linear-gradient(180deg,#071c2e 0%,#08263a 58%,#051827 100%) !important;
+  }
+  .clock-home::before{
+    opacity:.26 !important;
+  }
+  .clock-home::after{
+    opacity:.62 !important;
+    height:clamp(145px,25vh,210px) !important;
+    filter:saturate(.82) brightness(.72) !important;
+  }
+
+  /* Reduce the "gold frame everywhere" effect. */
+  .status-tile,
+  .next-up-card,
+  .heritage-teaser{
+    border-color:rgba(145,174,186,.22) !important;
+    box-shadow:0 10px 26px rgba(0,0,0,.16) !important;
+  }
+  .status-tile{
+    background:rgba(8,38,57,.58) !important;
+  }
+  .next-up-card{
+    border-color:rgba(227,183,93,.25) !important;
+  }
+  .heritage-teaser{
+    border-color:rgba(227,183,93,.22) !important;
+  }
+
+  /* Clock remains the visual hero. */
+  .dial-only-wrap{margin-top:8px !important;}
+  .dial-wrap{
+    box-shadow:
+      0 22px 48px rgba(0,0,0,.34),
+      0 0 0 1px rgba(245,216,141,.18),
+      inset 0 0 0 2px rgba(228,184,91,.52),
+      inset 0 0 34px rgba(22,101,125,.18) !important;
+  }
+
+  /* FAB: still discoverable, no longer visually stronger than the clock. */
+  .fab{
+    width:52px !important;
+    height:52px !important;
+    min-width:52px !important;
+    min-height:52px !important;
+    box-shadow:0 0 0 2px rgba(16,78,115,.38),0 10px 20px rgba(0,0,0,.30) !important;
+  }
+  .fab::before{width:17px !important;height:26px !important;}
+  .fab::after{width:25px !important;height:31px !important;}
+
+  /* MOON: simpler information hierarchy. */
+  #moonSheet.moon-guide{
+    border-color:rgba(145,174,186,.24) !important;
+    box-shadow:0 26px 60px rgba(0,0,0,.48) !important;
+  }
+  #moonSheet .moon-guide-head h2{
+    font-size:clamp(1.08rem,4.7vw,1.45rem) !important;
+    font-weight:650 !important;
+  }
+  #moonSheet .moon-guide-hero{
+    grid-template-columns:minmax(145px,.95fr) minmax(0,1.05fr) !important;
+    gap:16px !important;
+    padding-top:8px !important;
+  }
+  #moonSheet .moon-phase-art{
+    width:min(46vw,184px) !important;
+    height:min(46vw,184px) !important;
+  }
+  #moonSheet .quick-sheet-title{
+    font-size:1.05rem !important;
+  }
+  #moonSheet .moon-illum strong{
+    font-size:clamp(1.75rem,7vw,2.3rem) !important;
+  }
+  #moonSheet .moon-guide-stats{
+    border-color:rgba(145,174,186,.24) !important;
+    background:rgba(7,35,53,.62) !important;
+  }
+  #moonSheet .moon-stat+.moon-stat::before{
+    background:rgba(145,174,186,.20) !important;
+  }
+  #moonSheet .moon-stat-icon{
+    border-color:rgba(227,183,93,.36) !important;
+  }
+  #moonSheet .moon-guide-divider{
+    margin:14px 0 16px !important;
+  }
+  #moonSheet .moon-guide-heritage h3{
+    font-size:1.42rem !important;
+  }
+  #moonSheet .moon-guide-subtitle{
+    font-size:.92rem !important;
+    margin-bottom:10px !important;
+  }
+  #moonSheet .moon-heritage-card{
+    border-color:rgba(145,174,186,.22) !important;
+    background:linear-gradient(135deg,rgba(10,46,65,.82),rgba(6,28,44,.92)) !important;
+    box-shadow:none !important;
+  }
+
+  /* Phase thumbnails should read as lunar phases, not decorative rings. */
+  #moonSheet .moon-phase-thumb{
+    border-color:transparent !important;
+    opacity:.64 !important;
+  }
+  #moonSheet .moon-phase-thumb.active{
+    border-color:#e7c56e !important;
+    box-shadow:0 0 0 1.5px #e7c56e !important;
+  }
+
+  /* STORIES: remove container-inside-container heaviness. */
+  #storiesSheet .sheet-body{
+    gap:10px !important;
+  }
+  #storiesSheet .scholar-strip{
+    gap:7px !important;
+    padding-bottom:3px !important;
+  }
+  #storiesSheet .scholar-chip{
+    min-height:36px !important;
+    padding:6px 11px !important;
+    border-radius:999px !important;
+    border-color:rgba(145,174,186,.20) !important;
+    background:rgba(8,36,54,.64) !important;
+  }
+  #storiesSheet .scholar-chip-avatar{
+    display:none !important;
+  }
+  #storiesSheet .scholar-chip-name{
+    max-width:none !important;
+    font-size:.72rem !important;
+  }
+  #storiesSheet .scholar-chip.active{
+    background:rgba(227,183,93,.12) !important;
+    border-color:rgba(227,183,93,.54) !important;
+    box-shadow:none !important;
+  }
+  #storiesSheet .heritage-story-card{
+    border-color:rgba(145,174,186,.22) !important;
+    border-radius:22px !important;
+    box-shadow:0 14px 32px rgba(0,0,0,.22) !important;
+  }
+  #storiesSheet .heritage-story-card::before{
+    display:none !important;
+  }
+  #storiesSheet .story-hero-wrap{
+    border-bottom-color:rgba(145,174,186,.16) !important;
+  }
+  #storiesSheet .story-related-visual{
+    border-color:rgba(145,174,186,.18) !important;
+    background:rgba(7,34,51,.54) !important;
+    box-shadow:none !important;
+  }
+  #storiesSheet .story-actions button{
+    border-color:rgba(145,174,186,.26) !important;
+  }
+
+  /* Keep page dots small and subordinate. */
+  #storiesSheet .story-dot,
+  #storiesSheet .story-dot.active,
+  #moonSheet .moon-story-dot,
+  #moonSheet .moon-story-dot.active{
+    width:9px !important;min-width:9px !important;max-width:9px !important;
+    height:9px !important;min-height:9px !important;max-height:9px !important;
+  }
+
+  /* Functional data uses the UI font; display serif reserved for character/storytelling. */
+  .status-strip,.next-up-card,.prayer-label-text,.prayer-time-text,
+  #moonSheet .moon-guide-stats,#storiesSheet .story-meta,
+  #storiesSheet .story-swipe-hint{
+    font-family:var(--dr-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif) !important;
+  }
+
+  @media(max-width:390px){
+    .fab{width:48px !important;height:48px !important;min-width:48px !important;min-height:48px !important;}
+    #moonSheet .moon-guide-hero{
+      grid-template-columns:132px minmax(0,1fr) !important;
+      gap:10px !important;
+    }
+    #moonSheet .moon-phase-art{
+      width:132px !important;height:132px !important;
+    }
+  }
+</style>
+
+<script id="ui-ux-simplification-v1-script">
+(function(){
+  function localizeSecondaryUI(){
+    const ar=document.documentElement.lang==='ar';
+    const moonTitle=document.getElementById('moonGuideTitle');
+    const heritage=document.getElementById('moonHeritageHeading');
+    const subtitle=document.querySelector('#moonSheet .moon-guide-subtitle');
+    const swipe=document.querySelector('#moonSheet .moon-swipe-hint');
+    if(moonTitle) moonTitle.textContent=ar?'القمر':'The Moon';
+    if(heritage) heritage.textContent=ar?'التراث':'Heritage';
+    if(subtitle) subtitle.textContent=ar?'القمر في التراث الإسلامي':'The Moon in Islamic Tradition';
+    if(swipe) swipe.textContent=ar?'اسحب للمتابعة':'Swipe to continue';
+  }
+  localizeSecondaryUI();
+  new MutationObserver(localizeSecondaryUI).observe(document.documentElement,{attributes:true,attributeFilter:['lang','dir']});
+})();
+</script>
+
+
+<style id="single-magnifier-ios-fix-v1">
+  /* Prevent iOS/Safari from showing its native long-press loupe on top of our custom lens. */
+  .dial-wrap,
+  .dial-wrap *,
+  .dial-only-wrap,
+  .dial-only-wrap *{
+    -webkit-user-select:none !important;
+    user-select:none !important;
+    -webkit-touch-callout:none !important;
+  }
+
+  /* Exactly one custom lens. It appears only after our hold timer. */
+  #magnifier{
+    display:none !important;
+    pointer-events:none !important;
+    -webkit-user-select:none !important;
+    user-select:none !important;
+    -webkit-touch-callout:none !important;
+  }
+  #magnifier.press-visible{display:block !important;}
+
+  /* Do not let cloned SVG/text inside the lens trigger native selection/callouts. */
+  #magnifierInner,
+  #magnifierInner *{
+    pointer-events:none !important;
+    -webkit-user-select:none !important;
+    user-select:none !important;
+    -webkit-touch-callout:none !important;
+  }
+</style>
+
+<script id="single-magnifier-ios-fix-v1-script">
+(function(){
+  const dial=document.querySelector('.dial-wrap');
+  if(!dial)return;
+
+  /* Native Safari long-press selection/context UI is the second "magnifier".
+     Suppress it only inside the live dial; normal page scrolling remains pan-y. */
+  dial.addEventListener('selectstart',e=>e.preventDefault());
+  dial.addEventListener('contextmenu',e=>{
+    if(e.pointerType==='touch' || 'ontouchstart' in window) e.preventDefault();
+  });
+
+  /* Prevent image dragging/callout behavior from cloned artwork. */
+  dial.addEventListener('dragstart',e=>e.preventDefault());
+
+  /* Defensive cleanup: there must never be more than one custom lens node. */
+  const lenses=[...document.querySelectorAll('#magnifier')];
+  lenses.slice(1).forEach(n=>n.remove());
+})();
+</script>
 
 </body>
 </html>

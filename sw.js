@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'daily-rhythm-v3-moon-assets';
+const CACHE_VERSION = 'daily-rhythm-v12-language-relative';
 const APP_CACHE = `${CACHE_VERSION}-app`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -6,11 +6,6 @@ const APP_SHELL = [
   './',
   './index.html',
   './manifest.webmanifest',
-  './assets/scholar-biruni-measurement.webp',
-  './assets/scholar-haytham-optics.webp',
-  './assets/scholar-khwarizmi-algebra.webp',
-  './assets/scholar-zahrawi-instruments.webp',
-  './assets/scholar-idrisi-cartography.webp',
   './assets/moon-new.webp',
   './assets/moon-waxing-crescent.webp',
   './assets/moon-first-quarter.webp',
@@ -18,7 +13,12 @@ const APP_SHELL = [
   './assets/moon-full.webp',
   './assets/moon-waning-gibbous.webp',
   './assets/moon-last-quarter.webp',
-  './assets/moon-waning-crescent.webp'
+  './assets/moon-waning-crescent.webp',
+  './assets/scholar-biruni-measurement.webp',
+  './assets/scholar-haytham-optics.webp',
+  './assets/scholar-khwarizmi-algebra.webp',
+  './assets/scholar-zahrawi-instruments.webp',
+  './assets/scholar-idrisi-cartography.webp'
 ];
 
 self.addEventListener('install', event => {
