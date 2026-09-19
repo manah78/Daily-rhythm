@@ -68,3 +68,31 @@ Then test the app by adding an unknown custom activity in Arabic, switching to E
 - output length and script validation
 - no model/API credential in the PWA
 - no-store response headers
+
+
+## Hybrid command interpreter
+
+This version also adds `POST /api/interpret-command` for complex English/Arabic schedule commands. The browser still keeps the deterministic local parser as a fallback. Complex Arabic, prayer-relative, compound, and multiple-time add commands are sent to Workers AI for structured interpretation, then validated and executed by the app.
+
+Examples covered:
+- `أضف السباحة الساعة الواحدة مساءً والساعة السابعة مساءً` → two swimming occurrences
+- `أضف السباحة بعد صلاة المغرب` → swimming 15 minutes after Maghrib
+- `أضف مراجعة العلوم الساعة الرابعة مساءً` → preserves `مراجعة العلوم / Review science`; category does not replace the label
+- `swimming from 1 PM to 7 PM` → one explicit range
+
+The model never directly edits storage. It only returns a constrained JSON plan; the client validates times, labels, anchors, and allowed actions before modifying the schedule.
+
+## Hybrid command AI v2 refinements (2026-09-19)
+
+This continuation keeps the local deterministic parser as fallback and strengthens `/api/interpret-command` for complex add/schedule requests.
+
+Regression cases to test after deployment:
+
+- `أضف السباحة الساعة الواحدة مساءً والساعة السابعة مساءً` → two Swimming occurrences: 13:00 and 19:00.
+- `أضف الجيم الساعة السادسة والقراءة الساعة الثامنة والتاسعة مساءً` → Gym at 18:00; Reading at 20:00 and 21:00.
+- `أضف القراءة بعد صلاة المغرب` → preview resolved time, then require confirmation before changing the schedule.
+- `أضف المشي مباشرة بعد صلاة الفجر` → relative offset 0 minutes, still preview + confirm.
+- `أضف الدراسة قبل صلاة العشاء بنصف ساعة` → 30-minute prayer-relative offset, preview + confirm.
+- Speech/fuzzy substitutions such as `Jim/Gem/Gim` should be confirmed before AI/local execution when they match an existing activity.
+
+UI: phone clock proportions are unchanged. Tablet portrait (700px+) and landscape (1024px+) allow a larger watch face while retaining proportional moon and magnifier controls.
