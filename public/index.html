@@ -7917,14 +7917,14 @@
     const explicit = isExplicitCommand(text);
     const isArabic = containsArabicText(text);
     const multipleTimes = countExplicitClockMentions(text) >= 2;
-    const prayerRelative = /\b(?:after|before)\b/i.test(text) || /(?:بعد|قبل)\s+(?:صلاة\s*)?/.test(text);
-    const compound = splitCompoundCommands(text).length > 1 || /(?:،|,).*(?:أضف|اضف|أضيف|ضيف|احذف|حدف|امسح|شيل|ألغ|عدل|عدّل|غير|غيّر|add|delete|remove|edit|change)/i.test(text);
+    const prayerRelative = /\b(?:after|before|between)\b/i.test(text) || /(?:بعد|قبل|بين)\s+(?:صلاة\s*)?/.test(text);
+    const compound = splitCompoundCommands(text).length > 1 || /(?:،|,|\band\b|\bthen\b|\bfollowed by\b|و|ثم).*(?:أضف|اضف|أضيف|ضيف|احذف|حدف|امسح|شيل|ألغ|عدل|عدّل|غير|غيّر|add|delete|remove|edit|change|swim|breakfast|meeting|gym|reading|walk)/i.test(text);
     const conversationalArabic = isArabic && text.trim().length >= 2;
-    // Arabic is intentionally routed through the semantic layer even when it contains
-    // no formal command verb: dialect/slang such as "بدي", "عايز", "خليها" and
-    // "ما بدي" must work naturally. Completion/reset/follow-up intents were excluded above.
-    // The deterministic parser remains the offline/failure fallback.
-    return conversationalArabic || (explicit && (multipleTimes || prayerRelative || compound));
+    const scheduleNarrative = /\b(?:start|begin|schedule|plan|day|morning|afternoon|evening|going|having|have|do|doing|at|around)\b/i.test(text) && (multipleTimes || text.trim().split(/\s+/).length >= 7);
+    // Semantic routing is activity-first. Any explicit scheduling command, multi-time day
+    // description, Arabic/mixed utterance, relative placement, or conversational day
+    // narrative goes to the whole-utterance interpreter before the legacy parser.
+    return conversationalArabic || explicit || multipleTimes || prayerRelative || compound || scheduleNarrative;
   }
 
   function aiTimeToHour(value) {
@@ -7969,6 +7969,26 @@
     const start = occ.relation === 'before' ? anchorTime - offset - duration : anchorTime + offset;
     const end = start + duration;
     return { start, end, anchorLabel };
+  }
+
+  function resolveAiAnchorTime(anchorType, anchor, preferEnd = false) {
+    if (anchorType === 'prayer') {
+      const prayer = prayers.find(p => p.label === anchor);
+      return prayer ? prayer.time : null;
+    }
+    const block = findMatchingBlock(String(anchor || ''));
+    if (!block) return null;
+    if (preferEnd && Number.isFinite(block.end) && !block.openEnded) return block.end;
+    return Number.isFinite(block.start) ? block.start : null;
+  }
+
+  function resolveAiBetweenOccurrence(occ) {
+    const first = resolveAiAnchorTime(occ.anchor1Type, occ.anchor1, false);
+    const second = resolveAiAnchorTime(occ.anchor2Type, occ.anchor2, false);
+    if (!Number.isFinite(first) || !Number.isFinite(second)) return null;
+    let a = first, b = second;
+    if (b <= a) b += 24;
+    return { start: a + (b - a) / 2, anchor1: occ.anchor1, anchor2: occ.anchor2 };
   }
 
   async function requestAiCommandInterpretation(text) {
@@ -8067,7 +8087,15 @@
         if (occ.kind==='time') { start=aiTimeToHour(occ.start); openEnded=true; }
         else if (occ.kind==='range') { start=aiTimeToHour(occ.start); end=aiTimeToHour(occ.end); if(start!==null&&end!==null&&end<=start)end+=24; }
         else if (occ.kind==='relative') { const r=resolveAiRelativeOccurrence(occ); if(r){start=r.start;openEnded=true;} }
-        if (start===null) { unresolved.push(currentLang==='ar'?`تعذر تحديد وقت «${name}».`:`Couldn't resolve a time for “${name}”.`); continue; }
+        else if (occ.kind==='between') { const r=resolveAiBetweenOccurrence(occ); if(r){start=r.start;openEnded=true;} }
+        if (start===null) {
+          // Activity recognition wins over timing. Keep a confidently recognized ADD even
+          // when an anchor cannot yet be resolved; the user can place it later.
+          const r = addUntimedActivityFromAi(op);
+          if (r) { changed++; lines.push(`✓ ${r.message}`); }
+          else unresolved.push(currentLang==='ar'?`تعذر تحديد «${name}».`:`Couldn't resolve “${name}”.`);
+          continue;
+        }
         const r=addOrReplaceScheduledActivity(name,start,end,{openEnded});
         if(r){changed++;lines.push(`✓ ${r.message}`);}
         continue;
