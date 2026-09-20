@@ -1,0 +1,135 @@
+/* Consolidated clock + Moon Watch geometry. Loaded last so it wins legacy overrides. */
+.dial-only-wrap{overflow:visible !important;}
+.dial-wrap{
+  box-sizing:border-box !important;
+  aspect-ratio:1 / 1 !important;
+  height:auto !important;
+  flex:0 0 auto !important;
+  border-radius:50% !important;
+  overflow:visible !important;
+}
+.dial-wrap > svg{width:100% !important;height:100% !important;display:block !important;}
+
+#moonSheet .moon-guide-head,#moonSheet .moon-guide-head::before,#moonSheet .moon-guide-head::after,#moonSheet .moon-guide-head h2,#moonSheet .moon-guide-head h2::before,#moonSheet .moon-guide-head h2::after{border:0 !important;outline:0 !important;box-shadow:none !important;background:none !important;}
+#moonSheet .moon-guide-head::before,#moonSheet .moon-guide-head::after,#moonSheet .moon-guide-head h2::before,#moonSheet .moon-guide-head h2::after{display:none !important;content:none !important;}
+
+/* Moon center sits exactly on the 12 o'clock outer circumference. */
+#skyMoonBadge{position:absolute !important;top:0 !important;left:50% !important;transform:translate(-50%,-50%) !important;width:46px !important;height:46px !important;margin:0 !important;z-index:90 !important;overflow:visible !important;touch-action:manipulation !important;}
+#skyMoonBadge:hover,#skyMoonBadge:active{transform:translate(-50%,-50%) scale(1.06) !important;}
+
+/* Native horizontal phase carousel for iOS/iPadOS. */
+#moonSheet .moon-phase-strip{display:flex !important;grid-template-columns:none !important;gap:10px !important;width:100% !important;overflow-x:auto !important;overflow-y:hidden !important;overscroll-behavior-x:contain !important;-webkit-overflow-scrolling:touch !important;touch-action:pan-x !important;scroll-snap-type:x mandatory !important;scrollbar-width:none !important;padding:7px 4px 10px !important;margin:13px 0 5px !important;}
+#moonSheet .moon-phase-strip::-webkit-scrollbar{display:none !important;}
+#moonSheet .moon-phase-thumb{flex:0 0 50px !important;width:50px !important;min-width:50px !important;height:50px !important;aspect-ratio:1 !important;scroll-snap-align:center !important;pointer-events:auto !important;}
+#moonSheet .moon-phase-thumb.active{flex-basis:54px !important;width:54px !important;min-width:54px !important;height:54px !important;}
+#moonSheet .moon-story-pager{display:none !important;}
+#moonSheet .moon-swipe-hint{margin:0 0 4px !important;font-size:.69rem !important;color:#9fb2bb !important;}
+#moonSheet .moon-guide-reflection{font-size:.78rem !important;line-height:1.4 !important;opacity:.82 !important;}
+@media(max-width:390px){#skyMoonBadge{width:42px !important;height:42px !important;}#moonSheet .moon-phase-thumb{flex-basis:46px !important;width:46px !important;min-width:46px !important;height:46px !important;}#moonSheet .moon-phase-thumb.active{flex-basis:50px !important;width:50px !important;min-width:50px !important;height:50px !important;}}
+
+/* Daily Rhythm 1.0 final focused-home pass. */
+.clock-home .stage{
+  gap:12px !important;
+  justify-content:flex-start !important;
+  padding-top:max(58px,calc(env(safe-area-inset-top,0px) + 50px)) !important;
+}
+.home-greeting{margin-bottom:2px !important;}
+.status-strip{width:min(100%,560px) !important;gap:6px !important;}
+.status-tile{min-height:54px !important;padding:7px 9px !important;border-radius:15px !important;}
+.status-icon{width:22px !important;height:22px !important;flex-basis:22px !important;font-size:12px !important;}
+.status-copy,.prayer-tile .next-prayer{min-width:0 !important;overflow:visible !important;}
+.status-strip .date,.status-strip .hijri-date,.prayer-tile .next-prayer{
+  white-space:normal !important;overflow:visible !important;text-overflow:clip !important;
+  overflow-wrap:anywhere !important;line-height:1.12 !important;
+}
+.status-strip .date{font-size:.66rem !important;}
+.status-strip .hijri-date{font-size:.60rem !important;}
+.prayer-tile .next-prayer{font-size:.61rem !important;}
+.next-up-card{
+  width:min(100%,620px) !important;min-height:96px !important;padding:14px 18px !important;
+  margin-top:4px !important;border-radius:24px !important;border-color:rgba(227,183,93,.42) !important;
+  background:linear-gradient(180deg,rgba(10,47,68,.92),rgba(6,31,49,.96)) !important;
+  box-shadow:0 14px 30px rgba(0,0,0,.22) !important;
+}
+.nu-now,.nu-next{flex:1 1 50% !important;min-width:0 !important;}
+.nu-eyebrow{font-size:.72rem !important;color:#dfbd6b !important;letter-spacing:.10em !important;}
+.nu-now-text,.nu-next-text{font-size:clamp(1.08rem,4.7vw,1.48rem) !important;line-height:1.18 !important;color:#fff1cf !important;overflow-wrap:anywhere !important;}
+.nu-countdown{font-size:.82rem !important;color:#dfbd6b !important;}
+
+/* The freed centre belongs to today's live schedule. */
+.home-day-preview{
+  width:min(100%,620px);margin:2px auto 8px;padding:14px;border:1px solid rgba(227,183,93,.20);
+  border-radius:22px;background:linear-gradient(180deg,rgba(8,39,59,.78),rgba(5,28,44,.88));
+  box-shadow:0 10px 26px rgba(0,0,0,.16);font-family:var(--dr-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif);
+}
+.home-day-preview-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:9px;color:#fff1cf;font-weight:800;}
+.home-day-preview-head button{border:0;background:transparent;color:#dfbd6b;font-size:.78rem;font-weight:800;padding:6px 0;}
+.home-day-preview-list{display:grid;gap:7px;}
+.home-day-row,.home-day-empty{width:100%;border:1px solid rgba(145,174,186,.16);background:rgba(3,22,36,.58);color:#edf2f3;border-radius:15px;min-height:52px;text-align:start;}
+.home-day-row{display:grid;grid-template-columns:74px minmax(0,1fr) 18px;align-items:center;gap:9px;padding:9px 11px;}
+.home-day-time{font-variant-numeric:tabular-nums;color:#dfbd6b;font-size:.78rem;font-weight:800;}
+.home-day-name{font-size:.96rem;font-weight:750;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.home-day-arrow{color:#8fa8b2;font-size:1.25rem;}
+.home-day-row.is-done{opacity:.56;}
+.home-day-row.is-done .home-day-name{text-decoration:line-through;}
+.home-day-empty{display:grid;gap:3px;padding:13px 14px;}
+.home-day-empty strong{color:#fff1cf;font-size:1rem;}
+.home-day-empty span{color:#a9bdc5;font-size:.78rem;line-height:1.35;}
+html[dir="rtl"] .home-day-row{grid-template-columns:18px minmax(0,1fr) 74px;}
+html[dir="rtl"] .home-day-time{grid-column:3;grid-row:1;text-align:left;}
+html[dir="rtl"] .home-day-name{grid-column:2;grid-row:1;text-align:right;}
+html[dir="rtl"] .home-day-arrow{grid-column:1;grid-row:1;transform:rotate(180deg);}
+html[dir="rtl"] .home-day-empty{text-align:right;}
+
+/* Discovery remains preserved in source but dormant in 1.0. */
+.dial-only-wrap,#skyMoonBadge,#magnifierToggle,#heritageTeaser,#heritageCompletionToast,
+.heritage-settings,.settings-moon{display:none !important;}
+
+@media(max-width:430px){
+  .clock-home .stage{padding-inline:3vw !important;}
+  .status-strip{grid-template-columns:1fr 1fr 1.12fr !important;}
+  .status-tile{min-height:52px !important;padding:7px !important;gap:5px !important;}
+  .next-up-card{min-height:96px !important;padding:14px 15px !important;}
+  .home-day-preview{padding:12px !important;border-radius:19px !important;}
+}
+
+
+/* Daily Rhythm 1.0 stabilization: lighter unified dock. */
+.dock{
+  gap:0 !important;
+  padding:8px 12px calc(8px + env(safe-area-inset-bottom,0px)) !important;
+  background:linear-gradient(180deg,rgba(6,28,45,.94),rgba(5,22,37,.985)) !important;
+  border-top:1px solid rgba(227,183,93,.22) !important;
+  box-shadow:0 -8px 22px rgba(0,0,0,.22) !important;
+}
+.dock-btn{
+  position:relative !important;
+  min-height:58px !important;
+  border:0 !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  color:#aebdc2 !important;
+  gap:3px !important;
+}
+.dock-btn .dock-icon{
+  width:30px !important;height:30px !important;
+  border:0 !important;background:transparent !important;
+  box-shadow:none !important;color:inherit !important;
+}
+#openScheduleBtn{color:#f0cf7c !important;}
+#openScheduleBtn::after{
+  content:"";position:absolute;left:50%;bottom:1px;transform:translateX(-50%);
+  width:24px;height:2px;border-radius:999px;background:#dfbd6b;
+  box-shadow:0 0 8px rgba(223,189,107,.38);
+}
+.fab{
+  width:60px !important;height:60px !important;min-width:60px !important;min-height:60px !important;
+  margin-top:-24px !important;border-width:3px !important;
+}
+@media(max-width:390px){
+  .dock{padding-inline:8px !important;}
+  .dock-btn{font-size:.62rem !important;}
+  .fab{width:56px !important;height:56px !important;min-width:56px !important;min-height:56px !important;}
+}
+\n\n/* Daily Rhythm 1.0 voice-first landing action. */\n.home-talk-cta{\n  width:min(82%,520px) !important;min-height:82px !important;margin:18px auto 34px !important;\n  padding:12px 22px !important;display:flex !important;align-items:center !important;justify-content:center !important;gap:16px !important;\n  border:1.5px solid rgba(236,201,113,.86) !important;border-radius:999px !important;\n  background:linear-gradient(180deg,rgba(14,55,75,.96),rgba(6,31,49,.98)) !important;color:#fff1cf !important;\n  box-shadow:0 10px 30px rgba(0,0,0,.22),0 0 22px rgba(223,189,107,.10) !important;text-align:start !important;cursor:pointer !important;\n}\n.home-talk-cta:active{transform:scale(.985);}\n.home-talk-mic{flex:0 0 52px !important;width:52px !important;height:52px !important;display:grid !important;place-items:center !important;border:1px solid rgba(240,207,124,.72) !important;border-radius:50% !important;background:rgba(223,189,107,.14) !important;font-size:25px !important;box-shadow:inset 0 0 0 4px rgba(223,189,107,.06),0 0 16px rgba(223,189,107,.12) !important;}\n.home-talk-copy{display:grid !important;gap:3px !important;min-width:0 !important;}\n.home-talk-copy strong{font-family:Georgia,"Times New Roman",serif !important;font-size:clamp(1.16rem,4.8vw,1.52rem) !important;line-height:1.08 !important;color:#fff1cf !important;}\n.home-talk-copy span{font-size:.78rem !important;line-height:1.25 !important;color:#b8c8ce !important;}\nhtml[dir="rtl"] .home-talk-cta{text-align:right !important;}\n\n/* Three calm, equally aligned navigation destinations. */\n.dock{display:grid !important;grid-template-columns:repeat(3,minmax(0,1fr)) !important;align-items:center !important;gap:0 !important;padding:9px 14px calc(9px + env(safe-area-inset-bottom,0px)) !important;}\n.dock-btn{width:100% !important;min-width:0 !important;min-height:58px !important;}\n#openVoiceBtn,.fab{display:none !important;}\n.clock-home .stage{padding-bottom:28px !important;}\n@media(max-width:430px){.home-talk-cta{width:88% !important;min-height:76px !important;margin:16px auto 30px !important;padding:11px 17px !important;gap:13px !important}.home-talk-mic{flex-basis:48px !important;width:48px !important;height:48px !important;font-size:23px !important}.home-talk-copy span{font-size:.72rem !important}.dock{padding-inline:10px !important}}\n
