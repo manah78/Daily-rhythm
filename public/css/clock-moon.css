@@ -93,7 +93,6 @@ html[dir="rtl"] .home-day-empty{text-align:right;}
   .home-day-preview{padding:12px !important;border-radius:19px !important;}
 }
 
-
 /* Daily Rhythm 1.0 stabilization: lighter unified dock. */
 .dock{
   gap:0 !important;
@@ -132,4 +131,189 @@ html[dir="rtl"] .home-day-empty{text-align:right;}
   .dock-btn{font-size:.62rem !important;}
   .fab{width:56px !important;height:56px !important;min-width:56px !important;min-height:56px !important;}
 }
-\n\n/* Daily Rhythm 1.0 voice-first landing action. */\n.home-talk-cta{\n  width:min(82%,520px) !important;min-height:82px !important;margin:18px auto 34px !important;\n  padding:12px 22px !important;display:flex !important;align-items:center !important;justify-content:center !important;gap:16px !important;\n  border:1.5px solid rgba(236,201,113,.86) !important;border-radius:999px !important;\n  background:linear-gradient(180deg,rgba(14,55,75,.96),rgba(6,31,49,.98)) !important;color:#fff1cf !important;\n  box-shadow:0 10px 30px rgba(0,0,0,.22),0 0 22px rgba(223,189,107,.10) !important;text-align:start !important;cursor:pointer !important;\n}\n.home-talk-cta:active{transform:scale(.985);}\n.home-talk-mic{flex:0 0 52px !important;width:52px !important;height:52px !important;display:grid !important;place-items:center !important;border:1px solid rgba(240,207,124,.72) !important;border-radius:50% !important;background:rgba(223,189,107,.14) !important;font-size:25px !important;box-shadow:inset 0 0 0 4px rgba(223,189,107,.06),0 0 16px rgba(223,189,107,.12) !important;}\n.home-talk-copy{display:grid !important;gap:3px !important;min-width:0 !important;}\n.home-talk-copy strong{font-family:Georgia,"Times New Roman",serif !important;font-size:clamp(1.16rem,4.8vw,1.52rem) !important;line-height:1.08 !important;color:#fff1cf !important;}\n.home-talk-copy span{font-size:.78rem !important;line-height:1.25 !important;color:#b8c8ce !important;}\nhtml[dir="rtl"] .home-talk-cta{text-align:right !important;}\n\n/* Three calm, equally aligned navigation destinations. */\n.dock{display:grid !important;grid-template-columns:repeat(3,minmax(0,1fr)) !important;align-items:center !important;gap:0 !important;padding:9px 14px calc(9px + env(safe-area-inset-bottom,0px)) !important;}\n.dock-btn{width:100% !important;min-width:0 !important;min-height:58px !important;}\n#openVoiceBtn,.fab{display:none !important;}\n.clock-home .stage{padding-bottom:28px !important;}\n@media(max-width:430px){.home-talk-cta{width:88% !important;min-height:76px !important;margin:16px auto 30px !important;padding:11px 17px !important;gap:13px !important}.home-talk-mic{flex-basis:48px !important;width:48px !important;height:48px !important;font-size:23px !important}.home-talk-copy span{font-size:.72rem !important}.dock{padding-inline:10px !important}}\n
+
+/* Daily Rhythm 1.0 UI hotfix — valid CSS, real line breaks. */
+
+/* Voice-first landing action. */
+.home-talk-cta{
+  position:relative !important;
+  box-sizing:border-box !important;
+  width:min(88%,560px) !important;
+  min-height:100px !important;
+  margin:20px auto 34px !important;
+  padding:14px 54px 14px 18px !important;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap:16px !important;
+  overflow:visible !important;
+  border:1.5px solid rgba(239,201,104,.92) !important;
+  border-radius:999px !important;
+  background:linear-gradient(180deg,rgba(13,53,72,.98),rgba(5,31,48,.99)) !important;
+  color:#fff1cf !important;
+  box-shadow:0 0 20px rgba(235,190,80,.20),0 14px 30px rgba(0,0,0,.22) !important;
+  cursor:pointer !important;
+}
+.home-talk-cta:active{transform:scale(.985);}
+.home-talk-mic{
+  box-sizing:border-box !important;
+  flex:0 0 70px !important;
+  width:70px !important;
+  height:70px !important;
+  min-width:70px !important;
+  min-height:70px !important;
+  max-width:70px !important;
+  max-height:70px !important;
+  display:grid !important;
+  place-items:center !important;
+  overflow:hidden !important;
+  border:2px solid #efc968 !important;
+  border-radius:50% !important;
+  background:rgba(239,201,104,.10) !important;
+  box-shadow:inset 0 0 0 6px rgba(239,201,104,.05),0 0 16px rgba(239,201,104,.20) !important;
+  color:#fff2cf !important;
+}
+.home-talk-mic svg{
+  display:block !important;
+  width:36px !important;
+  height:36px !important;
+  max-width:36px !important;
+  max-height:36px !important;
+  fill:none !important;
+  stroke:#fff2cf !important;
+  stroke-width:2.4 !important;
+  stroke-linecap:round !important;
+  stroke-linejoin:round !important;
+}
+.home-talk-copy{
+  display:grid !important;
+  gap:5px !important;
+  min-width:0 !important;
+  text-align:left !important;
+}
+.home-talk-copy strong{
+  font-family:Georgia,"Times New Roman",serif !important;
+  font-size:clamp(1.18rem,4.7vw,1.55rem) !important;
+  line-height:1.05 !important;
+  color:#fff1cf !important;
+  white-space:normal !important;
+}
+.home-talk-copy span{
+  font-family:Georgia,"Times New Roman",serif !important;
+  font-style:italic !important;
+  font-size:.82rem !important;
+  line-height:1.2 !important;
+  color:#d9d1c4 !important;
+  white-space:normal !important;
+}
+.home-talk-audio{
+  position:absolute !important;
+  top:50% !important;
+  transform:translateY(-50%) !important;
+  display:flex !important;
+  align-items:center !important;
+  gap:3px !important;
+  pointer-events:none !important;
+}
+.home-talk-audio-left{left:-18px !important;}
+.home-talk-audio-right{right:-18px !important;}
+.home-talk-audio i{
+  display:block !important;
+  width:3px !important;
+  border-radius:999px !important;
+  background:#d9ae4f !important;
+}
+.home-talk-audio i:nth-child(1),.home-talk-audio i:nth-child(5){height:12px !important;}
+.home-talk-audio i:nth-child(2),.home-talk-audio i:nth-child(4){height:24px !important;}
+.home-talk-audio i:nth-child(3){height:36px !important;}
+
+/* Three genuinely equal navigation destinations. */
+.dock{
+  display:grid !important;
+  grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  align-items:center !important;
+  justify-items:stretch !important;
+  width:100% !important;
+  gap:0 !important;
+  padding:9px 10px calc(9px + env(safe-area-inset-bottom,0px)) !important;
+}
+.dock-btn{
+  box-sizing:border-box !important;
+  width:100% !important;
+  min-width:0 !important;
+  min-height:58px !important;
+  margin:0 !important;
+  justify-self:stretch !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  border-color:transparent !important;
+}
+#openVoiceBtn,.fab{display:none !important;}
+#openScheduleBtn{
+  background:transparent !important;
+  box-shadow:none !important;
+  border-color:transparent !important;
+}
+
+/* Language direction: Arabic right, English left. */
+html[dir="rtl"] .status-tile,
+html[dir="rtl"] .status-copy,
+html[dir="rtl"] .status-strip .date,
+html[dir="rtl"] .status-strip .hijri-date,
+html[dir="rtl"] .prayer-tile,
+html[dir="rtl"] .prayer-tile .next-prayer{
+  direction:rtl !important;
+  text-align:right !important;
+}
+html[dir="ltr"] .status-tile,
+html[dir="ltr"] .status-copy,
+html[dir="ltr"] .status-strip .date,
+html[dir="ltr"] .status-strip .hijri-date,
+html[dir="ltr"] .prayer-tile,
+html[dir="ltr"] .prayer-tile .next-prayer{
+  direction:ltr !important;
+  text-align:left !important;
+}
+html[dir="rtl"] .home-talk-cta{
+  direction:rtl !important;
+  padding:14px 18px 14px 54px !important;
+}
+html[dir="rtl"] .home-talk-copy{
+  direction:rtl !important;
+  text-align:right !important;
+}
+html[dir="ltr"] .home-talk-cta{direction:ltr !important;}
+html[dir="ltr"] .home-talk-copy{
+  direction:ltr !important;
+  text-align:left !important;
+}
+
+@media(max-width:430px){
+  .home-talk-cta{
+    width:86% !important;
+    min-height:94px !important;
+    margin:18px auto 30px !important;
+    padding:12px 36px 12px 14px !important;
+    gap:13px !important;
+  }
+  html[dir="rtl"] .home-talk-cta{padding:12px 14px 12px 36px !important;}
+  .home-talk-mic{
+    flex-basis:64px !important;
+    width:64px !important;
+    height:64px !important;
+    min-width:64px !important;
+    min-height:64px !important;
+    max-width:64px !important;
+    max-height:64px !important;
+  }
+  .home-talk-mic svg{width:32px !important;height:32px !important;}
+  .home-talk-copy strong{font-size:1.12rem !important;}
+  .home-talk-copy span{font-size:.74rem !important;}
+  .home-talk-audio-left{left:-15px !important;}
+  .home-talk-audio-right{right:-15px !important;}
+}
