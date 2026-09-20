@@ -178,3 +178,59 @@ html[dir="rtl"] .home-day-empty{text-align:right;}
   .home-talk-copy strong{font-size:1.04rem !important;}
   .home-talk-copy span{font-size:.68rem !important;}
 }
+
+/* 1.0 UI hotfix — CTA sizing, equal dock spacing, and language alignment. */
+.home-talk-cta{
+  box-sizing:border-box !important;
+  width:min(88%,580px) !important;
+  height:104px !important; min-height:104px !important; max-height:104px !important;
+  margin:22px auto 30px !important;
+  padding:12px 42px 12px 16px !important;
+  display:flex !important; flex-direction:row !important;
+  align-items:center !important; justify-content:flex-start !important;
+  gap:16px !important; overflow:visible !important;
+  border:1.5px solid rgba(244,207,112,.94) !important; border-radius:999px !important;
+  background:linear-gradient(180deg,rgba(13,53,72,.98),rgba(5,31,48,.99)) !important;
+  box-shadow:0 0 0 1px rgba(255,224,139,.08),0 0 20px rgba(235,190,80,.22),0 14px 30px rgba(0,0,0,.20) !important;
+}
+.home-talk-mic{
+  box-sizing:border-box !important; display:grid !important; place-items:center !important;
+  flex:0 0 72px !important; width:72px !important; height:72px !important;
+  min-width:72px !important; min-height:72px !important; max-width:72px !important; max-height:72px !important;
+  margin:0 !important; padding:0 !important; border:2px solid #efc968 !important; border-radius:50% !important;
+  color:#fff2cf !important; background:rgba(239,201,104,.10) !important;
+  box-shadow:inset 0 0 0 7px rgba(239,201,104,.055),0 0 17px rgba(239,201,104,.22) !important;
+}
+.home-talk-mic svg{display:block !important;width:38px !important;height:38px !important;color:#fff2cf !important;overflow:visible !important;}
+.home-talk-mic svg rect{fill:currentColor !important;stroke:none !important;}
+.home-talk-mic svg path{fill:none !important;stroke:currentColor !important;stroke-width:2.4 !important;stroke-linecap:round !important;stroke-linejoin:round !important;}
+.home-talk-copy{display:flex !important;flex:1 1 auto !important;flex-direction:column !important;justify-content:center !important;align-items:flex-start !important;gap:5px !important;min-width:0 !important;margin:0 !important;padding:0 !important;}
+.home-talk-copy strong{display:block !important;margin:0 !important;font-size:clamp(1.18rem,4.6vw,1.55rem) !important;line-height:1.08 !important;white-space:normal !important;color:#fff2cf !important;}
+.home-talk-copy span{display:block !important;margin:0 !important;font-size:clamp(.76rem,3.1vw,.96rem) !important;line-height:1.2 !important;white-space:normal !important;color:#e2d9ca !important;}
+.home-talk-audio{max-width:22px !important;}
+.home-talk-audio-left{left:-18px !important}.home-talk-audio-right{right:-18px !important}
+html[dir="rtl"] .home-talk-cta{flex-direction:row !important;padding:12px 16px 12px 42px !important;text-align:right !important;}
+html[dir="rtl"] .home-talk-copy{align-items:flex-end !important;text-align:right !important;direction:rtl !important;}
+html[dir="ltr"] .home-talk-copy{align-items:flex-start !important;text-align:left !important;direction:ltr !important;}
+
+/* Navigation: exactly three equal destinations across the full width. */
+.dock{display:grid !important;grid-template-columns:repeat(3,minmax(0,1fr)) !important;grid-auto-flow:column !important;width:100% !important;gap:0 !important;padding:8px 0 calc(8px + env(safe-area-inset-bottom,0px)) !important;direction:ltr !important;}
+.dock-btn{box-sizing:border-box !important;width:100% !important;min-width:0 !important;margin:0 !important;padding:7px 2px 6px !important;justify-self:stretch !important;align-self:stretch !important;border-radius:0 !important;background:transparent !important;box-shadow:none !important;}
+#openScheduleBtn{grid-column:1 !important}#openLogsBtn{grid-column:2 !important}#openSettingsBtn{grid-column:3 !important}
+#openScheduleBtn.active,#openScheduleBtn{background:transparent !important;box-shadow:none !important;}
+#openScheduleBtn::after{width:28px !important;height:2px !important;bottom:1px !important;border-radius:999px !important;}
+
+/* Language direction: Arabic content aligns right; English content aligns left. */
+html[dir="rtl"] .status-tile,html[dir="rtl"] .status-copy,html[dir="rtl"] .status-strip .date,html[dir="rtl"] .status-strip .hijri-date,html[dir="rtl"] .status-strip .clock,html[dir="rtl"] .status-strip .next-prayer{text-align:right !important;direction:rtl !important;}
+html[dir="ltr"] .status-tile,html[dir="ltr"] .status-copy,html[dir="ltr"] .status-strip .date,html[dir="ltr"] .status-strip .hijri-date,html[dir="ltr"] .status-strip .clock,html[dir="ltr"] .status-strip .next-prayer{text-align:left !important;direction:ltr !important;}
+html[dir="rtl"] .home-day-preview,html[dir="rtl"] .home-day-preview-head,html[dir="rtl"] .home-day-name{text-align:right !important;}
+html[dir="ltr"] .home-day-preview,html[dir="ltr"] .home-day-preview-head,html[dir="ltr"] .home-day-name{text-align:left !important;}
+
+@media(max-width:430px){
+  .home-talk-cta{width:86% !important;height:96px !important;min-height:96px !important;max-height:96px !important;margin:20px auto 28px !important;padding:11px 34px 11px 13px !important;gap:12px !important;}
+  html[dir="rtl"] .home-talk-cta{padding:11px 13px 11px 34px !important;}
+  .home-talk-mic{flex-basis:64px !important;width:64px !important;height:64px !important;min-width:64px !important;min-height:64px !important;max-width:64px !important;max-height:64px !important;}
+  .home-talk-mic svg{width:34px !important;height:34px !important;}
+  .home-talk-copy strong{font-size:1.14rem !important}.home-talk-copy span{font-size:.72rem !important}
+  .dock{padding-inline:0 !important;}
+}
