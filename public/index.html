@@ -3594,6 +3594,12 @@
   #voiceSheet .command-input-wrap{position:relative !important;}
   #commandInput{min-height:156px !important;max-height:40dvh !important;padding:16px 82px 16px 16px !important;font-size:1rem !important;line-height:1.5 !important;}
   #sendBtn{position:absolute !important;right:14px !important;bottom:14px !important;width:52px !important;height:52px !important;min-width:52px !important;border-radius:18px !important;display:grid !important;place-items:center !important;box-shadow:0 10px 24px rgba(0,0,0,.28) !important;}
+  #voiceSheet .voice-listen-btn{position:absolute;right:14px;top:14px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;border:1.5px solid rgba(239,201,104,.88);background:linear-gradient(180deg,rgba(17,68,88,.98),rgba(6,34,51,.99));color:#fff1cf;box-shadow:0 0 16px rgba(235,190,80,.18);z-index:2;}
+  #voiceSheet .voice-listen-btn svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;}
+  #voiceSheet .voice-listen-btn.is-listening{box-shadow:0 0 0 6px rgba(239,201,104,.10),0 0 22px rgba(239,201,104,.35);animation:voicePulse 1.15s ease-in-out infinite;}
+  #voiceSheet .voice-live-status{min-height:1.35em;margin:9px 0 0;color:var(--dr-gold-hi);font-size:.86rem;font-weight:700;}
+  html[dir="rtl"] #voiceSheet .voice-listen-btn{right:auto;left:14px;}
+  @keyframes voicePulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
   #voiceSheet .command-edit-hint{margin:10px 0 0 !important;font-size:.84rem !important;}
   #voiceSheet .examples{padding:12px 14px !important;}
   #voiceSheet .examples summary{font-size:.92rem !important;}
@@ -4557,6 +4563,10 @@
         <div class="command-row">
           <div class="command-input-wrap">
             <textarea id="commandInput" rows="4" maxlength="1200" spellcheck="true" placeholder="Write what to add, change, remove, or report. You can include more than one request." data-i18n-placeholder="commandPlaceholder"></textarea>
+            <button type="button" id="voiceListenBtn" class="voice-listen-btn" aria-label="Start listening" title="Start listening">
+              <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="18" y="7" width="12" height="24" rx="6"></rect><path d="M13 24v2a11 11 0 0 0 22 0v-2M24 37v7M17 44h14"></path></svg>
+            </button>
+            <p class="voice-live-status" id="voiceLiveStatus" role="status" aria-live="polite"></p>
             <p class="command-edit-hint" data-i18n="commandEditHint">Type one request or several, then review before sending.</p>
           </div>
           <button id="sendBtn" class="icon-btn" title="Submit" aria-label="Submit">➤</button>
@@ -7891,7 +7901,7 @@
   const AI_COMMAND_CONFIG = Object.assign({
     enabled: true,
     endpoint: '/api/interpret-command',
-    timeoutMs: 7500
+    timeoutMs: 15000
   }, window.DAILY_RHYTHM_AI_COMMAND || {});
 
   function countExplicitClockMentions(text) {
@@ -8222,7 +8232,12 @@
       commandInput.value = ''; resizeCommandInput(); return;
     }
 
-    if (!options.forcedLabel && !options.skipSuggestion) {
+    // Decide semantic routing BEFORE speech-correction. Long/dialect Arabic and
+    // compound requests must reach the multi-intent interpreter intact; a single
+    // fuzzy word such as "gym" must never capture the whole utterance.
+    const useSemanticInterpreter = shouldUseAiCommandInterpreter(text, options);
+
+    if (!useSemanticInterpreter && !options.forcedLabel && !options.skipSuggestion) {
       const preCommands = splitCompoundCommands(text);
       if (preCommands.length <= 1) {
         const preSuggestion = suggestActivity(text);
@@ -8234,7 +8249,7 @@
       }
     }
 
-    if (shouldUseAiCommandInterpreter(text, options)) {
+    if (useSemanticInterpreter) {
       setCommandFeedback(currentLang === 'ar' ? 'أفهم الأمر…' : 'Understanding the command…', 'question');
       const aiPlan = await requestAiCommandInterpretation(text);
       const requestedOperations=requestedOperationsFromPlan(aiPlan);
@@ -8257,7 +8272,16 @@
         finishRequestCapture(capture,{interpreter:'ai-add',aiPlan,requestedOperations,outcome:'success',result:aiResult});
         commandInput.value='';resizeCommandInput();return;
       }
-      // Fall through to deterministic parser when AI is unavailable/unsupported.
+      // Complex semantic requests are NOT sent to the legacy single-command
+      // fallback. Doing so can collapse an entire Arabic sentence into one
+      // "Custom activity" or one guessed activity. Preserve the schedule and
+      // ask the user to retry instead of committing incorrect data.
+      const safeFailure = currentLang === 'ar'
+        ? 'لم أتمكن من تفسير الطلب المركّب بأمان. لم أغيّر الجدول. حاول مرة أخرى أو قسّم الطلب إلى جزأين.'
+        : 'I could not safely interpret that multi-part request. I did not change your schedule. Please try again or split it into two parts.';
+      setCommandFeedback(safeFailure,'question');
+      finishRequestCapture(capture,{interpreter:'ai-semantic-unavailable',aiPlan,requestedOperations,outcome:'no_change',result:safeFailure});
+      commandInput.value='';resizeCommandInput();return;
     }
     const result = options.forcedLabel ? parseCommand(text, options.forcedLabel) : parseCommandBatch(text);
     const q=commandResultLooksLikeQuestion(result);
@@ -8356,13 +8380,130 @@
   let openSheets = [];
   function closeAllSheets() { openSheets.forEach(s => s.close()); }
 
+  const SpeechRecognitionCtor = window.SpeechRecognition || window.webkitSpeechRecognition;
+  let activeRecognition = null;
+  let voiceFinalTranscript = '';
+  let voiceAutoSubmit = false;
+  let voiceSubmitted = false;
+
+  function setVoiceLiveStatus(message, state = '') {
+    const status = document.getElementById('voiceLiveStatus');
+    const btn = document.getElementById('voiceListenBtn');
+    if (status) status.textContent = message || '';
+    if (btn) {
+      btn.classList.toggle('is-listening', state === 'listening');
+      btn.setAttribute('aria-label', state === 'listening'
+        ? (currentLang === 'ar' ? 'إيقاف الاستماع' : 'Stop listening')
+        : (currentLang === 'ar' ? 'ابدأ الاستماع' : 'Start listening'));
+    }
+  }
+
+  function stopVoiceListening() {
+    voiceAutoSubmit = false;
+    if (activeRecognition) {
+      try { activeRecognition.stop(); } catch (_) {}
+    }
+  }
+
+  function startVoiceListening({ autoSubmit = false } = {}) {
+    if (activeRecognition) {
+      stopVoiceListening();
+      return;
+    }
+    if (!SpeechRecognitionCtor) {
+      setVoiceLiveStatus(currentLang === 'ar'
+        ? 'الاستماع الصوتي غير متاح هنا. يمكنك الكتابة بدلاً من ذلك.'
+        : 'Voice listening is not available here. You can type instead.', 'error');
+      commandInput?.focus();
+      return;
+    }
+
+    const recognition = new SpeechRecognitionCtor();
+    activeRecognition = recognition;
+    voiceFinalTranscript = '';
+    voiceAutoSubmit = !!autoSubmit;
+    voiceSubmitted = false;
+    recognition.lang = currentLang === 'ar' ? 'ar-SA' : 'en-CA';
+    recognition.interimResults = true;
+    recognition.continuous = false;
+    recognition.maxAlternatives = 1;
+
+    recognition.onstart = () => {
+      setVoiceLiveStatus(currentLang === 'ar' ? 'أستمع… تحدث الآن' : 'Listening… speak now', 'listening');
+    };
+    recognition.onspeechend = () => {
+      setVoiceLiveStatus(currentLang === 'ar' ? 'جارٍ فهم طلبك…' : 'Understanding your request…', 'processing');
+      try { recognition.stop(); } catch (_) {}
+    };
+    recognition.onresult = (event) => {
+      let interim = '';
+      let finalChunk = '';
+      for (let i = event.resultIndex; i < event.results.length; i += 1) {
+        const transcript = event.results[i]?.[0]?.transcript || '';
+        if (event.results[i].isFinal) finalChunk += transcript;
+        else interim += transcript;
+      }
+      if (finalChunk) voiceFinalTranscript = `${voiceFinalTranscript} ${finalChunk}`.trim();
+      const visible = `${voiceFinalTranscript} ${interim}`.trim();
+      if (visible && commandInput) {
+        commandInput.value = visible;
+        resizeCommandInput();
+      }
+    };
+    recognition.onerror = (event) => {
+      const code = event?.error || 'unknown';
+      const denied = code === 'not-allowed' || code === 'service-not-allowed';
+      const noSpeech = code === 'no-speech';
+      voiceAutoSubmit = false;
+      setVoiceLiveStatus(
+        denied
+          ? (currentLang === 'ar' ? 'اسمح بالميكروفون والتعرّف على الكلام ثم حاول مرة أخرى.' : 'Allow microphone and speech recognition, then try again.')
+          : noSpeech
+            ? (currentLang === 'ar' ? 'لم أسمع كلاماً. اضغط الميكروفون وحاول مرة أخرى.' : 'I did not hear anything. Tap the microphone and try again.')
+            : (currentLang === 'ar' ? 'تعذّر الاستماع. اضغط الميكروفون للمحاولة مرة أخرى.' : 'Listening stopped. Tap the microphone to try again.'),
+        'error'
+      );
+    };
+    recognition.onend = () => {
+      activeRecognition = null;
+      const text = (commandInput?.value || '').trim();
+      const shouldSubmit = voiceAutoSubmit && !!text && !voiceSubmitted;
+      voiceAutoSubmit = false;
+      setVoiceLiveStatus(shouldSubmit
+        ? (currentLang === 'ar' ? 'جارٍ تطبيق طلبك…' : 'Applying your request…')
+        : (text ? (currentLang === 'ar' ? 'راجع النص أو اضغط إرسال.' : 'Review the text or tap Send.') : ''),
+        shouldSubmit ? 'processing' : 'idle');
+      if (shouldSubmit) {
+        voiceSubmitted = true;
+        Promise.resolve().then(() => submitCommand({ text }));
+      }
+    };
+
+    try {
+      recognition.start();
+    } catch (_) {
+      activeRecognition = null;
+      voiceAutoSubmit = false;
+      setVoiceLiveStatus(currentLang === 'ar' ? 'تعذّر بدء الميكروفون. حاول مرة أخرى.' : 'Could not start the microphone. Try again.', 'error');
+    }
+  }
+
   const scheduleSheet = makeSheet('scheduleSheet', 'scheduleBackdrop', 'openScheduleBtn', 'scheduleCloseBtn', () => { renderLegend(); renderSuggestions(); });
   const logsSheet = makeSheet('logsSheet', 'logsBackdrop', 'openLogsBtn', 'logsCloseBtn', () => { renderLogs(); });
-  const voiceSheet = makeSheet('voiceSheet', 'voiceBackdrop', 'openVoiceBtn', 'voiceCloseBtn', () => { setTimeout(() => commandInput.focus(), 250); });
+  const voiceSheet = makeSheet('voiceSheet', 'voiceBackdrop', 'openVoiceBtn', 'voiceCloseBtn', () => {});
   const settingsSheet = makeSheet('settingsSheet', 'settingsBackdrop', 'openSettingsBtn', 'settingsCloseBtn', () => { syncSettingsUI(); });
   openSheets = [scheduleSheet, logsSheet, voiceSheet, settingsSheet];
 
-  document.getElementById('homeTalkCta')?.addEventListener('click', () => voiceSheet.open());
+  document.getElementById('homeTalkCta')?.addEventListener('click', () => {
+    voiceSheet.open();
+    startVoiceListening({ autoSubmit:true });
+  });
+  document.getElementById('voiceListenBtn')?.addEventListener('click', () => {
+    if (activeRecognition) stopVoiceListening();
+    else startVoiceListening({ autoSubmit:false });
+  });
+  document.getElementById('voiceCloseBtn')?.addEventListener('click', stopVoiceListening);
+  document.getElementById('voiceBackdrop')?.addEventListener('click', stopVoiceListening);
 
   function syncSettingsUI() {
     const moonEnabled = document.getElementById('settingsMoonEnabled');
