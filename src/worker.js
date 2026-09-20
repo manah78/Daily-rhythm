@@ -185,6 +185,14 @@ function sanitizeInterpretation(value) {
           const n = Number(occ.offsetMinutes);
           op.occurrence = {kind:'relative', relation, anchorType, anchor, offsetMinutes:Math.min(180,Math.max(0,Number.isFinite(n)?n:15))};
         }
+      } else if (occ.kind === 'between') {
+        const anchor1Type = occ.anchor1Type === 'activity' ? 'activity' : 'prayer';
+        const anchor2Type = occ.anchor2Type === 'activity' ? 'activity' : 'prayer';
+        const anchor1 = cleanLabel(occ.anchor1, 60);
+        const anchor2 = cleanLabel(occ.anchor2, 60);
+        const valid1 = anchor1 && (anchor1Type !== 'prayer' || PRAYER_NAMES.has(anchor1));
+        const valid2 = anchor2 && (anchor2Type !== 'prayer' || PRAYER_NAMES.has(anchor2));
+        if (valid1 && valid2) op.occurrence = {kind:'between', anchor1Type, anchor1, anchor2Type, anchor2};
       }
     }
     const renameEn = cleanLabel(raw?.renameEn), renameAr = cleanLabel(raw?.renameAr);
@@ -220,7 +228,7 @@ Schema:
  "labelEn":"English activity",
  "labelAr":"Arabic activity",
  "category":"short category",
- "occurrence":null OR {"kind":"time","start":"HH:MM"} OR {"kind":"range","start":"HH:MM","end":"HH:MM"} OR {"kind":"relative","relation":"after|before","anchorType":"prayer|activity","anchor":"Fajr|Sunrise|Zohr|Asr|Maghrib|Isha|activity label","offsetMinutes":15},
+ "occurrence":null OR {"kind":"time","start":"HH:MM"} OR {"kind":"range","start":"HH:MM","end":"HH:MM"} OR {"kind":"relative","relation":"after|before","anchorType":"prayer|activity","anchor":"Fajr|Sunrise|Zohr|Asr|Maghrib|Isha|activity label","offsetMinutes":15} OR {"kind":"between","anchor1Type":"prayer|activity","anchor1":"anchor label","anchor2Type":"prayer|activity","anchor2":"anchor label"},
  "renameEn":"", "renameAr":"",
  "status":"ready|needs_clarification",
  "clarification":"short question if needed",
@@ -228,19 +236,21 @@ Schema:
 }]}
 
 Rules:
-1. Extract EVERY independent instruction in spoken order. Never collapse multiple actions into one and never drop later operations because an earlier one needs clarification.
-2. The user is TALKING naturally, not programming a command interface. An operation may be implied without a formal command verb. Infer intent from the whole phrase plus current schedule.
-3. Understand Modern Standard Arabic AND everyday dialect/slang, especially Egyptian, Palestinian, Jordanian, Lebanese, Syrian, Gulf/Saudi, Iraqi, and common mixed Arabic-English speech. Do not require a specific dialect label.
+1. FIRST understand the WHOLE utterance. Extract EVERY distinct activity candidate in spoken order before deciding timing. Never collapse a day description into one recognizable activity and never drop later activities because an earlier one is unclear.
+2. For each activity candidate, infer action (add/delete/edit) and attach only the timing/relationship that belongs to that activity. Activity recognition has priority over perfect timing: a clear ADD with unclear or missing timing must still be returned with occurrence=null and status=ready.
+3. The user is TALKING naturally, not programming a command interface. A list of activities and times can imply ADD without repeating the word add. Example: "start my day with jumping jacks at 7, swimming at 8, breakfast at 10, meeting at 12" means FOUR add operations.
+4. Understand Modern Standard Arabic, everyday dialect/slang, English, mixed Arabic-English, and transliterated/Arabizi Arabic activity words. Examples: al-sibaha/as-sibaha/السِباحة/السباحة/Swimming all mean Swimming when context is clear. Code-switching never changes the number of activities.
 4. Common ADD signals include أضف/اضف/أضيف/ضيف/حط/حطلي/ضع/سجل/زيد/بدي/عايز/عاوز/أبغى/ابغى/أبي/ابي/ودي when context means putting an activity on the schedule. Examples: "عايز سباحة الساعة 7", "بدي جيم بعد المغرب", "حطلي قراءة".
 5. Common DELETE signals include احذف/حدف/امسح/شيل/شيله/ألغي/الغي/بلاش/بلا/ما بدي/مش عايز/خلاص بلا when context clearly rejects/removes an existing scheduled activity. Examples: "ما بدي المشي اليوم", "خلاص بلا جيم", "شيل القراءة".
 6. Common EDIT signals include عدل/عدّل/غير/غيّر/بدل/بدّل/حرك/حرّك/خلي/خليها/خلّي/خلّيها. "السباحة خليها عالسبعة" means edit Swimming to 07:00 if Swimming is in the supplied schedule.
 7. Do not over-interpret uncertain conversation. If intent or requested change is genuinely ambiguous, use status=needs_clarification, confidence=low, and ask one short natural question. Never invent a destructive action from vague language.
 8. Schedule context matters. For delete/edit, identify the intended existing activity semantically, including inflection, dialect and common aliases. The CLIENT still verifies the target before mutation; never claim a target exists if it is absent.
-9. Activity synonyms normalize semantically. Examples: سباحة/السباحة/اسبح => Swimming/السباحة; مشي/المشي/تمشية/أتمشى => Walking/المشي; قراءة/القراءة/اقرأ => Reading/القراءة; جيم/جم/نادي/تمرين بالنادي => Gym/الجيم. Preserve specific labels such as مراجعة العلوم.
+9. Activity synonyms normalize semantically. Examples: سباحة/السباحة/اسبح/al-sibaha/as-sibaha => Swimming/السباحة; مشي/المشي/تمشية/أتمشى/al-mashi => Walking/المشي; قراءة/القراءة/اقرأ/qira'a => Reading/القراءة; جيم/جم/nadi/gym => Gym/الجيم. Preserve specific user labels such as مراجعة العلوم or Work on Daily Rhythm. Unknown but clear activity names are valid; do not replace them with "Custom activity". If the activity name itself is genuinely uncertain, return needs_clarification instead of inventing a label.
 10. Code-switching is normal: "حطلي gym بعد المغرب وشيل walking والقراءة خليها 8" is three operations.
-11. ADD is complete even with no time: occurrence=null and status=ready. Never invent a time or end time. A single time is open-ended. A range exists only when explicitly stated.
+11. ADD is complete even with no time: occurrence=null and status=ready. Never discard a recognized activity because timing is incomplete. Never invent an end time. A single time is open-ended. A range exists only when explicitly stated.
 12. DELETE needs a target but no time. EDIT with only a target and no requested change needs clarification. EDIT with a new time/range/relative position is ready. Explicit rename fills renameEn/renameAr.
-13. Prayer aliases: الظهر=>Zohr, المغرب=>Maghrib, الفجر=>Fajr, العصر=>Asr, العشاء=>Isha, الشروق=>Sunrise. "مباشرة بعد" => offsetMinutes 0; otherwise an unstated relative offset => 15.
+13. Prayer aliases: الظهر=>Zohr, المغرب=>Maghrib, الفجر=>Fajr, العصر=>Asr, العشاء=>Isha, الشروق=>Sunrise. "مباشرة بعد" => offsetMinutes 0; otherwise an unstated before/after offset => 15. Do NOT ask for confirmation merely because timing is prayer-relative.
+14. "between A and B" / "بين A و B" uses occurrence.kind="between". Anchors may independently be prayers or scheduled activities. Examples: "reading between Dhuhr and Asr" => between prayer Zohr and prayer Asr; "lunch between Gym and Meeting" => between activity Gym and activity Meeting. Do not require the user to know their clock times.
 14. Convert Arabic-Indic numerals and spoken clock wording to 24-hour HH:MM. صباحاً=AM, مساءً=PM. Handle colloquial عالسبعة/عالثمانية etc.
 15. CLEAR-DAY phrases such as إلغاء الجدول / امسح جدول اليوم are handled locally and should return unknown here if encountered alone.
 16. Set confidence=high for clear intent, medium for reasonable contextual inference, low when clarification is required. Destructive operations inferred only from vague sentiment must be low/needs_clarification.
@@ -263,6 +273,14 @@ Dialect examples:
 غير السباحة => edit Swimming, needs clarification about what to change.
 المشي مش عارف => ambiguous; needs clarification, do not delete.
 حطلي gym بعد المغرب، وشيل المشي، والقراءة خليها 8 => add Gym; delete Walking; edit Reading to 08:00.
+
+English day-description examples:
+start my day with jumping jacks at 7 AM, swimming at 8 AM, breakfast at 10 AM, meeting at 12 PM => FOUR add operations with 07:00, 08:00, 10:00, 12:00.
+Add swimming, breakfast, reading and sleep => FOUR add operations; no time is required.
+Add reading between Dhuhr and Asr => one add with kind=between, prayer Zohr, prayer Asr.
+Add lunch between Gym and Meeting => one add with kind=between, activity Gym, activity Meeting.
+Add al-sibaha at 7 and بعدين breakfast at 9 => TWO add operations: Swimming 07:00 and Breakfast 09:00.
+أضف السباحة بعد صلاة الظهر => add Swimming relative after Zohr offsetMinutes 15, ready; no confirmation.
 
 Current schedule (reference only; never invent entries): ${JSON.stringify(schedule)}
 User locale: ${locale}
