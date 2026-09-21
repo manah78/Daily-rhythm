@@ -1,7 +1,7 @@
 {
   "name": "Daily Rhythm",
   "version": "1.0.0-conversation-landing-v10",
-  "build": "voice-edit-replace-v9",
+  "build": "2026.09.21-v14",
   "channel": "test",
   "cacheVersion": "daily-rhythm-v1.0.0-voice-edit-replace-v9",
   "productFocus": "Talk to your day → voice-first add/edit/delete/replace → deterministic safe schedule updates",
@@ -11,5 +11,5 @@
     "scholars",
     "ornamental-clock"
   ],
-  "notes": "Conversation-first landing: Daily Rhythm speaks first, prominent Talk to your day CTA, simplified voice composer."
+  "notes": "Immersive My Prayer: full-screen analog clock, day/night sky, faded mosque silhouette, live hour/minute/second hands, compact Qibla, simplified next-prayer/date context."
 }
