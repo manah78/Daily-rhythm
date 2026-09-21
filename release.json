@@ -1,9 +1,0 @@
-{
-  "name": "Daily Rhythm",
-  "version": "1.0.0",
-  "build": "2026.09.19-focused-rc1",
-  "channel": "release-candidate",
-  "cacheVersion": "daily-rhythm-v1.0.0-focused-rc1",
-  "productFocus": "Schedule + Talk + Awareness",
-  "dormantFeatures": ["moon", "heritage", "scholars", "ornamental-clock"]
-}
