@@ -1,0 +1,26 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "daily-rhythm",
+  "main": "src/worker.js",
+  "compatibility_date": "2026-09-19",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application"
+  },
+  "durable_objects": {
+    "bindings": [
+      { "name": "REMINDER_SCHEDULER", "class_name": "ReminderScheduler" }
+    ]
+  },
+  "migrations": [
+    { "tag": "reminders-v1", "new_sqlite_classes": ["ReminderScheduler"] }
+  ],
+  "vars": {
+    "VAPID_SUBJECT": "https://daily-rhythm.manah78.workers.dev"
+  },
+  "secrets": {
+    "required": ["GROQ_API_KEY", "VAPID_PUBLIC_KEY", "VAPID_PRIVATE_KEY"]
+  }
+}
