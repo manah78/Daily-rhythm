@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'daily-rhythm-v1.0.0-reminders-v12';
+const CACHE_VERSION = 'daily-rhythm-v1.0.0-my-prayer-v14';
 const APP_CACHE = `${CACHE_VERSION}-app`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -6,7 +6,9 @@ const APP_SHELL = [
   './',
   './index.html',
   './css/command-results.css',
+  './css/my-prayer-immersive-v14.css',
   './js/command-results.js',
+  './js/my-prayer-immersive-v14.js',
   './js/reminders.js',
   './manifest.webmanifest'
 ];
