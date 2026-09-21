@@ -3,6 +3,7 @@
 
   const CLIENT_KEY = 'dailyRhythmPushClient_v1';
   const ENABLED_KEY = 'dailyRhythmPushEnabled_v1';
+  const DEFAULT_REMINDER_KEY = 'dailyRhythmDefaultReminderMinutes_v1';
   let syncTimer = null;
   let lastActivities = [];
   let statusListener = null;
@@ -36,6 +37,12 @@
 
   function setEnabled(value) {
     try { localStorage.setItem(ENABLED_KEY, value ? '1' : '0'); } catch (_) {}
+  }
+
+  function getDefaultReminderMinutes() {
+    let value = 10;
+    try { value = Number(localStorage.getItem(DEFAULT_REMINDER_KEY) ?? 10); } catch (_) {}
+    return [-1,0,5,10,15,30,60].includes(value) ? value : 10;
   }
 
   function emitStatus(status) {
@@ -131,11 +138,13 @@
     const start = Number(b && b.start);
     if (!b || !b.id || !Number.isFinite(start) || b.done) return null;
     const prefRaw = Number(b.reminderMinutesBefore);
-    const minutesBefore = Number.isFinite(prefRaw) ? prefRaw : 10;
+    const minutesBefore = Number.isFinite(prefRaw) ? prefRaw : getDefaultReminderMinutes();
     if (minutesBefore < 0) return null;
     const activityAt = localDateAtHourFraction(start);
     const scheduledAt = activityAt.getTime() - minutesBefore * 60 * 1000;
-    // Keep reminders that are still meaningful today; expired ones are omitted.
+    // Never create a fresh push for a reminder time that has already passed.
+    // This prevents enable/open/sync from replaying the same reminder repeatedly.
+    if (scheduledAt <= Date.now() + 15000) return null;
     if (activityAt.getTime() < Date.now() - 5 * 60 * 1000) return null;
     return {
       id: `activity:${b.id}`,
