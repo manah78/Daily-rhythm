@@ -1,0 +1,15 @@
+{
+  "name": "Daily Rhythm",
+  "version": "1.0.0-conversation-landing-v10",
+  "build": "voice-edit-replace-v9",
+  "channel": "test",
+  "cacheVersion": "daily-rhythm-v1.0.0-voice-edit-replace-v9",
+  "productFocus": "Talk to your day → voice-first add/edit/delete/replace → deterministic safe schedule updates",
+  "dormantFeatures": [
+    "moon",
+    "heritage",
+    "scholars",
+    "ornamental-clock"
+  ],
+  "notes": "Conversation-first landing: Daily Rhythm speaks first, prominent Talk to your day CTA, simplified voice composer."
+}
