@@ -1,0 +1,144 @@
+/* Daily Rhythm v14 — immersive My Prayer clock.
+   Clock first. Prayer context supports it rather than competing with it. */
+#moonSheet.moon-guide{
+  --mp-gold:#e7bd61;
+  --mp-gold-soft:#f4d88d;
+  --mp-ink:#fff3d0;
+  --mp-muted:#a9bdc7;
+  isolation:isolate;
+  overflow-x:hidden !important;
+  background:
+    radial-gradient(circle at 50% 30%,rgba(20,67,91,.52),transparent 33%),
+    linear-gradient(180deg,#031522 0%,#06263a 55%,#031420 100%) !important;
+}
+#moonSheet.moon-guide::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:-4;
+  background:
+    radial-gradient(circle at 10% 15%,rgba(255,244,197,.92) 0 1px,transparent 1.7px),
+    radial-gradient(circle at 22% 9%,rgba(255,244,197,.72) 0 1px,transparent 1.6px),
+    radial-gradient(circle at 38% 18%,rgba(255,244,197,.80) 0 1.2px,transparent 1.9px),
+    radial-gradient(circle at 58% 11%,rgba(255,244,197,.70) 0 1px,transparent 1.7px),
+    radial-gradient(circle at 74% 20%,rgba(255,244,197,.82) 0 1px,transparent 1.7px),
+    radial-gradient(circle at 88% 12%,rgba(255,244,197,.62) 0 1px,transparent 1.6px),
+    radial-gradient(circle at 16% 33%,rgba(255,244,197,.58) 0 1px,transparent 1.7px),
+    radial-gradient(circle at 68% 34%,rgba(255,244,197,.62) 0 1px,transparent 1.7px),
+    radial-gradient(circle at 92% 39%,rgba(255,244,197,.72) 0 1px,transparent 1.6px),
+    radial-gradient(circle at 47% 27%,rgba(232,194,100,.74) 0 1.4px,transparent 2.2px);
+  background-size:210px 190px,250px 220px,280px 230px,240px 200px,260px 230px,220px 205px,245px 220px,275px 235px,230px 210px,320px 260px;
+  opacity:.72;transition:opacity .9s ease;
+  filter:drop-shadow(0 0 5px rgba(255,231,162,.25));
+}
+.app-shell.is-day #moonSheet.moon-guide{
+  background:radial-gradient(circle at 50% 15%,rgba(233,205,136,.13),transparent 32%),linear-gradient(180deg,#0d4059 0%,#146078 45%,#0b3850 100%) !important;
+}
+.app-shell.is-day #moonSheet.moon-guide::before{opacity:.035;}
+
+/* Faded mosque skyline. It is atmosphere, never content. */
+#moonSheet .prayer-mosque-silhouette{
+  position:fixed;left:-4vw;right:-4vw;bottom:0;height:43dvh;z-index:-3;pointer-events:none;
+  opacity:.30;filter:blur(.15px);transition:opacity .9s ease;
+  background:linear-gradient(180deg,transparent 0 18%,rgba(1,13,22,.08) 18%,rgba(1,13,22,.68) 78%,rgba(1,12,20,.96) 100%);
+}
+.app-shell.is-day #moonSheet .prayer-mosque-silhouette{opacity:.12;}
+#moonSheet .mosque-dome,#moonSheet .mosque-minaret{position:absolute;bottom:11%;background:linear-gradient(180deg,rgba(2,20,31,.22),rgba(1,12,20,.92));}
+#moonSheet .mosque-dome{width:28vw;max-width:180px;aspect-ratio:1.45;border-radius:52% 52% 10% 10% / 64% 64% 10% 10%;}
+#moonSheet .mosque-dome::before{content:"";position:absolute;left:50%;top:-15%;width:2px;height:18%;transform:translateX(-50%);background:rgba(225,187,93,.36);}
+#moonSheet .mosque-dome::after{content:"";position:absolute;left:50%;top:-20%;width:7px;height:7px;border-radius:50%;transform:translateX(-50%);background:rgba(225,187,93,.34);box-shadow:0 0 10px rgba(225,187,93,.20);}
+#moonSheet .mosque-dome.d1{left:3%;transform:scale(.72);transform-origin:bottom}
+#moonSheet .mosque-dome.d2{left:35%;bottom:8%;transform:scale(1.12);transform-origin:bottom}
+#moonSheet .mosque-dome.d3{right:2%;transform:scale(.78);transform-origin:bottom}
+#moonSheet .mosque-minaret{width:18px;height:43%;border-radius:9px 9px 2px 2px;}
+#moonSheet .mosque-minaret::before{content:"";position:absolute;left:50%;top:-22px;width:32px;height:26px;border-radius:50% 50% 18% 18%;transform:translateX(-50%);background:inherit;}
+#moonSheet .mosque-minaret::after{content:"";position:absolute;left:50%;top:-48px;width:2px;height:30px;transform:translateX(-50%);background:rgba(225,187,93,.32);box-shadow:0 -3px 0 2px rgba(225,187,93,.20);}
+#moonSheet .mosque-minaret.m1{left:12%;height:48%}
+#moonSheet .mosque-minaret.m2{left:27%;height:34%;transform:scale(.72);transform-origin:bottom}
+#moonSheet .mosque-minaret.m3{right:26%;height:36%;transform:scale(.76);transform-origin:bottom}
+#moonSheet .mosque-minaret.m4{right:11%;height:51%}
+
+/* Title is light, not another card. */
+#moonSheet .moon-guide-head{
+  position:relative !important;top:auto !important;z-index:20 !important;
+  min-height:72px !important;display:flex !important;align-items:center !important;justify-content:center !important;
+  padding:6px 54px 2px !important;background:transparent !important;
+}
+#moonSheet .moon-guide-head h2{font-size:clamp(1.5rem,6vw,2.05rem) !important;text-shadow:0 2px 18px rgba(0,0,0,.32);}
+#moonSheet .moon-guide-close{position:absolute !important;right:2px !important;top:8px !important;width:44px !important;height:44px !important;border-radius:50% !important;background:rgba(3,20,31,.42) !important;border:1px solid rgba(231,189,97,.28) !important;color:var(--mp-gold-soft) !important;backdrop-filter:blur(8px);}
+html[dir="rtl"] #moonSheet .moon-guide-close{right:auto !important;left:2px !important;}
+
+/* Moon floats in the sky, detached from the dial. */
+#moonSheet #skyMoonBadge{
+  position:absolute !important;top:90px !important;left:7vw !important;transform:none !important;
+  width:64px !important;height:64px !important;z-index:10 !important;opacity:.92 !important;display:block !important;
+  filter:drop-shadow(0 0 18px rgba(202,224,235,.18));
+}
+html[dir="rtl"] #moonSheet #skyMoonBadge{left:auto !important;right:7vw !important;}
+#moonSheet #skyMoonBadge:hover,#moonSheet #skyMoonBadge:active{transform:none !important;}
+.app-shell.is-day #moonSheet #skyMoonBadge{opacity:.20 !important;}
+
+/* Clock takes the screen. */
+#moonSheet .my-prayer-clock{width:100% !important;margin:4px auto 0 !important;min-height:min(70dvh,700px);display:grid !important;place-items:center !important;position:relative;z-index:4;}
+#moonSheet .dial-only-wrap{width:100% !important;display:grid !important;place-items:center !important;}
+#moonSheet .dial-wrap{
+  width:min(96vw,620px,72dvh) !important;
+  max-width:620px !important;
+  background:radial-gradient(circle at 50% 45%,rgba(9,46,67,.97) 0%,rgba(5,28,44,.99) 58%,rgba(2,17,29,.995) 100%) !important;
+  border:1px solid rgba(231,189,97,.48) !important;
+  box-shadow:0 0 0 5px rgba(231,189,97,.045),0 0 32px rgba(231,189,97,.22),0 30px 80px rgba(0,0,0,.34) !important;
+}
+.app-shell.is-day #moonSheet .dial-wrap{background:radial-gradient(circle at 50% 43%,#15536d 0%,#0c3b55 56%,#082c43 100%) !important;box-shadow:0 0 0 5px rgba(231,189,97,.04),0 0 26px rgba(231,189,97,.13),0 28px 70px rgba(0,0,0,.25) !important;}
+#moonSheet .dial-wrap::after{box-shadow:inset 0 0 30px rgba(231,189,97,.08),0 0 24px rgba(231,189,97,.20) !important;}
+
+/* The clock face should breathe: prayer dots remain, repeated labels/times disappear. */
+#moonSheet #svg .prayer-label-text,#moonSheet #svg .prayer-time-text{display:none !important;}
+#moonSheet #svg .hand-group{display:none !important;}
+#moonSheet #svg .mp-hour-hand{filter:drop-shadow(0 0 7px rgba(231,189,97,.18));}
+#moonSheet #svg .mp-minute-hand{filter:drop-shadow(0 0 7px rgba(255,244,211,.14));}
+#moonSheet #svg .mp-second-hand{filter:drop-shadow(0 0 6px rgba(231,189,97,.36));}
+
+/* Qibla becomes a small live instrument, not a large card. */
+#moonSheet .qibla-card{
+  position:absolute !important;top:90px !important;right:5vw !important;z-index:14 !important;
+  width:88px !important;margin:0 !important;padding:7px 5px 8px !important;display:grid !important;grid-template-columns:1fr !important;gap:4px !important;
+  border:0 !important;background:transparent !important;box-shadow:none !important;text-align:center !important;
+}
+html[dir="rtl"] #moonSheet .qibla-card{right:auto !important;left:5vw !important;direction:rtl !important;grid-template-columns:1fr !important;}
+#moonSheet .qibla-compass{grid-column:auto !important;width:70px !important;height:70px !important;margin:auto !important;background:rgba(2,18,29,.46) !important;backdrop-filter:blur(6px);}
+#moonSheet .qibla-needle{height:27px !important;}
+#moonSheet .qibla-kaaba{width:23px !important;height:23px !important;font-size:.67rem !important;}
+#moonSheet .qibla-copy{grid-column:auto !important;grid-row:auto !important;text-align:center !important;}
+#moonSheet .qibla-kicker,#moonSheet #qiblaAccuracyText{display:none !important;}
+#moonSheet #qiblaBearingText{font:700 .68rem/1.2 var(--dr-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif) !important;color:var(--mp-gold-soft) !important;margin:0 !important;white-space:normal;}
+#moonSheet #enableQiblaCompass{position:absolute !important;inset:0 !important;margin:0 !important;padding:0 !important;opacity:0 !important;cursor:pointer !important;}
+#moonSheet .qibla-card.aligned .qibla-compass{box-shadow:0 0 0 2px rgba(240,200,101,.34),0 0 24px rgba(240,200,101,.34) !important;}
+
+/* Qibla rim marker stays subtle. */
+#moonSheet .qibla-clock-marker{width:30px !important;height:30px !important;box-shadow:0 0 0 3px rgba(227,183,93,.08),0 0 12px rgba(227,183,93,.26) !important;}
+#moonSheet .qibla-clock-marker b{display:none !important;}
+
+/* One compact story after the clock. */
+#moonSheet .my-prayer-focus{
+  position:relative;z-index:5;width:min(90vw,520px);margin:-2px auto 28px;text-align:center;
+  padding:10px 10px 0;color:var(--mp-ink);
+}
+#moonSheet .my-prayer-focus::before{content:"✦";display:block;margin:0 auto 8px;color:var(--mp-gold);font-size:1.05rem;text-shadow:0 0 13px rgba(231,189,97,.35);}
+#moonSheet .my-prayer-next-kicker{display:block;color:var(--mp-gold-soft);font:600 .82rem/1.2 Georgia,'Times New Roman',serif;letter-spacing:.03em;}
+#moonSheet .my-prayer-next-name{display:block;margin:3px 0 0;color:#fff2d1;font:700 clamp(1.85rem,9vw,3.2rem)/1 Georgia,'Times New Roman',serif;}
+#moonSheet .my-prayer-next-count{display:block;margin:7px 0 2px;color:#f5d88e;font:700 clamp(1.25rem,6vw,1.9rem)/1.1 Georgia,'Times New Roman',serif;}
+#moonSheet .my-prayer-next-time{display:block;color:var(--mp-muted);font-size:.78rem;}
+#moonSheet .my-prayer-date-line{margin:22px auto 0;padding-top:15px;width:min(88%,400px);border-top:1px solid rgba(231,189,97,.24);display:grid;gap:4px;color:#aebfc6;font-size:.75rem;line-height:1.25;}
+#moonSheet .my-prayer-date-line strong{color:#d4c69f;font-weight:650;}
+
+/* Old dashboard information remains in source for data, but is not a second UI. */
+#moonSheet .my-prayer-context,#moonSheet .moon-guide-hero,#moonSheet .moon-guide-stats,#moonSheet .moon-guide-divider,#moonSheet .moon-guide-heritage,#moonSheet .moon-phase-strip,#moonSheet .moon-story-pager,#moonSheet .moon-swipe-hint{display:none !important;}
+
+@media(max-width:390px){
+  #moonSheet.moon-guide{padding-inline:10px !important;}
+  #moonSheet .moon-guide-head{min-height:62px !important;}
+  #moonSheet #skyMoonBadge{top:78px !important;width:54px !important;height:54px !important;left:5vw !important;}
+  html[dir="rtl"] #moonSheet #skyMoonBadge{left:auto !important;right:5vw !important;}
+  #moonSheet .qibla-card{top:75px !important;right:3vw !important;width:76px !important;}
+  html[dir="rtl"] #moonSheet .qibla-card{right:auto !important;left:3vw !important;}
+  #moonSheet .qibla-compass{width:60px !important;height:60px !important;}
+  #moonSheet .my-prayer-clock{min-height:min(67dvh,610px) !important;}
+  #moonSheet .dial-wrap{width:min(97vw,64dvh) !important;}
+}
