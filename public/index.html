@@ -4213,6 +4213,30 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     html[dir="rtl"] .home-greeting{padding-left:150px !important;}
   }
 </style>
+
+<style id="conversation-landing-v10">
+  /* Daily Rhythm speaks first, then invites a response. */
+  #homeTalkCta{
+    margin-top:12px !important;
+    min-height:82px !important;
+    border-width:1.5px !important;
+    box-shadow:0 14px 30px rgba(0,0,0,.22),0 0 0 1px rgba(229,189,97,.08) inset !important;
+  }
+  #homeTalkTitle{font-size:clamp(1.08rem,4.6vw,1.3rem) !important;}
+  #homeTalkSubtitle{font-size:.84rem !important;line-height:1.35 !important;}
+  #homeDayPreview{margin-top:12px !important;}
+  .next-up-card{margin-bottom:0 !important;}
+  .nu-now{flex-basis:56% !important;}
+  .nu-next{flex-basis:44% !important;}
+  .nu-now-text{white-space:normal !important;display:-webkit-box !important;-webkit-line-clamp:3;-webkit-box-orient:vertical;line-height:1.22 !important;}
+  #voiceSheet .examples{display:none !important;}
+  #voiceSheet .command-edit-hint{margin-top:10px !important;}
+  @media(max-width:390px){
+    #homeTalkCta{min-height:76px !important;}
+    .nu-now{flex-basis:58% !important;}
+    .nu-next{flex-basis:42% !important;}
+  }
+</style>
 </head>
 <body>
 <noscript>
@@ -4292,22 +4316,22 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
           <p class="nu-countdown" id="nuCountdown">—</p>
         </div>
       </div>
-      <section class="home-day-preview" id="homeDayPreview" aria-label="Today’s schedule">
-        <div class="home-day-preview-head">
-          <span id="homeDayPreviewTitle">Today</span>
-          <button type="button" id="homeDayPreviewOpen">View day</button>
-        </div>
-        <div class="home-day-preview-list" id="homeDayPreviewList"></div>
-      </section>
       <button class="home-talk-cta" id="homeTalkCta" type="button" aria-label="Talk to your day">
         <span class="home-talk-audio home-talk-audio-left" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
         <span class="home-talk-mic" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><rect x="18" y="7" width="12" height="24" rx="6"></rect><path d="M13 24v2a11 11 0 0 0 22 0v-2M24 37v7M17 44h14"></path></svg></span>
         <span class="home-talk-copy">
           <strong id="homeTalkTitle">Talk to your day</strong>
-          <span id="homeTalkSubtitle">Add, move, or change anything</span>
+          <span id="homeTalkSubtitle">Add, move, remove, or ask what’s free</span>
         </span>
         <span class="home-talk-audio home-talk-audio-right" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
       </button>
+      <section class="home-day-preview" id="homeDayPreview" aria-label="Today’s schedule">
+        <div class="home-day-preview-head">
+          <span id="homeDayPreviewTitle">Coming up</span>
+          <button type="button" id="homeDayPreviewOpen">View day</button>
+        </div>
+        <div class="home-day-preview-list" id="homeDayPreviewList"></div>
+      </section>
       <div class="dial-only-wrap">
         <div class="dial-wrap">
           <div class="andalus-inner-art" aria-hidden="true"></div>
@@ -4645,24 +4669,24 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
   <div class="sheet" id="voiceSheet" role="dialog" aria-modal="true">
     <div class="sheet-handle"></div>
     <div class="sheet-header">
-      <span class="sheet-header-meta" id="voiceSheetTitle">Add or update</span>
+      <span class="sheet-header-meta" id="voiceSheetTitle">Talk to your day</span>
       <button class="sheet-close" id="voiceCloseBtn" aria-label="Close">✕</button>
     </div>
     <div class="sheet-body">
       <div class="command-bar">
-        <p class="command-label" data-i18n="commandLabel">Add or update activities</p>
+        <p class="command-label" data-i18n="commandLabel">What do you want to do?</p>
         <div class="command-row">
           <div class="command-input-wrap">
-            <textarea id="commandInput" rows="4" maxlength="1200" spellcheck="true" placeholder="Write what to add, change, remove, or report. You can include more than one request." data-i18n-placeholder="commandPlaceholder"></textarea>
+            <textarea id="commandInput" rows="4" maxlength="1200" spellcheck="true" placeholder="Say or type it naturally — add, move, remove, or ask what’s free." data-i18n-placeholder="commandPlaceholder"></textarea>
             <button type="button" id="voiceListenBtn" class="voice-listen-btn" aria-label="Start listening" title="Start listening">
               <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="18" y="7" width="12" height="24" rx="6"></rect><path d="M13 24v2a11 11 0 0 0 22 0v-2M24 37v7M17 44h14"></path></svg>
             </button>
             <p class="voice-live-status" id="voiceLiveStatus" role="status" aria-live="polite"></p>
-            <p class="command-edit-hint" data-i18n="commandEditHint">Type one request or several, then review before sending.</p>
+            <p class="command-edit-hint" data-i18n="commandEditHint">Speak or type naturally. I’ll work with your schedule.</p>
           </div>
           <button id="sendBtn" class="icon-btn" title="Submit" aria-label="Submit">➤</button>
         </div>
-        <p class="command-status" id="commandStatus" data-i18n="commandStatusDefault">Use your own words — one request or many.</p>
+        <p class="command-status" id="commandStatus" data-i18n="commandStatusDefault">Your day is listening.</p>
         <div class="command-confirm" id="commandConfirm" role="status" aria-live="polite">
           <span class="command-confirm-text" id="commandConfirmText"></span>
           <span class="command-confirm-actions">
@@ -4671,58 +4695,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
           </span>
         </div>
         <section id="multiAddReceipt" class="multi-add-receipt" hidden aria-live="polite"></section>
-        <details class="examples">
-          <summary data-i18n="examplesSummary">Examples</summary>
-          <div class="example-row">
-            <span class="example-in">"add gym at 7:30 to 8:30"</span>
-            <span class="example-out">Add · Gym · 7:30–8:30</span>
-          </div>
-          <div class="example-row">
-            <span class="example-in">"add swimming 5–6pm and also add cooking 6–7pm"</span>
-            <span class="example-out">Two commands · Add Swimming · Add Cooking</span>
-          </div>
-          <div class="example-row">
-            <span class="example-in">"add walk 6–6:30pm and change dinner to 7:30pm"</span>
-            <span class="example-out">Mixed commands · Add + Change</span>
-          </div>
-          <div class="example-row">
-            <span class="example-in">"remove lunch"</span>
-            <span class="example-out">Remove · Lunch</span>
-          </div>
-          <div class="example-row">
-            <span class="example-in">"change work to 9 to 5"</span>
-            <span class="example-out">Update time · Work · 9:00–5:00</span>
-          </div>
-          <div class="example-row">
-            <span class="example-in">"read Qur'an from 1 to 2pm, completed Surat Al-Baqarah"</span>
-            <span class="example-out">Mark done · Qur'an & reading · 1–2pm · Note: "Surat Al-Baqarah"</span>
-          </div>
-          <div class="example-row">
-            <span class="example-in">"finished walk for 20 minutes"</span>
-            <span class="example-out">Mark done · Walk · Note: "Took about 20 min"</span>
-          </div>
-          <div class="example-row">
-            <span class="example-in">"change fajr time from 5 to 5:30"</span>
-            <span class="example-out">Correct prayer time · Fajr → 5:30am</span>
-          </div>
-          <div class="example-row">
-            <span class="example-in">"أضف الجيم الساعة ٧:٣٠ إلى ٨:٣٠"</span>
-            <span class="example-out">Add · Gym · 7:30–8:30</span>
-          </div>
-          <div class="example-row">
-            <span class="example-in">"صليت الفجر الساعة ٥:٣٠"</span>
-            <span class="example-out">Logged prayer · Fajr · 5:30am</span>
-          </div>
-          <div class="example-row">
-            <span class="example-in">"أضف السباحة من ٤ إلى ٥ ثم أضف الطبخ من ٥ إلى ٦"</span>
-            <span class="example-out">أمران · إضافة السباحة · إضافة الطبخ</span>
-          </div>
-          <div class="example-row">
-            <span class="example-in">"إعادة ضبط جدولي"</span>
-            <span class="example-out">إعادة ضبط · يتطلب تأكيداً قبل الحذف</span>
-          </div>
-          <p class="examples-note" data-i18n="examplesNote">It only recognizes an activity already sitting in "Today's rhythm" — add it first with an "add" command if it's not there yet.</p>
-        </details>
+
       </div>
     </div>
   </div>
@@ -4782,12 +4755,12 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
       activityLogTitle: "Activity log",
       logSearchPlaceholder: 'Search logs — e.g. "fajr" or "gym"',
       filterAll: "All", filterAdd: "Add", filterEdit: "Edit", filterDelete: "Delete", filterActivity: "Activity",
-      talkTitle: "Talk to your schedule",
+      talkTitle: "Talk to your day",
       commandPlaceholder: 'Write what to add, change, remove, or report. You can include more than one request.',
       commandEditHint: 'Type one request or several, then review before sending.',
-      commandLabel: "Add or update activities",
+      commandLabel: "What do you want to do?",
       sendBtn: "Go",
-      commandStatusDefault: "Use your own words — one request or many.",
+      commandStatusDefault: "Your day is listening.",
       examplesSummary: "Examples",
       examplesNote: 'It only recognizes an activity already sitting in "Today\'s rhythm" — add it first with an "add" command if it\'s not there yet.',
       nextLabel: "Next", inLabel: "in",
@@ -4821,12 +4794,12 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
       activityLogTitle: "سجل النشاط",
       logSearchPlaceholder: 'ابحث في السجل — مثال "الفجر" أو "الجيم"',
       filterAll: "الكل", filterAdd: "إضافة", filterEdit: "تعديل", filterDelete: "حذف", filterActivity: "نشاط",
-      talkTitle: "تحدث إلى جدولك",
+      talkTitle: "تحدّث عن يومك",
       commandPlaceholder: 'اكتب ما تريد إضافته أو تعديله أو حذفه أو تسجيله. يمكنك إدخال أكثر من طلب معًا.',
       commandEditHint: 'اكتب طلبًا واحدًا أو عدة طلبات ثم راجعها قبل الإرسال.',
-      commandLabel: "أضف أو حدّث الأنشطة",
+      commandLabel: "ماذا تريد أن تفعل؟",
       sendBtn: "إرسال",
-      commandStatusDefault: "استخدم كلماتك — طلب واحد أو عدة طلبات.",
+      commandStatusDefault: "يومك يستمع إليك.",
       examplesSummary: "أمثلة",
       examplesNote: 'يتعرف فقط على نشاط موجود بالفعل في "إيقاع اليوم" — أضفه أولاً بأمر "أضف" إذا لم يكن موجوداً.',
       nextLabel: "التالي", inLabel: "خلال",
@@ -6183,7 +6156,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
 
   function missedStatusText(b) {
     if (blockIsSkipped(b)) return currentLang === 'ar' ? 'تم التخطي' : 'Skipped';
-    if (blockIsMissed(b)) return currentLang === 'ar' ? 'فات الموعد' : 'Missed';
+    if (blockIsMissed(b)) return currentLang === 'ar' ? 'نشاط سابق' : 'Previous activity';
     return '';
   }
 
@@ -6445,13 +6418,44 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     document.getElementById('dateLine').textContent = now.toLocaleDateString(dateLocale, { weekday: 'short', month: 'short', day: 'numeric' });
     document.getElementById('hijriLine').textContent = formatHijriDate(now);
 
-    // ---- Now / Up Next card ----
+    // ---- Daily Rhythm speaks first: concise context, then the user can answer by voice. ----
     const S0 = STRINGS[currentLang];
-    document.getElementById('nuNowText').textContent = activeBlock ? blockDisplayLabel(activeBlock) : (currentLang === 'ar' ? 'يومك مفتوح' : 'Your day is open');
+    const nowEyebrow = document.querySelector('.nu-now .nu-eyebrow');
+    const nextEyebrow = document.querySelector('.nu-next .nu-eyebrow');
+    if (nowEyebrow) nowEyebrow.textContent = currentLang === 'ar' ? 'يومك' : 'Your day';
+    if (nextEyebrow) nextEyebrow.textContent = currentLang === 'ar' ? 'التالي' : 'Next';
     const nb = nextBlockAfter(hf);
+    let nbDiff = nb ? nb.start - hf : null;
+    if (Number.isFinite(nbDiff) && nbDiff < 0) nbDiff += 24;
+    const nextHourCount = blocks.filter(b => !b.skipped && !b.done && Number.isFinite(Number(b.start)) && Number(b.start) > hf && Number(b.start) <= hf + 1).length;
+    let dayMessage = '';
+    if (activeBlock) {
+      dayMessage = currentLang === 'ar'
+        ? `أنت الآن في ${blockDisplayLabel(activeBlock)}.`
+        : `You're in ${blockDisplayLabel(activeBlock)}.`;
+    } else if (nb && nbDiff <= 1) {
+      const mins = Math.max(0, Math.floor(nbDiff * 60));
+      if (nextHourCount > 1) {
+        dayMessage = currentLang === 'ar'
+          ? `لديك ${nextHourCount} أنشطة خلال الساعة القادمة.`
+          : `You have ${nextHourCount} activities in the next hour.`;
+      } else {
+        dayMessage = currentLang === 'ar'
+          ? `لديك ${mins} دقيقة متاحة قبل ${blockDisplayLabel(nb)}.`
+          : `You have ${mins} minutes free before ${blockDisplayLabel(nb)}.`;
+      }
+    } else if (nb && nbDiff <= 2) {
+      const mins = Math.max(0, Math.floor(nbDiff * 60));
+      dayMessage = currentLang === 'ar'
+        ? `نشاطك التالي ${blockDisplayLabel(nb)} بعد ${mins} دقيقة.`
+        : `Your next activity is ${blockDisplayLabel(nb)} in ${mins} minutes.`;
+    } else {
+      dayMessage = currentLang === 'ar'
+        ? 'لديك مساحة هادئة خلال الساعتين القادمتين.'
+        : 'You have a clear stretch for the next 2 hours.';
+    }
+    document.getElementById('nuNowText').textContent = dayMessage;
     if (nb) {
-      let nbDiff = nb.start - hf;
-      if (nbDiff < 0) nbDiff += 24;
       const nbH = Math.floor(nbDiff);
       const nbM = Math.floor((nbDiff - nbH) * 60);
       const nbDiffStr = currentLang === 'ar'
@@ -6460,7 +6464,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
       document.getElementById('nuNextText').textContent = blockDisplayLabel(nb);
       document.getElementById('nuCountdown').textContent = `${S0.inLabel} ${nbDiffStr} · ${fmtClock12(nb.start)}`;
     } else {
-      document.getElementById('nuNextText').textContent = currentLang === 'ar' ? 'أضف نشاطاً' : 'Add an activity';
+      document.getElementById('nuNextText').textContent = currentLang === 'ar' ? 'اليوم مفتوح' : 'The rest of your day is open';
       document.getElementById('nuCountdown').textContent = '';
     }
 
@@ -6475,8 +6479,13 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     const S = STRINGS[currentLang];
     document.getElementById('nextPrayerLine').innerHTML =
       `<span class="prayer-name">${prayerDisplayLabel(np.label)}</span>` +
-      `<span class="prayer-time">${fmtClock12(np.time)}</span>` +
-      `<span class="prayer-countdown">${diffStr}</span>`;
+      `<span class="prayer-time">${fmtClock12(np.time)}</span>`;
+    const remainingLabel = document.getElementById('prayerRemainingLabel');
+    const remainingValue = document.getElementById('prayerRemainingValue');
+    if (remainingLabel) remainingLabel.textContent = currentLang === 'ar'
+      ? `صلاة ${prayerDisplayLabel(np.label)}`
+      : `${prayerDisplayLabel(np.label)} prayer`;
+    if (remainingValue) remainingValue.textContent = diffStr;
 
     document.getElementById('noteLine').textContent = activeBlock ? noteDisplay(activeBlock.label) : '';
 
@@ -6520,18 +6529,25 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     const title = document.getElementById('homeDayPreviewTitle');
     const open = document.getElementById('homeDayPreviewOpen');
     if (!wrap || !list) return;
-    if (title) title.textContent = currentLang === 'ar' ? 'اليوم' : 'Today';
+    if (title) title.textContent = currentLang === 'ar' ? 'القادم' : 'Coming up';
     if (open) {
       open.textContent = currentLang === 'ar' ? 'عرض اليوم' : 'View day';
       open.onclick = () => document.getElementById('openScheduleBtn')?.click();
     }
     list.innerHTML = '';
-    const visible = blocks.filter(b => !b.skipped).slice().sort((a,b) => a.start-b.start).slice(0,5);
+    const nowH = currentHourFraction(new Date());
+    // Home is a glance view: only the next five future activities.
+    // The full day stays available behind “View day”.
+    const visible = blocks
+      .filter(b => !b.skipped && !b.done && Number.isFinite(Number(b.start)) && Number(b.start) >= nowH - (1/60))
+      .slice()
+      .sort((a,b) => Number(a.start)-Number(b.start))
+      .slice(0,5);
     if (!visible.length) {
       const empty = document.createElement('button');
       empty.type = 'button';
       empty.className = 'home-day-empty';
-      empty.innerHTML = `<strong>${currentLang === 'ar' ? 'يومك مفتوح' : 'Your day is open'}</strong><span>${currentLang === 'ar' ? 'اضغط لإضافة نشاط بصوتك أو بكلماتك.' : 'Tap to add an activity in your own words.'}</span>`;
+      empty.innerHTML = `<strong>${currentLang === 'ar' ? 'لا يوجد شيء آخر اليوم' : 'Nothing else scheduled today'}</strong><span>${currentLang === 'ar' ? 'اضغط لإضافة نشاط بصوتك أو بكلماتك.' : 'Tap to add an activity in your own words.'}</span>`;
       empty.addEventListener('click', () => document.getElementById('homeTalkCta')?.click());
       list.appendChild(empty);
       return;
@@ -6539,7 +6555,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     visible.forEach(b => {
       const row = document.createElement('button');
       row.type = 'button';
-      row.className = 'home-day-row' + (b.done ? ' is-done' : '');
+      row.className = 'home-day-row';
       row.innerHTML = `<span class="home-day-time">${escapeHtml(fmtClock12(b.start))}</span><span class="home-day-name">${escapeHtml(blockDisplayLabel(b))}</span><span class="home-day-arrow" aria-hidden="true">›</span>`;
       row.addEventListener('click', () => document.getElementById('openScheduleBtn')?.click());
       list.appendChild(row);
@@ -6554,7 +6570,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     const talkSubtitle = document.getElementById('homeTalkSubtitle');
     const talkCta = document.getElementById('homeTalkCta');
     if (talkTitle) talkTitle.textContent = currentLang === 'ar' ? 'تحدّث عن يومك' : 'Talk to your day';
-    if (talkSubtitle) talkSubtitle.textContent = currentLang === 'ar' ? 'أضف أو حرّك أو غيّر أي نشاط' : 'Add, move, or change anything';
+    if (talkSubtitle) talkSubtitle.textContent = currentLang === 'ar' ? 'أضف أو حرّك أو احذف أو اسأل عن وقتك المتاح' : 'Add, move, remove, or ask what’s free';
     if (talkCta) talkCta.setAttribute('aria-label', currentLang === 'ar' ? 'تحدّث عن يومك' : 'Talk to your day');
     renderHomeDayPreview();
   }
@@ -8232,10 +8248,10 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     if (!payload || !Array.isArray(payload.operations)) return null;
     const operations = [];
     for (const raw of payload.operations) {
-      if (!raw || !['add','edit','delete','clear'].includes(raw.intent)) continue;
+      if (!raw || !['add','edit','delete','clear','query_availability'].includes(raw.intent)) continue;
       if (raw.intent === 'clear') continue; // Clear-day remains on the existing local confirmation path.
       const activity = String(raw.activity || '').trim();
-      if (!activity) continue;
+      if (!activity && raw.intent !== 'query_availability') continue;
       const timing = raw.timing || {type:'untimed'};
       let occurrence = null;
       if ((timing.type === 'exact_time' || timing.type === 'approximate_time') && timing.time) {
@@ -8260,12 +8276,15 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
       }
       const destructive = raw.intent === 'edit' || raw.intent === 'delete';
       const hasVerifiedTarget = !destructive || !!raw.matched_activity_id;
-      const needsTimingClarification = raw.intent === 'edit' && ['day_period','untimed'].includes(timing.type);
+      const replacementActivity = raw.intent === 'edit' ? String(raw.replacement_activity || '').trim() : '';
+      const hasReplacement = !!replacementActivity;
+      const needsTimingClarification = raw.intent === 'edit' && !hasReplacement && ['day_period','untimed'].includes(timing.type);
       operations.push({
         action:raw.intent,
-        activity,
-        labelEn:activity,
-        labelAr:activity,
+        activity: activity || 'availability',
+        replacementActivity,
+        labelEn:activity || 'availability',
+        labelAr:activity || 'availability',
         category:'custom',
         occurrence,
         semanticTiming:timing,
@@ -8275,7 +8294,8 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
         clarification:raw.clarification || (!hasVerifiedTarget
           ? (currentLang==='ar'?`أي نشاط «${activity}» تقصد؟`:`Which “${activity}” activity do you mean?`)
           : (needsTimingClarification?(currentLang==='ar'?`ما الوقت الذي تريده لـ «${activity}»؟`:`What time would you like for “${activity}”?`):'')),
-        confidence:raw.confidence || 'medium'
+        confidence:raw.confidence || 'medium',
+        durationMinutes:Number.isFinite(Number(raw.duration_minutes))?Number(raw.duration_minutes):null
       });
     }
     return operations.length ? {intent:'operations', operations, engine:'groq-qwen3.8'} : null;
@@ -8377,11 +8397,115 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     return {status:'added', message, name};
   }
 
+  function availabilityAnchorTime(value, preferEnd=false) {
+    const text = String(value || '').trim();
+    const clock = aiTimeToHour(text);
+    if (clock !== null) return clock;
+    const prayer = normalizePrayerAnchor(text);
+    if (prayer) {
+      const p = prayers.find(x => x.label === prayer);
+      return p ? Number(p.time) : null;
+    }
+    const block = findMatchingBlock(text);
+    if (!block) return null;
+    return preferEnd && Number.isFinite(Number(block.end)) ? Number(block.end) : Number(block.start);
+  }
+
+  function availabilityWindowFromOperation(op) {
+    const timing = op?.semanticTiming || {};
+    const now = currentHourFraction(new Date());
+    if (timing.type === 'between' && timing.anchor && timing.anchor2) {
+      let start = availabilityAnchorTime(timing.anchor, true);
+      let end = availabilityAnchorTime(timing.anchor2, false);
+      if (start !== null && end !== null) {
+        if (end <= start) end += 24;
+        return {start, end};
+      }
+    }
+    if (['before_prayer','before_activity'].includes(timing.type) && timing.anchor) {
+      const end = availabilityAnchorTime(timing.anchor, false);
+      if (end !== null) return {start:Math.max(now,0), end};
+    }
+    if (['after_prayer','after_activity','at_prayer'].includes(timing.type) && timing.anchor) {
+      const start = availabilityAnchorTime(timing.anchor, timing.type==='after_activity');
+      if (start !== null) return {start:Math.max(now,start), end:24};
+    }
+    if (timing.type === 'day_period') {
+      const d=String(timing.day_period||'').toLowerCase();
+      if (/morning|صباح/.test(d)) return {start:Math.max(now,6),end:12};
+      if (/afternoon|بعد الظهر/.test(d)) return {start:Math.max(now,12),end:17};
+      if (/evening|مساء/.test(d)) return {start:Math.max(now,17),end:22};
+      if (/night|tonight|ليل|الليلة/.test(d)) return {start:Math.max(now,20),end:24};
+    }
+    return {start:Math.max(now,0), end:24};
+  }
+
+  function calculateAvailabilitySlots(windowStart, windowEnd, minMinutes=0) {
+    let start=Number(windowStart), end=Number(windowEnd);
+    if (!Number.isFinite(start) || !Number.isFinite(end) || end<=start) return [];
+
+    // Open-ended activities deliberately have no trusted end time. Never claim a free
+    // slot after one begins; truncate the search window rather than inventing availability.
+    const openEndedStarts=blocks
+      .filter(b=>!b.done&&!blockIsSkipped(b)&&b.openEnded&&Number.isFinite(Number(b.start))&&Number(b.start)<end)
+      .map(b=>Number(b.start))
+      .sort((a,b)=>a-b);
+    let uncertainAfter=null;
+    if(openEndedStarts.length){
+      const first=openEndedStarts[0];
+      if(first<=start) { const none=[]; none.uncertainAfter=start; return none; }
+      uncertainAfter=first;
+      end=Math.min(end,first);
+    }
+
+    const busy=blocks.filter(b=>!b.done&&!blockIsSkipped(b)&&!b.openEnded&&Number.isFinite(Number(b.start))&&Number.isFinite(Number(b.end)))
+      .map(b=>({start:Number(b.start),end:Number(b.end)}))
+      .filter(x=>x.end>start&&x.start<end)
+      .sort((a,b)=>a.start-b.start);
+    const merged=[];
+    for(const b of busy){
+      const clipped={start:Math.max(start,b.start),end:Math.min(end,b.end)};
+      if(clipped.end<=clipped.start)continue;
+      const last=merged[merged.length-1];
+      if(last&&clipped.start<=last.end)last.end=Math.max(last.end,clipped.end); else merged.push(clipped);
+    }
+    const gaps=[]; let cursor=start;
+    for(const b of merged){if(b.start>cursor)gaps.push({start:cursor,end:b.start});cursor=Math.max(cursor,b.end);} if(cursor<end)gaps.push({start:cursor,end});
+    const minH=Math.max(0,Number(minMinutes)||0)/60;
+    const filtered=gaps.filter(g=>g.end-g.start>=minH-1e-6);
+    filtered.uncertainAfter=uncertainAfter;
+    return filtered;
+  }
+
+  function describeAvailability(op) {
+    const w=availabilityWindowFromOperation(op);
+    if(!w||w.end<=w.start) return currentLang==='ar'?'لم أتمكن من تحديد نافذة الوقت المطلوبة.':'I could not resolve that time window.';
+    const allSlots=calculateAvailabilitySlots(w.start,w.end,op.durationMinutes||0);
+    const slots=allSlots.slice(0,5);
+    const duration=Number(op.durationMinutes)||0;
+    if(!slots.length) {
+      const base=currentLang==='ar'
+        ? (duration?`لا أرى فترة متاحة مؤكدة لمدة ${duration} دقيقة ضمن هذا الوقت.`:'لا أرى فترة متاحة مؤكدة ضمن هذا الوقت.')
+        : (duration?`I don't see a confirmed free ${duration}-minute slot in that window.`:`I don't see a confirmed free slot in that window.`);
+      return allSlots.uncertainAfter!==null&&allSlots.uncertainAfter!==undefined
+        ? `${base} ${currentLang==='ar'?'هناك نشاط بلا وقت انتهاء محدد، لذلك لم أخمّن ما بعده.':'An activity has no end time, so I did not guess beyond it.'}`
+        : base;
+    }
+    const lines=slots.map((g,i)=>`${i+1}. ${fmtClock12(g.start)} – ${fmtClock12(g.end)} (${Math.round((g.end-g.start)*60)} ${currentLang==='ar'?'دقيقة':'min'})`);
+    if(allSlots.uncertainAfter!==null&&allSlots.uncertainAfter!==undefined) lines.push(currentLang==='ar'?'توقفت عند نشاط ليس له وقت انتهاء محدد.':'I stopped at an activity with no defined end time.');
+    const intro=currentLang==='ar'?'الفترات المتاحة:':"You're free:";
+    return [intro,...lines].join('\n');
+  }
+
   function executeAiOperations(plan, originalText='') {
     if (!plan || plan.intent !== 'operations' || !Array.isArray(plan.operations) || !plan.operations.length) return null;
     const lines = [], unresolved = [];
     let changed = 0;
     for (const op of plan.operations) {
+      if (op.action === 'query_availability') {
+        lines.push(describeAvailability(op));
+        continue;
+      }
       const pair = cacheAiActivityPair(op);
       const name = pair ? (currentLang === 'ar' ? pair.labelAr : pair.labelEn) : (op.labelAr || op.labelEn || '');
       if (!name) continue;
@@ -8396,7 +8520,20 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
         if (occ.kind==='time') { start=aiTimeToHour(occ.start); openEnded=true; }
         else if (occ.kind==='range') { start=aiTimeToHour(occ.start); end=aiTimeToHour(occ.end); if(start!==null&&end!==null&&end<=start)end+=24; }
         else if (occ.kind==='relative') { const r=resolveAiRelativeOccurrence(occ); if(r){start=r.start;openEnded=true;} }
-        else if (occ.kind==='between') { const r=resolveAiBetweenOccurrence(occ); if(r){start=r.start;openEnded=true;} }
+        else if (occ.kind==='between') {
+          // A between-window is a constraint, not a clock time. Do not invent a midpoint.
+          const r = addUntimedActivityFromAi(op);
+          if (r) {
+            changed++;
+            const a1 = occ.anchor1 || op.semanticTiming?.anchor || '';
+            const a2 = occ.anchor2 || op.semanticTiming?.anchor2 || '';
+            const hint = currentLang==='ar'
+              ? `سأبقيه بدون وقت بدلاً من التخمين. اسألني عن الأوقات المتاحة بين ${a1} و${a2}.`
+              : `I kept it untimed instead of guessing. Ask me for available slots between ${a1} and ${a2}.`;
+            lines.push(`✓ ${r.message} ${hint}`);
+          }
+          continue;
+        }
         if (start===null) {
           // Activity recognition wins over timing. Keep a confidently recognized ADD even
           // when an anchor cannot yet be resolved; the user can place it later.
@@ -8421,7 +8558,8 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
       }
 
       if (op.action==='edit') {
-        if(!target || op.status==='needs_clarification' || (!op.occurrence && !op.renameEn && !op.renameAr)) {
+        const replacementName=String(op.replacementActivity||'').trim();
+        if(!target || op.status==='needs_clarification' || (!op.occurrence && !replacementName && !op.renameEn && !op.renameAr)) {
           const targetName = target ? blockDisplayLabel(target) : name;
           const q=op.clarification || (currentLang==='ar'?`ماذا تريد أن تعدّل في «${targetName}»؟`:`What would you like to change about “${targetName}”?`);
           unresolved.push(q);
@@ -8429,7 +8567,10 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
           if(target && !pendingScheduleIntent) pendingScheduleIntent={type:'update-time',blockId:target.id};
           continue;
         }
-        if(op.renameEn && op.renameAr){target.label=op.renameEn;target.labelEn=op.renameEn;target.labelAr=op.renameAr;}
+        if(replacementName){
+          target.label=replacementName; target.labelEn=replacementName; target.labelAr=replacementName;
+          cacheActivityTranslation(replacementName,{label:replacementName,labelEn:replacementName,labelAr:replacementName});
+        } else if(op.renameEn && op.renameAr){target.label=op.renameEn;target.labelEn=op.renameEn;target.labelAr=op.renameAr;}
         const occ=op.occurrence;
         if(occ){
           if(occ.kind==='time'){const st=aiTimeToHour(occ.start);if(st!==null){const dur=Math.max(.25,target.end-target.start);target.start=st;target.end=st+dur;}}
@@ -8442,9 +8583,10 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
       }
     }
     if(!changed && !lines.length && !unresolved.length)return null;
-    const header=currentLang==='ar'?`فهمت ${plan.operations.length} تعليمات:`:`Understood ${plan.operations.length} instructions:`;
+    const queryOnly=plan.operations.every(op=>op.action==='query_availability');
+    const header=queryOnly?'':(currentLang==='ar'?`فهمت ${plan.operations.length} تعليمات:`:`Understood ${plan.operations.length} instructions:`);
     const pending=unresolved.length?(currentLang==='ar'?['تحتاج توضيحاً:',...unresolved.map(x=>`? ${x}`)]:['Needs clarification:',...unresolved.map(x=>`? ${x}`)]):[];
-    return [header,...lines,...pending].join('\n');
+    return [header,...lines,...pending].filter(Boolean).join('\n');
   }
 
   function executeAiAddPlan(plan) {
@@ -8511,7 +8653,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
   function requestedOperationsFromPlan(plan) {
     if (!plan) return [];
     if (plan.intent==='operations' && Array.isArray(plan.operations)) return plan.operations.map(op=>({
-      action:op.action||null, activity:op.labelAr||op.labelEn||null, labelEn:op.labelEn||null, labelAr:op.labelAr||null,
+      action:op.action||null, activity:op.labelAr||op.labelEn||null, replacementActivity:op.replacementActivity||null, labelEn:op.labelEn||null, labelAr:op.labelAr||null,
       occurrence:op.occurrence||null, status:op.status||null, confidence:op.confidence||null, clarification:op.clarification||null
     }));
     if (plan.intent==='add_schedule' && Array.isArray(plan.activities)) return plan.activities.map(a=>({
@@ -8557,6 +8699,14 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
   });
   updateTestDataCount();
 
+  function clearCompletedCommandDraft() {
+    if (commandInput) commandInput.value='';
+    try { voiceDraftBase=''; voiceFinalTranscript=''; } catch (_) {}
+    const receipt=document.getElementById('multiAddReceipt');
+    if(receipt){receipt.hidden=true;receipt.innerHTML='';}
+    resizeCommandInput();
+  }
+
   async function submitCommand(options = {}) {
     const text = (options.text !== undefined ? options.text : commandInput.value).trim();
     if (!text) return;
@@ -8566,7 +8716,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     if (!options.skipResetCheck && isScheduleResetIntent(text)) {
       showResetConfirmation(text);
       finishRequestCapture(capture,{interpreter:'safety-rule',outcome:'needs_confirmation',result:commandConfirmText.textContent,requestedOperations:[{action:'clear_day'}]});
-      commandInput.value = ''; resizeCommandInput(); return;
+      return;
     }
 
     // Decide semantic routing BEFORE speech-correction. Long/dialect Arabic and
@@ -8597,7 +8747,8 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
         const q=commandResultLooksLikeQuestion(multiResult);
         setCommandFeedback(multiResult,q?'question':'success');
         finishRequestCapture(capture,{interpreter:'groq-qwen3.8',aiPlan,requestedOperations,outcome:q?'partial_or_clarification':'success',result:multiResult});
-        commandInput.value='';resizeCommandInput();return;
+        if(!q) clearCompletedCommandDraft();
+        return;
       }
       const relativePreview = aiPlanRelativePreview(aiPlan);
       if (relativePreview && !options.skipAiRelativeConfirmation) {
@@ -8609,7 +8760,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
       if (aiResult) {
         setCommandFeedback(aiResult,'success');
         finishRequestCapture(capture,{interpreter:'ai-add',aiPlan,requestedOperations,outcome:'success',result:aiResult});
-        commandInput.value='';resizeCommandInput();return;
+        clearCompletedCommandDraft();return;
       }
       // Complex semantic requests are NOT sent to the legacy single-command
       // fallback. Doing so can collapse an entire Arabic sentence into one
@@ -8620,13 +8771,13 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
         : 'I could not safely interpret that multi-part request. I did not change your schedule. Please try again or split it into two parts.';
       setCommandFeedback(safeFailure,'question');
       finishRequestCapture(capture,{interpreter:'groq-unavailable',aiPlan,requestedOperations,outcome:'no_change',result:safeFailure});
-      commandInput.value='';resizeCommandInput();return;
+      return;
     }
     const result = options.forcedLabel ? parseCommand(text, options.forcedLabel) : parseCommandBatch(text);
     const q=commandResultLooksLikeQuestion(result);
     setCommandFeedback(result,q?'question':'success');
     finishRequestCapture(capture,{interpreter:options.forcedLabel?'local-forced-label':'local-parser',requestedOperations:[],outcome:q?'clarification':'success',result});
-    commandInput.value='';resizeCommandInput();
+    if(!q) clearCompletedCommandDraft();
   }
 
   commandConfirmYes.addEventListener('click', () => {
@@ -8664,7 +8815,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     commandInput.style.height = `${Math.min(Math.max(commandInput.scrollHeight, 124), maxPx)}px`;
   }
   sendBtn.addEventListener('click', submitCommand);
-  commandInput.addEventListener('input', resizeCommandInput);
+  commandInput.addEventListener('input', () => { resizeCommandInput(); const r=document.getElementById('multiAddReceipt'); if(r&&!r.hidden){r.hidden=true;r.innerHTML='';} });
   commandInput.addEventListener('keydown', (e) => {
     // Enter creates a new line so longer/multi-command requests remain easy to review.
     // Cmd/Ctrl+Enter submits for keyboard users.
@@ -8968,7 +9119,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
           data: { blockId: hit.b.id },
           actions: [
             { action: 'done', title: currentLang === 'ar' ? 'تم' : 'Done' },
-            { action: 'snooze', title: currentLang === 'ar' ? 'غفوة' : 'Snooze' },
+            { action: 'snooze', title: currentLang === 'ar' ? 'تأجيل' : 'Snooze' },
             { action: 'ignore', title: currentLang === 'ar' ? 'تجاهل' : 'Ignore' }
           ]
         });
@@ -8995,7 +9146,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     const snoozeCount = Number(reminderState.snoozeCount?.[hit.b.id] || 0);
     reminderSnooze.hidden = snoozeCount >= 2;
     reminderSnooze.textContent = currentLang === 'ar'
-      ? 'غفوة ١٠د'
+      ? 'تأجيل ١٠د'
       : 'Snooze 10m';
     reminderEdit.textContent = currentLang === 'ar' ? 'تعديل' : 'Edit';
     reminderDelete.textContent = currentLang === 'ar' ? 'حذف' : 'Delete';
@@ -10920,20 +11071,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
 </script>
 
 
-<script id="activity-swipe-hint-v1">
-(function(){
-  function copy(){
-    const ar=document.documentElement.lang==='ar';
-    const target=document.querySelector('#voiceSheet .command-edit-hint, #scheduleSheet .command-edit-hint');
-    if(!target)return;
-    target.textContent=ar
-      ? 'اسحب النشاط من اليسار إلى اليمين للتعديل، ومن اليمين إلى اليسار بالكامل للحذف.'
-      : 'Swipe an activity left-to-right to edit; swipe fully right-to-left to delete.';
-  }
-  copy();
-  new MutationObserver(copy).observe(document.documentElement,{attributes:true,attributeFilter:['lang','dir']});
-})();
-</script>
+
 
 
 <script id="story-image-asset-fallback-v2">
