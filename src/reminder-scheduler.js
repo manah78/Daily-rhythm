@@ -102,10 +102,22 @@ export class ReminderScheduler {
 
     if (url.pathname.endsWith('/sync')) {
       if (!(await this.authenticate(body))) return Response.json({ error: 'Unauthorized reminder client.' }, { status: 401 });
-      const reminders = (Array.isArray(body.reminders) ? body.reminders : []).slice(0, MAX_REMINDERS).map(cleanReminder).filter(Boolean);
+      const incoming = (Array.isArray(body.reminders) ? body.reminders : []).slice(0, MAX_REMINDERS).map(cleanReminder).filter(Boolean);
+      const existing = (await this.storage.get('reminders')) || [];
+      const previousById = new Map(existing.map(r => [r.id, r]));
+      const reminders = incoming.map(r => {
+        const previous = previousById.get(r.id);
+        // Preserve delivery state when the same reminder is merely re-synced.
+        // A changed time/preference is a genuinely new reminder and may fire again.
+        if (previous && previous.sent && previous.scheduledAt === r.scheduledAt && previous.activityTime === r.activityTime && previous.minutesBefore === r.minutesBefore) {
+          r.sent = true;
+          r.sentAt = previous.sentAt || Date.now();
+        }
+        return r;
+      });
       await this.storage.put('reminders', reminders);
       await this.rescheduleAlarm(reminders);
-      return Response.json({ ok: true, scheduled: reminders.length });
+      return Response.json({ ok: true, scheduled: reminders.filter(r => !r.sent).length });
     }
 
     if (url.pathname.endsWith('/snooze')) {
