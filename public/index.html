@@ -4288,6 +4288,36 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
   .activity-reminder .reminder-actions{grid-template-columns:1fr !important;}
   .reminder-setting-status{font-size:.72rem;color:var(--ink-dim);margin-top:4px;}
 </style>
+
+<style id="shell-quality-v13-css">
+  /* v13 shell quality: one visual rhythm across home, settings and RTL. */
+  #langToggle{display:none !important;}
+  .clock-home{scroll-behavior:auto !important;overscroll-behavior-y:auto !important;touch-action:pan-y !important;}
+  .clock-home .stage{display:flex !important;flex-direction:column !important;gap:14px !important;padding-top:calc(14px + env(safe-area-inset-top,0px)) !important;padding-inline:14px !important;}
+  .home-top-time,.home-greeting,#nextUpCard,#homeTalkCta,#homeDayPreview,.prayer-remaining-card{margin-top:0 !important;margin-bottom:0 !important;}
+  #homeTalkCta{min-height:84px !important;}
+  .prayer-remaining-card{top:calc(12px + env(safe-area-inset-top,0px)) !important;right:14px !important;max-width:150px !important;}
+  html[dir=rtl] .prayer-remaining-card{right:auto !important;left:14px !important;}
+  .home-greeting{padding-right:164px !important;min-height:92px !important;}
+  html[dir=rtl] .home-greeting{padding-right:8px !important;padding-left:164px !important;}
+  html[dir=rtl] .prayer-remaining-copy{text-align:right !important;}
+  html[dir=rtl] .prayer-remaining-value{unicode-bidi:isolate;direction:rtl;}
+  @media(max-width:390px){.clock-home .stage{gap:12px !important;padding-inline:10px !important}.prayer-remaining-card{position:relative !important;top:auto !important;left:auto !important;right:auto !important;align-self:stretch !important;max-width:none !important;order:-2 !important}.home-top-time{order:-1 !important}.home-greeting{padding:0 4px !important;min-height:auto !important}.home-greeting-copy{max-width:100% !important}}
+
+  #settingsSheet .sheet-body.settings-mobile-body{padding:14px 14px calc(22px + env(safe-area-inset-bottom,0px)) !important;}
+  .settings-home,.settings-child{width:min(100%,560px);margin:0 auto;}
+  .settings-feature-card{width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:10px;min-height:92px;padding:10px 12px;border:1px solid rgba(238,198,104,.48);border-radius:22px;background:linear-gradient(145deg,rgba(16,60,78,.96),rgba(7,31,49,.98));color:#fff4d8;box-shadow:0 14px 34px rgba(0,0,0,.22);}
+  .settings-feature-open{display:grid;grid-template-columns:48px minmax(0,1fr);align-items:center;gap:12px;min-width:0;padding:5px 2px;border:0;background:transparent;color:inherit;text-align:left;}
+  html[dir=rtl] .settings-feature-open{text-align:right;direction:rtl;grid-template-columns:minmax(0,1fr) 48px;}
+  html[dir=rtl] .settings-feature-open .settings-feature-icon{grid-column:2;grid-row:1}html[dir=rtl] .settings-feature-open .settings-feature-copy{grid-column:1;grid-row:1}
+  html[dir=rtl] .settings-feature-card{direction:rtl;}
+  html[dir=rtl] .settings-feature-icon{grid-column:3}.settings-feature-icon{width:48px;height:48px;border-radius:16px;display:grid;place-items:center;background:rgba(227,183,93,.12);border:1px solid rgba(227,183,93,.28);font-size:1.25rem}.settings-feature-copy{display:block;min-width:0}.settings-feature-copy strong{display:block;font:700 1.12rem/1.15 Georgia,'Times New Roman',serif}.settings-feature-copy small{display:block;margin-top:5px;color:#c9d7db;font-size:.77rem;line-height:1.35}.settings-feature-toggle-wrap{display:grid;place-items:center;padding:8px;}
+  .settings-mobile-group{margin-top:14px;border:1px solid rgba(227,183,93,.23);border-radius:20px;overflow:hidden;background:rgba(7,32,50,.75)}
+  .settings-nav-row{width:100%;min-height:68px;padding:12px 14px;display:grid;grid-template-columns:minmax(0,1fr) 24px;align-items:center;gap:12px;border:0;border-bottom:1px solid rgba(227,183,93,.12);background:transparent;color:#f7edd7;text-align:left;}
+  .settings-nav-row:last-child{border-bottom:0}.settings-nav-row span{min-width:0}.settings-nav-row b{display:block;font-size:.95rem}.settings-nav-row small{display:block;margin-top:3px;color:#aebfc6;font-size:.72rem;line-height:1.3}.settings-nav-row i{font-style:normal;color:#e4bd68;font-size:1.35rem;text-align:center}html[dir=rtl] .settings-nav-row{text-align:right;direction:rtl;grid-template-columns:24px minmax(0,1fr)}html[dir=rtl] .settings-nav-row i{grid-column:1;grid-row:1;transform:rotate(180deg)}html[dir=rtl] .settings-nav-row span{grid-column:2;grid-row:1}
+  .settings-child-back{display:inline-flex;align-items:center;gap:6px;min-height:44px;margin:0 0 10px;padding:0 10px;border:0;background:transparent;color:#f0cb78;font-weight:800;font-size:.88rem}html[dir=rtl] .settings-child-back{direction:rtl}.settings-child-intro,.settings-footnote{margin:0 0 14px;color:#b9c9cf;font-size:.79rem;line-height:1.45}.settings-footnote{margin:12px 0 0}.settings-choice-block{padding-top:12px;border-top:1px solid rgba(227,183,93,.13)}.settings-choice-block>strong{display:block;margin-bottom:10px;color:#f7ebd0}.reminder-choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.reminder-choice-grid button,.language-choice button,.settings-inline-action{min-height:46px;border-radius:14px;border:1px solid rgba(227,183,93,.28);background:rgba(4,22,38,.72);color:#f5ead0;font-weight:750;padding:9px 10px}.reminder-choice-grid button.selected,.language-choice button.selected{background:linear-gradient(180deg,#f2d489,#d4a14a);color:#082136;border-color:transparent}.language-choice{display:grid;grid-template-columns:1fr 1fr;gap:10px}.settings-inline-action{min-width:132px}.settings-row-toggle{grid-template-columns:minmax(0,1fr) auto !important}.settings-hidden-language-trigger{display:none !important}
+  @media(max-width:380px){.settings-feature-card{padding:10px;gap:8px}.settings-feature-open{grid-template-columns:44px minmax(0,1fr);gap:9px}.settings-feature-icon{width:44px;height:44px}.reminder-choice-grid{grid-template-columns:1fr}.settings-nav-row{min-height:64px}}
+</style>
 </head>
 <body>
 <noscript>
@@ -4550,6 +4580,8 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
             <option value="5">5 minutes before</option>
             <option value="10">10 minutes before</option>
             <option value="15">15 minutes before</option>
+            <option value="30">30 minutes before</option>
+            <option value="60">1 hour before</option>
             <option value="-1">No reminder</option>
           </select>
           <small class="reminder-setting-status" id="activityEditReminderStatus"></small>
@@ -4604,96 +4636,62 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
       <span class="sheet-header-meta" data-i18n="settingsTitle">Settings</span>
       <button class="sheet-close" id="settingsCloseBtn" aria-label="Close">✕</button>
     </div>
-    <div class="sheet-body">
-      <section class="settings-section settings-appearance">
-        <h3 data-i18n="settingsAppearance">Appearance</h3>
-        <div class="settings-row">
-          <span class="settings-label" data-i18n="settingsLanguage">Language</span>
-          <button type="button" class="settings-control" id="settingsLanguageButton">العربية</button>
+    <div class="sheet-body settings-mobile-body" id="settingsMobileBody">
+      <div class="settings-home" id="settingsHome">
+        <div class="settings-feature-card" id="settingsRemindersEntry">
+          <button class="settings-feature-open" id="settingsRemindersOpen" type="button">
+            <span class="settings-feature-icon" aria-hidden="true">🔔</span>
+            <span class="settings-feature-copy"><strong id="settingsRemindersHeroTitle">Reminders</strong><small id="settingsRemindersHeroStatus">Stay ready for what comes next.</small></span>
+          </button>
+          <span class="settings-feature-toggle-wrap"><input class="settings-switch" type="checkbox" id="settingsReminderToggle" aria-label="Enable reminders" /></span>
         </div>
-        <div class="settings-row settings-name-row">
-          <label for="settingsProfileName" id="settingsProfileNameLabel">Your name</label>
-          <input id="settingsProfileName" class="settings-control settings-name-input" type="text" maxlength="28" placeholder="Optional" autocomplete="name" />
+        <div class="settings-mobile-group">
+          <button class="settings-nav-row" type="button" data-settings-open="language"><span><b id="settingsLanguageRowTitle">Language</b><small id="settingsLanguageRowValue">English</small></span><i aria-hidden="true">›</i></button>
+          <button class="settings-nav-row" type="button" data-settings-open="prayer"><span><b id="settingsPrayerRowTitle">My Prayer</b><small id="settingsPrayerRowValue">Location, moon and prayer preferences</small></span><i aria-hidden="true">›</i></button>
+          <button class="settings-nav-row" type="button" data-settings-open="profile"><span><b id="settingsProfileRowTitle">Personalization</b><small id="settingsProfileRowValue">Name and personal preferences</small></span><i aria-hidden="true">›</i></button>
+          <button class="settings-nav-row" type="button" data-settings-open="stories"><span><b id="settingsStoriesRowTitle">Heritage stories</b><small id="settingsStoriesRowValue">Choose how often stories appear</small></span><i aria-hidden="true">›</i></button>
+          <button class="settings-nav-row" type="button" data-settings-open="about"><span><b id="settingsAboutRowTitle">About & data</b><small id="settingsAboutRowValue">App information and test data</small></span><i aria-hidden="true">›</i></button>
         </div>
-      </section>
+      </div>
 
-      <section class="settings-section heritage-settings">
-        <h3 id="heritageSettingsTitle">Heritage stories</h3>
-        <div class="settings-row">
-          <label for="heritageEnabled" id="heritageEnabledLabel">Show heritage stories</label>
-          <input class="settings-switch" type="checkbox" id="heritageEnabled" checked />
-        </div>
-        <div class="settings-row">
-          <label for="heritageFrequency" id="heritageFrequencyLabel">Story frequency</label>
-          <select id="heritageFrequency" class="settings-control">
-            <option value="daily">About once a day</option>
-            <option value="few">A few times a week</option>
-            <option value="manual">Only when I open Stories</option>
-          </select>
-        </div>
-        <div class="settings-row">
-          <label for="heritageOnCompletion" id="heritageCompletionLabel">Include after activity completion</label>
-          <input class="settings-switch" type="checkbox" id="heritageOnCompletion" checked />
-        </div>
-      </section>
+      <div class="settings-child" data-settings-panel="reminders" hidden>
+        <button class="settings-child-back" type="button" data-settings-back>‹ <span>Settings</span></button>
+        <section class="settings-section settings-reminders">
+          <h3 id="settingsRemindersTitle">Reminders</h3>
+          <p class="settings-child-intro" id="settingsRemindersIntro">Choose when Daily Rhythm should get your attention. You can still override this for any activity.</p>
+          <div class="settings-row settings-row-toggle"><label for="enableReminderNotifications" id="settingsEnableRemindersLabel">Activity reminders</label><button id="enableReminderNotifications" class="settings-inline-action" type="button">Enable reminders</button></div>
+          <div class="settings-choice-block"><strong id="settingsDefaultReminderLabel">Default reminder</strong><div class="reminder-choice-grid" id="defaultReminderChoices">
+            <button type="button" data-reminder-default="0">At time</button><button type="button" data-reminder-default="5">5 min before</button><button type="button" data-reminder-default="10">10 min before</button><button type="button" data-reminder-default="15">15 min before</button><button type="button" data-reminder-default="30">30 min before</button><button type="button" data-reminder-default="60">1 hour before</button><button type="button" data-reminder-default="-1">No reminder</button>
+          </div></div>
+          <p class="settings-footnote" id="settingsReminderFootnote">This becomes the default for new timed activities. Existing activities keep their own choice.</p>
+        </section>
+      </div>
 
-      <section class="settings-section settings-moon">
-        <h3 data-i18n="settingsMoon">Moon</h3>
-        <div class="settings-row">
-          <label for="settingsMoonEnabled" data-i18n="moonShow">Show moon on clock</label>
-          <input class="settings-switch" type="checkbox" id="settingsMoonEnabled" checked />
-        </div>
-        <div class="settings-row">
-          <label for="settingsMoonPosition" data-i18n="moonPosition">Moon position</label>
-          <select id="settingsMoonPosition" class="settings-control">
-            <option value="auto" data-i18n="moonPositionAuto">Follow phase</option>
-            <option value="top-right" data-i18n="moonTopRight">Top right</option>
-            <option value="top-left" data-i18n="moonTopLeft">Top left</option>
-            <option value="bottom-right" data-i18n="moonBottomRight">Bottom right</option>
-            <option value="bottom-left" data-i18n="moonBottomLeft">Bottom left</option>
-          </select>
-        </div>
-      </section>
+      <div class="settings-child" data-settings-panel="language" hidden>
+        <button class="settings-child-back" type="button" data-settings-back>‹ <span>Settings</span></button>
+        <section class="settings-section settings-language"><h3 id="settingsLanguageTitle">Language</h3><p class="settings-child-intro" id="settingsLanguageIntro">Choose the interface language.</p><div class="language-choice" id="languageChoice"><button type="button" data-lang-choice="en">English</button><button type="button" data-lang-choice="ar">العربية</button></div><button type="button" class="settings-control settings-hidden-language-trigger" id="settingsLanguageButton" hidden>العربية</button></section>
+      </div>
 
-      <section class="settings-section settings-prayer">
-        <h3 data-i18n="settingsPrayerReminders">Prayer & reminders</h3>
-        <div class="prayer-location-card" id="prayerLocationCard">
-          <div class="prayer-location-head">
-            <div class="prayer-location-copy">
-              <strong class="prayer-location-title" id="prayerLocationTitle">Prayer times</strong>
-              <span class="prayer-location-status" id="prayerLocationStatus">Checking location…</span>
-            </div>
-          </div>
-          <div class="prayer-location-actions">
-            <button type="button" class="primary" id="prayerUseCurrent">Use current location</button>
-            <button type="button" id="prayerChooseCity">Choose city</button>
-          </div>
-        </div>
-        <div class="settings-actions">
-          <button id="enableReminderNotifications" type="button" data-i18n="enableReminders">Enable lock-screen reminders</button>
-          <button id="resetBtn" type="button" data-i18n="resetBtn">Reset to default schedule</button>
-        </div>
-      </section>
+      <div class="settings-child" data-settings-panel="profile" hidden>
+        <button class="settings-child-back" type="button" data-settings-back>‹ <span>Settings</span></button>
+        <section class="settings-section settings-profile"><h3 id="settingsProfileTitle">Personalization</h3><div class="settings-row settings-name-row"><label for="settingsProfileName" id="settingsProfileNameLabel">Your name</label><input id="settingsProfileName" class="settings-control settings-name-input" type="text" maxlength="28" placeholder="Optional" autocomplete="name" /></div></section>
+      </div>
 
-      <section class="settings-section settings-test-data" id="testDataSection">
-        <h3 id="testDataTitle">Temporary test data</h3>
-        <p class="about-copy" id="testDataCopy">Stores schedule requests and their outcomes only on this device so they can be reviewed during testing. Nothing is sent automatically.</p>
-        <div class="settings-actions">
-          <button id="exportTestData" type="button">Export test data</button>
-          <button id="clearTestData" type="button">Clear test data</button>
-        </div>
-        <p class="about-copy" id="testDataCount" style="margin-top:8px"></p>
-      </section>
+      <div class="settings-child" data-settings-panel="prayer" hidden>
+        <button class="settings-child-back" type="button" data-settings-back>‹ <span>Settings</span></button>
+        <section class="settings-section settings-prayer"><h3 id="settingsPrayerTitle">My Prayer</h3><p class="settings-child-intro" id="settingsPrayerIntro">Prayer times use your chosen location. The full clock, moon, dates and Qibla compass live in My Prayer.</p><div class="prayer-location-card" id="prayerLocationCard"><div class="prayer-location-head"><div class="prayer-location-copy"><strong class="prayer-location-title" id="prayerLocationTitle">Prayer times</strong><span class="prayer-location-status" id="prayerLocationStatus">Checking location…</span></div></div><div class="prayer-location-actions"><button type="button" class="primary" id="prayerUseCurrent">Use current location</button><button type="button" id="prayerChooseCity">Choose city</button></div></div><div class="settings-row"><label for="settingsMoonEnabled" data-i18n="moonShow">Show moon on clock</label><input class="settings-switch" type="checkbox" id="settingsMoonEnabled" checked /></div><div class="settings-row"><label for="settingsMoonPosition" data-i18n="moonPosition">Moon position</label><select id="settingsMoonPosition" class="settings-control"><option value="auto" data-i18n="moonPositionAuto">Follow phase</option><option value="top-right" data-i18n="moonTopRight">Top right</option><option value="top-left" data-i18n="moonTopLeft">Top left</option><option value="bottom-right" data-i18n="moonBottomRight">Bottom right</option><option value="bottom-left" data-i18n="moonBottomLeft">Bottom left</option></select></div></section>
+      </div>
 
-      <section class="settings-section settings-about">
-        <h3 data-i18n="aboutTitle">About Daily Rhythm</h3>
-        <p class="about-copy" data-i18n="aboutCopy">Daily Rhythm turns your day into a glanceable clock. See what you are doing now, what is next, prayer times, and the moon phase, while adding or changing several activities naturally in English or Arabic. The goal is to reduce planning friction and help you stay present in your day — not manage another complicated calendar.</p>
-        <div class="release-meta" aria-label="Release information">
-          <div class="release-meta-row"><span data-i18n="versionLabel">Version</span><strong id="appVersion">1.0.0</strong></div>
-          <div class="release-meta-row"><span data-i18n="buildLabel">Build</span><strong id="appBuild">2026.09.19</strong></div>
-          <div class="release-meta-row"><span data-i18n="channelLabel">Channel</span><strong data-i18n="productionChannel">Production</strong></div>
-        </div>
-      </section>
+      <div class="settings-child" data-settings-panel="stories" hidden>
+        <button class="settings-child-back" type="button" data-settings-back>‹ <span>Settings</span></button>
+        <section class="settings-section heritage-settings"><h3 id="heritageSettingsTitle">Heritage stories</h3><div class="settings-row"><label for="heritageEnabled" id="heritageEnabledLabel">Show heritage stories</label><input class="settings-switch" type="checkbox" id="heritageEnabled" checked /></div><div class="settings-row"><label for="heritageFrequency" id="heritageFrequencyLabel">Story frequency</label><select id="heritageFrequency" class="settings-control"><option value="daily">About once a day</option><option value="few">A few times a week</option><option value="manual">Only when I open Stories</option></select></div><div class="settings-row"><label for="heritageOnCompletion" id="heritageCompletionLabel">Include after activity completion</label><input class="settings-switch" type="checkbox" id="heritageOnCompletion" checked /></div></section>
+      </div>
+
+      <div class="settings-child" data-settings-panel="about" hidden>
+        <button class="settings-child-back" type="button" data-settings-back>‹ <span>Settings</span></button>
+        <section class="settings-section settings-test-data" id="testDataSection"><h3 id="testDataTitle">Temporary test data</h3><p class="about-copy" id="testDataCopy">Stores schedule requests and their outcomes only on this device so they can be reviewed during testing. Nothing is sent automatically.</p><div class="settings-actions"><button id="exportTestData" type="button">Export test data</button><button id="clearTestData" type="button">Clear test data</button></div><p class="about-copy" id="testDataCount" style="margin-top:8px"></p></section>
+        <section class="settings-section settings-about"><h3 data-i18n="aboutTitle">About Daily Rhythm</h3><p class="about-copy" data-i18n="aboutCopy">Daily Rhythm turns your day into a glanceable clock. See what you are doing now, what is next, prayer times, and the moon phase, while adding or changing several activities naturally in English or Arabic. The goal is to reduce planning friction and help you stay present in your day — not manage another complicated calendar.</p><div class="settings-actions"><button id="resetBtn" type="button" data-i18n="resetBtn">Reset to default schedule</button></div><div class="release-meta" aria-label="Release information"><div class="release-meta-row"><span data-i18n="versionLabel">Version</span><strong id="appVersion">1.0.0</strong></div><div class="release-meta-row"><span data-i18n="buildLabel">Build</span><strong id="appBuild">2026.09.21</strong></div><div class="release-meta-row"><span data-i18n="channelLabel">Channel</span><strong data-i18n="productionChannel">Production</strong></div></div></section>
+      </div>
     </div>
   </div>
 
@@ -4871,14 +4869,14 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
       todayRhythm: "إيقاع اليوم",
       suggestionsTitle: "أنشطة غير مدرجة",
       resetBtn: "إعادة ضبط الجدول الافتراضي",
-      enableReminders: "تفعيل تذكيرات شاشة القفل",
+      enableReminders: "تفعيل التذكيرات",
       prayerLocationTitle: "مواقيت الصلاة", prayerUseCurrent: "استخدم موقعي الحالي", prayerChooseCity: "اختر المدينة",
       prayerCheckingLocation: "جارٍ التحقق من الموقع…", prayerAutomatic: "تلقائي", prayerDefaultLocation: "الموقع الافتراضي", prayerLocationDenied: "الموقع غير متاح — اختر مدينتك",
       prayerCityPrompt: "أدخل مدينتك لمواقيت الصلاة", prayerCityNotFound: "لم يتم العثور على المدينة. جرّب المدينة + الدولة.", prayerCityError: "تعذر البحث عن المدينة الآن.",
       activityLogTitle: "سجل النشاط",
       logSearchPlaceholder: 'ابحث في السجل — مثال "الفجر" أو "الجيم"',
       filterAll: "الكل", filterAdd: "إضافة", filterEdit: "تعديل", filterDelete: "حذف", filterActivity: "نشاط",
-      talkTitle: "تحدّث عن يومك",
+      talkTitle: "تحدّث مع يومك",
       commandPlaceholder: 'اكتب ما تريد إضافته أو تعديله أو حذفه أو تسجيله. يمكنك إدخال أكثر من طلب معًا.',
       commandEditHint: 'اكتب طلبًا واحدًا أو عدة طلبات ثم راجعها قبل الإرسال.',
       commandLabel: "ماذا تريد أن تفعل؟",
@@ -4887,7 +4885,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
       examplesSummary: "أمثلة",
       examplesNote: 'يتعرف فقط على نشاط موجود بالفعل في "إيقاع اليوم" — أضفه أولاً بأمر "أضف" إذا لم يكن موجوداً.',
       nextLabel: "التالي", inLabel: "خلال",
-      nowLabel: "الآن", upNextLabel: "القادم",
+      nowLabel: "الآن", upNextLabel: "التالي في يومك",
       swipeHint: "› اسحب لعرض الجدول والسجل والصوت ‹",
       tapHint: "اضغط على التسمية في وسط الساعة لتسجيلها كمكتملة",
       quickNowLabel: "الآن",
@@ -5624,6 +5622,12 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
   ];
   const PALETTE = ["var(--c-family)","var(--c-gym)","var(--c-work)","var(--c-lunch)","var(--c-walk)","var(--c-app)","var(--c-quran)","var(--c-rotate)","var(--c-wind)"];
   const STORAGE_KEY = "dailyRhythmBlocks_v1";
+  const DEFAULT_REMINDER_KEY = 'dailyRhythmDefaultReminderMinutes_v1';
+  function defaultReminderMinutes() {
+    let value = 10;
+    try { value = Number(localStorage.getItem(DEFAULT_REMINDER_KEY) ?? 10); } catch (_) {}
+    return [-1,0,5,10,15,30,60].includes(value) ? value : 10;
+  }
   let uidCounter = 1;
   function nextId() { return 'b' + (uidCounter++) + '_' + Date.now(); }
 
@@ -5651,7 +5655,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
               occurrenceDate: typeof b.occurrenceDate === 'string' ? b.occurrenceDate : '',
               recurrence: (b.recurrence && typeof b.recurrence === 'object') ? b.recurrence : null,
               recurrenceGenerated: !!b.recurrenceGenerated,
-              reminderMinutesBefore: Number.isFinite(Number(b.reminderMinutesBefore)) ? Number(b.reminderMinutesBefore) : 10
+              reminderMinutesBefore: Number.isFinite(Number(b.reminderMinutesBefore)) ? Number(b.reminderMinutesBefore) : defaultReminderMinutes()
             };
           }).filter(Boolean).map((b, i) => ensureActivityPair(b, `Activity ${i + 1}`));
           if (cleaned.length) { blocks = cleaned; saveBlocks(); return; }
@@ -5666,7 +5670,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     const snapshot = blocks.map(b => ({
       id:b.id, start:b.start, end:b.end, done:!!b.done,
       label:b.label, labelEn:b.labelEn, labelAr:b.labelAr,
-      reminderMinutesBefore:Number.isFinite(Number(b.reminderMinutesBefore)) ? Number(b.reminderMinutesBefore) : 10
+      reminderMinutesBefore:Number.isFinite(Number(b.reminderMinutesBefore)) ? Number(b.reminderMinutesBefore) : defaultReminderMinutes()
     }));
     window.DailyRhythmReminders.sync(snapshot);
   }
@@ -5675,6 +5679,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     reminderSyncTimer=setTimeout(pushReminderSnapshot,delay);
   }
   function saveBlocks() {
+    blocks.forEach(b => { if (!Number.isFinite(Number(b.reminderMinutesBefore))) b.reminderMinutesBefore = defaultReminderMinutes(); });
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(blocks)); } catch (e) { /* storage unavailable */ }
     schedulePushReminderSync();
   }
@@ -6102,7 +6107,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     document.getElementById('activityEditStart').value = hourToTimeInput(block.start);
     document.getElementById('activityEditEnd').value = hourToTimeInput(block.end);
     document.getElementById('activityEditNote').value = block.note || '';
-    const reminderPref = Number.isFinite(Number(block.reminderMinutesBefore)) ? Number(block.reminderMinutesBefore) : 10;
+    const reminderPref = Number.isFinite(Number(block.reminderMinutesBefore)) ? Number(block.reminderMinutesBefore) : defaultReminderMinutes();
     const reminderSelect = document.getElementById('activityEditReminder');
     if (reminderSelect) reminderSelect.value = String(reminderPref);
     const ar = currentLang === 'ar';
@@ -6114,11 +6119,11 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     const reminderLabel = document.getElementById('activityEditReminderLabel');
     if (reminderLabel) reminderLabel.textContent = ar ? 'التذكير' : 'Reminder';
     if (reminderSelect) {
-      const labels = ar ? ['في وقت النشاط','قبل ٥ دقائق','قبل ١٠ دقائق','قبل ١٥ دقيقة','بدون تذكير'] : ['At time','5 minutes before','10 minutes before','15 minutes before','No reminder'];
+      const labels = ar ? ['عند موعد النشاط','قبل ٥ دقائق','قبل ١٠ دقائق','قبل ١٥ دقيقة','قبل ٣٠ دقيقة','قبل ساعة','بدون تذكير'] : ['At time','5 minutes before','10 minutes before','15 minutes before','30 minutes before','1 hour before','No reminder'];
       Array.from(reminderSelect.options).forEach((o,i)=>{ if(labels[i]) o.textContent=labels[i]; });
     }
     const reminderStatus = document.getElementById('activityEditReminderStatus');
-    if (reminderStatus) reminderStatus.textContent = ar ? 'يصل كتذكير على شاشة القفل عند تفعيل الإشعارات.' : 'Delivered as a lock-screen reminder when notifications are enabled.';
+    if (reminderStatus) reminderStatus.textContent = ar ? 'يمكنك اختيار وقت التنبيه لهذا النشاط. سيصل التذكير حتى عندما يكون Daily Rhythm مغلقًا.' : 'Choose when to be reminded for this activity. It can arrive even when Daily Rhythm is closed.';
     document.getElementById('activityEditCancel').textContent = ar ? 'إلغاء' : 'Cancel';
     document.getElementById('activityEditSave').textContent = ar ? 'حفظ التغييرات' : 'Save changes';
     const scopeWrap = document.getElementById('activityEditScopeWrap');
@@ -6640,7 +6645,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     const title = document.getElementById('homeDayPreviewTitle');
     const open = document.getElementById('homeDayPreviewOpen');
     if (!wrap || !list) return;
-    if (title) title.textContent = currentLang === 'ar' ? 'القادم' : 'Coming up';
+    if (title) title.textContent = currentLang === 'ar' ? 'لاحقًا اليوم' : 'Coming up';
     if (open) {
       open.textContent = currentLang === 'ar' ? 'عرض اليوم' : 'View day';
       open.onclick = () => document.getElementById('openScheduleBtn')?.click();
@@ -6680,9 +6685,9 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     const talkTitle = document.getElementById('homeTalkTitle');
     const talkSubtitle = document.getElementById('homeTalkSubtitle');
     const talkCta = document.getElementById('homeTalkCta');
-    if (talkTitle) talkTitle.textContent = currentLang === 'ar' ? 'تحدّث عن يومك' : 'Talk to your day';
-    if (talkSubtitle) talkSubtitle.textContent = currentLang === 'ar' ? 'أضف أو حرّك أو احذف أو اسأل عن وقتك المتاح' : 'Add, move, remove, or ask what’s free';
-    if (talkCta) talkCta.setAttribute('aria-label', currentLang === 'ar' ? 'تحدّث عن يومك' : 'Talk to your day');
+    if (talkTitle) talkTitle.textContent = currentLang === 'ar' ? 'تحدّث مع يومك' : 'Talk to your day';
+    if (talkSubtitle) talkSubtitle.textContent = currentLang === 'ar' ? 'أضف أو غيّر أو احذف، أو اسأل عن وقتك المتاح' : 'Add, move, remove, or ask what’s free';
+    if (talkCta) talkCta.setAttribute('aria-label', currentLang === 'ar' ? 'تحدّث مع يومك' : 'Talk to your day');
     renderHomeDayPreview();
   }
 
@@ -8029,7 +8034,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     const start = timeInputToHour(document.getElementById('activityEditStart').value);
     let end = timeInputToHour(document.getElementById('activityEditEnd').value);
     const note = document.getElementById('activityEditNote').value.trim().slice(0, 160);
-    const reminderMinutesBefore = Number(document.getElementById('activityEditReminder')?.value ?? 10);
+    const reminderMinutesBefore = Number(document.getElementById('activityEditReminder')?.value ?? defaultReminderMinutes());
     if (!name || start === null || end === null) return;
     if (end <= start) end += 24;
     if (end - start > 24) return;
@@ -8062,7 +8067,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     block.start = start;
     block.end = end;
     block.note = note;
-    block.reminderMinutesBefore = [-1,0,5,10,15].includes(reminderMinutesBefore) ? reminderMinutesBefore : 10;
+    block.reminderMinutesBefore = [-1,0,5,10,15,30,60].includes(reminderMinutesBefore) ? reminderMinutesBefore : 10;
     clearReminderStateForBlock(block.id);
     sortBlocks(); saveBlocks(); closeActivityEditor(); renderAll();
     const after = `${blockDisplayLabel(block)} ${fmtClock12(block.start)}–${fmtClock12(block.end)}`;
@@ -9256,8 +9261,8 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
       row?.classList.add('active');
     }, 100);
   }
-  reminderMain?.addEventListener('click', () => reminderVisibleBlockId && openReminderActivity(reminderVisibleBlockId));
-  reminderMain?.addEventListener('keydown', e => { if ((e.key==='Enter'||e.key===' ') && reminderVisibleBlockId) { e.preventDefault(); openReminderActivity(reminderVisibleBlockId); } });
+  reminderMain?.addEventListener('click', () => { if (!reminderVisibleBlockId) return; const id=reminderVisibleBlockId; reminderState.ignored[id]=true; saveReminderState(); hideActivityReminder(); openReminderActivity(id); });
+  reminderMain?.addEventListener('keydown', e => { if ((e.key==='Enter'||e.key===' ') && reminderVisibleBlockId) { e.preventDefault(); const id=reminderVisibleBlockId; reminderState.ignored[id]=true; saveReminderState(); hideActivityReminder(); openReminderActivity(id); } });
   document.getElementById('reminderClose')?.addEventListener('click', e => {
     e.stopPropagation();
     if (reminderVisibleBlockId) reminderState.ignored[reminderVisibleBlockId] = true;
@@ -9381,7 +9386,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
         saveReminderState();
         if (reminderId) window.DailyRhythmReminders?.snooze?.(reminderId,10).catch(()=>{});
       }
-      if (action === 'open' && b) openReminderActivity(blockId);
+      if (action === 'open' && b) { reminderState.ignored[blockId] = true; saveReminderState(); hideActivityReminder(); openReminderActivity(blockId); }
       u.searchParams.delete('reminderAction'); u.searchParams.delete('blockId'); u.searchParams.delete('reminderId');
       history.replaceState({}, '', u.pathname + u.search + u.hash);
     } catch (e) {}
@@ -11115,8 +11120,10 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
 
 
 
+  <link rel="stylesheet" href="css/my-prayer-immersive-v14.css">
   <link rel="stylesheet" href="css/clock-moon.css">
   <script src="js/moon-watch.js"></script>
+  <script src="js/my-prayer-immersive-v14.js"></script>
 
   <script src="js/command-results.js"></script>
   <script src="js/reminders.js"></script>
@@ -11190,5 +11197,54 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
 })();
 </script>
 
+
+<script id="settings-mobile-v13-js">
+(() => {
+  const $ = id => document.getElementById(id);
+  const home = $('settingsHome');
+  const panels = [...document.querySelectorAll('#settingsSheet [data-settings-panel]')];
+  const DEFAULT_KEY = 'dailyRhythmDefaultReminderMinutes_v1';
+  const validDefaults = [-1,0,5,10,15,30,60];
+  const ar = () => document.documentElement.lang === 'ar';
+  const getDefault = () => { let v=10; try{v=Number(localStorage.getItem(DEFAULT_KEY) ?? 10)}catch(_){} return validDefaults.includes(v)?v:10; };
+  const setDefault = v => { if(!validDefaults.includes(v))return; try{localStorage.setItem(DEFAULT_KEY,String(v))}catch(_){}; paintDefault(); };
+  function showHome(){ home.hidden=false; panels.forEach(p=>p.hidden=true); syncCopy(); }
+  function openPanel(name){ home.hidden=true; panels.forEach(p=>p.hidden=p.dataset.settingsPanel!==name); syncCopy(); }
+  document.querySelectorAll('#settingsSheet [data-settings-open]').forEach(btn=>btn.addEventListener('click',()=>openPanel(btn.dataset.settingsOpen)));
+  document.querySelectorAll('#settingsSheet [data-settings-back]').forEach(btn=>btn.addEventListener('click',showHome));
+  $('settingsRemindersOpen')?.addEventListener('click',()=>openPanel('reminders')); 
+  document.querySelectorAll('[data-reminder-default]').forEach(btn=>btn.addEventListener('click',()=>setDefault(Number(btn.dataset.reminderDefault))));
+  function paintDefault(){ const v=getDefault(); document.querySelectorAll('[data-reminder-default]').forEach(b=>b.classList.toggle('selected',Number(b.dataset.reminderDefault)===v)); }
+  document.querySelectorAll('[data-lang-choice]').forEach(btn=>btn.addEventListener('click',()=>{ const wanted=btn.dataset.langChoice; if(wanted && wanted!==document.documentElement.lang) $('langToggle')?.click(); syncCopy(); }));
+  function paintLanguage(){ document.querySelectorAll('[data-lang-choice]').forEach(b=>b.classList.toggle('selected',b.dataset.langChoice===document.documentElement.lang)); }
+  async function paintReminder(){ const toggle=$('settingsReminderToggle'); const hero=$('settingsRemindersHeroStatus'); if(!toggle||!window.DailyRhythmReminders)return; try{const st=await window.DailyRhythmReminders.status(); toggle.checked=!!st.enabled; if(hero)hero.textContent=ar()?(st.enabled?'التذكيرات مفعّلة. سننبّهك في الوقت الذي تختاره.':'اختر متى تريد أن ننبهك قبل أن يبدأ نشاطك.'):(st.enabled?'Reminders are on. We’ll notify you at the time you choose.':'Choose how early you want Daily Rhythm to get your attention.');}catch(_){}}
+  $('settingsReminderToggle')?.addEventListener('change',async e=>{ e.target.disabled=true; try{ if(e.target.checked) await window.DailyRhythmReminders?.enable?.(); else await window.DailyRhythmReminders?.disable?.(); }catch(_){ e.target.checked=!e.target.checked; } finally{e.target.disabled=false;paintReminder();} });
+  function syncCopy(){
+    const A=ar();
+    const text={
+      settingsRemindersHeroTitle:A?'التذكيرات':'Reminders',
+      settingsLanguageRowTitle:A?'اللغة':'Language', settingsLanguageRowValue:A?'العربية':'English',
+      settingsPrayerRowTitle:A?'صلاتي':'My Prayer', settingsPrayerRowValue:A?'الموقع والقمر ومواقيت الصلاة واتجاه القبلة':'Location, moon, prayer times and Qibla',
+      settingsProfileRowTitle:A?'التخصيص':'Personalization', settingsProfileRowValue:A?'اسمك وتفضيلاتك الشخصية':'Name and personal preferences',
+      settingsStoriesRowTitle:A?'حكايات من التراث':'Heritage stories', settingsStoriesRowValue:A?'اختر متى تظهر الحكايات':'Choose how often stories appear',
+      settingsAboutRowTitle:A?'عن التطبيق والبيانات':'About & data', settingsAboutRowValue:A?'معلومات التطبيق وبيانات الاختبار':'App information and test data',
+      settingsRemindersTitle:A?'التذكيرات':'Reminders', settingsRemindersIntro:A?'اختر متى تريد أن يلفت Daily Rhythm انتباهك. ويمكنك تغيير التذكير لأي نشاط على حدة.':'Choose when Daily Rhythm should get your attention. You can still override this for any activity.',
+      settingsEnableRemindersLabel:A?'تذكيرات الأنشطة':'Activity reminders', settingsDefaultReminderLabel:A?'التذكير الافتراضي':'Default reminder', settingsReminderFootnote:A?'يُستخدم هذا الاختيار تلقائيًا للأنشطة الجديدة ذات الوقت المحدد. الأنشطة الحالية تحتفظ بإعدادها.':'This becomes the default for new timed activities. Existing activities keep their own choice.',
+      settingsLanguageTitle:A?'اللغة':'Language', settingsLanguageIntro:A?'اختر لغة واجهة Daily Rhythm.':'Choose the Daily Rhythm interface language.',
+      settingsProfileTitle:A?'التخصيص':'Personalization', settingsPrayerTitle:A?'صلاتي':'My Prayer', settingsPrayerIntro:A?'تعتمد مواقيت الصلاة على الموقع الذي تختاره. الساعة والقمر والتاريخان واتجاه القبلة موجودة في صفحة صلاتي.':'Prayer times use your chosen location. The clock, moon, both dates and Qibla compass live in My Prayer.'
+    };
+    Object.entries(text).forEach(([id,v])=>{const el=$(id);if(el)el.textContent=v});
+    document.querySelectorAll('#settingsSheet [data-settings-back] span').forEach(el=>el.textContent=A?'الإعدادات':'Settings');
+    const labels=A?{'0':'عند الموعد','5':'قبل ٥ دقائق','10':'قبل ١٠ دقائق','15':'قبل ١٥ دقيقة','30':'قبل ٣٠ دقيقة','60':'قبل ساعة','-1':'بدون تذكير'}:{'0':'At time','5':'5 min before','10':'10 min before','15':'15 min before','30':'30 min before','60':'1 hour before','-1':'No reminder'};
+    document.querySelectorAll('[data-reminder-default]').forEach(b=>b.textContent=labels[b.dataset.reminderDefault]||b.textContent);
+    paintLanguage();paintDefault();paintReminder();
+  }
+  window.addEventListener('dailyRhythm:reminderStatus',paintReminder);
+  new MutationObserver(syncCopy).observe(document.documentElement,{attributes:true,attributeFilter:['lang','dir']});
+  document.getElementById('settingsOpenBtn')?.addEventListener('click',()=>setTimeout(showHome,0));
+  document.getElementById('openSettingsBtn')?.addEventListener('click',()=>setTimeout(showHome,0));
+  setTimeout(()=>{showHome();syncCopy()},0);
+})();
+</script>
 </body>
 </html>
