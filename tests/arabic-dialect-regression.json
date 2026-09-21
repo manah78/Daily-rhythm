@@ -1,0 +1,1428 @@
+[
+  {
+    "dialect": "MSA",
+    "text": "أضف السباحة",
+    "schedule": [],
+    "expected": [
+      "add:Swimming:no-time"
+    ]
+  },
+  {
+    "dialect": "MSA",
+    "text": "أضف السباحة الساعة ٧ مساءً",
+    "schedule": [],
+    "expected": [
+      "add:Swimming:19:00"
+    ]
+  },
+  {
+    "dialect": "MSA",
+    "text": "أضف السباحة واحذف المشي",
+    "schedule": [],
+    "expected": [
+      "add:Swimming:no-time",
+      "delete:Walking"
+    ]
+  },
+  {
+    "dialect": "MSA",
+    "text": "أضيف سباحة، وعدل القراءة، وامحي المشي",
+    "schedule": [],
+    "expected": [
+      "add:Swimming:no-time",
+      "edit:Reading:clarify",
+      "delete:Walking"
+    ]
+  },
+  {
+    "dialect": "MSA",
+    "text": "غير القراءة للساعة ٨ مساءً وامسح المشي",
+    "schedule": [],
+    "expected": [
+      "edit:Reading:20:00",
+      "delete:Walking"
+    ]
+  },
+  {
+    "dialect": "MSA",
+    "text": "أضف السباحة من ٧ إلى ٨ مساءً واحذف القراءة",
+    "schedule": [],
+    "expected": [
+      "add:Swimming:19:00-20:00",
+      "delete:Reading"
+    ]
+  },
+  {
+    "dialect": "MSA",
+    "text": "أضف المشي بعد المغرب بنصف ساعة والقراءة بعد العشاء",
+    "schedule": [],
+    "expected": [
+      "add:Walking:after-Maghrib+30",
+      "add:Reading:after-Isha+15"
+    ]
+  },
+  {
+    "dialect": "MSA",
+    "text": "عدل القراءة",
+    "schedule": [],
+    "expected": [
+      "edit:Reading:clarify"
+    ]
+  },
+  {
+    "dialect": "MSA",
+    "text": "إلغاء الجدول",
+    "schedule": [],
+    "expected": [
+      "clear-day:confirm"
+    ]
+  },
+  {
+    "dialect": "MSA",
+    "text": "امسح جدول اليوم",
+    "schedule": [],
+    "expected": [
+      "clear-day:confirm"
+    ]
+  },
+  {
+    "dialect": "Levantine",
+    "text": "حطلي سباحة عالسبعة",
+    "schedule": [],
+    "expected": [
+      "add:Swimming:07:00"
+    ]
+  },
+  {
+    "dialect": "Levantine",
+    "text": "بدي أسبح الساعة سبعة",
+    "schedule": [],
+    "expected": [
+      "add:Swimming:07:00"
+    ]
+  },
+  {
+    "dialect": "Levantine",
+    "text": "السباحة خليها عالسبعة",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "edit:Swimming:07:00"
+    ]
+  },
+  {
+    "dialect": "Levantine",
+    "text": "شيل المشي اليوم",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "delete:Walking"
+    ]
+  },
+  {
+    "dialect": "Levantine",
+    "text": "ما بدي المشي اليوم",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "delete:Walking"
+    ]
+  },
+  {
+    "dialect": "Levantine",
+    "text": "خلاص بلا مشي اليوم",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "delete:Walking"
+    ]
+  },
+  {
+    "dialect": "Levantine",
+    "text": "القراءة خليها عالثمانية وشيل المشي",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "edit:Reading:08:00",
+      "delete:Walking"
+    ]
+  },
+  {
+    "dialect": "Levantine",
+    "text": "بدي جيم بعد المغرب وشيل المشي",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "add:Gym:after-Maghrib+15",
+      "delete:Walking"
+    ]
+  },
+  {
+    "dialect": "Palestinian/Jordanian",
+    "text": "حطلي جيم، والقراءة خليها ٨، وشيل المشي",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "add:Gym:no-time",
+      "edit:Reading:08:00",
+      "delete:Walking"
+    ]
+  },
+  {
+    "dialect": "Lebanese",
+    "text": "خلّي السباحة عالسبعة وبلا مشي اليوم",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "edit:Swimming:07:00",
+      "delete:Walking"
+    ]
+  },
+  {
+    "dialect": "Levantine",
+    "text": "المشي مش عارف",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "clarify"
+    ],
+    "note": "Must not infer delete from vague sentiment"
+  },
+  {
+    "dialect": "Levantine",
+    "text": "غير السباحة",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "edit:Swimming:clarify"
+    ]
+  },
+  {
+    "dialect": "Egyptian",
+    "text": "عايز سباحة الساعة سبعة",
+    "schedule": [],
+    "expected": [
+      "add:Swimming:07:00"
+    ]
+  },
+  {
+    "dialect": "Egyptian",
+    "text": "عاوز أمشي الساعة ستة",
+    "schedule": [],
+    "expected": [
+      "add:Walking:06:00"
+    ]
+  },
+  {
+    "dialect": "Egyptian",
+    "text": "حطلي الجيم الساعة تسعة",
+    "schedule": [],
+    "expected": [
+      "add:Gym:09:00"
+    ]
+  },
+  {
+    "dialect": "Egyptian",
+    "text": "شيل المشي",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "delete:Walking"
+    ]
+  },
+  {
+    "dialect": "Egyptian",
+    "text": "مش عايز المشي النهارده",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "delete:Walking"
+    ]
+  },
+  {
+    "dialect": "Egyptian",
+    "text": "خلي القراءة الساعة تمانية",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "edit:Reading:08:00"
+    ]
+  },
+  {
+    "dialect": "Egyptian",
+    "text": "غير السباحة وخليها الساعة سبعة",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "edit:Swimming:07:00"
+    ]
+  },
+  {
+    "dialect": "Egyptian",
+    "text": "عايز سباحة، وشيل المشي، وخلي القراءة الساعة تسعة",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "add:Swimming:no-time",
+      "delete:Walking",
+      "edit:Reading:09:00"
+    ]
+  },
+  {
+    "dialect": "Egyptian",
+    "text": "بلاش جيم النهارده",
+    "schedule": [
+      {
+        "labelEn": "Gym",
+        "labelAr": "الجيم",
+        "start": "17:00"
+      }
+    ],
+    "expected": [
+      "delete:Gym"
+    ]
+  },
+  {
+    "dialect": "Gulf/Saudi",
+    "text": "أبغى سباحة الساعة سبعة",
+    "schedule": [],
+    "expected": [
+      "add:Swimming:07:00"
+    ]
+  },
+  {
+    "dialect": "Gulf/Saudi",
+    "text": "ابي جيم بعد المغرب",
+    "schedule": [],
+    "expected": [
+      "add:Gym:after-Maghrib+15"
+    ]
+  },
+  {
+    "dialect": "Gulf/Saudi",
+    "text": "ودي أقرأ الساعة ثمانية",
+    "schedule": [],
+    "expected": [
+      "add:Reading:08:00"
+    ]
+  },
+  {
+    "dialect": "Gulf/Saudi",
+    "text": "شيل المشي اليوم",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "delete:Walking"
+    ]
+  },
+  {
+    "dialect": "Gulf/Saudi",
+    "text": "خل السباحة الساعة سبعة",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "edit:Swimming:07:00"
+    ]
+  },
+  {
+    "dialect": "Gulf/Saudi",
+    "text": "أبغى سباحة وشيل المشي وغير القراءة للساعة ٩",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "add:Swimming:no-time",
+      "delete:Walking",
+      "edit:Reading:09:00"
+    ]
+  },
+  {
+    "dialect": "Iraqi/common",
+    "text": "أريد أسبح الساعة سبعة",
+    "schedule": [],
+    "expected": [
+      "add:Swimming:07:00"
+    ]
+  },
+  {
+    "dialect": "Iraqi/common",
+    "text": "خلي القراءة بالثمانية",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "edit:Reading:08:00"
+    ]
+  },
+  {
+    "dialect": "Iraqi/common",
+    "text": "شيل المشي من اليوم",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "delete:Walking"
+    ]
+  },
+  {
+    "dialect": "Code-switch",
+    "text": "حطلي gym بعد المغرب",
+    "schedule": [],
+    "expected": [
+      "add:Gym:after-Maghrib+15"
+    ]
+  },
+  {
+    "dialect": "Code-switch",
+    "text": "شيل walking وخلي reading الساعة 8",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "delete:Walking",
+      "edit:Reading:08:00"
+    ]
+  },
+  {
+    "dialect": "Code-switch",
+    "text": "حطلي gym بعد المغرب، وشيل المشي، والقراءة خليها 8",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "add:Gym:after-Maghrib+15",
+      "delete:Walking",
+      "edit:Reading:08:00"
+    ]
+  },
+  {
+    "dialect": "Code-switch",
+    "text": "عايز swimming الساعة 7 وdelete المشي",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "add:Swimming:07:00",
+      "delete:Walking"
+    ]
+  },
+  {
+    "dialect": "Open-time",
+    "text": "حطلي سباحة",
+    "schedule": [],
+    "expected": [
+      "add:Swimming:no-time"
+    ]
+  },
+  {
+    "dialect": "Open-time",
+    "text": "بدي قراءة ومشي",
+    "schedule": [],
+    "expected": [
+      "add:Reading:no-time",
+      "add:Walking:no-time"
+    ]
+  },
+  {
+    "dialect": "Duplicates",
+    "text": "أضف سباحة الساعة ٧ وأضف قراءة الساعة ٧",
+    "schedule": [],
+    "expected": [
+      "add:Swimming:07:00",
+      "add:Reading:07:00"
+    ]
+  },
+  {
+    "dialect": "Duplicates",
+    "text": "حطلي جيم ومشي الساعة ٦",
+    "schedule": [],
+    "expected": [
+      "add:Gym:no-time",
+      "add:Walking:06:00"
+    ]
+  },
+  {
+    "dialect": "Clarification",
+    "text": "عدل المشي",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "edit:Walking:clarify"
+    ]
+  },
+  {
+    "dialect": "Clarification",
+    "text": "غيّر القراءة",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "edit:Reading:clarify"
+    ]
+  },
+  {
+    "dialect": "Clarification",
+    "text": "السباحة بدها تغيير",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "clarify"
+    ]
+  },
+  {
+    "dialect": "Not-found",
+    "text": "شيل كرة القدم",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "delete:Football"
+    ]
+  },
+  {
+    "dialect": "Not-found",
+    "text": "غير اليوغا للساعة ٦",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "edit:Yoga:06:00"
+    ]
+  },
+  {
+    "dialect": "Safety",
+    "text": "يمكن ما بدي المشي، مش متأكد",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "clarify"
+    ],
+    "note": "Uncertain destructive intent must clarify"
+  },
+  {
+    "dialect": "Safety",
+    "text": "المشي يمكن لأ",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "clarify"
+    ],
+    "note": "Must not delete"
+  },
+  {
+    "dialect": "Safety",
+    "text": "خلصت المشي",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "completion:Walking"
+    ],
+    "note": "Completion must not become delete"
+  },
+  {
+    "dialect": "Safety",
+    "text": "عملت الجيم",
+    "schedule": [
+      {
+        "labelEn": "Gym",
+        "labelAr": "الجيم",
+        "start": "17:00"
+      }
+    ],
+    "expected": [
+      "completion:Gym"
+    ]
+  },
+  {
+    "dialect": "Time",
+    "text": "أضف القراءة الساعة ٧:٣٠ مساءً",
+    "schedule": [],
+    "expected": [
+      "add:Reading:19:30"
+    ]
+  },
+  {
+    "dialect": "Time",
+    "text": "حطلي مشي الساعة ٦:١٥ صباحاً",
+    "schedule": [],
+    "expected": [
+      "add:Walking:06:15"
+    ]
+  },
+  {
+    "dialect": "Time",
+    "text": "السباحة خليها الساعة ١٩",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "edit:Swimming:19:00"
+    ]
+  },
+  {
+    "dialect": "Time",
+    "text": "عايز قراءة من ٨ لحد ٩ مساءً",
+    "schedule": [],
+    "expected": [
+      "add:Reading:20:00-21:00"
+    ]
+  },
+  {
+    "dialect": "Time",
+    "text": "بدي سباحة من ٦ لل٧ الصبح",
+    "schedule": [],
+    "expected": [
+      "add:Swimming:06:00-07:00"
+    ]
+  },
+  {
+    "dialect": "Prayer",
+    "text": "حطلي مشي مباشرة بعد الفجر",
+    "schedule": [],
+    "expected": [
+      "add:Walking:after-Fajr+0"
+    ]
+  },
+  {
+    "dialect": "Prayer",
+    "text": "بدي قراءة قبل العشاء بنص ساعة",
+    "schedule": [],
+    "expected": [
+      "add:Reading:before-Isha+30"
+    ]
+  },
+  {
+    "dialect": "Prayer",
+    "text": "عايز جيم بعد العصر",
+    "schedule": [],
+    "expected": [
+      "add:Gym:after-Asr+15"
+    ]
+  },
+  {
+    "dialect": "Prayer",
+    "text": "أبغى مشي بعد الشروق بعشرين دقيقة",
+    "schedule": [],
+    "expected": [
+      "add:Walking:after-Sunrise+20"
+    ]
+  },
+  {
+    "dialect": "Stress",
+    "text": "حطلي سباحة الساعة ٧، وشيل المشي، وخلي القراءة ٨، وضيف جيم بعد المغرب",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "add:Swimming:07:00",
+      "delete:Walking",
+      "edit:Reading:08:00",
+      "add:Gym:after-Maghrib+15"
+    ]
+  },
+  {
+    "dialect": "Stress",
+    "text": "أضف فطور ٨، ومشي ٩، واحذف القراءة، وعدل السباحة للساعة ٦، وحط نوم ١١ مساءً",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "add:Breakfast:08:00",
+      "add:Walking:09:00",
+      "delete:Reading",
+      "edit:Swimming:06:00",
+      "add:Sleep:23:00"
+    ]
+  },
+  {
+    "dialect": "Levantine",
+    "text": "ضيفلي تمشاية الساعة خمسة",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "add:Walking:05:00"
+    ]
+  },
+  {
+    "dialect": "Egyptian",
+    "text": "حط قراءة الساعة عشرة بالليل",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "add:Reading:22:00"
+    ]
+  },
+  {
+    "dialect": "Gulf/Saudi",
+    "text": "ابي امشي بعد المغرب",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "add:Walking:after-Maghrib+15"
+    ]
+  },
+  {
+    "dialect": "MSA",
+    "text": "سجل السباحة الساعة السادسة",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "add:Swimming:06:00"
+    ]
+  },
+  {
+    "dialect": "Levantine",
+    "text": "بلا سباحة اليوم",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "delete:Swimming"
+    ]
+  },
+  {
+    "dialect": "Egyptian",
+    "text": "امسحلي القراءة",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "delete:Reading"
+    ]
+  },
+  {
+    "dialect": "MSA",
+    "text": "بدّل وقت المشي إلى السابعة",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "edit:Walking:07:00"
+    ]
+  },
+  {
+    "dialect": "Levantine",
+    "text": "حرّك الجيم للساعة تسعة",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "edit:Gym:09:00"
+    ]
+  },
+  {
+    "dialect": "Code-switch",
+    "text": "خلي gym الساعة 9 وشيل reading",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "edit:Gym:09:00",
+      "delete:Reading"
+    ]
+  },
+  {
+    "dialect": "Egyptian",
+    "text": "عايز أمشي وأقرأ",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "add:Walking:no-time",
+      "add:Reading:no-time"
+    ]
+  },
+  {
+    "dialect": "Gulf/Saudi",
+    "text": "ودي سباحة ومشي",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "add:Swimming:no-time",
+      "add:Walking:no-time"
+    ]
+  },
+  {
+    "dialect": "Levantine",
+    "text": "بدي سباحة وبعدين شيل المشي وبعدها خلي القراءة ٨",
+    "schedule": [
+      {
+        "labelEn": "Swimming",
+        "labelAr": "السباحة",
+        "start": "20:00"
+      },
+      {
+        "labelEn": "Walking",
+        "labelAr": "المشي",
+        "start": "18:00"
+      },
+      {
+        "labelEn": "Reading",
+        "labelAr": "القراءة",
+        "start": "21:00"
+      }
+    ],
+    "expected": [
+      "add:Swimming:no-time",
+      "delete:Walking",
+      "edit:Reading:08:00"
+    ]
+  }
+]
