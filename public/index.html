@@ -4167,6 +4167,52 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
  html[dir="rtl"] .activity-reminder .reminder-actions{grid-column:1/-1 !important;grid-row:2 !important;}
 }
 </style>
+
+<style id="prayer-remaining-card-v1">
+  .prayer-remaining-card{
+    position:absolute;
+    top:max(112px,calc(env(safe-area-inset-top,0px) + 104px));
+    right:max(16px,4vw);
+    z-index:12;
+    min-width:176px;
+    max-width:220px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:12px 14px 12px 16px;
+    border-radius:22px;
+    border:1px solid rgba(218,177,74,.78);
+    background:linear-gradient(145deg,rgba(12,47,64,.82),rgba(8,31,47,.72));
+    box-shadow:0 10px 28px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.06);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    color:#fff4dc;
+    pointer-events:none;
+  }
+  .prayer-remaining-copy{min-width:0;display:flex;flex-direction:column;align-items:flex-start;line-height:1.05;}
+  .prayer-remaining-label{font-size:.69rem;font-weight:760;color:#e7c76e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px;}
+  .prayer-remaining-value{margin-top:5px;font-size:1.18rem;font-weight:850;letter-spacing:.01em;font-variant-numeric:tabular-nums;color:#fff8e9;white-space:nowrap;}
+  .prayer-remaining-icon{width:38px;height:38px;flex:0 0 38px;border-radius:50%;display:grid;place-items:center;border:1px solid rgba(232,196,103,.9);color:#f2d27d;background:rgba(255,255,255,.035);box-shadow:0 0 14px rgba(219,177,73,.16);font-size:1.12rem;}
+  html[dir="rtl"] .prayer-remaining-copy{align-items:flex-end;text-align:right;}
+  .app-shell:not(.is-night) .prayer-remaining-card{background:linear-gradient(145deg,rgba(255,250,236,.94),rgba(241,232,210,.88));border-color:rgba(160,112,34,.5);color:#173f4f;box-shadow:0 10px 25px rgba(62,42,22,.12);}
+  .app-shell:not(.is-night) .prayer-remaining-label{color:#9a6a18;}
+  .app-shell:not(.is-night) .prayer-remaining-value{color:#173f4f;}
+  .app-shell:not(.is-night) .prayer-remaining-icon{color:#9a6a18;border-color:rgba(154,106,24,.5);}
+  @media(max-width:430px){
+    .prayer-remaining-card{top:max(104px,calc(env(safe-area-inset-top,0px) + 96px));right:12px;min-width:154px;max-width:180px;padding:10px 11px 10px 13px;border-radius:19px;gap:9px;}
+    .prayer-remaining-label{font-size:.62rem;max-width:122px;}
+    .prayer-remaining-value{font-size:1.02rem;margin-top:4px;}
+    .prayer-remaining-icon{width:34px;height:34px;flex-basis:34px;font-size:1rem;}
+    .home-greeting{padding-right:166px !important;}
+    html[dir="rtl"] .home-greeting{padding-right:8px !important;padding-left:166px !important;}
+  }
+  @media(max-width:360px){
+    .prayer-remaining-card{min-width:142px;right:9px;}
+    .home-greeting{padding-right:150px !important;}
+    html[dir="rtl"] .home-greeting{padding-left:150px !important;}
+  }
+</style>
 </head>
 <body>
 <noscript>
@@ -4187,6 +4233,14 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
       <button class="lang-toggle lang-single" id="langToggle" type="button" aria-label="Switch language">
         <span id="langButtonLabel">English</span>
       </button>
+
+      <div class="prayer-remaining-card" id="prayerRemainingCard" aria-live="polite" aria-label="Time remaining to next prayer">
+        <div class="prayer-remaining-copy">
+          <span class="prayer-remaining-label" id="prayerRemainingLabel">Next prayer</span>
+          <strong class="prayer-remaining-value" id="prayerRemainingValue">—</strong>
+        </div>
+        <span class="prayer-remaining-icon" aria-hidden="true">◷</span>
+      </div>
       <div class="home-top-time" id="homeTopTime" aria-live="off">--:--</div>
       <div class="home-greeting" id="homeGreeting">
         <div class="home-greeting-copy">
