@@ -1,15 +1,15 @@
 {
   "name": "Daily Rhythm",
   "version": "1.0.0-conversation-landing-v10",
-  "build": "2026.09.21-v14",
+  "build": "2026.09.22-v16-phase1-voice",
   "channel": "test",
-  "cacheVersion": "daily-rhythm-v1.0.0-voice-edit-replace-v9",
-  "productFocus": "Talk to your day → voice-first add/edit/delete/replace → deterministic safe schedule updates",
+  "cacheVersion": "daily-rhythm-v1.0.0-phase1-voice-v16",
+  "productFocus": "Phase 1: throw a messy day at Rhythm → understand → review → Done → commit, without leaving My Day",
   "dormantFeatures": [
     "moon",
     "heritage",
     "scholars",
     "ornamental-clock"
   ],
-  "notes": "Immersive My Prayer: full-screen analog clock, day/night sky, faded mosque silhouette, live hour/minute/second hands, compact Qibla, simplified next-prayer/date context."
+  "notes": "Phase 1 voice flow: keeps voice on My Day, adds visible Idle/Listening/Understanding/Review/Done states, stages schedule changes until Done, preserves the spoken draft when the user interrupts before Done, rolls back partial changes when clarification is needed, and keeps long results compact."
 }
