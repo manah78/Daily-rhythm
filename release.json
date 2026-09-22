@@ -1,15 +1,9 @@
 {
-  "name": "Daily Rhythm",
-  "version": "1.0.0-conversation-landing-v10",
-  "build": "2026.09.22-v16-phase1-voice",
-  "channel": "test",
-  "cacheVersion": "daily-rhythm-v1.0.0-phase1-voice-v16",
-  "productFocus": "Phase 1: throw a messy day at Rhythm → understand → review → Done → commit, without leaving My Day",
-  "dormantFeatures": [
-    "moon",
-    "heritage",
-    "scholars",
-    "ornamental-clock"
-  ],
-  "notes": "Phase 1 voice flow: keeps voice on My Day, adds visible Idle/Listening/Understanding/Review/Done states, stages schedule changes until Done, preserves the spoken draft when the user interrupts before Done, rolls back partial changes when clarification is needed, and keeps long results compact."
+  "name": "daily-rhythm-phase1-v16.6-contract-compliance-patch",
+  "version": "16.6",
+  "build": "2026.09.22-v16.5",
+  "channel": "production",
+  "cacheVersion": "daily-rhythm-v1.0.0-phase1-incremental-voice-settings-v16-5",
+  "productFocus": "Incremental multi-turn voice working rhythm + simplified functional settings",
+  "notes": "Adds cumulative working-draft voice patches, explicit commit, 50-character full name, optional profile photo, persistent notifications toggle, and Light/Dark/System appearance."
 }
