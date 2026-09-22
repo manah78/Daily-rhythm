@@ -2596,162 +2596,6 @@
     .status-strip { gap:8px !important; }
   }
 </style>
-
-
-<style id="moon-story-reference-v1">
-  .moon-popover {
-    width:min(92vw,430px) !important;
-    max-height:min(86vh,760px) !important;
-    padding:18px 16px 16px !important;
-    background:
-      radial-gradient(circle at 50% -10%, rgba(65,122,149,.22), transparent 34%),
-      linear-gradient(180deg,#08283d 0%,#061a2b 62%,#071827 100%) !important;
-    border:1px solid rgba(225,184,95,.52) !important;
-    box-shadow:0 26px 70px rgba(0,0,0,.46), inset 0 1px 0 rgba(255,255,255,.06) !important;
-    overflow:auto !important;
-  }
-  .moon-popover .quick-sheet-label {
-    text-transform:none !important; letter-spacing:.04em !important;
-    font-family:Georgia,'Times New Roman',serif !important;
-    color:#f5d88d !important; font-size:.78rem !important;
-  }
-  #moonSheet .moon-phase-art {
-    width:154px !important; height:154px !important; margin:5px auto 10px !important;
-    border-radius:50%;
-    box-shadow:0 0 0 1px rgba(245,216,141,.28), 0 12px 34px rgba(0,0,0,.34), 0 0 28px rgba(197,213,219,.10);
-  }
-  #moonSheet .quick-sheet-title {
-    margin:5px 0 2px !important; font-family:Georgia,'Times New Roman',serif !important;
-    color:#fff5d8 !important; font-size:1.28rem !important;
-  }
-  #moonSheet .moon-illum { color:#cfdde2 !important; font-size:.84rem !important; margin-bottom:12px !important; }
-  .moon-heritage-card {
-    display:grid !important; grid-template-columns:72px 1fr auto !important; gap:11px !important; align-items:center !important;
-    padding:11px 10px !important; margin:12px 0 6px !important;
-    background:linear-gradient(135deg,rgba(12,55,75,.95),rgba(7,31,49,.98)) !important;
-    border:1px solid rgba(229,188,97,.56) !important; border-radius:20px !important;
-    box-shadow:0 12px 28px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.04);
-  }
-  .moon-scholar-avatar {
-    width:72px; height:72px; border-radius:16px; object-fit:cover; object-position:center 18%;
-    border:1px solid rgba(247,220,158,.66); box-shadow:0 7px 18px rgba(0,0,0,.32);
-  }
-  .moon-heritage-copy { min-width:0; }
-  .moon-heritage-card .heritage-kicker { font-size:.56rem !important; margin-bottom:3px !important; }
-  .moon-heritage-card h4 { margin:0 0 3px !important; color:#fff4cf !important; font-family:Georgia,serif !important; font-size:.96rem !important; line-height:1.18 !important; }
-  .moon-heritage-card p { margin:0 !important; color:#d5e0e4 !important; font-size:.72rem !important; line-height:1.32 !important; }
-  .moon-heritage-card button {
-    width:34px !important; height:34px !important; border-radius:50% !important; padding:0 !important;
-    display:grid; place-items:center; background:linear-gradient(145deg,#f6d995,#d9a64c) !important;
-    color:#082338 !important; font-size:0 !important; box-shadow:0 6px 15px rgba(0,0,0,.20);
-  }
-  .moon-heritage-card button::after { content:'›'; font-size:1.45rem; font-weight:800; line-height:1; }
-  .quick-sheet-actions #moonCloseBtn {
-    border:1px solid rgba(229,188,97,.42) !important; background:rgba(255,255,255,.04) !important;
-    color:#f8e8b9 !important; border-radius:999px !important;
-  }
-
-  .heritage-story-card {
-    padding:0 0 14px !important; overflow:hidden;
-    background:linear-gradient(180deg,rgba(8,38,57,.98),rgba(5,24,39,.99)) !important;
-    border:1px solid rgba(225,184,95,.52) !important; border-radius:24px !important;
-    box-shadow:0 24px 54px rgba(0,0,0,.34) !important;
-  }
-  .story-hero-wrap {
-    position:relative; width:100%; aspect-ratio:1.42/1; max-height:300px; overflow:hidden;
-    background:radial-gradient(circle at 50% 35%,#425b6e,#0a2438 70%);
-  }
-  .story-hero-wrap::after {
-    content:''; position:absolute; inset:auto 0 0; height:42%;
-    background:linear-gradient(180deg,transparent,rgba(6,26,42,.96)); pointer-events:none;
-  }
-  .story-hero-image { width:100%; height:100%; object-fit:cover; object-position:center 18%; display:block; }
-  .story-hero-monogram {
-    width:100%; height:100%; display:grid; place-items:center; font-family:Georgia,serif;
-    font-size:4rem; color:#f4d488; background:radial-gradient(circle at 50% 40%,rgba(224,181,88,.22),transparent 42%);
-  }
-  .story-hero-badge {
-    position:absolute; top:12px; left:12px; z-index:2; padding:5px 9px; border-radius:999px;
-    background:rgba(6,25,40,.70); border:1px solid rgba(245,216,141,.34); color:#f8e8b9;
-    font-size:.68rem; font-weight:800; backdrop-filter:blur(8px);
-  }
-  .story-name { margin:2px 18px 0 !important; font-size:1.65rem !important; }
-  .story-name-ar { margin:-4px 18px 0 !important; }
-  .story-meta { margin:0 18px 7px !important; }
-  .story-dots { margin:2px 18px 4px !important; }
-  .story-section-title, .story-copy { margin-left:18px !important; margin-right:18px !important; }
-  .story-section-title {
-    margin-top:7px !important; padding-top:9px; border-top:1px solid rgba(225,184,95,.14);
-    color:#f4d488 !important; letter-spacing:.065em !important;
-  }
-  .story-copy { color:#edf2f0 !important; font-size:.91rem !important; line-height:1.5 !important; }
-  .story-actions { padding:7px 18px 0 !important; }
-  .story-actions button { min-height:42px !important; }
-  @media(max-width:420px) {
-    .moon-heritage-card { grid-template-columns:62px 1fr 32px !important; gap:9px !important; }
-    .moon-scholar-avatar { width:62px; height:62px; }
-    .moon-heritage-card h4 { font-size:.88rem !important; }
-    .moon-heritage-card p { font-size:.68rem !important; }
-  }
-</style>
-
-
-<style id="moon-story-reference-fixes-v1">
-  .moon-heritage-card::after { display:none !important; content:none !important; }
-  .story-hero-image[hidden], .story-hero-monogram[hidden] { display:none !important; }
-  .stories-sheet .sheet-header {
-    background:linear-gradient(180deg,rgba(7,30,47,.98),rgba(6,24,39,.98)) !important;
-    border-bottom:1px solid rgba(221,179,91,.22) !important;
-    color:#fff3d0 !important;
-  }
-  .stories-sheet .sheet-header-meta { color:#fff3d0 !important; }
-  .stories-sheet .sheet-close { background:rgba(221,179,91,.14) !important; color:#f8e5b5 !important; border:1px solid rgba(221,179,91,.26) !important; }
-</style>
-
-<style id="moon-story-reference-polish-v2">
-  .moon-popover { background:linear-gradient(180deg,rgba(8,40,61,.98),rgba(6,26,43,.995) 62%,rgba(7,24,39,.995) 100%) !important; backdrop-filter:blur(14px); }
-  .moon-heritage-card { background:linear-gradient(135deg,rgba(12,55,75,.99),rgba(7,31,49,.995)) !important; }
-  .story-hero-wrap { aspect-ratio:1/1 !important; max-height:278px !important; }
-  .story-hero-image { object-fit:cover !important; object-position:center center !important; }
-</style>
-
-<style id="heritage-story-flow-v2">
-  .heritage-story-card { position:relative; touch-action:pan-y; }
-  .story-page-headline {
-    margin:7px 18px 2px; font-family:Georgia,'Times New Roman',serif;
-    font-size:1.15rem; line-height:1.25; color:#fff2c9; text-align:center;
-  }
-  .story-swipe-hint {
-    margin:0 18px 4px; text-align:center; color:#91a9b5; font-size:.67rem;
-    letter-spacing:.04em;
-  }
-  .heritage-story-card[data-story-page="1"] .story-hero-wrap,
-  .heritage-story-card[data-story-page="2"] .story-hero-wrap { display:none; }
-  .heritage-story-card[data-story-page="1"],
-  .heritage-story-card[data-story-page="2"] { min-height:520px; padding-top:18px !important; }
-  .heritage-story-card[data-story-page="1"] .story-name,
-  .heritage-story-card[data-story-page="2"] .story-name { margin-top:0 !important; }
-  .heritage-story-card .story-section-title,
-  .heritage-story-card .story-copy { transition:opacity .18s ease, transform .18s ease; }
-  .heritage-story-card.is-turning .story-section-title,
-  .heritage-story-card.is-turning .story-copy { opacity:.2; transform:translateX(8px); }
-  .story-dots { min-height:11px; }
-  .story-dot { width:8px !important; height:8px !important; cursor:pointer; }
-  .story-dot.active { transform:scale(1.2); box-shadow:0 0 0 3px rgba(240,200,101,.12); }
-  .story-actions button { min-width:112px; }
-  .story-actions button.primary { box-shadow:0 7px 18px rgba(214,164,71,.16); }
-  .story-page-symbol {
-    width:58px; height:58px; margin:14px auto 6px; border-radius:50%; display:grid; place-items:center;
-    border:1px solid rgba(230,194,92,.40); background:rgba(221,179,91,.08); color:#f4d488;
-    font-size:1.55rem; box-shadow:inset 0 0 24px rgba(221,179,91,.06);
-  }
-  @media(max-width:420px){
-    .heritage-story-card[data-story-page="1"], .heritage-story-card[data-story-page="2"] { min-height:480px; }
-    .story-page-headline { font-size:1.05rem; }
-  }
-</style>
-
-
 <style id="nav-settings-polish-v1">
   /* Bottom navigation: refined line icons and a clear, calm active state. */
   .dock{padding:8px 8px calc(7px + env(safe-area-inset-bottom)) !important;min-height:76px;align-items:center !important;}
@@ -3582,40 +3426,6 @@
     #settingsSheet .prayer-location-actions{grid-template-columns:1fr !important;}
   }
 </style>
-
-
-<style id="voice-sheet-simplify-v1">
-  /* Simplify the add/update sheet: fewer headings, clearer composer, attached submit button. */
-  #voiceSheet .sheet-header-meta{font-size:1.02rem !important;}
-  #voiceSheet .command-label,
-  #voiceSheet .command-status{display:none !important;}
-  #voiceSheet .command-bar{padding:16px !important;}
-  #voiceSheet .command-row{display:block !important;}
-  #voiceSheet .command-input-wrap{position:relative !important;}
-  #commandInput{min-height:156px !important;max-height:40dvh !important;padding:16px 82px 16px 16px !important;font-size:1rem !important;line-height:1.5 !important;}
-  #sendBtn{position:absolute !important;right:14px !important;bottom:14px !important;width:52px !important;height:52px !important;min-width:52px !important;border-radius:18px !important;display:grid !important;place-items:center !important;box-shadow:0 10px 24px rgba(0,0,0,.28) !important;}
-  #voiceSheet .voice-listen-btn{position:absolute;right:14px;top:14px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;border:1.5px solid rgba(239,201,104,.88);background:linear-gradient(180deg,rgba(17,68,88,.98),rgba(6,34,51,.99));color:#fff1cf;box-shadow:0 0 16px rgba(235,190,80,.18);z-index:2;}
-  #voiceSheet .voice-listen-btn svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;}
-  #voiceSheet .voice-listen-btn.is-listening{box-shadow:0 0 0 6px rgba(239,201,104,.10),0 0 22px rgba(239,201,104,.35);animation:voicePulse 1.15s ease-in-out infinite;}
-  #voiceSheet .voice-live-status{min-height:1.35em;margin:9px 0 0;color:var(--dr-gold-hi);font-size:.86rem;font-weight:700;}
-  html[dir="rtl"] #voiceSheet .voice-listen-btn{right:auto;left:14px;}
-  @keyframes voicePulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
-  #voiceSheet .command-edit-hint{margin:10px 0 0 !important;font-size:.84rem !important;}
-  #voiceSheet .examples{padding:12px 14px !important;}
-  #voiceSheet .examples summary{font-size:.92rem !important;}
-  #voiceSheet .example-row{padding:10px 0 !important;}
-  html[dir="rtl"] #commandInput{padding:16px 16px 16px 82px !important;}
-  html[dir="rtl"] #sendBtn{right:auto !important;left:14px !important;}
-  @media(max-width:430px){
-    #voiceSheet .command-bar{padding:14px !important;}
-    #commandInput{min-height:144px !important;padding:14px 74px 14px 14px !important;}
-    html[dir="rtl"] #commandInput{padding:14px 14px 14px 74px !important;}
-    #sendBtn{width:48px !important;height:48px !important;min-width:48px !important;right:12px !important;bottom:12px !important;border-radius:16px !important;}
-    html[dir="rtl"] #sendBtn{right:auto !important;left:12px !important;}
-  }
-</style>
-
-
 <style id="home-top-time-layout-v1">
   .home-top-time{
     width:min(520px,100%);
@@ -3717,89 +3527,6 @@
     #moonSheet .moon-scholar-avatar{height:86px !important;}
   }
 </style>
-
-
-<style id="heritage-story-bank-v2-style">
-  #storiesSheet .story-hero-wrap{
-    min-height:190px !important;
-    height:clamp(190px,29vh,245px) !important;
-    max-height:245px !important;
-    aspect-ratio:auto !important;
-  }
-  #storiesSheet .heritage-story-card[data-story-page="1"] .story-hero-wrap,
-  #storiesSheet .heritage-story-card[data-story-page="2"] .story-hero-wrap{
-    height:clamp(128px,20vh,160px) !important;
-    min-height:128px !important;
-    max-height:160px !important;
-  }
-  #storiesSheet .story-hero-image{
-    filter:saturate(1.06) contrast(1.04) !important;
-  }
-  #storiesSheet .story-page-headline{
-    font-size:clamp(1.08rem,4.8vw,1.4rem) !important;
-    line-height:1.18 !important;
-    color:#fff1cf !important;
-    margin-top:12px !important;
-  }
-  #storiesSheet .story-copy{
-    font-size:.94rem !important;
-    line-height:1.58 !important;
-  }
-  #storiesSheet .story-section-title{
-    color:#dfbd6b !important;
-    letter-spacing:.07em !important;
-  }
-  #storiesSheet .story-hero-badge{
-    border-radius:999px !important;
-  }
-  .heritage-recent{
-    flex:0 0 auto;
-    margin:2px 0 6px;
-    padding:10px 12px;
-    border:1px solid rgba(145,174,186,.18);
-    border-radius:16px;
-    background:rgba(6,29,45,.50);
-  }
-  .heritage-recent summary{
-    cursor:pointer;
-    color:#d7e1e4;
-    font-size:.78rem;
-    font-weight:800;
-  }
-  .heritage-recent-row{
-    display:flex;
-    gap:7px;
-    overflow-x:auto;
-    padding-top:9px;
-    scrollbar-width:none;
-  }
-  .heritage-recent-row::-webkit-scrollbar{display:none;}
-  .heritage-recent-chip{
-    flex:0 0 auto;
-    max-width:220px;
-    min-height:38px;
-    padding:7px 11px;
-    border-radius:999px;
-    border:1px solid rgba(227,183,93,.24);
-    background:rgba(8,40,58,.80);
-    color:#f6ead0;
-    font-size:.72rem;
-    line-height:1.2;
-    text-align:start;
-  }
-  html[dir="rtl"] .heritage-recent-chip{text-align:right;}
-  @media(max-width:390px){
-    #storiesSheet .story-hero-wrap{
-      height:178px !important;min-height:178px !important;max-height:178px !important;
-    }
-    #storiesSheet .heritage-story-card[data-story-page="1"] .story-hero-wrap,
-    #storiesSheet .heritage-story-card[data-story-page="2"] .story-hero-wrap{
-      height:120px !important;min-height:120px !important;max-height:120px !important;
-    }
-  }
-</style>
-
-
 <style id="recurrence-ui-v1">
   .recurrence-badge{
     display:inline-flex;
@@ -4099,32 +3826,20 @@
 </style>
 
 <style id="daily-rhythm-focus-v1">
-  /* 1.0 focused product surface: Schedule + Talk + Awareness.
-     Moon / heritage / scholar experiences remain dormant in source for future experiments. */
+  /* Focus the home surface on My Day + Talk. My Prayer remains its own screen. */
   .dial-only-wrap,
   #skyMoonBadge,
   #magnifier,
   #magnifierToggle,
   #heritageTeaser,
   #moonBackdrop,
-  #moonSheet,
-  #storiesBackdrop,
-  #storiesSheet,
-  #openStoriesBtn,
-  #settingsMoonEnabled,
-  #settingsMoonPosition,
-  label[for="settingsMoonEnabled"],
-  label[for="settingsMoonPosition"] { display:none !important; }
+  #moonSheet { display:none !important; }
 
   /* Make the living day, not the ornamental clock, the visual center. */
   .clock-home .stage { padding-bottom: 104px !important; }
   .next-up-card { margin-top: 16px !important; }
   .activity-reminder { margin-top: 14px !important; }
-  .dock { grid-template-columns: 1fr auto 1fr 1fr !important; }
-  .dock #openScheduleBtn { order:1; }
-  .dock #openVoiceBtn { order:2; }
-  .dock #openLogsBtn { order:3; }
-  .dock #openSettingsBtn { order:4; }
+  .dock { grid-template-columns: repeat(4, minmax(0,1fr)) !important; }
 
   @media (max-width: 390px) {
     .dock { gap: 5px !important; }
@@ -4341,8 +4056,6 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
   #voiceSheet .command-row{align-items:stretch !important;flex:1 0 auto !important;}
   #voiceSheet .command-input-wrap{display:flex !important;flex-direction:column !important;flex:1 1 auto !important;}
   #voiceSheet #commandInput{min-height:clamp(230px,38dvh,390px) !important;max-height:48dvh !important;flex:1 1 auto !important;}
-  .voice-quick-prompts{display:flex;gap:8px;overflow-x:auto;padding:10px 0 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
-  .voice-quick-prompts::-webkit-scrollbar{display:none}.voice-quick-prompts button{flex:0 0 auto;min-height:38px;border-radius:999px;border:1px solid rgba(227,183,93,.30);background:rgba(5,26,41,.72);color:#eadbb8;padding:8px 12px;font-weight:750;font-size:.78rem;}
   .clock-home{overflow-y:auto !important;-webkit-overflow-scrolling:touch !important;overscroll-behavior-y:auto !important;touch-action:pan-y !important;}
   .stage{padding-bottom:calc(110px + env(safe-area-inset-bottom,0px)) !important;}
   .home-talk-cta,.next-up-card,.home-day-preview{margin-top:18px !important;}
@@ -4356,26 +4069,16 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
 
 <style id="phase1-inline-voice-v16-css">
   /* Phase 1: voice stays on My Day; no screen hop. */
-  .phase1-legacy-voice-sheet,#voiceBackdrop{display:none !important;}
   .home-voice-shell{width:100%;margin-top:18px;}
   .home-voice-shell #homeTalkCta{margin-top:0 !important;width:100%;}
   .home-voice-shell.is-open #homeTalkCta{border-bottom-left-radius:14px !important;border-bottom-right-radius:14px !important;}
   .home-voice-panel{margin-top:10px;border:1px solid rgba(227,183,93,.34);border-radius:22px;background:linear-gradient(180deg,rgba(8,39,58,.96),rgba(4,24,39,.98));box-shadow:0 16px 38px rgba(0,0,0,.22);overflow:hidden;}
   .home-voice-panel[hidden]{display:none !important;}
-  .home-voice-state{display:flex;align-items:center;gap:8px;padding:12px 14px 0;color:#f2d58d;font-size:.78rem;letter-spacing:.02em;}
-  .home-voice-state-dot{width:8px;height:8px;border-radius:50%;background:#8b96a0;box-shadow:0 0 0 4px rgba(139,150,160,.10);}
-  .home-voice-shell.is-listening .home-voice-state-dot{background:#7fd3a3;box-shadow:0 0 0 5px rgba(127,211,163,.10),0 0 14px rgba(127,211,163,.22);animation:voicePulse 1.15s ease-in-out infinite;}
-  .home-voice-shell.is-processing .home-voice-state-dot{background:#e8bd66;box-shadow:0 0 0 5px rgba(232,189,102,.10);}
-  .home-voice-shell.is-review .home-voice-state-dot{background:#74b8d3;box-shadow:0 0 0 5px rgba(116,184,211,.10);}
   .home-command-bar{padding:12px 14px 14px !important;background:transparent !important;border:0 !important;box-shadow:none !important;}
   .home-command-bar .command-row{display:grid !important;grid-template-columns:minmax(0,1fr) 48px !important;align-items:end !important;gap:10px !important;}
   .home-command-bar .command-input-wrap{position:relative !important;}
   .home-command-bar #commandInput{min-height:132px !important;max-height:34dvh !important;padding:15px 76px 15px 15px !important;background:rgba(3,19,32,.82) !important;color:var(--dr-ivory) !important;border:1px solid rgba(227,183,93,.33) !important;border-radius:16px !important;line-height:1.5 !important;}
   html[dir=rtl] .home-command-bar #commandInput{padding:15px 15px 15px 76px !important;text-align:right;}
-  .home-command-bar .voice-listen-btn{position:absolute;right:12px;top:12px;width:50px;height:50px;border-radius:50%;display:grid;place-items:center;border:1.5px solid rgba(239,201,104,.88);background:linear-gradient(180deg,rgba(17,68,88,.98),rgba(6,34,51,.99));color:#fff1cf;box-shadow:0 0 16px rgba(235,190,80,.18);z-index:2;}
-  html[dir=rtl] .home-command-bar .voice-listen-btn{right:auto;left:12px;}
-  .home-command-bar .voice-listen-btn svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;}
-  .home-command-bar .voice-listen-btn.is-listening{box-shadow:0 0 0 6px rgba(239,201,104,.10),0 0 22px rgba(239,201,104,.35);animation:voicePulse 1.15s ease-in-out infinite;}
   .home-command-bar .voice-live-status{min-height:1.35em;margin:8px 0 0;color:var(--dr-gold-hi);font-size:.82rem;font-weight:700;}
   .home-command-bar .command-edit-hint{margin:7px 0 0 !important;font-size:.77rem !important;color:#a9bcc4 !important;}
   .home-command-bar .command-status{margin-top:10px !important;}
@@ -4392,6 +4095,124 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     .home-voice-shell{margin-top:12px}.home-voice-panel{border-radius:18px}.home-command-bar{padding:10px 10px 12px !important}.home-command-bar #commandInput{min-height:118px !important}.voice-review-actions{grid-template-columns:1fr;}
   }
 </style>
+
+<style id="phase1-mobile-hotfix-v16-1-css">
+  /* v16.1: keep invisible dock placeholders from consuming grid cells. */
+  .dock > [hidden]{display:none !important;}
+  .dock{
+    display:grid !important;
+    grid-template-columns:repeat(4,minmax(0,1fr)) !important;
+    grid-auto-flow:column !important;
+    grid-auto-columns:minmax(0,1fr) !important;
+    align-items:center !important;
+    gap:2px !important;
+    width:100% !important;
+    min-height:72px !important;
+    padding:7px 6px calc(7px + env(safe-area-inset-bottom,0px)) !important;
+    position:relative !important;
+    flex:0 0 auto !important;
+  }
+  .dock-btn{
+    display:flex !important;
+    width:100% !important;
+    min-width:0 !important;
+    max-width:none !important;
+    min-height:56px !important;
+    margin:0 !important;
+    padding:6px 2px 5px !important;
+    justify-content:center !important;
+    align-items:center !important;
+  }
+  .dock-btn span:last-child{white-space:nowrap !important;overflow:hidden !important;text-overflow:ellipsis !important;}
+  #openScheduleBtn{grid-column:1 !important;}
+  #openMyPrayerBtn{grid-column:2 !important;}
+  #openLogsBtn{grid-column:3 !important;}
+  #openSettingsBtn{grid-column:4 !important;}
+
+  /* One intentional scroll container. */
+  .app-shell{height:100dvh !important;min-height:100dvh !important;overflow:hidden !important;}
+  .clock-home{flex:1 1 auto !important;min-height:0 !important;overflow-y:auto !important;overflow-x:hidden !important;-webkit-overflow-scrolling:touch !important;overscroll-behavior-y:contain !important;touch-action:pan-y !important;}
+  .clock-home .stage{min-height:max-content !important;padding-bottom:28px !important;}
+
+  /* Arabic: align greeting/name as one RTL block; isolate Latin names. */
+  html[dir="rtl"] .home-greeting{direction:rtl !important;text-align:right !important;}
+  html[dir="rtl"] .home-greeting-copy{width:100% !important;max-width:100% !important;align-items:flex-end !important;text-align:right !important;direction:rtl !important;}
+  html[dir="rtl"] .home-greeting-small,
+  html[dir="rtl"] .home-greeting-motto{width:100% !important;text-align:right !important;}
+  html[dir="rtl"] .home-greeting-name{align-self:flex-end !important;text-align:right !important;direction:ltr !important;unicode-bidi:isolate !important;}
+  html[dir="rtl"] .home-greeting-rule{align-self:flex-end !important;}
+
+  /* Arabic prayer countdown: stable right-aligned copy with the icon on the opposite side. */
+  html[dir="rtl"] .prayer-remaining-card{direction:rtl !important;text-align:right !important;}
+  html[dir="rtl"] .prayer-remaining-copy{display:flex !important;flex-direction:column !important;align-items:flex-start !important;text-align:right !important;direction:rtl !important;min-width:0 !important;flex:1 1 auto !important;}
+  html[dir="rtl"] .prayer-remaining-label,
+  html[dir="rtl"] .prayer-remaining-value{width:100% !important;text-align:right !important;}
+  html[dir="rtl"] .prayer-remaining-value{direction:rtl !important;unicode-bidi:plaintext !important;}
+  html[dir="rtl"] .prayer-remaining-icon{order:2 !important;flex:0 0 auto !important;}
+
+  @media(max-width:430px){
+    .dock{grid-template-columns:repeat(4,minmax(0,1fr)) !important;}
+    .dock-btn{font-size:.62rem !important;}
+    html[dir="rtl"] .prayer-remaining-card{align-self:flex-end !important;}
+  }
+</style>
+
+<style id="phase1-voice-workspace-v16-3-css">
+  /* v16.3: one voice state, one microphone, one clear submit path. */
+  .home-voice-shell.is-open #homeTalkCta{
+    min-height:190px !important;
+    padding:24px 20px !important;
+    display:flex !important;
+    flex-direction:column !important;
+    justify-content:center !important;
+    align-items:center !important;
+    gap:12px !important;
+    border-radius:34px !important;
+    text-align:center !important;
+  }
+  .home-voice-shell.is-open #homeTalkCta .home-talk-mic{
+    width:92px !important;height:92px !important;flex:0 0 92px !important;
+    display:grid !important;place-items:center !important;
+    border:2px solid rgba(239,201,104,.96) !important;border-radius:50% !important;
+    box-shadow:0 0 0 8px rgba(239,201,104,.08),0 16px 34px rgba(0,0,0,.25) !important;
+  }
+  .home-voice-shell.is-open #homeTalkCta .home-talk-mic svg{width:48px !important;height:48px !important;}
+  .home-voice-shell.is-open #homeTalkCta .home-talk-copy{display:flex !important;flex-direction:column !important;align-items:center !important;gap:5px !important;}
+  .home-voice-shell.is-open #homeTalkTitle{font-size:clamp(1.7rem,8vw,2.35rem) !important;line-height:1.02 !important;font-weight:800 !important;text-align:center !important;}
+  .home-voice-shell.is-open #homeTalkSubtitle{font-size:.94rem !important;line-height:1.35 !important;text-align:center !important;max-width:280px !important;}
+  .home-voice-shell.is-open .home-talk-audio{display:none !important;}
+  .home-voice-shell.is-listening #homeTalkCta{box-shadow:0 0 0 2px rgba(127,211,163,.16),0 18px 44px rgba(0,0,0,.26) !important;}
+  .home-voice-shell.is-listening #homeTalkCta .home-talk-mic{animation:voicePulse 1.15s ease-in-out infinite !important;}
+
+  .home-voice-panel{margin-top:12px !important;padding:0 !important;}
+  .home-command-bar{padding:14px !important;}
+  .home-command-bar .command-row{display:flex !important;flex-direction:column !important;gap:12px !important;}
+  .home-command-bar #commandInput{
+    min-height:180px !important;max-height:34dvh !important;
+    padding:18px !important;border-radius:18px !important;
+    font-size:1.08rem !important;line-height:1.5 !important;
+  }
+  html[dir=rtl] .home-command-bar #commandInput{padding:18px !important;}
+  .home-command-bar .voice-live-status{margin:10px 2px 0 !important;min-height:0 !important;font-size:.86rem !important;text-align:center !important;}
+  .home-command-bar .command-edit-hint{margin:6px 2px 0 !important;text-align:center !important;}
+  .home-command-bar .command-status{margin:10px 0 0 !important;text-align:center !important;}
+  .home-command-bar .command-status.is-default:empty{display:none !important;}
+  .voice-review-btn{
+    width:100% !important;min-height:54px !important;border-radius:16px !important;
+    border:1px solid rgba(227,183,93,.42) !important;
+    background:linear-gradient(180deg,#efd17f,#cb9743) !important;color:#082136 !important;
+    font-size:1rem !important;font-weight:850 !important;letter-spacing:.01em !important;
+    box-shadow:0 10px 24px rgba(0,0,0,.18) !important;
+  }
+  .voice-review-btn:disabled{opacity:.38 !important;box-shadow:none !important;}
+  .voice-commit-review{margin-top:14px !important;}
+  @media(max-width:390px){
+    .home-voice-shell.is-open #homeTalkCta{min-height:172px !important;padding:20px 16px !important;}
+    .home-voice-shell.is-open #homeTalkCta .home-talk-mic{width:82px !important;height:82px !important;flex-basis:82px !important;}
+    .home-command-bar #commandInput{min-height:150px !important;}
+  }
+</style>
+
 </head>
 <body>
 <noscript>
@@ -4464,30 +4285,16 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
           <span class="home-talk-audio home-talk-audio-right" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
         </button>
         <div class="home-voice-panel" id="homeVoicePanel" hidden>
-          <div class="home-voice-state" aria-live="polite">
-            <span class="home-voice-state-dot" aria-hidden="true"></span>
-            <strong id="voicePhaseLabel">Ready</strong>
-          </div>
           <div class="command-bar home-command-bar">
-            <p class="command-label" data-i18n="commandLabel">What do you want to do?</p>
             <div class="command-row">
               <div class="command-input-wrap">
                 <textarea id="commandInput" rows="4" maxlength="1200" spellcheck="true" placeholder="Say or type it naturally — add, move, remove, or ask what’s free." data-i18n-placeholder="commandPlaceholder"></textarea>
-                <button type="button" id="voiceListenBtn" class="voice-listen-btn" aria-label="Start listening" title="Start listening">
-                  <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="18" y="7" width="12" height="24" rx="6"></rect><path d="M13 24v2a11 11 0 0 0 22 0v-2M24 37v7M17 44h14"></path></svg>
-                </button>
-                <p class="voice-live-status" id="voiceLiveStatus" role="status" aria-live="polite">Tap the microphone when you are ready.</p>
-                <p class="command-edit-hint" data-i18n="commandEditHint">Speak or type naturally. Nothing changes until you tap Done.</p>
+                <p class="voice-live-status" id="voiceLiveStatus" role="status" aria-live="polite">Tap the large microphone above to start.</p>
+                <p class="command-edit-hint" data-i18n="commandEditHint">Nothing changes until you review and tap Done.</p>
               </div>
-              <button id="sendBtn" class="icon-btn" title="Review" aria-label="Review">➤</button>
+              <button id="sendBtn" class="voice-review-btn" type="button" title="Review command" aria-label="Review command" disabled>Review command</button>
             </div>
-            <p class="command-status" id="commandStatus" data-i18n="commandStatusDefault">Your day is listening.</p>
-            <div class="voice-quick-prompts" id="voiceQuickPrompts" aria-label="Things you can ask">
-              <button type="button" data-voice-prompt="capabilities">What can I do?</button>
-              <button type="button" data-voice-prompt="free">Find me a free time</button>
-              <button type="button" data-voice-prompt="edit">How do I edit an activity?</button>
-              <button type="button" data-voice-prompt="help">What can Daily Rhythm do?</button>
-            </div>
+            <p class="command-status" id="commandStatus" aria-live="polite"></p>
             <div class="command-confirm" id="commandConfirm" role="status" aria-live="polite">
               <span class="command-confirm-text" id="commandConfirmText"></span>
               <span class="command-confirm-actions">
@@ -4774,7 +4581,6 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
           <button class="settings-nav-row" type="button" data-settings-open="language"><span><b id="settingsLanguageRowTitle">Language</b><small id="settingsLanguageRowValue">English</small></span><i aria-hidden="true">›</i></button>
           <button class="settings-nav-row" type="button" data-settings-open="prayer"><span><b id="settingsPrayerRowTitle">My Prayer</b><small id="settingsPrayerRowValue">Location, moon and prayer preferences</small></span><i aria-hidden="true">›</i></button>
           <button class="settings-nav-row" type="button" data-settings-open="profile"><span><b id="settingsProfileRowTitle">Personalization</b><small id="settingsProfileRowValue">Name and personal preferences</small></span><i aria-hidden="true">›</i></button>
-          <button class="settings-nav-row" type="button" data-settings-open="stories"><span><b id="settingsStoriesRowTitle">Heritage stories</b><small id="settingsStoriesRowValue">Choose how often stories appear</small></span><i aria-hidden="true">›</i></button>
           <button class="settings-nav-row" type="button" data-settings-open="about"><span><b id="settingsAboutRowTitle">About & data</b><small id="settingsAboutRowValue">App information and test data</small></span><i aria-hidden="true">›</i></button>
         </div>
       </div>
@@ -4804,12 +4610,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
 
       <div class="settings-child" data-settings-panel="prayer" hidden>
         <button class="settings-child-back" type="button" data-settings-back>‹ <span>Settings</span></button>
-        <section class="settings-section settings-prayer"><h3 id="settingsPrayerTitle">My Prayer</h3><p class="settings-child-intro" id="settingsPrayerIntro">Prayer times use your chosen location. The full clock, moon, dates and Qibla compass live in My Prayer.</p><div class="prayer-location-card" id="prayerLocationCard"><div class="prayer-location-head"><div class="prayer-location-copy"><strong class="prayer-location-title" id="prayerLocationTitle">Prayer times</strong><span class="prayer-location-status" id="prayerLocationStatus">Checking location…</span></div></div><div class="prayer-location-actions"><button type="button" class="primary" id="prayerUseCurrent">Use current location</button><button type="button" id="prayerChooseCity">Choose city</button></div></div><div class="settings-row"><label for="settingsMoonEnabled" data-i18n="moonShow">Show moon on clock</label><input class="settings-switch" type="checkbox" id="settingsMoonEnabled" checked /></div><div class="settings-row"><label for="settingsMoonPosition" data-i18n="moonPosition">Moon position</label><select id="settingsMoonPosition" class="settings-control"><option value="auto" data-i18n="moonPositionAuto">Follow phase</option><option value="top-right" data-i18n="moonTopRight">Top right</option><option value="top-left" data-i18n="moonTopLeft">Top left</option><option value="bottom-right" data-i18n="moonBottomRight">Bottom right</option><option value="bottom-left" data-i18n="moonBottomLeft">Bottom left</option></select></div></section>
-      </div>
-
-      <div class="settings-child" data-settings-panel="stories" hidden>
-        <button class="settings-child-back" type="button" data-settings-back>‹ <span>Settings</span></button>
-        <section class="settings-section heritage-settings"><h3 id="heritageSettingsTitle">Heritage stories</h3><div class="settings-row"><label for="heritageEnabled" id="heritageEnabledLabel">Show heritage stories</label><input class="settings-switch" type="checkbox" id="heritageEnabled" checked /></div><div class="settings-row"><label for="heritageFrequency" id="heritageFrequencyLabel">Story frequency</label><select id="heritageFrequency" class="settings-control"><option value="daily">About once a day</option><option value="few">A few times a week</option><option value="manual">Only when I open Stories</option></select></div><div class="settings-row"><label for="heritageOnCompletion" id="heritageCompletionLabel">Include after activity completion</label><input class="settings-switch" type="checkbox" id="heritageOnCompletion" checked /></div></section>
+        <section class="settings-section settings-prayer"><h3 id="settingsPrayerTitle">My Prayer</h3><p class="settings-child-intro" id="settingsPrayerIntro">Prayer times use your chosen location. The full clock, moon, dates and Qibla compass live in My Prayer.</p><div class="prayer-location-card" id="prayerLocationCard"><div class="prayer-location-head"><div class="prayer-location-copy"><strong class="prayer-location-title" id="prayerLocationTitle">Prayer times</strong><span class="prayer-location-status" id="prayerLocationStatus">Checking location…</span></div></div><div class="prayer-location-actions"><button type="button" class="primary" id="prayerUseCurrent">Use current location</button><button type="button" id="prayerChooseCity">Choose city</button></div></div></section>
       </div>
 
       <div class="settings-child" data-settings-panel="about" hidden>
@@ -4820,65 +4621,9 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     </div>
   </div>
 
-  <!-- Heritage stories sheet -->
-  <div class="sheet-backdrop" id="storiesBackdrop"></div>
-  <div class="sheet stories-sheet" id="storiesSheet" role="dialog" aria-modal="true" hidden aria-hidden="true">
-    <div class="sheet-handle"></div>
-    <div class="sheet-header">
-      <span class="sheet-header-meta" id="storiesHeader">Stories</span>
-      <button class="sheet-close" id="storiesCloseBtn" aria-label="Close">✕</button>
-    </div>
-    <div class="sheet-body">
-      <div class="scholar-strip" id="scholarStrip" aria-label="Choose a scholar"></div>
-      <div class="heritage-story-card" id="heritageStoryCard">
-        <div class="story-hero-wrap" id="storyHeroWrap">
-          <img class="story-hero-image" id="storyHeroImage" src="assets/embedded-744a017c18ed.png" alt="Illustrated scholar portrait" />
-          <div class="story-hero-monogram" id="storyHeroMonogram" hidden>ب</div>
-          <span class="story-hero-badge" id="storyHeroBadge">1 of 5</span>
-        </div>
-        <div class="story-medallion" id="storyMedallion" hidden>ب</div>
-        <h2 class="story-name" id="storyName">Al-Biruni</h2>
-        <p class="story-name-ar" id="storyNameAr">البيروني</p>
-        <div class="story-meta" id="storyMeta">973–1048 · astronomy · mathematics · geography</div>
-        <div class="story-page-headline" id="storyPageHeadline">A question about the sky</div>
-        <div class="story-swipe-hint" id="storySwipeHint">Swipe to continue</div>
-        <div class="story-dots" id="storyDots"></div>
-        <div class="story-related-visual" id="storyRelatedVisual" hidden>
-          <img class="story-related-image" id="storyRelatedImage" alt="Related illustration" />
-          <div class="story-related-copy">
-            <div class="story-related-kicker" id="storyRelatedKicker">Related visual</div>
-            <div class="story-related-title" id="storyRelatedTitle">Observation & light</div>
-            <div class="story-related-caption" id="storyRelatedCaption">An illustration that connects this scholar to the field they advanced.</div>
-          </div>
-        </div>
-        <p class="story-section-title" id="storySectionTitle">Why you are seeing this</p>
-        <p class="story-copy" id="storyContext">You opened the moon. Al-Biruni studied the sky, time and the Earth with mathematics and observation.</p>
-        <p class="story-section-title" id="storyContributionTitle">What he contributed</p>
-        <p class="story-copy" id="storyContribution">He wrote extensively on astronomy and devised a geometric method for estimating the Earth’s radius from observations made from a mountain.</p>
-        <p class="story-section-title" id="storyLegacyTitle">Why it still matters</p>
-        <p class="story-copy" id="storyLegacy">His work is a reminder that careful measurement can connect the sky above us with the world beneath our feet.</p>
-        <div class="story-actions">
-          <button type="button" id="storyPrev">← Back</button>
-          <button type="button" class="primary" id="storyNext">Next →</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="heritage-completion-toast" id="heritageCompletionToast" role="status" aria-live="polite">
-    <strong id="heritageToastTitle">A moment from our heritage</strong>
-    <span id="heritageToastCopy">Your study session connects naturally to a story about learning and discovery.</span>
-    <button type="button" id="heritageToastOpen">View story</button>
-  </div>
 
-  <!-- Legacy voice sheet retained as an inert shell for compatibility; Phase 1 voice now lives on My Day. -->
-  <div class="sheet-backdrop" id="voiceBackdrop"></div>
-  <div class="sheet phase1-legacy-voice-sheet" id="voiceSheet" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="sheet-header"><button class="sheet-close" id="voiceCloseBtn" aria-label="Close">✕</button></div>
-    <div class="sheet-body"></div>
-  </div>
-
-  <!-- Persistent controls over the clock: My Day / Voice / History / Settings -->
+  <!-- Persistent navigation: My Day / My Prayer / History / Settings -->
   <div class="dock">
     <button class="dock-btn" id="openScheduleBtn" type="button">
       <span class="dock-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V21h13V9.5"/><path d="M9.2 21v-6.4h5.6V21"/></svg></span><span data-i18n="navSchedule">My Day</span>
@@ -4886,10 +4631,6 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     <button class="dock-btn" id="openMyPrayerBtn" type="button">
       <span class="dock-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3c-3.5 2.5-5.5 5.4-5.5 8.8V20h11v-8.2C17.5 8.4 15.5 5.5 12 3Z"/><path d="M9 20v-5h6v5"/><path d="M8.3 8.7h7.4"/></svg></span><span id="navMyPrayerLabel">My Prayer</span>
     </button>
-    <button class="dock-btn" id="openStoriesBtn" type="button" hidden aria-hidden="true" tabindex="-1">
-      <span class="dock-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5c2.7-.8 5.3-.3 8 1.4v12c-2.7-1.7-5.3-2.2-8-1.4z"/><path d="M20 5.5c-2.7-.8-5.3-.3-8 1.4v12c2.7-1.7 5.3-2.2 8-1.4z"/></svg></span><span id="navStoriesLabel">Stories</span>
-    </button>
-    <button id="openVoiceBtn" type="button" hidden aria-hidden="true" tabindex="-1"></button>
     <button class="dock-btn" id="openLogsBtn" type="button">
       <span class="dock-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4.8 8.2A8 8 0 1 1 4 15"/><path d="M4.8 8.2V3.8M4.8 8.2H9"/><path d="M12 7.5v5l3.5 2"/></svg></span><span data-i18n="navLogs">History</span>
     </button>
@@ -4941,7 +4682,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
       commandEditHint: 'Speak or type naturally. Nothing changes until you tap Done.',
       commandLabel: "What do you want to do?",
       sendBtn: "Go",
-      commandStatusDefault: "Your day is listening.",
+      commandStatusDefault: "",
       examplesSummary: "Examples",
       examplesNote: 'It only recognizes an activity already sitting in "Today\'s rhythm" — add it first with an "add" command if it\'s not there yet.',
       nextLabel: "Next", inLabel: "in",
@@ -4980,7 +4721,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
       commandEditHint: 'تحدّث أو اكتب بطبيعتك. لن يتغير شيء حتى تضغط «تم».',
       commandLabel: "ماذا تريد أن تفعل؟",
       sendBtn: "إرسال",
-      commandStatusDefault: "يومك يستمع إليك.",
+      commandStatusDefault: "",
       examplesSummary: "أمثلة",
       examplesNote: 'يتعرف فقط على نشاط موجود بالفعل في "إيقاع اليوم" — أضفه أولاً بأمر "أضف" إذا لم يكن موجوداً.',
       nextLabel: "التالي", inLabel: "خلال",
@@ -9239,7 +8980,8 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
 
   function setVoicePhase(phase = 'idle', label = '') {
     const shell = document.getElementById('homeVoiceShell');
-    const phaseLabel = document.getElementById('voicePhaseLabel');
+    const title = document.getElementById('homeTalkTitle');
+    const subtitle = document.getElementById('homeTalkSubtitle');
     if (shell) {
       shell.classList.remove('is-listening','is-processing','is-review','is-done');
       if (phase === 'listening') shell.classList.add('is-listening');
@@ -9247,32 +8989,50 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
       if (phase === 'review') shell.classList.add('is-review');
       if (phase === 'done') shell.classList.add('is-done');
     }
-    const defaults = currentLang === 'ar'
-      ? { idle:'جاهز', listening:'أستمع', processing:'أفهم', review:'راجع قبل الحفظ', done:'تم' }
-      : { idle:'Ready', listening:'Listening', processing:'Understanding', review:'Review before saving', done:'Done' };
-    if (phaseLabel) phaseLabel.textContent = label || defaults[phase] || defaults.idle;
+    const copy = currentLang === 'ar'
+      ? {
+          idle:['تحدّث مع يومك','اضغط للبدء أو للمتابعة'],
+          listening:['أستمع إليك…','اضغط مرة أخرى لإيقاف التسجيل'],
+          processing:['أفهم طلبك…','لحظة واحدة'],
+          review:['راجع طلبك','لن يتغير شيء حتى تضغط تم'],
+          done:['تم','تم تحديث يومك']
+        }
+      : {
+          idle:['Talk to your day','Tap to speak or continue'],
+          listening:['Listening…','Tap again to stop'],
+          processing:['Understanding…','One moment'],
+          review:['Review your command','Nothing changes until you tap Done'],
+          done:['Done','Your day is updated']
+        };
+    const c = copy[phase] || copy.idle;
+    if (title) title.textContent = label || c[0];
+    if (subtitle) subtitle.textContent = c[1];
+  }
+
+  function syncVoiceReviewButton() {
+    const btn = document.getElementById('sendBtn');
+    if (!btn) return;
+    const hasDraft = !!(commandInput?.value || '').trim();
+    btn.disabled = !hasDraft || !!activeRecognition;
+    btn.textContent = currentLang === 'ar' ? 'مراجعة الطلب' : 'Review command';
+    btn.setAttribute('aria-label', btn.textContent);
   }
 
   function setVoiceLiveStatus(message, state = '') {
     const status = document.getElementById('voiceLiveStatus');
-    const btn = document.getElementById('voiceListenBtn');
     if (status) status.textContent = message || '';
-    if (btn) {
-      btn.classList.toggle('is-listening', state === 'listening');
-      btn.setAttribute('aria-label', state === 'listening'
-        ? (currentLang === 'ar' ? 'إيقاف الاستماع' : 'Stop listening')
-        : (currentLang === 'ar' ? 'متابعة التحدث' : 'Continue speaking'));
-    }
     if (state === 'listening') setVoicePhase('listening');
     else if (state === 'processing') setVoicePhase('processing');
     else if (state === 'review') setVoicePhase('review');
     else if (state === 'done') setVoicePhase('done');
     else if (!document.getElementById('voiceCommitReview')?.hidden) setVoicePhase('review');
     else setVoicePhase('idle');
+    syncVoiceReviewButton();
   }
 
   function stopVoiceListening() {
     if (activeRecognition) {
+      setVoiceLiveStatus(currentLang === 'ar' ? 'جارٍ إنهاء التسجيل…' : 'Finishing your recording…', 'processing');
       try { activeRecognition.stop(); } catch (_) {}
     }
   }
@@ -9329,6 +9089,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
       if (commandInput) {
         commandInput.value = visible;
         resizeCommandInput();
+        syncVoiceReviewButton();
       }
     };
     recognition.onerror = (event) => {
@@ -9354,8 +9115,8 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
       }
       const hasDraft = !!(commandInput?.value || '').trim();
       setVoiceLiveStatus(hasDraft
-        ? (currentLang === 'ar' ? 'تم حفظ المسودة. اضغط الميكروفون للمتابعة أو إرسال عند الانتهاء.' : 'Draft saved. Tap the microphone to continue, or Send when finished.')
-        : (currentLang === 'ar' ? 'اضغط الميكروفون عندما تكون جاهزاً.' : 'Tap the microphone when you are ready.'), 'idle');
+        ? (currentLang === 'ar' ? 'تم إيقاف التسجيل. راجع النص ثم اضغط «مراجعة الطلب»، أو اضغط الميكروفون للمتابعة.' : 'Recording stopped. Review the text, then tap Review command — or tap the microphone to continue.')
+        : (currentLang === 'ar' ? 'اضغط الميكروفون الكبير للبدء.' : 'Tap the large microphone above to start.'), hasDraft ? 'review' : 'idle');
     };
 
     try {
@@ -9368,7 +9129,6 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
 
   const scheduleSheet = makeSheet('scheduleSheet', 'scheduleBackdrop', 'openScheduleBtn', 'scheduleCloseBtn', () => { renderLegend(); renderSuggestions(); });
   const logsSheet = makeSheet('logsSheet', 'logsBackdrop', 'openLogsBtn', 'logsCloseBtn', () => { renderLogs(); });
-  const voiceSheet = makeSheet('voiceSheet', 'voiceBackdrop', 'openVoiceBtn', 'voiceCloseBtn', () => {});
   const settingsSheet = makeSheet('settingsSheet', 'settingsBackdrop', 'openSettingsBtn', 'settingsCloseBtn', () => { syncSettingsUI(); });
   openSheets = [scheduleSheet, logsSheet, settingsSheet];
 
@@ -9381,7 +9141,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     shell?.classList.add('is-open');
     trigger?.setAttribute('aria-expanded','true');
     if (startListening) startVoiceListening();
-    else commandInput?.focus();
+    else setVoiceLiveStatus(currentLang === 'ar' ? 'اضغط الميكروفون الكبير للبدء.' : 'Tap the large microphone above to start.', 'idle');
   }
 
   document.getElementById('homeTalkCta')?.addEventListener('click', () => {
@@ -9390,12 +9150,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     else if (activeRecognition) stopVoiceListening();
     else startVoiceListening();
   });
-  document.getElementById('voiceListenBtn')?.addEventListener('click', () => {
-    if (activeRecognition) stopVoiceListening();
-    else startVoiceListening();
-  });
-  document.getElementById('voiceCloseBtn')?.addEventListener('click', stopVoiceListening);
-  document.getElementById('voiceBackdrop')?.addEventListener('click', stopVoiceListening);
+  commandInput?.addEventListener('input', syncVoiceReviewButton);
 
   function syncSettingsUI() {
     const moonEnabled = document.getElementById('settingsMoonEnabled');
@@ -9714,452 +9469,10 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
   }
 })();
 </script>
-
-<script id="heritage-experience-v2">
-(function(){
-  const SETTINGS_KEY='dailyRhythmHeritageSettings_v1';
-  const HISTORY_KEY='dailyRhythmHeritageStoryHistory_v2';
-  let settings={enabled:true,frequency:'few',onCompletion:true};
-  try { settings={...settings,...JSON.parse(localStorage.getItem(SETTINGS_KEY)||'{}')}; } catch(_){}
-
-  const $=id=>document.getElementById(id);
-  const ar=()=>document.documentElement.lang==='ar';
-  const t=(en,arText)=>ar()?arText:en;
-  const AS='assets/';
-
-  const scholars=[
-    {id:'biruni',monogram:'ب',name:'Al-Biruni',nameAr:'البيروني',meta:'973–1048 · Astronomy · Mathematics · Geography'},
-    {id:'haytham',monogram:'هـ',name:'Ibn al-Haytham',nameAr:'ابن الهيثم',meta:'c. 965–1040 · Optics · Mathematics · Astronomy'},
-    {id:'khwarizmi',monogram:'خ',name:'Al-Khwarizmi',nameAr:'الخوارزمي',meta:'c. 780–850 · Mathematics · Astronomy · Geography'},
-    {id:'zahrawi',monogram:'ز',name:'Al-Zahrawi',nameAr:'الزهراوي',meta:'936–1013 · Medicine · Surgery · Al-Andalus'},
-    {id:'idrisi',monogram:'إ',name:'Al-Idrisi',nameAr:'الإدريسي',meta:'c. 1100–1165 · Geography · Cartography · Al-Andalus/Sicily'}
-  ];
-
-  const storyBank=[
-    {
-      id:'biruni-earth-radius',scholarId:'biruni',image:(window.DR_ASSET_DATA&&window.DR_ASSET_DATA["story-biruni-earth-radius.webp"])||'assets/story-biruni-earth-radius.webp',
-      categories:['moon','astronomy','prayer','science','measurement'],
-      titleEn:'How could a mountain help measure the Earth?',titleAr:'كيف يمكن لجبل أن يساعد في قياس الأرض؟',
-      hookEn:'Imagine standing high above the horizon with no satellite, no GPS and one difficult question: how large is the Earth?',
-      hookAr:'تخيّل أنك تقف فوق جبل عالٍ بلا أقمار صناعية ولا نظام تحديد مواقع، ومعك سؤال صعب: ما حجم الأرض؟',
-      contributionEn:'Al-Biruni described a geometric method that used the height of a mountain and the angle to the horizon to estimate the Earth’s radius.',
-      contributionAr:'وصف البيروني طريقة هندسية تستخدم ارتفاع الجبل وزاوية النظر إلى الأفق لتقدير نصف قطر الأرض.',
-      legacyEn:'The idea is powerful because the instrument was not the impressive part—the reasoning was. Careful angles could turn one visible horizon into a measurement of the planet.',
-      legacyAr:'قوة الفكرة لم تكن في فخامة الأداة، بل في الاستدلال: زوايا دقيقة حوّلت الأفق المرئي إلى قياس لكوكب كامل.'
-    },
-    {
-      id:'biruni-mountain-angle',scholarId:'biruni',image:(window.DR_ASSET_DATA&&window.DR_ASSET_DATA["story-biruni-mountain-angle.webp"])||'assets/story-biruni-mountain-angle.webp',
-      categories:['hiking','walk','outdoors','measurement','travel'],
-      titleEn:'A horizon became a measuring instrument',titleAr:'حين أصبح الأفق أداة قياس',
-      hookEn:'A walk to high ground can change what you notice. For Al-Biruni, elevation, distance and angle were pieces of the same puzzle.',
-      hookAr:'قد تغيّر المرتفعات ما تلاحظه في العالم. عند البيروني كان الارتفاع والمسافة والزاوية أجزاءً من لغز واحد.',
-      contributionEn:'His work in mathematical geography connected observations of landscapes with trigonometric calculation and astronomical measurement.',
-      contributionAr:'ربط عمله في الجغرافيا الرياضية بين ملاحظة التضاريس والحساب المثلثي والقياس الفلكي.',
-      legacyEn:'It is a reminder that mathematics can begin with something ordinary: a mountain, a line of sight and the discipline to measure carefully.',
-      legacyAr:'إنها تذكير بأن الرياضيات قد تبدأ من شيء مألوف: جبل وخط نظر وانضباط في القياس.'
-    },
-    {
-      id:'biruni-sky-measurement',scholarId:'biruni',image:(window.DR_ASSET_DATA&&window.DR_ASSET_DATA["story-biruni-sky-measurement.webp"])||'assets/story-biruni-sky-measurement.webp',
-      categories:['prayer','moon','sky','astronomy','time'],
-      titleEn:'Time was read from the sky',titleAr:'كان الزمن يُقرأ من السماء',
-      hookEn:'Before a phone could tell you the hour, the sky itself was a clock, calendar and compass.',
-      hookAr:'قبل أن يخبرك الهاتف بالوقت، كانت السماء نفسها ساعةً وتقويماً وبوصلة.',
-      contributionEn:'Al-Biruni wrote extensively about astronomy, calendars and methods of observation, comparing systems of time used by different cultures.',
-      contributionAr:'كتب البيروني بإسهاب عن الفلك والتقاويم وطرق الرصد، وقارن بين أنظمة الزمن لدى ثقافات مختلفة.',
-      legacyEn:'Every prayer time, lunar month and changing shadow carries a small echo of that older habit: look up, observe, calculate.',
-      legacyAr:'يحمل كل وقت صلاة وشهر قمري وظل متغيّر صدىً لتلك العادة القديمة: انظر، راقب، واحسب.'
-    },
-    {
-      id:'haytham-camera-obscura',scholarId:'haytham',image:(window.DR_ASSET_DATA&&window.DR_ASSET_DATA["story-haytham-camera-obscura.webp"])||'assets/story-haytham-camera-obscura.webp',
-      categories:['reading','study','science','camera','light','curiosity'],
-      titleEn:'A tiny opening could project an entire scene',titleAr:'فتحة صغيرة يمكن أن تسقط مشهداً كاملاً',
-      hookEn:'Darken a room, allow light through a small opening, and an outside scene can appear inside—upside down.',
-      hookAr:'أظلم غرفة واترك الضوء يمر عبر فتحة صغيرة، فيظهر مشهد الخارج في الداخل مقلوباً.',
-      contributionEn:'Ibn al-Haytham used dark-room observations while studying how rays of light travel, an important part of the history of the camera obscura and optics.',
-      contributionAr:'استخدم ابن الهيثم ملاحظات الغرفة المظلمة أثناء دراسته لمسار أشعة الضوء، وهي محطة مهمة في تاريخ البصريات والكاميرا المظلمة.',
-      legacyEn:'The image feels almost magical, but the lesson is scientific: surprising effects become understandable when you control the conditions and observe carefully.',
-      legacyAr:'تبدو الصورة كأنها سحر، لكن الدرس علمي: الظواهر المدهشة تصبح مفهومة عندما تضبط الظروف وتراقب بعناية.'
-    },
-    {
-      id:'haytham-light-rays',scholarId:'haytham',image:(window.DR_ASSET_DATA&&window.DR_ASSET_DATA["story-haytham-light-rays.webp"])||'assets/story-haytham-light-rays.webp',
-      categories:['science','study','reading','photo','light'],
-      titleEn:'Does sight leave the eye—or does light enter it?',titleAr:'هل يخرج البصر من العين أم يدخلها الضوء؟',
-      hookEn:'For centuries, thinkers argued about vision. Ibn al-Haytham challenged explanations that treated sight as something emitted by the eye.',
-      hookAr:'لُقرون اختلف المفكرون في تفسير الإبصار. تحدّى ابن الهيثم الآراء التي اعتبرت الرؤية شيئاً يخرج من العين.',
-      contributionEn:'In the Book of Optics, he developed an influential account in which light from objects reaches the eye and investigated reflection and refraction experimentally.',
-      contributionAr:'قدّم في كتاب المناظر تصوراً مؤثراً يصل فيه الضوء من الأجسام إلى العين، ودرس الانعكاس والانكسار بالتجربة.',
-      legacyEn:'That shift matters beyond optics: a confident explanation is not enough. The world has to agree with it.',
-      legacyAr:'هذا التحول يتجاوز البصريات: لا يكفي أن يبدو التفسير مقنعاً، بل يجب أن يوافق ما نراه في الواقع.'
-    },
-    {
-      id:'haytham-experiment-evidence',scholarId:'haytham',image:(window.DR_ASSET_DATA&&window.DR_ASSET_DATA["story-haytham-experiment-evidence.webp"])||'assets/story-haytham-experiment-evidence.webp',
-      categories:['study','learning','work','science','research'],
-      titleEn:'What if the experiment disagrees with you?',titleAr:'ماذا لو خالفت التجربة فكرتك؟',
-      hookEn:'The difficult part of learning is not finding evidence for what you already believe. It is letting evidence change your mind.',
-      hookAr:'أصعب ما في التعلم ليس إيجاد دليل لما تؤمن به مسبقاً، بل السماح للدليل بأن يغيّر رأيك.',
-      contributionEn:'Ibn al-Haytham repeatedly paired mathematical reasoning with controlled observation in his investigations of light and vision.',
-      contributionAr:'جمع ابن الهيثم مراراً بين الاستدلال الرياضي والملاحظة المضبوطة في أبحاثه عن الضوء والإبصار.',
-      legacyEn:'That attitude still feels modern: form a question, isolate what matters, observe, and be willing to revise.',
-      legacyAr:'لا يزال هذا الموقف حديثاً: ضع سؤالاً، اعزل ما يهم، راقب، وكن مستعداً للمراجعة.'
-    },
-    {
-      id:'khwarizmi-algebra-steps',scholarId:'khwarizmi',image:(window.DR_ASSET_DATA&&window.DR_ASSET_DATA["story-khwarizmi-algebra-steps.webp"])||'assets/story-khwarizmi-algebra-steps.webp',
-      categories:['math','study','work','planning','coding','problem'],
-      titleEn:'A hard problem becomes a sequence of steps',titleAr:'المسألة الصعبة تصبح سلسلة خطوات',
-      hookEn:'When a task feels tangled, one of the oldest useful tricks is still the same: name the unknown, then work step by step.',
-      hookAr:'عندما تبدو المهمة متشابكة، تبقى إحدى أقدم الحيل المفيدة كما هي: حدّد المجهول ثم تقدّم خطوةً خطوة.',
-      contributionEn:'Al-Khwarizmi’s algebraic writing presented systematic procedures for solving classes of equations rather than treating each example as an isolated puzzle.',
-      contributionAr:'عرضت كتابات الخوارزمي في الجبر إجراءات منهجية لحل أنواع من المعادلات بدلاً من التعامل مع كل مسألة كحالة منفصلة.',
-      legacyEn:'That procedural way of thinking is why his work feels unexpectedly close to modern problem solving.',
-      legacyAr:'لهذا يبدو التفكير الإجرائي في عمله قريباً على نحو مدهش من حل المشكلات اليوم.'
-    },
-    {
-      id:'khwarizmi-algorithm-name',scholarId:'khwarizmi',image:(window.DR_ASSET_DATA&&window.DR_ASSET_DATA["story-khwarizmi-algorithm-name.webp"])||'assets/story-khwarizmi-algorithm-name.webp',
-      categories:['coding','software','work','technology','study'],
-      titleEn:'His name is hidden inside a word you use every day',titleAr:'اسمه مختبئ في كلمة نستخدمها كل يوم',
-      hookEn:'Search results, navigation and software all depend on algorithms. The word itself carries a trace of Al-Khwarizmi’s name.',
-      hookAr:'تعتمد نتائج البحث والملاحة والبرمجيات على الخوارزميات. والكلمة نفسها تحمل أثراً من اسم الخوارزمي.',
-      contributionEn:'Latin versions of his name, associated with works on calculation, eventually gave rise to the European term that became “algorithm.”',
-      contributionAr:'أدت الصيغ اللاتينية لاسمه، المرتبطة بمؤلفاته في الحساب، إلى المصطلح الأوروبي الذي تطور إلى كلمة «algorithm».',
-      legacyEn:'A medieval scholar’s name now sits quietly inside the vocabulary of computing.',
-      legacyAr:'أصبح اسم عالم من العصور الوسطى حاضراً بهدوء داخل مفردات الحوسبة الحديثة.'
-    },
-    {
-      id:'khwarizmi-calculation-tables',scholarId:'khwarizmi',image:(window.DR_ASSET_DATA&&window.DR_ASSET_DATA["story-khwarizmi-calculation-tables.webp"])||'assets/story-khwarizmi-calculation-tables.webp',
-      categories:['planning','finance','work','math','numbers'],
-      titleEn:'Calculation was also a practical technology',titleAr:'كان الحساب أيضاً تقنية عملية',
-      hookEn:'Numbers were not abstract decoration. They helped people calculate trade, inheritance, land and astronomy.',
-      hookAr:'لم تكن الأرقام زينةً مجردة؛ فقد ساعدت الناس في حساب التجارة والميراث والأرض والفلك.',
-      contributionEn:'Al-Khwarizmi wrote on calculation with Hindu-Arabic numerals as well as algebra and astronomical tables.',
-      contributionAr:'كتب الخوارزمي في الحساب بالأرقام الهندية العربية، إضافة إلى الجبر والجداول الفلكية.',
-      legacyEn:'The heritage here is not only a theorem. It is the idea that reliable methods can make everyday decisions clearer.',
-      legacyAr:'التراث هنا ليس نظرية فقط، بل فكرة أن الطرق الموثوقة تجعل القرارات اليومية أوضح.'
-    },
-    {
-      id:'zahrawi-surgical-tools',scholarId:'zahrawi',image:(window.DR_ASSET_DATA&&window.DR_ASSET_DATA["story-zahrawi-surgical-tools.webp"])||'assets/story-zahrawi-surgical-tools.webp',
-      categories:['health','doctor','medicine','recovery','care'],
-      titleEn:'Why draw the instrument?',titleAr:'لماذا ترسم الأداة؟',
-      hookEn:'A medical instruction can be dangerously vague if the reader cannot see the tool being described.',
-      hookAr:'قد تكون التعليمات الطبية غامضة وخطيرة إذا لم يستطع القارئ رؤية الأداة المقصودة.',
-      contributionEn:'The surgical section of Al-Zahrawi’s medical encyclopedia described many instruments and included illustrations to help explain their use.',
-      contributionAr:'وصف القسم الجراحي من موسوعة الزهراوي عدداً كبيراً من الأدوات وتضمّن رسوماً تساعد على شرح استخدامها.',
-      legacyEn:'It is an early reminder that good technical knowledge needs more than words: design, illustration and precise explanation matter.',
-      legacyAr:'إنها تذكير مبكر بأن المعرفة التقنية الجيدة تحتاج إلى أكثر من الكلمات: التصميم والرسم والشرح الدقيق مهمون.'
-    },
-    {
-      id:'zahrawi-instrument-design',scholarId:'zahrawi',image:(window.DR_ASSET_DATA&&window.DR_ASSET_DATA["story-zahrawi-instrument-design.webp"])||'assets/story-zahrawi-instrument-design.webp',
-      categories:['health','design','craft','medicine','work'],
-      titleEn:'A tool is part of the treatment',titleAr:'الأداة جزء من العلاج',
-      hookEn:'Sometimes progress is not a new theory. It is a better instrument in the practitioner’s hand.',
-      hookAr:'أحياناً لا يكون التقدم نظرية جديدة، بل أداة أفضل في يد الممارس.',
-      contributionEn:'Al-Zahrawi documented specialized surgical instruments and techniques, preserving practical details for later physicians.',
-      contributionAr:'وثّق الزهراوي أدوات جراحية متخصصة وتقنيات عملية، وحفظ تفاصيلها للأطباء الذين جاءوا بعده.',
-      legacyEn:'The connection to modern design is immediate: the shape of a tool changes what a skilled person can do safely and precisely.',
-      legacyAr:'الصلة بالتصميم الحديث مباشرة: شكل الأداة يغيّر ما يستطيع المختص إنجازه بأمان ودقة.'
-    },
-    {
-      id:'zahrawi-medical-encyclopedia',scholarId:'zahrawi',image:(window.DR_ASSET_DATA&&window.DR_ASSET_DATA["story-zahrawi-medical-encyclopedia.webp"])||'assets/story-zahrawi-medical-encyclopedia.webp',
-      categories:['reading','health','learning','medicine'],
-      titleEn:'Thirty volumes built a medical memory',titleAr:'ثلاثون جزءاً صنعت ذاكرة طبية',
-      hookEn:'Knowledge disappears easily when it stays only in one practitioner’s hands.',
-      hookAr:'تضيع المعرفة بسهولة عندما تبقى في يد ممارس واحد فقط.',
-      contributionEn:'Al-Zahrawi’s Al-Tasrif was a large medical encyclopedia covering many areas of medicine; its surgical material later circulated through Latin translation.',
-      contributionAr:'كان «التصريف» للزهراوي موسوعة طبية كبيرة تناولت مجالات متعددة، وانتشر قسمها الجراحي لاحقاً عبر الترجمة اللاتينية.',
-      legacyEn:'Writing turned individual experience into something that could travel farther than its author.',
-      legacyAr:'حوّلت الكتابة الخبرة الفردية إلى معرفة تستطيع السفر أبعد من صاحبها.'
-    },
-    {
-      id:'idrisi-world-map',scholarId:'idrisi',image:(window.DR_ASSET_DATA&&window.DR_ASSET_DATA["story-idrisi-world-map.webp"])||'assets/story-idrisi-world-map.webp',
-      categories:['travel','map','geography','commute','walk'],
-      titleEn:'What would the world look like without satellite maps?',titleAr:'كيف سيبدو العالم بلا خرائط الأقمار الصناعية؟',
-      hookEn:'Imagine building a picture of distant coasts and cities from travellers, books and careful comparison.',
-      hookAr:'تخيّل أن تبني صورة للسواحل والمدن البعيدة من روايات الرحالة والكتب والمقارنة الدقيقة.',
-      contributionEn:'Al-Idrisi produced a major geographical work for Roger II of Sicily in 1154, accompanied by regional maps.',
-      contributionAr:'أعد الإدريسي عملاً جغرافياً مهماً لروجر الثاني في صقلية سنة 1154، وصحبته خرائط إقليمية.',
-      legacyEn:'Every map is an argument about where things are. Al-Idrisi’s project shows how much collaboration and verification that argument requires.',
-      legacyAr:'كل خريطة هي حجة حول موقع الأشياء. ويُظهر مشروع الإدريسي مقدار التعاون والتحقق اللازمين لبنائها.'
-    },
-    {
-      id:'idrisi-traveller-reports',scholarId:'idrisi',image:(window.DR_ASSET_DATA&&window.DR_ASSET_DATA["story-idrisi-traveller-reports.webp"])||'assets/story-idrisi-traveller-reports.webp',
-      categories:['travel','commute','walk','people','geography'],
-      titleEn:'A traveller’s story became geographic data',titleAr:'تحولت رواية المسافر إلى بيانات جغرافية',
-      hookEn:'A road, river or port described by one traveller is a story. Compared with many reports, it can become a map.',
-      hookAr:'طريق أو نهر أو ميناء يصفه مسافر واحد هو رواية؛ وعندما تقارنه بروايات كثيرة يمكن أن يتحول إلى خريطة.',
-      contributionEn:'Al-Idrisi drew on earlier written sources and reports associated with travellers while compiling descriptions of regions and routes.',
-      contributionAr:'اعتمد الإدريسي على مصادر مكتوبة سابقة وعلى روايات مرتبطة بالرحالة أثناء جمع أوصاف الأقاليم والطرق.',
-      legacyEn:'The method feels familiar today: gather observations, compare sources, look for contradictions, then build the clearest model you can.',
-      legacyAr:'تبدو الطريقة مألوفة اليوم: اجمع الملاحظات، قارن المصادر، ابحث عن التناقضات، ثم ابنِ أوضح نموذج ممكن.'
-    },
-    {
-      id:'idrisi-regional-maps',scholarId:'idrisi',image:(window.DR_ASSET_DATA&&window.DR_ASSET_DATA["story-idrisi-regional-maps.webp"])||'assets/story-idrisi-regional-maps.webp',
-      categories:['planning','travel','geography','navigation'],
-      titleEn:'The world was easier to understand in pieces',titleAr:'كان فهم العالم أسهل عندما يُقسّم إلى أجزاء',
-      hookEn:'One giant map can overwhelm. Regional maps let a reader inspect routes, coasts and places at a more useful scale.',
-      hookAr:'قد تربكك خريطة واحدة ضخمة؛ أما الخرائط الإقليمية فتسمح بفحص الطرق والسواحل والأماكن بمقياس أكثر فائدة.',
-      contributionEn:'Al-Idrisi’s geographical project included a set of sectional maps that together described the inhabited world known to his compilers.',
-      contributionAr:'تضمن مشروع الإدريسي الجغرافي مجموعة من الخرائط المقطعية التي وصفت معاً العالم المأهول المعروف لدى جامعيه.',
-      legacyEn:'It is the same design principle behind modern zoom levels: show the right amount of world for the question at hand.',
-      legacyAr:'إنه المبدأ نفسه وراء مستويات التكبير الحديثة: اعرض من العالم القدر المناسب للسؤال الذي تريد الإجابة عنه.'
-    }
-  ];
-
-  let activeStoryId=storyBank[0].id;
-  let storyPage=0;
-
-  function saveSettings(){try{localStorage.setItem(SETTINGS_KEY,JSON.stringify(settings));}catch(_){}}
-  function loadHistory(){try{return JSON.parse(localStorage.getItem(HISTORY_KEY)||'[]')||[]}catch(_){return []}}
-  function saveHistory(h){try{localStorage.setItem(HISTORY_KEY,JSON.stringify(h.slice(-120)))}catch(_){}}
-  function activeStory(){return storyBank.find(s=>s.id===activeStoryId)||storyBank[0]}
-  function scholarOf(id){return scholars.find(s=>s.id===id)||scholars[0]}
-  function storiesForScholar(id){return storyBank.filter(s=>s.scholarId===id)}
-  function historyTime(id){
-    const rows=loadHistory().filter(h=>h.storyId===id);
-    return rows.length?Math.max(...rows.map(h=>h.shownAt||0)):0;
-  }
-  function leastRecent(list){
-    return [...list].sort((a,b)=>historyTime(a.id)-historyTime(b.id))[0]||list[0];
-  }
-  function pickForScholar(id){return leastRecent(storiesForScholar(id));}
-
-  function categoryFor(block){
-    const raw=((block?.label||'')+' '+(block?.labelAr||'')+' '+(block?.note||'')).toLowerCase();
-    const tests=[
-      ['prayer',/prayer|fajr|dhuhr|asr|maghrib|isha|quran|قرآن|صلاة|فجر|ظهر|عصر|مغرب|عشاء/],
-      ['coding',/code|coding|program|software|developer|برمج|كود/],
-      ['math',/math|algebra|calculate|finance|budget|رياض|حساب|ميزان/],
-      ['study',/study|learn|school|homework|read|reading|بحث|دراسة|تعلم|مدرس|قراءة/],
-      ['health',/doctor|health|medicine|therapy|recovery|medical|طبيب|صحة|دواء|علاج/],
-      ['travel',/travel|flight|drive|commute|trip|walk|hike|سفر|رحلة|قيادة|مشي/],
-      ['work',/work|plan|meeting|project|task|عمل|اجتماع|مشروع|تخطيط/],
-      ['science',/science|experiment|photo|camera|light|علم|تجرب|صورة|ضوء/]
-    ];
-    for(const [cat,re] of tests) if(re.test(raw)) return cat;
-    return 'general';
-  }
-
-  function eligibleByFrequency(){
-    if(!settings.enabled||!settings.onCompletion||settings.frequency==='manual') return false;
-    const h=loadHistory();
-    const now=Date.now();
-    const day=86400000;
-    if(settings.frequency==='daily') return !h.some(x=>x.trigger==='completion'&&now-(x.shownAt||0)<20*60*60*1000);
-    if(settings.frequency==='few'){
-      const recent=h.filter(x=>x.trigger==='completion'&&now-(x.shownAt||0)<7*day);
-      return recent.length<3 && !recent.some(x=>now-(x.shownAt||0)<36*60*60*1000);
-    }
-    return false;
-  }
-
-  function pickContextual(block){
-    const cat=categoryFor(block);
-    const matching=storyBank.filter(s=>s.categories.includes(cat));
-    const pool=matching.length?matching:storyBank;
-    const now=Date.now(), month=30*86400000;
-    const h=loadHistory();
-    const fresh=pool.filter(s=>!h.some(x=>x.storyId===s.id&&now-(x.shownAt||0)<month));
-    return leastRecent(fresh.length?fresh:pool);
-  }
-
-  function recordStory(story,trigger='manual',block=null,opened=false){
-    const h=loadHistory();
-    const existing=h.findLast?.(x=>x.storyId===story.id&&x.trigger===trigger&&Date.now()-(x.shownAt||0)<30000);
-    if(existing){
-      if(opened) existing.openedAt=Date.now();
-    }else{
-      h.push({
-        storyId:story.id,scholarId:story.scholarId,shownAt:Date.now(),
-        openedAt:opened?Date.now():0,trigger,
-        activityId:block?.id||'',activityLabel:block?.label||'',category:categoryFor(block)
-      });
-    }
-    saveHistory(h);
-    renderRecent();
-  }
-
-  function renderScholarStrip(){
-    const strip=$('scholarStrip'); if(!strip)return;
-    strip.innerHTML='';
-    const current=activeStory();
-    scholars.forEach(sc=>{
-      const btn=document.createElement('button');
-      btn.type='button';btn.className='scholar-chip'+(sc.id===current.scholarId?' active':'');
-      btn.setAttribute('aria-label',t('Explore '+sc.name,'استكشف '+sc.nameAr));
-      const avatar=document.createElement('span');avatar.className='scholar-chip-avatar';avatar.textContent=sc.monogram;
-      const name=document.createElement('span');name.className='scholar-chip-name';name.textContent=ar()?sc.nameAr:sc.name;
-      btn.append(avatar,name);
-      btn.addEventListener('click',()=>{const s=pickForScholar(sc.id);renderStory(s.id,0,true);});
-      strip.appendChild(btn);
-    });
-  }
-
-  function renderRecent(){
-    const body=$('storiesSheet')?.querySelector('.sheet-body');
-    if(!body)return;
-    let details=$('heritageRecent');
-    const hist=loadHistory().filter(x=>x.openedAt||x.shownAt).slice(-8).reverse();
-    const unique=[];const seen=new Set();
-    for(const h of hist){if(!seen.has(h.storyId)){seen.add(h.storyId);unique.push(h);}}
-    if(!unique.length){details?.remove();return;}
-    if(!details){
-      details=document.createElement('details');details.id='heritageRecent';details.className='heritage-recent';
-      const summary=document.createElement('summary');summary.id='heritageRecentSummary';details.appendChild(summary);
-      const row=document.createElement('div');row.className='heritage-recent-row';row.id='heritageRecentRow';details.appendChild(row);
-      body.appendChild(details);
-    }
-    $('heritageRecentSummary').textContent=t('Recently discovered','اكتشفتها مؤخراً');
-    const row=$('heritageRecentRow');row.innerHTML='';
-    unique.slice(0,4).forEach(h=>{
-      const s=storyBank.find(x=>x.id===h.storyId);if(!s)return;
-      const b=document.createElement('button');b.type='button';b.className='heritage-recent-chip';
-      b.textContent=ar()?s.titleAr:s.titleEn;
-      b.addEventListener('click',()=>renderStory(s.id,0,true));
-      row.appendChild(b);
-    });
-  }
-
-  function renderStory(storyId=activeStoryId,page=storyPage,markOpened=false){
-    if(storyBank.some(s=>s.id===storyId))activeStoryId=storyId;
-    storyPage=Math.max(0,Math.min(2,page));
-    const s=activeStory(),sc=scholarOf(s.scholarId);
-    renderScholarStrip();
-    if(!$('storyName'))return;
-    const card=$('heritageStoryCard');if(card)card.dataset.storyPage=String(storyPage);
-    $('storyMedallion').textContent=sc.monogram;
-    const hero=$('storyHeroImage'),mono=$('storyHeroMonogram'),badge=$('storyHeroBadge');
-    if(hero&&mono){
-      hero.src=s.image;hero.alt=ar()?s.titleAr:s.titleEn;hero.hidden=false;mono.hidden=true;
-      hero.onerror=()=>{hero.hidden=true;mono.hidden=false;mono.textContent=sc.monogram;};
-    }
-    if(badge)badge.textContent=t(`${storyPage+1} of 3`,`${storyPage+1} من 3`);
-    $('storyName').textContent=sc.name;$('storyNameAr').textContent=sc.nameAr;$('storyMeta').textContent=sc.meta;
-    const headline=$('storyPageHeadline'),hint=$('storySwipeHint');
-    const a=$('storySectionTitle'),ac=$('storyContext'),b=$('storyContributionTitle'),bc=$('storyContribution'),c=$('storyLegacyTitle'),cc=$('storyLegacy');
-    [a,ac,b,bc,c,cc].forEach(x=>{if(x)x.hidden=true;});
-    if(storyPage===0){
-      headline.textContent=ar()?s.titleAr:s.titleEn;
-      a.textContent=t('The moment','اللحظة');ac.textContent=ar()?s.hookAr:s.hookEn;a.hidden=false;ac.hidden=false;
-    }else if(storyPage===1){
-      headline.textContent=t('What happened next?','ماذا حدث بعد ذلك؟');
-      b.textContent=t('The contribution','الإسهام');bc.textContent=ar()?s.contributionAr:s.contributionEn;b.hidden=false;bc.hidden=false;
-    }else{
-      headline.textContent=t('Why it still feels close to us','لماذا ما زال قريباً منا');
-      c.textContent=t('The connection','الصلة اليوم');cc.textContent=ar()?s.legacyAr:s.legacyEn;c.hidden=false;cc.hidden=false;
-    }
-    hint.textContent=t(storyPage<2?'Swipe to continue':'Swipe for another discovery',storyPage<2?'اسحب للمتابعة':'اسحب لاكتشاف آخر');
-    $('storyPrev').textContent=t(storyPage===0?'← Previous':'← Back',storyPage===0?'السابق →':'رجوع →');
-    $('storyNext').textContent=t(storyPage===2?'Another story →':'Next →',storyPage===2?'← قصة أخرى':'← التالي');
-    $('storiesHeader').textContent=t('Stories from our heritage','قصص من تراثنا');
-    $('navStoriesLabel').textContent=t('Stories','قصص');
-    const dots=$('storyDots');dots.innerHTML='';
-    for(let i=0;i<3;i++){
-      const d=document.createElement('button');d.type='button';d.className='story-dot'+(i===storyPage?' active':'');
-      d.setAttribute('aria-label',t(`Story page ${i+1}`,`صفحة القصة ${i+1}`));
-      d.addEventListener('click',()=>renderStory(activeStoryId,i,true));dots.appendChild(d);
-    }
-    if(markOpened)recordStory(s,'manual',null,true);
-    renderRecent();
-  }
-
-  function nextStory(step=1){
-    const i=storyBank.findIndex(s=>s.id===activeStoryId);
-    return storyBank[(i+step+storyBank.length)%storyBank.length];
-  }
-
-  function openStories(storyId=activeStoryId,page=0,trigger='manual',block=null){
-    const candidate=storyBank.find(s=>s.id===storyId)||storyBank[0];
-    activeStoryId=candidate.id;storyPage=page;renderStory(activeStoryId,page,false);
-    recordStory(candidate,trigger,block,true);
-    storiesExperience.open();
-  }
-
-  function syncHeritageUI(){
-    if($('heritageEnabled'))$('heritageEnabled').checked=!!settings.enabled;
-    if($('heritageFrequency'))$('heritageFrequency').value=settings.frequency;
-    if($('heritageOnCompletion'))$('heritageOnCompletion').checked=!!settings.onCompletion;
-    if($('heritageTeaser'))$('heritageTeaser').style.display=settings.enabled&&settings.frequency!=='manual'?'':'none';
-    $('heritageSettingsTitle').textContent=t('Heritage stories','قصص التراث');
-    $('heritageEnabledLabel').textContent=t('Show heritage stories','إظهار قصص التراث');
-    $('heritageFrequencyLabel').textContent=t('Story frequency','تكرار القصص');
-    $('heritageCompletionLabel').textContent=t('Include after activity completion','إظهار قصة بعد إكمال نشاط');
-    const f=$('heritageFrequency');if(f){
-      f.options[0].textContent=t('About once a day','مرة تقريباً كل يوم');
-      f.options[1].textContent=t('A few times a week','بضع مرات في الأسبوع');
-      f.options[2].textContent=t('Only when I open Stories','فقط عندما أفتح القصص');
-    }
-    $('heritageTeaserKicker').textContent=t('A moment from our heritage','لحظة من تراثنا');
-    $('heritageTeaserTitle').textContent=t('How could a mountain help measure the Earth?','كيف يمكن لجبل أن يساعد في قياس الأرض؟');
-    $('moonHeritageKicker').textContent=t('A moment from our heritage','لحظة من تراثنا');
-    $('moonHeritageTitle').textContent=t('A tiny opening could project an entire scene','فتحة صغيرة يمكن أن تسقط مشهداً كاملاً');
-    $('moonHeritageCopy').textContent=t('A visual story about Ibn al-Haytham, light and the camera obscura.','قصة بصرية عن ابن الهيثم والضوء والكاميرا المظلمة.');
-    $('moonHeritageOpen').textContent=t('Discover the story','اكتشف القصة');
-    renderStory(activeStoryId,storyPage,false);
-  }
-
-  const storiesExperience=makeSheet('storiesSheet','storiesBackdrop','openStoriesBtn','storiesCloseBtn',()=>renderStory(activeStoryId,storyPage,false));
-  openSheets.push(storiesExperience);
-
-  $('heritageTeaser')?.addEventListener('click',()=>openStories('biruni-earth-radius',0,'home'));
-  $('moonHeritageOpen')?.addEventListener('click',()=>{
-    $('moonSheet')?.classList.remove('open');$('moonBackdrop')?.classList.remove('open');
-    openStories('haytham-camera-obscura',0,'moon');
-  });
-  $('storyPrev')?.addEventListener('click',()=>{
-    if(storyPage>0)renderStory(activeStoryId,storyPage-1,true);
-    else renderStory(nextStory(-1).id,2,true);
-  });
-  $('storyNext')?.addEventListener('click',()=>{
-    if(storyPage<2)renderStory(activeStoryId,storyPage+1,true);
-    else renderStory(nextStory(1).id,0,true);
-  });
-  $('heritageEnabled')?.addEventListener('change',e=>{settings.enabled=!!e.target.checked;saveSettings();syncHeritageUI();});
-  $('heritageFrequency')?.addEventListener('change',e=>{settings.frequency=e.target.value;saveSettings();syncHeritageUI();});
-  $('heritageOnCompletion')?.addEventListener('change',e=>{settings.onCompletion=!!e.target.checked;saveSettings();});
-
-  (function gestures(){
-    const card=$('heritageStoryCard');if(!card)return;
-    let sx=0,sy=0,tracking=false;
-    card.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button!==0)return;sx=e.clientX;sy=e.clientY;tracking=true;});
-    card.addEventListener('pointerup',e=>{
-      if(!tracking)return;tracking=false;
-      const dx=e.clientX-sx,dy=e.clientY-sy;
-      if(Math.abs(dx)<48||Math.abs(dx)<Math.abs(dy)*1.2)return;
-      const forward=ar()?dx>0:dx<0;
-      if(forward){if(storyPage<2)renderStory(activeStoryId,storyPage+1,true);else renderStory(nextStory(1).id,0,true);}
-      else {if(storyPage>0)renderStory(activeStoryId,storyPage-1,true);else renderStory(nextStory(-1).id,2,true);}
-    });
-    card.addEventListener('pointercancel',()=>tracking=false);
-    document.addEventListener('keydown',e=>{
-      if(!$('storiesSheet')?.classList.contains('open'))return;
-      if(e.key==='ArrowRight'){e.preventDefault();if(ar()){if(storyPage>0)renderStory(activeStoryId,storyPage-1,true);else renderStory(nextStory(-1).id,2,true);}else{if(storyPage<2)renderStory(activeStoryId,storyPage+1,true);else renderStory(nextStory(1).id,0,true);}}
-      if(e.key==='ArrowLeft'){e.preventDefault();if(ar()){if(storyPage<2)renderStory(activeStoryId,storyPage+1,true);else renderStory(nextStory(1).id,0,true);}else{if(storyPage>0)renderStory(activeStoryId,storyPage-1,true);else renderStory(nextStory(-1).id,2,true);}}
-    });
-  })();
-
-  function offerCompletionStory(block){
-    if(!eligibleByFrequency())return;
-    const s=pickContextual(block);
-    recordStory(s,'completion',block,false);
-    $('heritageToastTitle').textContent=t('A discovery from your heritage','اكتشاف من تراثك');
-    $('heritageToastCopy').textContent=ar()?s.titleAr:s.titleEn;
-    $('heritageToastOpen').textContent=t('Discover','اكتشف');
-    const toast=$('heritageCompletionToast');toast.classList.add('show');
-    const hide=setTimeout(()=>toast.classList.remove('show'),9000);
-    $('heritageToastOpen').onclick=()=>{clearTimeout(hide);toast.classList.remove('show');openStories(s.id,0,'completion-open',block);};
-  }
-
-  document.addEventListener('dailyRhythm:activityCompleted',e=>setTimeout(()=>offerCompletionStory(e.detail?.block||null),180));
-
-  new MutationObserver(syncHeritageUI).observe(document.documentElement,{attributes:true,attributeFilter:['lang','dir']});
-  $('openSettingsBtn')?.addEventListener('click',()=>setTimeout(syncHeritageUI,0));
-  syncHeritageUI();
-})();
-</script>
-
-
 <script id="nav-active-state-v1">
 (function(){
-  const ids={schedule:'openScheduleBtn',stories:'openStoriesBtn',logs:'openLogsBtn',settings:'openSettingsBtn'};
-  const sheets={schedule:'scheduleSheet',stories:'storiesSheet',logs:'logsSheet',settings:'settingsSheet'};
+  const ids={schedule:'openScheduleBtn',prayer:'openMyPrayerBtn',logs:'openLogsBtn',settings:'openSettingsBtn'};
+  const sheets={schedule:'scheduleSheet',logs:'logsSheet',settings:'settingsSheet'};
   const buttons=Object.fromEntries(Object.entries(ids).map(([k,id])=>[k,document.getElementById(id)]));
   function sync(){
     let active='schedule';
@@ -10167,172 +9480,9 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     Object.entries(buttons).forEach(([key,btn])=>{ if(!btn)return; btn.classList.toggle('active',key===active); btn.setAttribute('aria-current',key===active?'page':'false'); });
   }
   Object.values(sheets).forEach(id=>{ const el=document.getElementById(id); if(el) new MutationObserver(sync).observe(el,{attributes:true,attributeFilter:['class']}); });
-  document.getElementById('openVoiceBtn')?.addEventListener('click',()=>{Object.values(buttons).forEach(b=>b?.classList.remove('active'));});
   sync();
 })();
 </script>
-
-
-<style id="heritage-story-layout-fix-v3">
-  .stories-sheet .sheet-body{
-    padding-bottom:calc(144px + env(safe-area-inset-bottom,0px)) !important;
-    overscroll-behavior:contain;
-  }
-  .heritage-story-card{
-    min-height:auto !important;
-    height:auto !important;
-    overflow:visible !important;
-    padding:0 0 16px !important;
-    gap:0 !important;
-  }
-  .story-hero-wrap{
-    display:block !important;
-    aspect-ratio:1.45/1 !important;
-    max-height:250px !important;
-    border-bottom:1px solid rgba(225,184,95,.18);
-  }
-  .heritage-story-card[data-story-page="1"] .story-hero-wrap,
-  .heritage-story-card[data-story-page="2"] .story-hero-wrap{
-    aspect-ratio:2.45/1 !important;
-    max-height:132px !important;
-  }
-  .story-hero-image{object-position:center center !important;}
-  .story-name{margin:12px 18px 0 !important;}
-  .story-name-ar{margin:0 18px 0 !important;}
-  .story-meta,.story-page-headline,.story-swipe-hint,.story-dots,.story-section-title,.story-copy{
-    margin-left:18px !important;
-    margin-right:18px !important;
-  }
-  .story-page-headline{margin-top:10px !important;}
-  .story-related-visual{
-    display:grid;
-    grid-template-columns:84px 1fr;
-    gap:12px;
-    align-items:center;
-    margin:6px 18px 8px;
-    padding:10px 12px;
-    border-radius:18px;
-    border:1px solid rgba(225,184,95,.22);
-    background:linear-gradient(135deg,rgba(15,58,78,.88),rgba(8,34,51,.96));
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.03);
-  }
-  .story-related-image{
-    width:84px; height:84px; border-radius:14px; object-fit:cover; display:block;
-    border:1px solid rgba(225,184,95,.25);
-    background:#0a2438;
-  }
-  .story-related-copy{min-width:0;}
-  .story-related-kicker{
-    color:#f3d27e; text-transform:uppercase; letter-spacing:.08em; font-size:.68rem; font-weight:800;
-    margin-bottom:3px;
-  }
-  .story-related-title{color:#fff1c6; font-size:.98rem; font-weight:800; line-height:1.25;}
-  .story-related-caption{color:#d4e0e5; font-size:.81rem; line-height:1.42; margin-top:4px;}
-  .story-copy{padding-bottom:0 !important;}
-  .story-actions{margin-top:10px !important; padding:10px 18px 0 !important;}
-  @media (max-width:420px){
-    .story-related-visual{grid-template-columns:72px 1fr; gap:10px; padding:10px;}
-    .story-related-image{width:72px;height:72px;}
-    .story-related-title{font-size:.92rem;}
-    .story-related-caption{font-size:.77rem;}
-  }
-</style>
-
-
-<script id="heritage-story-layout-fix-v3-script">
-(function(){
-  const $=id=>document.getElementById(id);
-  const ar=()=>document.documentElement.lang==='ar';
-  const visualMap={
-    biruni:{
-      titleEn:'Measuring the Earth', titleAr:'قياس الأرض',
-      captionEn:'A globe, mountain and angle lines reflect al-Biruni’s work on careful measurement and astronomy.',
-      captionAr:'يرمز المجسم الجغرافي والجبل وخطوط القياس إلى عمل البيروني في القياس الدقيق وعلم الفلك.',
-      src:'assets/scholar-biruni-measurement.webp'
-    },
-    haytham:{
-      titleEn:'Light and Observation', titleAr:'الضوء والملاحظة',
-      captionEn:'Lens shapes and light rays point to Ibn al-Haytham’s work in optics and experimental observation.',
-      captionAr:'تشير العدسة وأشعة الضوء إلى أعمال ابن الهيثم في البصريات والملاحظة التجريبية.',
-      src:'assets/scholar-haytham-optics.webp'
-    },
-    khwarizmi:{
-      titleEn:'Algebra and Algorithms', titleAr:'الجبر والخوارزميات',
-      captionEn:'A manuscript page and geometric marks connect al-Khwarizmi to algebra and step-by-step problem solving.',
-      captionAr:'ترمز صفحة المخطوط والعلامات الهندسية إلى الجبر والحل المتدرج للمسائل عند الخوارزمي.',
-      src:'assets/scholar-khwarizmi-algebra.webp'
-    },
-    zahrawi:{
-      titleEn:'Surgery and Instruments', titleAr:'الجراحة والأدوات',
-      captionEn:'Surgical tools represent al-Zahrawi’s influential work in medicine and the design of instruments.',
-      captionAr:'ترمز الأدوات الجراحية إلى أعمال الزهراوي المؤثرة في الطب وتصميم الأدوات.',
-      src:'assets/scholar-zahrawi-instruments.webp'
-    },
-    idrisi:{
-      titleEn:'Maps and Cartography', titleAr:'الخرائط ورسمها',
-      captionEn:'A map grid and compass suggest al-Idrisi’s work describing the world and building maps from travel knowledge.',
-      captionAr:'تشير شبكة الخريطة والبوصلة إلى عمل الإدريسي في وصف العالم وبناء الخرائط من خبرات الرحلات.',
-      src:'assets/scholar-idrisi-cartography.webp'
-    }
-  };
-  function relatedFor(id){ return visualMap[id] || visualMap.biruni; }
-  function applyVisual(){
-    const nameEl=$('storyName'); if(!nameEl) return;
-    const currentName=(nameEl.textContent||'').trim();
-    const nameToId={
-      'Al-Biruni':'biruni','البيروني':'biruni',
-      'Ibn al-Haytham':'haytham','ابن الهيثم':'haytham',
-      'Al-Khwarizmi':'khwarizmi','الخوارزمي':'khwarizmi',
-      'Al-Zahrawi':'zahrawi','الزهراوي':'zahrawi',
-      'Al-Idrisi':'idrisi','الإدريسي':'idrisi'
-    };
-    const visual=relatedFor(nameToId[currentName]);
-    const wrap=$('storyRelatedVisual'), img=$('storyRelatedImage'), kicker=$('storyRelatedKicker'), title=$('storyRelatedTitle'), cap=$('storyRelatedCaption');
-    if(!wrap||!img||!kicker||!title||!cap) return;
-    const relatedSrc=visual.src;
-    img.src=relatedSrc;
-    img.alt=(ar()?visual.titleAr:visual.titleEn);
-    const heroImg=$('storyHeroImage'), heroMono=$('storyHeroMonogram');
-    if(heroImg && heroMono && heroImg.hidden){
-      heroImg.src=relatedSrc;
-      heroImg.alt=(ar()?visual.titleAr:visual.titleEn);
-      heroImg.hidden=false;
-      heroMono.hidden=true;
-      heroImg.dataset.relatedHero='1';
-    }
-    kicker.textContent=ar()?'صورة مرتبطة':'Related visual';
-    title.textContent=ar()?visual.titleAr:visual.titleEn;
-    cap.textContent=ar()?visual.captionAr:visual.captionEn;
-    wrap.hidden=false;
-  }
-  function go(delta){
-    const card=$('heritageStoryCard'); if(!card) return;
-    const page=Number(card.dataset.storyPage||0);
-    if(delta>0){
-      if(page<2) $('storyNext')?.click(); else $('storyNext')?.click();
-    }else{
-      if(page>0) $('storyPrev')?.click(); else $('storyPrev')?.click();
-    }
-  }
-  function attachSwipe(){ /* Native heritage story pointer-swipe handler is the single source of truth. */ }
-  function hookButtons(){
-    const prev=$('storyPrev'), next=$('storyNext');
-    if(prev && !prev.dataset.visualHook){ prev.dataset.visualHook='1'; prev.addEventListener('click',()=>setTimeout(applyVisual,0)); }
-    if(next && !next.dataset.visualHook){ next.dataset.visualHook='1'; next.addEventListener('click',()=>setTimeout(applyVisual,0)); }
-    const dots=$('storyDots');
-    if(dots && !dots.dataset.visualHook){ dots.dataset.visualHook='1'; dots.addEventListener('click',()=>setTimeout(applyVisual,0)); }
-    const strip=$('scholarStrip');
-    if(strip && !strip.dataset.visualHook){ strip.dataset.visualHook='1'; strip.addEventListener('click',()=>setTimeout(applyVisual,0)); }
-  }
-  const mo=new MutationObserver(()=>{ applyVisual(); attachSwipe(); hookButtons(); });
-  const card=$('heritageStoryCard'); if(card) mo.observe(card,{attributes:true, attributeFilter:['data-story-page']});
-  const nameEl=$('storyName'); if(nameEl) mo.observe(nameEl,{childList:true, characterData:true, subtree:true});
-  const sheet=$('storiesSheet'); if(sheet) mo.observe(sheet,{attributes:true, attributeFilter:['class']});
-  attachSwipe(); hookButtons(); setTimeout(applyVisual,0);
-})();
-</script>
-
-
 <script id="personalized-greeting-v1">
 (function(){
   const KEY='dailyRhythmProfileName_v1';
@@ -10367,45 +9517,6 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
   setInterval(()=>{ const el=$('homeGreetingSmall'); if(el) el.textContent=getDaypart(); },60000);
 })();
 </script>
-
-
-
-
-<style id="stories-hero-final-fix-v1">
-  #storiesSheet .story-medallion[hidden]{display:none !important;}
-  #storiesSheet .story-hero-wrap{
-    display:block !important;
-    width:100% !important;
-    height:190px !important;
-    min-height:190px !important;
-    max-height:190px !important;
-    aspect-ratio:auto !important;
-    overflow:hidden !important;
-    background:#071d2e !important;
-    border-bottom:1px solid rgba(227,183,93,.19) !important;
-  }
-  #storiesSheet .heritage-story-card[data-story-page="1"] .story-hero-wrap,
-  #storiesSheet .heritage-story-card[data-story-page="2"] .story-hero-wrap{
-    display:block !important;
-    height:126px !important;
-    min-height:126px !important;
-    max-height:126px !important;
-    aspect-ratio:auto !important;
-  }
-  #storiesSheet .story-hero-image{
-    display:block !important;
-    width:100% !important;
-    height:100% !important;
-    object-fit:cover !important;
-    object-position:center center !important;
-  }
-  @media(max-width:390px){
-    #storiesSheet .story-hero-wrap{height:168px !important;min-height:168px !important;max-height:168px !important;}
-    #storiesSheet .heritage-story-card[data-story-page="1"] .story-hero-wrap,
-    #storiesSheet .heritage-story-card[data-story-page="2"] .story-hero-wrap{height:112px !important;min-height:112px !important;max-height:112px !important;}
-  }
-</style>
-
 <script id="clean-moon-phases-v1">
 (function(){
   const clean=[(window.DR_ASSET_DATA&&window.DR_ASSET_DATA["moon-new.webp"])||'assets/moon-new.webp',(window.DR_ASSET_DATA&&window.DR_ASSET_DATA["moon-waxing-crescent.webp"])||'assets/moon-waxing-crescent.webp',(window.DR_ASSET_DATA&&window.DR_ASSET_DATA["moon-first-quarter.webp"])||'assets/moon-first-quarter.webp',(window.DR_ASSET_DATA&&window.DR_ASSET_DATA["moon-waxing-gibbous.webp"])||'assets/moon-waxing-gibbous.webp',(window.DR_ASSET_DATA&&window.DR_ASSET_DATA["moon-full.webp"])||'assets/moon-full.webp',(window.DR_ASSET_DATA&&window.DR_ASSET_DATA["moon-waning-gibbous.webp"])||'assets/moon-waning-gibbous.webp',(window.DR_ASSET_DATA&&window.DR_ASSET_DATA["moon-last-quarter.webp"])||'assets/moon-last-quarter.webp',(window.DR_ASSET_DATA&&window.DR_ASSET_DATA["moon-waning-crescent.webp"])||'assets/moon-waning-crescent.webp'];
@@ -10711,63 +9822,6 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     .dial-only-wrap{margin-bottom:10px !important;}
   }
 </style>
-
-
-<style id="story-dots-portrait-bgclock-fix-v1">
-  /* Scholar story pagination: always true circles, including the active point. */
-  #storiesSheet .story-dots{
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    gap:9px !important;
-  }
-  #storiesSheet .story-dot{
-    box-sizing:border-box !important;
-    display:block !important;
-    flex:0 0 10px !important;
-    width:10px !important;
-    min-width:10px !important;
-    max-width:10px !important;
-    height:10px !important;
-    min-height:10px !important;
-    max-height:10px !important;
-    aspect-ratio:1 / 1 !important;
-    padding:0 !important;
-    margin:0 !important;
-    border-radius:50% !important;
-    transform:none !important;
-  }
-  #storiesSheet .story-dot.active{
-    width:10px !important;
-    min-width:10px !important;
-    max-width:10px !important;
-    height:10px !important;
-    min-height:10px !important;
-    max-height:10px !important;
-    border-radius:50% !important;
-    transform:none !important;
-    box-shadow:0 0 0 3px rgba(227,183,93,.12) !important;
-  }
-
-  /* Portrait: do not use the full-screen concept/reference image as the page background.
-     It contains its own clock artwork, which can appear as a second clock behind the live dial. */
-  @media (orientation:portrait){
-    .clock-home{
-      background:
-        radial-gradient(circle at 50% 8%,rgba(46,119,151,.18),transparent 28%),
-        radial-gradient(circle at 14% 20%,rgba(228,184,91,.05),transparent 18%),
-        linear-gradient(180deg,#061c31 0%,#08243a 58%,#071a2b 100%) !important;
-      background-image:
-        radial-gradient(circle at 50% 8%,rgba(46,119,151,.18),transparent 28%),
-        radial-gradient(circle at 14% 20%,rgba(228,184,91,.05),transparent 18%),
-        linear-gradient(180deg,#061c31 0%,#08243a 58%,#071a2b 100%) !important;
-      background-position:center top !important;
-      background-size:auto !important;
-    }
-  }
-</style>
-
-
 <style id="magnifier-offset-polish-v1">
   /* Small reticle: the center of the lens is the exact point under the finger. */
   #magnifier.press-visible::after{
@@ -11365,36 +10419,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
   }).observe(document.documentElement,{attributes:true,attributeFilter:['lang','dir']});
 })();
 </script>
-
-
-
-
-
-<script id="story-image-asset-fallback-v2">
-(function(){
-  const img=document.getElementById('storyHeroImage');
-  if(!img)return;
-  const fallbackForTitle=()=>{
-    const title=(document.getElementById('storyName')?.textContent||'').toLowerCase();
-    if(title.includes('biruni')) return 'assets/scholar-biruni-measurement.webp';
-    if(title.includes('haytham')) return 'assets/scholar-haytham-optics.webp';
-    if(title.includes('khwarizmi')) return 'assets/scholar-khwarizmi-algebra.webp';
-    if(title.includes('zahrawi')) return 'assets/scholar-zahrawi-instruments.webp';
-    return 'assets/scholar-idrisi-cartography.webp';
-  };
-  img.addEventListener('error',function(){
-    const fallback=fallbackForTitle();
-    if(this.getAttribute('src')!==fallback){
-      this.src=fallback;
-      this.style.visibility='visible';
-    }
-  });
-})();
-</script>
-
-
-
-  <link rel="stylesheet" href="css/my-prayer-immersive-v14.css">
+<link rel="stylesheet" href="css/my-prayer-immersive-v14.css">
   <link rel="stylesheet" href="css/clock-moon.css">
   <script src="js/moon-watch.js"></script>
   <script src="js/my-prayer-immersive-v14.js"></script>
@@ -11459,6 +10484,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     if(typeof openMoonSheet==='function')openMoonSheet();
     const title=$id('moonGuideTitle');if(title)title.textContent=currentLang==='ar'?'صلاتي':'My Prayer';
   }
+  window.DailyRhythmOpenMyPrayer=openMyPrayer;
   $id('prayerRemainingCard')?.addEventListener('click',openMyPrayer);
   $id('enableQiblaCompass')?.addEventListener('click',enableCompass);
   // Moon is now part of My Prayer; tapping it simply refreshes the prayer surface.
@@ -11500,7 +10526,6 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
       settingsLanguageRowTitle:A?'اللغة':'Language', settingsLanguageRowValue:A?'العربية':'English',
       settingsPrayerRowTitle:A?'صلاتي':'My Prayer', settingsPrayerRowValue:A?'الموقع والقمر ومواقيت الصلاة واتجاه القبلة':'Location, moon, prayer times and Qibla',
       settingsProfileRowTitle:A?'التخصيص':'Personalization', settingsProfileRowValue:A?'اسمك وتفضيلاتك الشخصية':'Name and personal preferences',
-      settingsStoriesRowTitle:A?'حكايات من التراث':'Heritage stories', settingsStoriesRowValue:A?'اختر متى تظهر الحكايات':'Choose how often stories appear',
       settingsAboutRowTitle:A?'عن التطبيق والبيانات':'About & data', settingsAboutRowValue:A?'معلومات التطبيق وبيانات الاختبار':'App information and test data',
       settingsRemindersTitle:A?'التذكيرات':'Reminders', settingsRemindersIntro:A?'اختر متى تريد أن يلفت Daily Rhythm انتباهك. ويمكنك تغيير التذكير لأي نشاط على حدة.':'Choose when Daily Rhythm should get your attention. You can still override this for any activity.',
       settingsEnableRemindersLabel:A?'تذكيرات الأنشطة':'Activity reminders', settingsDefaultReminderLabel:A?'التذكير الافتراضي':'Default reminder', settingsReminderFootnote:A?'يُستخدم هذا الاختيار تلقائيًا للأنشطة الجديدة ذات الوقت المحدد. الأنشطة الحالية تحتفظ بإعدادها.':'This becomes the default for new timed activities. Existing activities keep their own choice.',
@@ -11541,7 +10566,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     if(isChild()){e.preventDefault();e.stopImmediatePropagation();settingsHome.hidden=false;panels.forEach(p=>p.hidden=true);syncSettingsHeader();}
   },true);
   $('openSettingsBtn')?.addEventListener('click',()=>setTimeout(syncSettingsHeader,0));
-  $('openMyPrayerBtn')?.addEventListener('click',()=>{ $('prayerRemainingCard')?.click(); });
+  $('openMyPrayerBtn')?.addEventListener('click',()=>{ if(typeof window.DailyRhythmOpenMyPrayer==='function') window.DailyRhythmOpenMyPrayer(); else $('prayerRemainingCard')?.click(); });
   function syncMyPrayerLabel(){const el=$('navMyPrayerLabel');if(el)el.textContent=ar()?'صلاتي':'My Prayer';}
   const prompts={
     en:{capabilities:'What can I do?',free:'Find me a free time',edit:'How do I edit an activity?',help:'What can Daily Rhythm do?'},
@@ -11569,6 +10594,58 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
   window.addEventListener('dailyRhythm:reminderStatus',paintReminderActions);
   new MutationObserver(()=>{syncPrompts();paintReminderActions();syncSettingsHeader();}).observe(document.documentElement,{attributes:true,attributeFilter:['lang','dir']});
   setTimeout(()=>{syncPrompts();paintReminderActions();syncSettingsHeader();},0);
+})();
+</script>
+
+<script id="phase1-mobile-hotfix-v16-1-js">
+(() => {
+  const $=id=>document.getElementById(id);
+  const ar=()=>document.documentElement.lang==='ar';
+
+  // Make My Prayer a direct action rather than a chained synthetic click.
+  $('openMyPrayerBtn')?.addEventListener('click',(e)=>{
+    e.preventDefault();
+    e.stopPropagation();
+    if(typeof window.DailyRhythmOpenMyPrayer==='function') window.DailyRhythmOpenMyPrayer();
+    else {
+      const sheet=$('moonSheet'),backdrop=$('moonBackdrop');
+      sheet?.classList.add('open');
+      backdrop?.classList.add('open');
+    }
+  },true);
+
+  async function paintReminderState(){
+    const api=window.DailyRhythmReminders;
+    if(!api?.status)return;
+    const statusText=$('settingsRemindersStatusText');
+    const statusBtn=$('settingsRemindersStatusButton');
+    const action=$('enableReminderNotifications');
+    const hero=$('settingsRemindersHeroStatus');
+    try{
+      const st=await api.status();
+      const on=!!st.enabled;
+      statusBtn?.classList.toggle('is-on',on);
+      if(statusText) statusText.textContent=on?(ar()?'مفعّلة':'On'):(ar()?'متوقفة':'Off');
+      if(action){
+        action.dataset.enabled=on?'1':'0';
+        action.textContent=on?(ar()?'إيقاف التذكيرات':'Turn off reminders'):(ar()?'تفعيل التذكيرات':'Enable reminders');
+      }
+      if(hero){
+        if(on && st.pushEnabled===false){
+          hero.textContent=ar()?'التذكيرات مفعّلة داخل التطبيق. أضف Daily Rhythm إلى الشاشة الرئيسية لتذكيرات شاشة القفل.':'Reminders are on in the app. Add Daily Rhythm to your Home Screen for lock-screen reminders.';
+        } else if(on){
+          hero.textContent=ar()?'التذكيرات مفعّلة. اضغط لاختيار التوقيت الافتراضي.':'Reminders are on. Tap to choose your default timing.';
+        } else {
+          hero.textContent=ar()?'اختر متى تريد أن ينبهك Daily Rhythm قبل الأنشطة.':'Choose when Daily Rhythm should remind you before activities.';
+        }
+      }
+    }catch(_){ }
+  }
+
+  window.addEventListener('dailyRhythm:reminderStatus',paintReminderState);
+  window.addEventListener('pageshow',paintReminderState);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)paintReminderState();});
+  setTimeout(paintReminderState,250);
 })();
 </script>
 </body>
