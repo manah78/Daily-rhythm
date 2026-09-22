@@ -3827,13 +3827,9 @@
 
 <style id="daily-rhythm-focus-v1">
   /* Focus the home surface on My Day + Talk. My Prayer remains its own screen. */
-  .dial-only-wrap,
-  #skyMoonBadge,
+  /* Home cleanup: My Prayer is intentionally NOT hidden here. */
   #magnifier,
-  #magnifierToggle,
-  #heritageTeaser,
-  #moonBackdrop,
-  #moonSheet { display:none !important; }
+  #heritageTeaser { display:none !important; }
 
   /* Make the living day, not the ornamental clock, the visual center. */
   .clock-home .stage { padding-bottom: 104px !important; }
@@ -4256,7 +4252,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
           <span id="nameOnboardingText">What should I call you?</span>
         </div>
         <div class="name-onboarding-actions">
-          <input id="nameOnboardingInput" type="text" maxlength="28" autocomplete="name" placeholder="Your name" />
+          <input id="nameOnboardingInput" type="text" maxlength="50" autocomplete="name" placeholder="Your name" />
           <button id="nameOnboardingSave" type="button">Save</button>
           <button id="nameOnboardingLater" type="button" class="secondary">Not now</button>
         </div>
@@ -4605,7 +4601,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
 
       <div class="settings-child" data-settings-panel="profile" hidden>
         <button class="settings-child-back" type="button" data-settings-back>‹ <span>Settings</span></button>
-        <section class="settings-section settings-profile"><h3 id="settingsProfileTitle">Personalization</h3><div class="settings-row settings-name-row"><label for="settingsProfileName" id="settingsProfileNameLabel">Your name</label><input id="settingsProfileName" class="settings-control settings-name-input" type="text" maxlength="28" placeholder="Optional" autocomplete="name" /></div></section>
+        <section class="settings-section settings-profile"><h3 id="settingsProfileTitle">Personalization</h3><div class="settings-row settings-name-row"><label for="settingsProfileName" id="settingsProfileNameLabel">Your name</label><input id="settingsProfileName" class="settings-control settings-name-input" type="text" maxlength="50" placeholder="Optional" autocomplete="name" /></div></section>
       </div>
 
       <div class="settings-child" data-settings-panel="prayer" hidden>
@@ -6266,11 +6262,13 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
 
   function applyTimeTheme(now, hf) {
     const appShell = document.querySelector('.app-shell');
-    document.documentElement.setAttribute('data-theme', 'dark');
-    if (appShell) { appShell.classList.add('is-night'); appShell.classList.remove('is-day'); }
+    const pref = themePreference || 'auto';
+    const dark = pref === 'night' || (pref === 'auto' && window.matchMedia?.('(prefers-color-scheme: dark)').matches);
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+    if (appShell) { appShell.classList.toggle('is-night', dark); appShell.classList.toggle('is-day', !dark); }
     const metaTheme = document.querySelector('meta[name="theme-color"]');
-    if (metaTheme) metaTheme.setAttribute('content', '#10243B');
-    return false;
+    if (metaTheme) metaTheme.setAttribute('content', dark ? '#10243B' : '#F7F3EA');
+    return !dark;
   }
 
   function positionMoonBadge(now) {
@@ -8272,7 +8270,18 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
         body:JSON.stringify({
           text,
           locale:currentLang,
-          schedule:blocks.map(b=>({
+          // Incremental contract: send only locally-resolved relevant activities, never the whole rhythm.
+          schedule:(()=>{
+            const q=normalizeText(String(text||''));
+            const ordered=blocks.slice().sort((a,b)=>a.start-b.start);
+            const num=(q.match(/\b(?:number|no\.?|#)\s*(\d{1,2})\b/i)||[])[1];
+            if(num){const hit=ordered[Number(num)-1];return hit?[hit]:[];}
+            const hits=ordered.filter(b=>{
+              const names=[b.labelEn,b.labelAr,b.label,blockDisplayLabel(b)].filter(Boolean).map(x=>normalizeText(String(x)));
+              return names.some(n=>n && (q.includes(n)||n.includes(q)));
+            });
+            return hits.slice(0,3);
+          })().map(b=>({
             id:String(b.id || ''),
             activity:blockDisplayLabel(b),
             labelEn:b.labelEn||b.label||'',
@@ -8669,6 +8678,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
   // ---- Phase 1 transactional voice commit ----
   // Interpret/validate first, but do not persist a schedule mutation until the user taps Done.
   let pendingScheduleCommit = null;
+  let workingRhythmBaseState = null; // committed state before this multi-turn conversation
   function cloneRhythmState(value) {
     try { return JSON.parse(JSON.stringify(value)); } catch (_) { return value; }
   }
@@ -8712,6 +8722,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
   }
   function hideVoiceCommitReview() {
     pendingScheduleCommit = null;
+    workingRhythmBaseState = null;
     const review = document.getElementById('voiceCommitReview');
     if (review) review.hidden = true;
     setVoicePhase(activeRecognition ? 'listening' : 'idle');
@@ -8719,9 +8730,11 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
   function stageScheduleCommit(beforeState, heardText, actionText) {
     const afterState = captureRhythmState();
     if (rhythmStateSignature(beforeState) === rhythmStateSignature(afterState)) return false;
-    // Return the live schedule to exactly where it was. The proposed state is held in memory only.
-    applyRhythmState(beforeState);
-    pendingScheduleCommit = { state: afterState, heardText: String(heardText || ''), actionText: String(actionText || '') };
+    // First mutation captures the committed baseline. Later turns patch the same working draft.
+    if (!workingRhythmBaseState) workingRhythmBaseState = cloneRhythmState(beforeState);
+    applyRhythmState(workingRhythmBaseState);
+    const previousHeard = pendingScheduleCommit?.heardText || '';
+    pendingScheduleCommit = { state: afterState, heardText: [previousHeard, String(heardText || '')].filter(Boolean).join(' → '), actionText: String(actionText || '') };
     const review = document.getElementById('voiceCommitReview');
     const heard = document.getElementById('voiceHeardText');
     const action = document.getElementById('voiceWillDoText');
@@ -8729,6 +8742,8 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     if (heard) { heard.textContent = pendingScheduleCommit.heardText; heard.title = pendingScheduleCommit.heardText; }
     if (action) { action.textContent = pendingScheduleCommit.actionText; action.title = pendingScheduleCommit.actionText; }
     if (review) review.hidden = false;
+    window.__dailyRhythmWorkingState = () => cloneRhythmState(pendingScheduleCommit?.state || null);
+    window.dispatchEvent(new CustomEvent('dailyRhythm:workingDraftChanged'));
     const receipt=document.getElementById('multiAddReceipt'); if(receipt){receipt.hidden=true;}
     setVoiceLiveStatus(currentLang === 'ar' ? 'راجع ما فهمته. لن يتغير جدولك حتى تضغط «تم».' : 'Review what I understood. Your schedule will not change until you tap Done.', 'review');
     setCommandFeedback(currentLang === 'ar' ? 'جاهز للحفظ — لم يتغير أي شيء بعد.' : 'Ready to save — nothing has changed yet.', 'question');
@@ -8751,6 +8766,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     if (!pendingScheduleCommit) return;
     const pending = pendingScheduleCommit;
     pendingScheduleCommit = null;
+    workingRhythmBaseState = null;
     applyRhythmState(pending.state);
     const review = document.getElementById('voiceCommitReview');
     if (review) review.hidden = true;
@@ -8759,14 +8775,20 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     setVoiceLiveStatus(currentLang === 'ar' ? 'تم الحفظ.' : 'Saved.', 'done');
   });
   document.getElementById('voiceCommitContinue')?.addEventListener('click', () => {
-    cancelPendingScheduleCommit(currentLang === 'ar' ? 'لم يتم الحفظ — عدّل أو تابع كلامك.' : 'Not saved — edit or continue your thought.');
+    const review = document.getElementById('voiceCommitReview'); if (review) review.hidden = true;
+    setVoiceLiveStatus(currentLang === 'ar' ? 'تابع الكلام — المسودة محفوظة.' : 'Keep talking — your working draft is preserved.', 'listening');
     commandInput?.focus();
+    if (!activeRecognition) startVoiceListening();
   });
 
   async function submitCommand(options = {}) {
     const text = (options.text !== undefined ? options.text : commandInput.value).trim();
     if (!text) return;
-    if (pendingScheduleCommit) cancelPendingScheduleCommit(currentLang === 'ar' ? 'تم إلغاء المسودة السابقة. سأراجع النسخة الجديدة.' : 'Previous draft cancelled. I’ll review the new version.');
+    // Continue from the existing working draft instead of cancelling/regenerating it.
+    if (pendingScheduleCommit) {
+      applyRhythmState(pendingScheduleCommit.state);
+      const review = document.getElementById('voiceCommitReview'); if (review) review.hidden = true;
+    }
     const beforeRhythmState = captureRhythmState();
     const capture = beginRequestCapture(text, options.source || 'typed');
     hideCommandConfirmation();
@@ -10648,5 +10670,170 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
   setTimeout(paintReminderState,250);
 })();
 </script>
+
+<style id="v16-5-settings-voice-ui">
+  #settingsMobileBody>.settings-home, #settingsMobileBody>.settings-child{display:none!important}
+  .settings-simple{display:flex;flex-direction:column;gap:12px;padding-bottom:18px}
+  .ss-card{background:var(--bg-panel);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:0 4px 16px rgba(0,0,0,.05)}
+  .ss-title{font-weight:800;font-size:.95rem;margin-bottom:10px}.ss-row{display:flex;align-items:center;gap:12px;min-height:48px}.ss-row+.ss-row{border-top:1px solid var(--line)}
+  .ss-grow{flex:1;min-width:0}.ss-grow small{display:block;color:var(--ink-dim);margin-top:2px}.ss-input{width:100%;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:12px;padding:11px 12px;font-size:16px}
+  .ss-avatar{width:58px;height:58px;border-radius:50%;border:2px solid #c69a3a;object-fit:cover;background:rgba(198,154,58,.14);display:grid;place-items:center;font-weight:800;color:var(--ink)}
+  .ss-photo-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}.ss-btn,.ss-segment button{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:8px 11px;font-weight:700}.ss-btn.primary,.ss-segment button.active{background:#c69a3a;color:#24180a;border-color:#c69a3a}
+  .ss-switch{position:relative;width:50px;height:30px;flex:0 0 auto}.ss-switch input{opacity:0;width:0;height:0}.ss-slider{position:absolute;inset:0;border-radius:99px;background:#9aa7a0;transition:.2s}.ss-slider:before{content:'';position:absolute;width:24px;height:24px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s}.ss-switch input:checked+.ss-slider{background:#c69a3a}.ss-switch input:checked+.ss-slider:before{transform:translateX(20px)}
+  .ss-segment{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.ss-segment button{padding:9px 6px}
+  .working-rhythm-card{margin-top:10px;border:1px solid var(--line);border-radius:14px;padding:10px;background:rgba(255,255,255,.04)}.working-rhythm-card h4{margin:0 0 8px;font-size:.82rem;color:var(--ink-dim)}.working-rhythm-row{display:grid;grid-template-columns:1fr auto;gap:10px;padding:7px 0;border-top:1px solid var(--line);font-size:.86rem}.working-rhythm-row:first-of-type{border-top:0}.working-rhythm-row b{font-weight:700}.working-rhythm-row span{color:var(--ink-dim)}
+  .voice-end-btn{width:100%;margin-top:10px;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:11px;font-weight:800}
+
+  /* Approved Settings contract: one flat screen only. */
+  #settingsSheet .sheet-header-meta::after{content:" · Customize your experience";font-size:.72rem;font-family:system-ui,sans-serif;font-weight:500;opacity:.68;margin-left:6px}
+  #settingsSimple .ss-card{overflow:hidden}
+  #settingsSimple .ss-title{letter-spacing:.01em}
+  #settingsSimple .ss-row{padding:4px 0}
+  #settingsSimple .ss-input{max-width:none!important;text-align:left!important}
+  #settingsSimple .ss-avatar img{display:block}
+  #settingsSimple .ss-card:nth-of-type(4),#settingsSimple .ss-card:nth-of-type(5){min-height:66px}
+  :root[data-theme="light"] #settingsSheet .sheet-body{background:#f7f5ef!important;color:#24333a!important}
+  :root[data-theme="light"] #settingsSheet .sheet-header{background:rgba(247,245,239,.98)!important;border-bottom:1px solid #e7dfd0!important}
+  :root[data-theme="light"] #settingsSheet .sheet-header-meta{color:#24333a!important}
+  :root[data-theme="light"] #settingsSheet .sheet-close{color:#51615c!important;background:#fff!important;border-color:#e1d8c8!important}
+  :root[data-theme="light"] #settingsSimple .ss-card{background:#fff!important;border-color:#e7dfd0!important;box-shadow:0 8px 22px rgba(40,52,48,.06)!important}
+  :root[data-theme="light"] #settingsSimple .ss-title,:root[data-theme="light"] #settingsSimple b{color:#24333a!important}
+  :root[data-theme="light"] #settingsSimple small{color:#72807c!important}
+  :root[data-theme="light"] #settingsSimple .ss-input{background:#fbfaf7!important;color:#24333a!important;border-color:#ded7ca!important}
+  :root[data-theme="light"] #settingsSimple .ss-btn,:root[data-theme="light"] #settingsSimple .ss-segment button{background:#fbfaf7!important;color:#33443f!important;border-color:#ded7ca!important}
+  :root[data-theme="light"] #settingsSimple .ss-segment button.active{background:#2f6f5e!important;color:#fff!important;border-color:#2f6f5e!important}
+  :root[data-theme="dark"] #settingsSimple .ss-card{background:linear-gradient(180deg,rgba(13,48,66,.88),rgba(8,34,52,.94))!important;border-color:rgba(221,179,91,.28)!important}
+  :root[data-theme="dark"] #settingsSimple .ss-title,:root[data-theme="dark"] #settingsSimple b{color:#f6ecd3!important}
+  :root[data-theme="dark"] #settingsSimple small{color:#b8c8cd!important}
+  :root[data-theme="dark"] #settingsSimple .ss-input{background:rgba(4,22,38,.72)!important;color:#fff5db!important;border-color:rgba(221,179,91,.28)!important}
+  :root[data-theme="dark"] #settingsSimple .ss-btn,:root[data-theme="dark"] #settingsSimple .ss-segment button{color:#f5ead0!important;border-color:rgba(221,179,91,.28)!important}
+  :root[data-theme="dark"] #settingsSimple .ss-segment button.active{background:#c69a3a!important;color:#24180a!important}
+</style>
+<script id="v16-5-settings-voice-js">
+(()=>{
+ const $=id=>document.getElementById(id), body=$('settingsMobileBody');
+ if(body && !$('settingsSimple')){
+   const wrap=document.createElement('div');wrap.id='settingsSimple';wrap.className='settings-simple';
+   wrap.innerHTML=`
+    <section class="ss-card"><div class="ss-title">Personalization</div><div class="ss-row"><div id="ssAvatar" class="ss-avatar">ME</div><div class="ss-grow"><label for="ssName"><b>Your name</b></label><input id="ssName" class="ss-input" maxlength="50" autocomplete="name" placeholder="First and last name"><small id="ssNameCount">0/50 characters</small><div class="ss-photo-actions"><button class="ss-btn" id="ssTakePhoto" type="button">Take photo</button><button class="ss-btn" id="ssChoosePhoto" type="button">Choose photo</button><button class="ss-btn" id="ssRemovePhoto" type="button">Remove</button></div></div></div><input id="ssPhotoCamera" type="file" accept="image/*" capture="user" hidden><input id="ssPhotoLibrary" type="file" accept="image/*" hidden></section>
+    <section class="ss-card"><div class="ss-title">Notifications</div><div class="ss-row"><div class="ss-grow"><b>Activity reminders</b><small id="ssNotifyStatus">On/off for activity reminders</small></div><label class="ss-switch"><input id="ssNotify" type="checkbox"><span class="ss-slider"></span></label></div></section>
+    <section class="ss-card"><div class="ss-title">Appearance</div><div class="ss-segment"><button data-theme-choice="light">Light</button><button data-theme-choice="dark">Dark</button><button data-theme-choice="system">System</button></div></section>
+    <section class="ss-card"><div class="ss-row"><div class="ss-grow"><b>Data & Privacy</b><small>Your rhythm and personalization stay on this device unless a feature explicitly sends a request for AI interpretation.</small></div></div></section>
+    <section class="ss-card"><div class="ss-row"><div class="ss-grow"><b>About</b><small>Daily Rhythm · v16.6</small></div></div></section>`;
+   body.prepend(wrap);
+ }
+ const NAME='dailyRhythmProfileName_v1', PHOTO='dailyRhythmProfilePhoto_v1', THEME='dailyRhythmThemePreference_v1';
+ const name=$('ssName'), count=$('ssNameCount'), avatar=$('ssAvatar');
+ function initials(v){return (v||'Me').trim().split(/\s+/).slice(0,2).map(x=>x[0]||'').join('').toUpperCase()||'ME'}
+ function paintProfile(){let v='';try{v=localStorage.getItem(NAME)||''}catch(_){} if(name)name.value=v;if(count)count.textContent=`${v.length}/50 characters`;let ph='';try{ph=localStorage.getItem(PHOTO)||''}catch(_){};if(avatar){avatar.innerHTML=ph?`<img alt="Profile photo" src="${ph}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:initials(v)}}
+ name?.addEventListener('input',e=>{const v=e.target.value.slice(0,50);try{localStorage.setItem(NAME,v)}catch(_){};const old=$('settingsProfileName');if(old)old.value=v;const greet=$('homeGreetingName');if(greet)greet.textContent=v.trim();paintProfile();});
+ function loadPhoto(file){if(!file)return;const r=new FileReader();r.onload=()=>{try{localStorage.setItem(PHOTO,String(r.result))}catch(_){}paintProfile()};r.readAsDataURL(file)}
+ $('ssTakePhoto')?.addEventListener('click',()=> $('ssPhotoCamera')?.click());$('ssChoosePhoto')?.addEventListener('click',()=> $('ssPhotoLibrary')?.click());$('ssPhotoCamera')?.addEventListener('change',e=>loadPhoto(e.target.files?.[0]));$('ssPhotoLibrary')?.addEventListener('change',e=>loadPhoto(e.target.files?.[0]));$('ssRemovePhoto')?.addEventListener('click',()=>{try{localStorage.removeItem(PHOTO)}catch(_){}paintProfile()});
+ async function paintNotify(){try{const st=await window.DailyRhythmReminders?.status?.();if($('ssNotify'))$('ssNotify').checked=!!st?.enabled;if($('ssNotifyStatus'))$('ssNotifyStatus').textContent=st?.enabled?'On':'Off'}catch(_){}}
+ $('ssNotify')?.addEventListener('change',async e=>{e.target.disabled=true;try{if(e.target.checked)await window.DailyRhythmReminders?.enable?.();else await window.DailyRhythmReminders?.disable?.()}catch(_){e.target.checked=!e.target.checked}finally{e.target.disabled=false;paintNotify()}});
+ function paintTheme(){let t='system';try{const raw=localStorage.getItem(THEME)||'auto';t=raw==='auto'?'system':raw==='day'?'light':raw==='night'?'dark':raw}catch(_){};document.querySelectorAll('[data-theme-choice]').forEach(b=>b.classList.toggle('active',b.dataset.themeChoice===t))}
+ document.querySelectorAll('[data-theme-choice]').forEach(b=>b.addEventListener('click',()=>{const t=b.dataset.themeChoice;const stored=t==='system'?'auto':t==='light'?'day':'night';try{localStorage.setItem(THEME,stored)}catch(_){};themePreference=stored;applyTimeTheme(new Date(),new Date().getHours()+new Date().getMinutes()/60);paintTheme()}));
+ $('openSettingsBtn')?.addEventListener('click',()=>{paintProfile();paintNotify();paintTheme()});window.addEventListener('dailyRhythm:reminderStatus',paintNotify);paintProfile();paintNotify();paintTheme();
+})();
+</script>
+<script id="v16-5-working-rhythm-ui">
+(()=>{
+ const review=document.getElementById('voiceCommitReview'); if(!review)return;
+ const card=document.createElement('section');card.id='workingRhythmCard';card.className='working-rhythm-card';card.innerHTML='<h4>Working rhythm · not saved</h4><div id="workingRhythmRows"></div>';review.insertBefore(card,review.querySelector('.voice-review-actions'));
+ const end=document.createElement('button');end.type='button';end.id='voiceEndConversation';end.className='voice-end-btn';end.textContent='End conversation';review.appendChild(end);
+ function fmt(h){let n=Number(h);if(!Number.isFinite(n))return '';n=((n%24)+24)%24;let hr=Math.floor(n),m=Math.round((n-hr)*60);if(m===60){hr=(hr+1)%24;m=0}const ap=hr>=12?'PM':'AM';return `${hr%12||12}:${String(m).padStart(2,'0')} ${ap}`}
+ const refs=new Map();let refSeq=1;function refFor(b){const k=String(b.id||`${b.labelEn||b.label||'activity'}|${b.start}`);if(!refs.has(k))refs.set(k,`R${String(refSeq++).padStart(2,'0')}`);return refs.get(k)}
+ function paint(){const rows=document.getElementById('workingRhythmRows');if(!rows)return;const state=window.__dailyRhythmWorkingState?.()||null;const list=state?.blocks||[];rows.innerHTML=list.slice().sort((a,b)=>a.start-b.start).map(b=>`<div class="working-rhythm-row"><b>${refFor(b)} · ${b.labelEn||b.label||'Activity'}</b><span>${fmt(b.start)}</span></div>`).join('')||'<small>No activity changes yet.</small>'}
+ window.addEventListener('dailyRhythm:workingDraftChanged',paint);end.addEventListener('click',()=>{setVoiceLiveStatus(currentLang==='ar'?'جاهز للحفظ — راجع ثم اضغط تم.':'Ready to commit — review, then tap Done.','review');review.scrollIntoView({behavior:'smooth',block:'nearest'});});
+ const mo=new MutationObserver(()=>{if(!review.hidden)paint()});mo.observe(review,{attributes:true,attributeFilter:['hidden']});
+})();
+</script>
+
+
+<style id="v16-6-approved-voice-contract-ui">
+#homeVoiceShell.is-open #homeTalkCta{background:#fbf8f0!important;border:1px solid #eadfca!important;box-shadow:0 10px 30px rgba(30,44,52,.08)!important;color:#24333a!important}
+#homeVoiceShell.is-open #homeTalkCta .home-talk-mic{background:#dfe9e4!important;border:1px solid #cadbd3!important;color:#2e6b5b!important}
+#homeVoicePanel{background:#fbf8f0!important;border:1px solid #eadfca!important;box-shadow:0 12px 30px rgba(30,44,52,.08)!important}
+.home-command-bar #commandInput{background:#fff!important;color:#24333a!important;border:1px solid #ded8ca!important}
+.home-command-bar .voice-live-status{color:#6c7d78!important}.home-command-bar .command-edit-hint{color:#7f8985!important}
+.voice-commit-review{background:#fff!important;border:1px solid #ded8ca!important}.voice-review-step>span{color:#b58a43!important}.voice-review-step p{color:#24333a!important}
+.working-rhythm-card{background:#fbfaf6!important;border:1px solid #e4ddcf!important}.working-rhythm-card h4{color:#7b827f!important}.working-rhythm-row span{color:#78817e!important}
+.voice-done-btn{background:#2f6f5e!important;color:#fff!important}.voice-continue-btn,.voice-end-btn{background:#fff!important;color:#2f6f5e!important;border-color:#b8cdc5!important}
+#homeVoiceShell.is-listening #homeTalkCta{box-shadow:0 0 0 5px rgba(47,111,94,.10),0 10px 30px rgba(30,44,52,.08)!important}
+#homeVoiceShell.is-processing #homeTalkCta .home-talk-mic{animation:drPulse 1.1s ease-in-out infinite}@keyframes drPulse{50%{transform:scale(.92);opacity:.72}}
+</style>
 </body>
 </html>
+<style id="my-prayer-v16-4-repair">
+/* v16.4 — My Prayer is a real full-screen destination, not a hidden moon popover. */
+#moonBackdrop.open{display:block !important;visibility:visible !important;opacity:1 !important;pointer-events:auto !important;}
+#moonSheet.moon-guide.open{
+  display:block !important;visibility:visible !important;opacity:1 !important;pointer-events:auto !important;
+  position:fixed !important;inset:0 !important;left:0 !important;top:0 !important;
+  width:100vw !important;max-width:none !important;height:100dvh !important;max-height:none !important;
+  transform:none !important;border-radius:0 !important;
+  padding:0 18px calc(28px + env(safe-area-inset-bottom,0px)) !important;
+  z-index:120 !important;overflow-y:auto !important;-webkit-overflow-scrolling:touch !important;
+}
+#moonSheet.open .my-prayer-clock{display:grid !important;width:100% !important;max-width:620px !important;margin:8px auto 18px !important;}
+#moonSheet.open .dial-only-wrap{display:block !important;width:100% !important;max-width:580px !important;margin:0 auto !important;}
+#moonSheet.open .dial-wrap{display:block !important;width:min(88vw,560px) !important;max-width:560px !important;margin:0 auto !important;}
+#moonSheet.open #skyMoonBadge{display:block !important;visibility:visible !important;}
+#moonSheet.open #magnifierToggle{display:grid !important;visibility:visible !important;}
+#moonSheet.open .qibla-card,#moonSheet.open .my-prayer-context{display:grid !important;}
+#moonSheet .moon-guide-head{padding-top:calc(18px + env(safe-area-inset-top,0px)) !important;min-height:82px !important;}
+#moonSheet .moon-guide-head h2{font-size:clamp(1.65rem,7vw,2.15rem) !important;}
+@media(max-width:390px){
+  #moonSheet.moon-guide.open{padding-inline:12px !important;}
+  #moonSheet.open .dial-wrap{width:min(92vw,520px) !important;}
+}
+</style>
+<script id="my-prayer-v16-4-repair-js">
+(() => {
+  const $=id=>document.getElementById(id);
+  const sheet=$('moonSheet'), backdrop=$('moonBackdrop'), nav=$('openMyPrayerBtn'), close=$('moonCloseBtn'), card=$('prayerRemainingCard');
+  function showPrayer(e){
+    if(e){e.preventDefault();e.stopPropagation();}
+    if(!sheet)return;
+    sheet.hidden=false; sheet.removeAttribute('hidden'); sheet.setAttribute('aria-hidden','false');
+    if(backdrop){backdrop.hidden=false;backdrop.removeAttribute('hidden');backdrop.setAttribute('aria-hidden','false');backdrop.classList.add('open');}
+    sheet.classList.add('open');
+    document.body.classList.add('my-prayer-open');
+    try{ if(typeof updateStaticQibla==='function') updateStaticQibla(); }catch(_){}
+    try{ if(typeof tick==='function') tick(); }catch(_){}
+    requestAnimationFrame(()=>{ try{ window.dispatchEvent(new Event('resize')); }catch(_){} });
+  }
+  function hidePrayer(e){
+    if(e){e.preventDefault();e.stopPropagation();}
+    if(!sheet)return;
+    sheet.classList.remove('open'); sheet.setAttribute('aria-hidden','true'); sheet.hidden=true;
+    if(backdrop){backdrop.classList.remove('open');backdrop.setAttribute('aria-hidden','true');backdrop.hidden=true;}
+    document.body.classList.remove('my-prayer-open');
+  }
+  nav?.addEventListener('click',showPrayer,true);
+  card?.addEventListener('click',showPrayer,true);
+  close?.addEventListener('click',hidePrayer,true);
+  backdrop?.addEventListener('click',hidePrayer,true);
+  window.DailyRhythmOpenMyPrayer=showPrayer;
+})();
+</script>
+
+<!-- Approved My Prayer reference implementation - local review only -->
+<style id="my-prayer-approved-reference-v17">
+#moonSheet.moon-guide{inset:0!important;width:100%!important;max-width:none!important;height:100dvh!important;max-height:none!important;border-radius:0!important;padding:0 16px calc(82px + env(safe-area-inset-bottom))!important;overflow-y:auto!important;background:#f9f5ed!important;color:#111!important;box-shadow:none!important}
+#moonBackdrop{display:none!important}.moon-guide-head{position:relative!important;display:flex!important;align-items:center!important;padding:56px 18px 2px!important;margin:0 -16px!important;background:transparent!important;border:0!important}.moon-guide-handle,#moonCloseBtn{display:none!important}#moonGuideTitle{font:700 2rem/1.05 Georgia,'Times New Roman',serif!important;color:#111!important;margin:0!important}#moonGuideTitle:after{content:'Stay connected, wherever you are';display:block;font:400 1rem/1.4 system-ui,-apple-system,sans-serif;margin-top:8px;color:#303030}.moon-guide-head:after{content:'⌖  Montreal   ⚙';margin-left:auto;font:700 .82rem system-ui;color:#111}
+.my-prayer-clock{margin-top:10px!important}.dial-only-wrap{padding:0!important}.dial-wrap{width:min(78vw,370px)!important;height:min(78vw,370px)!important;margin:72px auto 30px!important;border:3px solid #b98b3a!important;border-radius:50%!important;box-shadow:0 0 0 5px #e7cf98,0 0 0 8px #805f28!important}.andalus-inner-art{border-radius:50%!important;overflow:hidden!important}.qibla-clock-marker{color:#a06f17!important}.magnifier-toggle{left:auto!important;right:-12%!important;bottom:-8%!important;background:#ead7ad!important;color:#111!important;border:0!important}
+#moonSheet .qibla-card{display:grid!important;grid-template-columns:1fr!important;align-content:center!important;text-align:center!important;min-height:196px!important;padding:12px!important;border-radius:14px!important;background:#fff!important;border:1px solid #ece8df!important;box-shadow:none!important}.qibla-copy{display:block!important}.qibla-kicker{font:700 .9rem system-ui!important;color:#111!important}.qibla-copy #qiblaAccuracyText,.qibla-copy button{display:none!important}.qibla-copy strong{font:700 .95rem system-ui!important;color:#111!important}.qibla-compass{margin:auto!important}
+.my-prayer-context{display:contents!important}.status-strip{display:grid!important;grid-template-columns:1fr 1fr!important;gap:10px!important;margin:0!important}.status-tile{background:#fff!important;color:#111!important;border:1px solid #ece8df!important;border-radius:14px!important;min-height:196px!important;padding:14px!important;box-shadow:none!important}.status-strip .hijri-tile{display:none!important}.status-strip .prayer-tile{grid-column:1!important;grid-row:1!important}.status-strip .date-tile{grid-column:2!important;grid-row:1!important}.status-strip .prayer-tile:before{content:'Next Prayer';display:block;font-weight:700;margin-bottom:22px}.status-strip .date-tile:before{content:'Date';display:block;font-weight:700;margin-bottom:22px}.status-strip .next-prayer,.status-strip .date{color:#111!important;font-size:1rem!important}
+#moonSheet .qibla-card,.status-strip{width:100%!important}#moonSheet .qibla-card{margin:0!important}.my-prayer-context{margin:0!important}
+#moonSheet .moon-guide-hero{margin-top:12px!important;display:grid!important;grid-template-columns:145px 1fr!important;gap:18px!important;align-items:center!important;padding:14px!important;border-radius:14px!important;background:#fff!important;border:1px solid #ece8df!important}.moon-guide-hero:before{content:'Moon Phase';position:absolute;font-weight:700}.moon-guide-hero{position:relative!important;padding-top:42px!important}#moonSheet .moon-phase-art{width:132px!important;height:132px!important}.moon-guide-summary{text-align:left!important}.moon-guide-summary .quick-sheet-title{color:#111!important;font:700 1rem system-ui!important}.moon-guide-summary .moon-illum{color:#111!important;font-size:.9rem!important}.moon-guide-reflection{display:none!important}.moon-guide-stats{display:none!important}.moon-guide-divider{display:none!important}
+#moonSheet .moon-guide-heritage{display:block!important;margin-top:12px!important;padding:14px!important;border-radius:14px!important;background:#fff!important;border:1px solid #ece8df!important}.moon-guide-heritage h3{font:700 1rem system-ui!important;color:#111!important}.moon-guide-subtitle{display:none!important}.moon-heritage-card{display:grid!important;grid-template-columns:138px 1fr!important;gap:14px!important;background:transparent!important;border:0!important;padding:0!important}.moon-scholar-avatar{width:138px!important;height:92px!important;border-radius:8px!important}.moon-heritage-copy .heritage-kicker{display:none!important}.moon-heritage-copy h4{color:#111!important;font:700 .9rem system-ui!important}.moon-heritage-copy p{color:#333!important;font-size:.78rem!important}.moon-heritage-card button{display:none!important}
+#moonSheet .moon-phase-strip{display:flex!important;margin-top:12px!important;padding:42px 12px 14px!important;min-height:170px!important;background:#fff!important;border:1px solid #ece8df!important;border-radius:14px!important;position:relative!important;overflow-x:auto!important}#moonSheet .moon-phase-strip:before{content:'Moon Phases';position:absolute;left:14px;top:14px;font-weight:700;color:#111}.moon-story-pager,.moon-swipe-hint{display:none!important}
+#moonSheet:after{content:'⌂   Home        ✓   Tasks        🏃   Sports        🕌   My Prayer        •••   More';position:fixed;left:0;right:0;bottom:0;height:72px;padding:18px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);border-top:1px solid #e8e4dc;text-align:center;font:600 .73rem system-ui;color:#666;white-space:pre;z-index:20}
+#moonSheet .qibla-card,.status-strip{display:grid!important}.moon-guide-head+.my-prayer-clock+ .qibla-card{float:left;width:32%!important}.my-prayer-context{display:block!important;margin-left:34%!important}.status-strip{grid-template-columns:1fr 1fr!important}.status-tile{min-height:196px!important}
+.app-shell.is-night #moonSheet.moon-guide{background:#061d31!important;color:#fff!important;background-image:radial-gradient(circle at 50% 8%,rgba(22,71,102,.32),transparent 38%)!important}.app-shell.is-night #moonGuideTitle,.app-shell.is-night #moonGuideTitle:after,.app-shell.is-night .moon-guide-head:after{color:#fff!important}.app-shell.is-night #moonSheet .qibla-card,.app-shell.is-night #moonSheet .status-tile,.app-shell.is-night #moonSheet .moon-guide-hero,.app-shell.is-night #moonSheet .moon-guide-heritage,.app-shell.is-night #moonSheet .moon-phase-strip{background:#0b2a43!important;border-color:#24435a!important;color:#fff!important}.app-shell.is-night #moonSheet .qibla-kicker,.app-shell.is-night #moonSheet .qibla-copy strong,.app-shell.is-night #moonSheet .status-strip .next-prayer,.app-shell.is-night #moonSheet .status-strip .date,.app-shell.is-night #moonSheet .moon-guide-summary .quick-sheet-title,.app-shell.is-night #moonSheet .moon-guide-summary .moon-illum,.app-shell.is-night #moonSheet .moon-guide-heritage h3,.app-shell.is-night #moonSheet .moon-heritage-copy h4,.app-shell.is-night #moonSheet .moon-heritage-copy p,.app-shell.is-night #moonSheet .moon-phase-strip:before{color:#fff!important}.app-shell.is-night #moonSheet:after{background:rgba(5,25,42,.98);border-color:#23435a;color:#eee}
+@media(max-width:430px){#moonSheet.moon-guide{padding-inline:14px!important}.dial-wrap{width:74vw!important;height:74vw!important}.moon-guide-head{padding-top:48px!important}.moon-guide-head:after{font-size:.72rem}.moon-guide-head+.my-prayer-clock+ .qibla-card{width:32%!important}.my-prayer-context{margin-left:34%!important}.status-strip{gap:7px!important}.status-tile,#moonSheet .qibla-card{min-height:180px!important;padding:9px!important}#moonSheet .moon-guide-hero{grid-template-columns:120px 1fr!important}.moon-heritage-card{grid-template-columns:112px 1fr!important}.moon-scholar-avatar{width:112px!important;height:78px!important}}
+</style>
+<script id="my-prayer-approved-reference-v17-js">
+(()=>{const sheet=document.getElementById('moonSheet');if(!sheet)return;const clock=sheet.querySelector('.my-prayer-clock'),q=sheet.querySelector('#qiblaCard'),ctx=sheet.querySelector('.my-prayer-context');if(clock&&q&&ctx){const row=document.createElement('div');row.className='approved-prayer-cards';row.style.cssText='display:grid;grid-template-columns:1fr 2fr;gap:10px;margin:0 0 12px';q.parentNode.insertBefore(row,q);row.append(q,ctx);q.style.cssText='width:auto!important;float:none!important';ctx.style.cssText='margin:0!important';}const title=document.getElementById('moonHeritageHeading');if(title)title.textContent='Islamic Heritage';})();
+</script>

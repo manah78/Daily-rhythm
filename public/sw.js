@@ -1,4 +1,5 @@
-const CACHE_VERSION = 'daily-rhythm-v1.0.0-phase1-voice-workspace-v16-3';
+// Daily Rhythm v16.4 My Prayer repair
+const CACHE_VERSION = 'daily-rhythm-v1.0.0-phase1-incremental-voice-settings-v16-5';
 const APP_CACHE = `${CACHE_VERSION}-app`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
