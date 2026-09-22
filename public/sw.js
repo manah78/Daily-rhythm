@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'daily-rhythm-v1.0.0-my-prayer-v14';
+const CACHE_VERSION = 'daily-rhythm-v1.0.0-phase1-voice-v16';
 const APP_CACHE = `${CACHE_VERSION}-app`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 

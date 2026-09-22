@@ -4318,6 +4318,80 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
   .settings-child-back{display:inline-flex;align-items:center;gap:6px;min-height:44px;margin:0 0 10px;padding:0 10px;border:0;background:transparent;color:#f0cb78;font-weight:800;font-size:.88rem}html[dir=rtl] .settings-child-back{direction:rtl}.settings-child-intro,.settings-footnote{margin:0 0 14px;color:#b9c9cf;font-size:.79rem;line-height:1.45}.settings-footnote{margin:12px 0 0}.settings-choice-block{padding-top:12px;border-top:1px solid rgba(227,183,93,.13)}.settings-choice-block>strong{display:block;margin-bottom:10px;color:#f7ebd0}.reminder-choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.reminder-choice-grid button,.language-choice button,.settings-inline-action{min-height:46px;border-radius:14px;border:1px solid rgba(227,183,93,.28);background:rgba(4,22,38,.72);color:#f5ead0;font-weight:750;padding:9px 10px}.reminder-choice-grid button.selected,.language-choice button.selected{background:linear-gradient(180deg,#f2d489,#d4a14a);color:#082136;border-color:transparent}.language-choice{display:grid;grid-template-columns:1fr 1fr;gap:10px}.settings-inline-action{min-width:132px}.settings-row-toggle{grid-template-columns:minmax(0,1fr) auto !important}.settings-hidden-language-trigger{display:none !important}
   @media(max-width:380px){.settings-feature-card{padding:10px;gap:8px}.settings-feature-open{grid-template-columns:44px minmax(0,1fr);gap:9px}.settings-feature-icon{width:44px;height:44px}.reminder-choice-grid{grid-template-columns:1fr}.settings-nav-row{min-height:64px}}
 </style>
+
+<style id="mobile-shell-v15-css">
+  /* v15 mobile shell cleanup */
+  .sheet-header::before{display:none !important;content:none !important;}
+  .dock{grid-template-columns:repeat(4,minmax(0,1fr)) !important;gap:2px !important;}
+  .dock #openScheduleBtn{order:1}.dock #openMyPrayerBtn{order:2}.dock #openLogsBtn{order:3}.dock #openSettingsBtn{order:4}
+  .dock-btn{min-width:0 !important;padding-inline:2px !important;}
+  .reminder-settings-icon svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .settings-feature-card{grid-template-columns:minmax(0,1fr) auto !important;}
+  .settings-feature-status{min-width:76px;min-height:44px;border-radius:14px;border:1px solid rgba(227,183,93,.28);background:rgba(4,22,38,.62);color:#f5ead0;display:flex;align-items:center;justify-content:center;gap:7px;padding:8px 10px;font-weight:800;}
+  .settings-feature-status span{width:8px;height:8px;border-radius:50%;background:#8b96a0;box-shadow:0 0 0 3px rgba(139,150,160,.10)}
+  .settings-feature-status.is-on span{background:#79c99c;box-shadow:0 0 0 3px rgba(121,201,156,.12)}
+  .settings-feature-status i{font-style:normal;color:#e4bd68;font-size:1.2rem}
+  html[dir=rtl] .settings-feature-status i{transform:rotate(180deg)}
+  #settingsSheet.child-open #settingsCloseBtn{font-size:0 !important;}
+  #settingsSheet.child-open #settingsCloseBtn::before{content:'‹';font-size:32px;line-height:1;}
+  html[dir=rtl] #settingsSheet.child-open #settingsCloseBtn::before{content:'›';}
+  #settingsSheet.child-open .settings-child-back{display:none !important;}
+  #voiceSheet .sheet-body{display:flex !important;min-height:min(76dvh,720px) !important;}
+  #voiceSheet .command-bar{width:100% !important;display:flex !important;flex-direction:column !important;min-height:calc(76dvh - 84px) !important;}
+  #voiceSheet .command-row{align-items:stretch !important;flex:1 0 auto !important;}
+  #voiceSheet .command-input-wrap{display:flex !important;flex-direction:column !important;flex:1 1 auto !important;}
+  #voiceSheet #commandInput{min-height:clamp(230px,38dvh,390px) !important;max-height:48dvh !important;flex:1 1 auto !important;}
+  .voice-quick-prompts{display:flex;gap:8px;overflow-x:auto;padding:10px 0 4px;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+  .voice-quick-prompts::-webkit-scrollbar{display:none}.voice-quick-prompts button{flex:0 0 auto;min-height:38px;border-radius:999px;border:1px solid rgba(227,183,93,.30);background:rgba(5,26,41,.72);color:#eadbb8;padding:8px 12px;font-weight:750;font-size:.78rem;}
+  .clock-home{overflow-y:auto !important;-webkit-overflow-scrolling:touch !important;overscroll-behavior-y:auto !important;touch-action:pan-y !important;}
+  .stage{padding-bottom:calc(110px + env(safe-area-inset-bottom,0px)) !important;}
+  .home-talk-cta,.next-up-card,.home-day-preview{margin-top:18px !important;}
+  @media(max-width:390px){
+    .prayer-remaining-card{position:relative !important;top:auto !important;left:auto !important;right:auto !important;align-self:flex-end !important;width:auto !important;min-width:168px !important;max-width:218px !important;order:-2 !important;padding:10px 12px !important;}
+    html[dir=rtl] .prayer-remaining-card{align-self:flex-start !important;}
+    .home-top-time{order:-1 !important}.home-greeting{padding:0 4px !important;min-height:auto !important}.home-greeting-copy{max-width:100% !important}
+    #voiceSheet .sheet-body{min-height:78dvh !important}.dock-btn{font-size:.56rem !important}.dock-icon svg{width:21px !important;height:21px !important}
+  }
+</style>
+
+<style id="phase1-inline-voice-v16-css">
+  /* Phase 1: voice stays on My Day; no screen hop. */
+  .phase1-legacy-voice-sheet,#voiceBackdrop{display:none !important;}
+  .home-voice-shell{width:100%;margin-top:18px;}
+  .home-voice-shell #homeTalkCta{margin-top:0 !important;width:100%;}
+  .home-voice-shell.is-open #homeTalkCta{border-bottom-left-radius:14px !important;border-bottom-right-radius:14px !important;}
+  .home-voice-panel{margin-top:10px;border:1px solid rgba(227,183,93,.34);border-radius:22px;background:linear-gradient(180deg,rgba(8,39,58,.96),rgba(4,24,39,.98));box-shadow:0 16px 38px rgba(0,0,0,.22);overflow:hidden;}
+  .home-voice-panel[hidden]{display:none !important;}
+  .home-voice-state{display:flex;align-items:center;gap:8px;padding:12px 14px 0;color:#f2d58d;font-size:.78rem;letter-spacing:.02em;}
+  .home-voice-state-dot{width:8px;height:8px;border-radius:50%;background:#8b96a0;box-shadow:0 0 0 4px rgba(139,150,160,.10);}
+  .home-voice-shell.is-listening .home-voice-state-dot{background:#7fd3a3;box-shadow:0 0 0 5px rgba(127,211,163,.10),0 0 14px rgba(127,211,163,.22);animation:voicePulse 1.15s ease-in-out infinite;}
+  .home-voice-shell.is-processing .home-voice-state-dot{background:#e8bd66;box-shadow:0 0 0 5px rgba(232,189,102,.10);}
+  .home-voice-shell.is-review .home-voice-state-dot{background:#74b8d3;box-shadow:0 0 0 5px rgba(116,184,211,.10);}
+  .home-command-bar{padding:12px 14px 14px !important;background:transparent !important;border:0 !important;box-shadow:none !important;}
+  .home-command-bar .command-row{display:grid !important;grid-template-columns:minmax(0,1fr) 48px !important;align-items:end !important;gap:10px !important;}
+  .home-command-bar .command-input-wrap{position:relative !important;}
+  .home-command-bar #commandInput{min-height:132px !important;max-height:34dvh !important;padding:15px 76px 15px 15px !important;background:rgba(3,19,32,.82) !important;color:var(--dr-ivory) !important;border:1px solid rgba(227,183,93,.33) !important;border-radius:16px !important;line-height:1.5 !important;}
+  html[dir=rtl] .home-command-bar #commandInput{padding:15px 15px 15px 76px !important;text-align:right;}
+  .home-command-bar .voice-listen-btn{position:absolute;right:12px;top:12px;width:50px;height:50px;border-radius:50%;display:grid;place-items:center;border:1.5px solid rgba(239,201,104,.88);background:linear-gradient(180deg,rgba(17,68,88,.98),rgba(6,34,51,.99));color:#fff1cf;box-shadow:0 0 16px rgba(235,190,80,.18);z-index:2;}
+  html[dir=rtl] .home-command-bar .voice-listen-btn{right:auto;left:12px;}
+  .home-command-bar .voice-listen-btn svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;}
+  .home-command-bar .voice-listen-btn.is-listening{box-shadow:0 0 0 6px rgba(239,201,104,.10),0 0 22px rgba(239,201,104,.35);animation:voicePulse 1.15s ease-in-out infinite;}
+  .home-command-bar .voice-live-status{min-height:1.35em;margin:8px 0 0;color:var(--dr-gold-hi);font-size:.82rem;font-weight:700;}
+  .home-command-bar .command-edit-hint{margin:7px 0 0 !important;font-size:.77rem !important;color:#a9bcc4 !important;}
+  .home-command-bar .command-status{margin-top:10px !important;}
+  .voice-commit-review{margin-top:12px;padding:12px;border:1px solid rgba(227,183,93,.24);border-radius:16px;background:rgba(3,19,32,.56);}
+  .voice-review-step+ .voice-review-step{margin-top:10px;padding-top:10px;border-top:1px solid rgba(227,183,93,.12);}
+  .voice-review-step>span{display:block;color:#e9c56e;font-size:.68rem;font-weight:850;letter-spacing:.08em;text-transform:uppercase;}
+  .voice-review-step p{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:4;overflow:hidden;margin:4px 0 0;color:#f6ecd7;font-size:.88rem;line-height:1.4;white-space:pre-wrap;}
+  .voice-review-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;}
+  .voice-review-actions button{min-height:46px;border-radius:14px;font-weight:850;border:1px solid rgba(227,183,93,.30);}
+  .voice-done-btn{background:linear-gradient(180deg,#efd17f,#cb9743);color:#082136;border-color:transparent !important;}
+  .voice-continue-btn{background:rgba(4,24,39,.92);color:#f3e3bd;}
+  .home-voice-shell.is-done .voice-commit-review{border-color:rgba(121,201,156,.34);}
+  @media(max-width:390px){
+    .home-voice-shell{margin-top:12px}.home-voice-panel{border-radius:18px}.home-command-bar{padding:10px 10px 12px !important}.home-command-bar #commandInput{min-height:118px !important}.voice-review-actions{grid-template-columns:1fr;}
+  }
+</style>
 </head>
 <body>
 <noscript>
@@ -4379,15 +4453,66 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
           <p class="nu-countdown" id="nuCountdown">—</p>
         </div>
       </div>
-      <button class="home-talk-cta" id="homeTalkCta" type="button" aria-label="Talk to your day">
-        <span class="home-talk-audio home-talk-audio-left" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
-        <span class="home-talk-mic" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><rect x="18" y="7" width="12" height="24" rx="6"></rect><path d="M13 24v2a11 11 0 0 0 22 0v-2M24 37v7M17 44h14"></path></svg></span>
-        <span class="home-talk-copy">
-          <strong id="homeTalkTitle">Talk to your day</strong>
-          <span id="homeTalkSubtitle">Add, move, remove, or ask what’s free</span>
-        </span>
-        <span class="home-talk-audio home-talk-audio-right" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
-      </button>
+      <section class="home-voice-shell" id="homeVoiceShell" aria-label="Talk to your day">
+        <button class="home-talk-cta" id="homeTalkCta" type="button" aria-expanded="false" aria-controls="homeVoicePanel" aria-label="Talk to your day">
+          <span class="home-talk-audio home-talk-audio-left" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+          <span class="home-talk-mic" aria-hidden="true"><svg viewBox="0 0 48 48" focusable="false"><rect x="18" y="7" width="12" height="24" rx="6"></rect><path d="M13 24v2a11 11 0 0 0 22 0v-2M24 37v7M17 44h14"></path></svg></span>
+          <span class="home-talk-copy">
+            <strong id="homeTalkTitle">Talk to your day</strong>
+            <span id="homeTalkSubtitle">Tap to speak · add, move, remove, or ask what’s free</span>
+          </span>
+          <span class="home-talk-audio home-talk-audio-right" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+        </button>
+        <div class="home-voice-panel" id="homeVoicePanel" hidden>
+          <div class="home-voice-state" aria-live="polite">
+            <span class="home-voice-state-dot" aria-hidden="true"></span>
+            <strong id="voicePhaseLabel">Ready</strong>
+          </div>
+          <div class="command-bar home-command-bar">
+            <p class="command-label" data-i18n="commandLabel">What do you want to do?</p>
+            <div class="command-row">
+              <div class="command-input-wrap">
+                <textarea id="commandInput" rows="4" maxlength="1200" spellcheck="true" placeholder="Say or type it naturally — add, move, remove, or ask what’s free." data-i18n-placeholder="commandPlaceholder"></textarea>
+                <button type="button" id="voiceListenBtn" class="voice-listen-btn" aria-label="Start listening" title="Start listening">
+                  <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="18" y="7" width="12" height="24" rx="6"></rect><path d="M13 24v2a11 11 0 0 0 22 0v-2M24 37v7M17 44h14"></path></svg>
+                </button>
+                <p class="voice-live-status" id="voiceLiveStatus" role="status" aria-live="polite">Tap the microphone when you are ready.</p>
+                <p class="command-edit-hint" data-i18n="commandEditHint">Speak or type naturally. Nothing changes until you tap Done.</p>
+              </div>
+              <button id="sendBtn" class="icon-btn" title="Review" aria-label="Review">➤</button>
+            </div>
+            <p class="command-status" id="commandStatus" data-i18n="commandStatusDefault">Your day is listening.</p>
+            <div class="voice-quick-prompts" id="voiceQuickPrompts" aria-label="Things you can ask">
+              <button type="button" data-voice-prompt="capabilities">What can I do?</button>
+              <button type="button" data-voice-prompt="free">Find me a free time</button>
+              <button type="button" data-voice-prompt="edit">How do I edit an activity?</button>
+              <button type="button" data-voice-prompt="help">What can Daily Rhythm do?</button>
+            </div>
+            <div class="command-confirm" id="commandConfirm" role="status" aria-live="polite">
+              <span class="command-confirm-text" id="commandConfirmText"></span>
+              <span class="command-confirm-actions">
+                <button type="button" class="confirm-yes" id="commandConfirmYes">Yes</button>
+                <button type="button" id="commandConfirmNo">No</button>
+              </span>
+            </div>
+            <section class="voice-commit-review" id="voiceCommitReview" hidden aria-live="polite">
+              <div class="voice-review-step">
+                <span id="voiceHeardLabel">I heard</span>
+                <p id="voiceHeardText"></p>
+              </div>
+              <div class="voice-review-step">
+                <span id="voiceWillDoLabel">I’ll do</span>
+                <p id="voiceWillDoText"></p>
+              </div>
+              <div class="voice-review-actions">
+                <button type="button" class="voice-done-btn" id="voiceCommitDone">Done</button>
+                <button type="button" class="voice-continue-btn" id="voiceCommitContinue">Keep editing</button>
+              </div>
+            </section>
+            <section id="multiAddReceipt" class="multi-add-receipt" hidden aria-live="polite"></section>
+          </div>
+        </div>
+      </section>
       <section class="home-day-preview" id="homeDayPreview" aria-label="Today’s schedule">
         <div class="home-day-preview-head">
           <span id="homeDayPreviewTitle">Coming up</span>
@@ -4640,10 +4765,10 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
       <div class="settings-home" id="settingsHome">
         <div class="settings-feature-card" id="settingsRemindersEntry">
           <button class="settings-feature-open" id="settingsRemindersOpen" type="button">
-            <span class="settings-feature-icon" aria-hidden="true">🔔</span>
-            <span class="settings-feature-copy"><strong id="settingsRemindersHeroTitle">Reminders</strong><small id="settingsRemindersHeroStatus">Stay ready for what comes next.</small></span>
+            <span class="settings-feature-icon reminder-settings-icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="21" cy="21" r="11"></circle><path d="M21 14v8l5 3"></path><circle cx="35" cy="34" r="6"></circle><path d="M35 25v3M35 40v3M26 34h3M41 34h3M29 28l2 2M39 38l2 2M41 28l-2 2M31 38l-2 2"></path></svg></span>
+            <span class="settings-feature-copy"><strong id="settingsRemindersHeroTitle">Reminder settings</strong><small id="settingsRemindersHeroStatus">Choose when Daily Rhythm should remind you before activities.</small></span>
           </button>
-          <span class="settings-feature-toggle-wrap"><input class="settings-switch" type="checkbox" id="settingsReminderToggle" aria-label="Enable reminders" /></span>
+          <button class="settings-feature-status" id="settingsRemindersStatusButton" type="button" aria-label="Open reminder settings"><span id="settingsRemindersStatusDot"></span><b id="settingsRemindersStatusText">Off</b><i aria-hidden="true">›</i></button>
         </div>
         <div class="settings-mobile-group">
           <button class="settings-nav-row" type="button" data-settings-open="language"><span><b id="settingsLanguageRowTitle">Language</b><small id="settingsLanguageRowValue">English</small></span><i aria-hidden="true">›</i></button>
@@ -4746,46 +4871,20 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     <button type="button" id="heritageToastOpen">View story</button>
   </div>
 
-  <!-- Voice / text-input sheet -->
+  <!-- Legacy voice sheet retained as an inert shell for compatibility; Phase 1 voice now lives on My Day. -->
   <div class="sheet-backdrop" id="voiceBackdrop"></div>
-  <div class="sheet" id="voiceSheet" role="dialog" aria-modal="true">
-    <div class="sheet-handle"></div>
-    <div class="sheet-header">
-      <span class="sheet-header-meta" id="voiceSheetTitle">Talk to your day</span>
-      <button class="sheet-close" id="voiceCloseBtn" aria-label="Close">✕</button>
-    </div>
-    <div class="sheet-body">
-      <div class="command-bar">
-        <p class="command-label" data-i18n="commandLabel">What do you want to do?</p>
-        <div class="command-row">
-          <div class="command-input-wrap">
-            <textarea id="commandInput" rows="4" maxlength="1200" spellcheck="true" placeholder="Say or type it naturally — add, move, remove, or ask what’s free." data-i18n-placeholder="commandPlaceholder"></textarea>
-            <button type="button" id="voiceListenBtn" class="voice-listen-btn" aria-label="Start listening" title="Start listening">
-              <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false"><rect x="18" y="7" width="12" height="24" rx="6"></rect><path d="M13 24v2a11 11 0 0 0 22 0v-2M24 37v7M17 44h14"></path></svg>
-            </button>
-            <p class="voice-live-status" id="voiceLiveStatus" role="status" aria-live="polite"></p>
-            <p class="command-edit-hint" data-i18n="commandEditHint">Speak or type naturally. I’ll work with your schedule.</p>
-          </div>
-          <button id="sendBtn" class="icon-btn" title="Submit" aria-label="Submit">➤</button>
-        </div>
-        <p class="command-status" id="commandStatus" data-i18n="commandStatusDefault">Your day is listening.</p>
-        <div class="command-confirm" id="commandConfirm" role="status" aria-live="polite">
-          <span class="command-confirm-text" id="commandConfirmText"></span>
-          <span class="command-confirm-actions">
-            <button type="button" class="confirm-yes" id="commandConfirmYes">Yes</button>
-            <button type="button" id="commandConfirmNo">No</button>
-          </span>
-        </div>
-        <section id="multiAddReceipt" class="multi-add-receipt" hidden aria-live="polite"></section>
-
-      </div>
-    </div>
+  <div class="sheet phase1-legacy-voice-sheet" id="voiceSheet" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="sheet-header"><button class="sheet-close" id="voiceCloseBtn" aria-label="Close">✕</button></div>
+    <div class="sheet-body"></div>
   </div>
 
   <!-- Persistent controls over the clock: My Day / Voice / History / Settings -->
   <div class="dock">
     <button class="dock-btn" id="openScheduleBtn" type="button">
       <span class="dock-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V21h13V9.5"/><path d="M9.2 21v-6.4h5.6V21"/></svg></span><span data-i18n="navSchedule">My Day</span>
+    </button>
+    <button class="dock-btn" id="openMyPrayerBtn" type="button">
+      <span class="dock-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3c-3.5 2.5-5.5 5.4-5.5 8.8V20h11v-8.2C17.5 8.4 15.5 5.5 12 3Z"/><path d="M9 20v-5h6v5"/><path d="M8.3 8.7h7.4"/></svg></span><span id="navMyPrayerLabel">My Prayer</span>
     </button>
     <button class="dock-btn" id="openStoriesBtn" type="button" hidden aria-hidden="true" tabindex="-1">
       <span class="dock-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 5.5c2.7-.8 5.3-.3 8 1.4v12c-2.7-1.7-5.3-2.2-8-1.4z"/><path d="M20 5.5c-2.7-.8-5.3-.3-8 1.4v12c2.7-1.7 5.3-2.2 8-1.4z"/></svg></span><span id="navStoriesLabel">Stories</span>
@@ -4839,7 +4938,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
       filterAll: "All", filterAdd: "Add", filterEdit: "Edit", filterDelete: "Delete", filterActivity: "Activity",
       talkTitle: "Talk to your day",
       commandPlaceholder: 'Write what to add, change, remove, or report. You can include more than one request.',
-      commandEditHint: 'Type one request or several, then review before sending.',
+      commandEditHint: 'Speak or type naturally. Nothing changes until you tap Done.',
       commandLabel: "What do you want to do?",
       sendBtn: "Go",
       commandStatusDefault: "Your day is listening.",
@@ -4878,7 +4977,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
       filterAll: "الكل", filterAdd: "إضافة", filterEdit: "تعديل", filterDelete: "حذف", filterActivity: "نشاط",
       talkTitle: "تحدّث مع يومك",
       commandPlaceholder: 'اكتب ما تريد إضافته أو تعديله أو حذفه أو تسجيله. يمكنك إدخال أكثر من طلب معًا.',
-      commandEditHint: 'اكتب طلبًا واحدًا أو عدة طلبات ثم راجعها قبل الإرسال.',
+      commandEditHint: 'تحدّث أو اكتب بطبيعتك. لن يتغير شيء حتى تضغط «تم».',
       commandLabel: "ماذا تريد أن تفعل؟",
       sendBtn: "إرسال",
       commandStatusDefault: "يومك يستمع إليك.",
@@ -6686,8 +6785,9 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     const talkSubtitle = document.getElementById('homeTalkSubtitle');
     const talkCta = document.getElementById('homeTalkCta');
     if (talkTitle) talkTitle.textContent = currentLang === 'ar' ? 'تحدّث مع يومك' : 'Talk to your day';
-    if (talkSubtitle) talkSubtitle.textContent = currentLang === 'ar' ? 'أضف أو غيّر أو احذف، أو اسأل عن وقتك المتاح' : 'Add, move, remove, or ask what’s free';
+    if (talkSubtitle) talkSubtitle.textContent = currentLang === 'ar' ? 'اضغط للتحدث · أضف أو غيّر أو احذف أو اسأل عن وقتك المتاح' : 'Tap to speak · add, move, remove, or ask what’s free';
     if (talkCta) talkCta.setAttribute('aria-label', currentLang === 'ar' ? 'تحدّث مع يومك' : 'Talk to your day');
+    try { updateVoiceReviewLabels(); } catch (_) {}
     renderHomeDayPreview();
   }
 
@@ -8825,15 +8925,116 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     resizeCommandInput();
   }
 
+  // ---- Phase 1 transactional voice commit ----
+  // Interpret/validate first, but do not persist a schedule mutation until the user taps Done.
+  let pendingScheduleCommit = null;
+  function cloneRhythmState(value) {
+    try { return JSON.parse(JSON.stringify(value)); } catch (_) { return value; }
+  }
+  function captureRhythmState() {
+    return {
+      blocks: cloneRhythmState(blocks),
+      recurringSeries: cloneRhythmState(recurringSeries),
+      recurringExceptions: cloneRhythmState(recurringExceptions),
+      unmatched: cloneRhythmState(unmatched),
+      logs: cloneRhythmState(logs),
+      pendingScheduleIntent: cloneRhythmState(pendingScheduleIntent)
+    };
+  }
+  function rhythmStateSignature(state) {
+    return JSON.stringify({
+      blocks: state?.blocks || [], recurringSeries: state?.recurringSeries || [],
+      recurringExceptions: state?.recurringExceptions || {}, unmatched: state?.unmatched || []
+    });
+  }
+  function applyRhythmState(state) {
+    if (!state) return;
+    blocks = cloneRhythmState(state.blocks || []);
+    recurringSeries = cloneRhythmState(state.recurringSeries || []);
+    recurringExceptions = cloneRhythmState(state.recurringExceptions || {});
+    unmatched = cloneRhythmState(state.unmatched || []);
+    logs = cloneRhythmState(state.logs || []);
+    pendingScheduleIntent = cloneRhythmState(state.pendingScheduleIntent || null);
+    saveBlocks(); saveRecurringSeries(); saveRecurringExceptions(); saveUnmatched(); saveLogs();
+    renderAll(); renderLogs(); renderSuggestions();
+  }
+  function updateVoiceReviewLabels() {
+    const ar = currentLang === 'ar';
+    const heard = document.getElementById('voiceHeardLabel');
+    const will = document.getElementById('voiceWillDoLabel');
+    const done = document.getElementById('voiceCommitDone');
+    const edit = document.getElementById('voiceCommitContinue');
+    if (heard) heard.textContent = ar ? 'سمعت' : 'I heard';
+    if (will) will.textContent = ar ? 'سأفعل' : 'I’ll do';
+    if (done) done.textContent = ar ? 'تم' : 'Done';
+    if (edit) edit.textContent = ar ? 'متابعة التعديل' : 'Keep editing';
+  }
+  function hideVoiceCommitReview() {
+    pendingScheduleCommit = null;
+    const review = document.getElementById('voiceCommitReview');
+    if (review) review.hidden = true;
+    setVoicePhase(activeRecognition ? 'listening' : 'idle');
+  }
+  function stageScheduleCommit(beforeState, heardText, actionText) {
+    const afterState = captureRhythmState();
+    if (rhythmStateSignature(beforeState) === rhythmStateSignature(afterState)) return false;
+    // Return the live schedule to exactly where it was. The proposed state is held in memory only.
+    applyRhythmState(beforeState);
+    pendingScheduleCommit = { state: afterState, heardText: String(heardText || ''), actionText: String(actionText || '') };
+    const review = document.getElementById('voiceCommitReview');
+    const heard = document.getElementById('voiceHeardText');
+    const action = document.getElementById('voiceWillDoText');
+    updateVoiceReviewLabels();
+    if (heard) { heard.textContent = pendingScheduleCommit.heardText; heard.title = pendingScheduleCommit.heardText; }
+    if (action) { action.textContent = pendingScheduleCommit.actionText; action.title = pendingScheduleCommit.actionText; }
+    if (review) review.hidden = false;
+    const receipt=document.getElementById('multiAddReceipt'); if(receipt){receipt.hidden=true;}
+    setVoiceLiveStatus(currentLang === 'ar' ? 'راجع ما فهمته. لن يتغير جدولك حتى تضغط «تم».' : 'Review what I understood. Your schedule will not change until you tap Done.', 'review');
+    setCommandFeedback(currentLang === 'ar' ? 'جاهز للحفظ — لم يتغير أي شيء بعد.' : 'Ready to save — nothing has changed yet.', 'question');
+    return true;
+  }
+  function rollbackUncommittedMutation(beforeState) {
+    const now = captureRhythmState();
+    if (rhythmStateSignature(beforeState) !== rhythmStateSignature(now)) applyRhythmState(beforeState);
+  }
+  function cancelPendingScheduleCommit(message = '') {
+    if (!pendingScheduleCommit) return false;
+    pendingScheduleCommit = null;
+    const review = document.getElementById('voiceCommitReview');
+    if (review) review.hidden = true;
+    setVoiceLiveStatus(message || (currentLang === 'ar' ? 'لم يتم الحفظ — تابع أو عدّل كلامك.' : 'Not saved — continue or change what you said.'), 'idle');
+    setCommandFeedback(currentLang === 'ar' ? 'لم يتم حفظ التغيير.' : 'The change was not saved.', 'question');
+    return true;
+  }
+  document.getElementById('voiceCommitDone')?.addEventListener('click', () => {
+    if (!pendingScheduleCommit) return;
+    const pending = pendingScheduleCommit;
+    pendingScheduleCommit = null;
+    applyRhythmState(pending.state);
+    const review = document.getElementById('voiceCommitReview');
+    if (review) review.hidden = true;
+    clearCompletedCommandDraft();
+    setCommandFeedback(currentLang === 'ar' ? 'تم. تم حفظ التغيير في يومك.' : 'Done. Your day has been updated.', 'success');
+    setVoiceLiveStatus(currentLang === 'ar' ? 'تم الحفظ.' : 'Saved.', 'done');
+  });
+  document.getElementById('voiceCommitContinue')?.addEventListener('click', () => {
+    cancelPendingScheduleCommit(currentLang === 'ar' ? 'لم يتم الحفظ — عدّل أو تابع كلامك.' : 'Not saved — edit or continue your thought.');
+    commandInput?.focus();
+  });
+
   async function submitCommand(options = {}) {
     const text = (options.text !== undefined ? options.text : commandInput.value).trim();
     if (!text) return;
+    if (pendingScheduleCommit) cancelPendingScheduleCommit(currentLang === 'ar' ? 'تم إلغاء المسودة السابقة. سأراجع النسخة الجديدة.' : 'Previous draft cancelled. I’ll review the new version.');
+    const beforeRhythmState = captureRhythmState();
     const capture = beginRequestCapture(text, options.source || 'typed');
     hideCommandConfirmation();
+    setVoiceLiveStatus(currentLang === 'ar' ? 'أفهم ما تريد…' : 'Understanding what you want…', 'processing');
 
     if (!options.skipResetCheck && isScheduleResetIntent(text)) {
       showResetConfirmation(text);
       finishRequestCapture(capture,{interpreter:'safety-rule',outcome:'needs_confirmation',result:commandConfirmText.textContent,requestedOperations:[{action:'clear_day'}]});
+      setVoiceLiveStatus(currentLang === 'ar' ? 'أحتاج تأكيدك قبل المتابعة.' : 'I need your confirmation before continuing.', 'idle');
       return;
     }
 
@@ -8849,6 +9050,7 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
         if (preSuggestion) {
           showCommandConfirmation(text, preSuggestion);
           finishRequestCapture(capture,{interpreter:'speech-correction',outcome:'needs_confirmation',result:commandConfirmText.textContent,requestedOperations:[{action:'confirm_activity',activity:preSuggestion.label}]});
+          setVoiceLiveStatus(currentLang === 'ar' ? 'أحتاج توضيحاً صغيراً.' : 'I need one quick clarification.', 'idle');
           return;
         }
       }
@@ -8865,20 +9067,31 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
         const q=commandResultLooksLikeQuestion(multiResult);
         setCommandFeedback(multiResult,q?'question':'success');
         finishRequestCapture(capture,{interpreter:'groq-qwen3.8',aiPlan,requestedOperations,outcome:q?'partial_or_clarification':'success',result:multiResult});
-        if(!q) clearCompletedCommandDraft();
+        if (q) {
+          rollbackUncommittedMutation(beforeRhythmState);
+          setVoiceLiveStatus(currentLang === 'ar' ? 'أحتاج توضيحاً قبل أن أحفظ أي تغيير.' : 'I need clarification before I save anything.', 'idle');
+        } else if (!stageScheduleCommit(beforeRhythmState, text, multiResult)) {
+          clearCompletedCommandDraft();
+          setVoiceLiveStatus(currentLang === 'ar' ? 'تمت الإجابة — لا يوجد تغيير لحفظه.' : 'Answered — there is no schedule change to save.', 'done');
+        }
         return;
       }
       const relativePreview = aiPlanRelativePreview(aiPlan);
       if (relativePreview && !options.skipAiRelativeConfirmation) {
         showAiPlanConfirmation(text, aiPlan, relativePreview);
         finishRequestCapture(capture,{interpreter:'ai-relative',aiPlan,requestedOperations,outcome:'needs_confirmation',result:commandConfirmText.textContent});
-        commandInput.value='';resizeCommandInput();return;
+        setVoiceLiveStatus(currentLang === 'ar' ? 'راجع هذا التفسير أولاً.' : 'Review this interpretation first.', 'idle');
+        return;
       }
       const aiResult = executeAiAddPlan(aiPlan);
       if (aiResult) {
         setCommandFeedback(aiResult,'success');
         finishRequestCapture(capture,{interpreter:'ai-add',aiPlan,requestedOperations,outcome:'success',result:aiResult});
-        clearCompletedCommandDraft();return;
+        if (!stageScheduleCommit(beforeRhythmState, text, aiResult)) {
+          clearCompletedCommandDraft();
+          setVoiceLiveStatus(currentLang === 'ar' ? 'تمت الإجابة — لا يوجد تغيير لحفظه.' : 'Answered — there is no schedule change to save.', 'done');
+        }
+        return;
       }
       // Complex semantic requests are NOT sent to the legacy single-command
       // fallback. Doing so can collapse an entire Arabic sentence into one
@@ -8889,13 +9102,21 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
         : 'I could not safely interpret that multi-part request. I did not change your schedule. Please try again or split it into two parts.';
       setCommandFeedback(safeFailure,'question');
       finishRequestCapture(capture,{interpreter:'groq-unavailable',aiPlan,requestedOperations,outcome:'no_change',result:safeFailure});
+      rollbackUncommittedMutation(beforeRhythmState);
+      setVoiceLiveStatus(currentLang === 'ar' ? 'لم أغيّر الجدول.' : 'I did not change your schedule.', 'idle');
       return;
     }
     const result = options.forcedLabel ? parseCommand(text, options.forcedLabel) : parseCommandBatch(text);
     const q=commandResultLooksLikeQuestion(result);
     setCommandFeedback(result,q?'question':'success');
     finishRequestCapture(capture,{interpreter:options.forcedLabel?'local-forced-label':'local-parser',requestedOperations:[],outcome:q?'clarification':'success',result});
-    if(!q) clearCompletedCommandDraft();
+    if (q) {
+      rollbackUncommittedMutation(beforeRhythmState);
+      setVoiceLiveStatus(currentLang === 'ar' ? 'أحتاج توضيحاً قبل أن أحفظ أي تغيير.' : 'I need clarification before I save anything.', 'idle');
+    } else if (!stageScheduleCommit(beforeRhythmState, text, result)) {
+      clearCompletedCommandDraft();
+      setVoiceLiveStatus(currentLang === 'ar' ? 'تمت الإجابة — لا يوجد تغيير لحفظه.' : 'Answered — there is no schedule change to save.', 'done');
+    }
   }
 
   commandConfirmYes.addEventListener('click', () => {
@@ -8903,12 +9124,20 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     const pending = { ...pendingCommand };
     hideCommandConfirmation();
     if (pending.type === 'reset') {
-      setCommandFeedback(executeScheduleReset(), 'success');
+      const before = captureRhythmState();
+      const result = executeScheduleReset();
+      setCommandFeedback(result, 'success');
+      if (!stageScheduleCommit(before, pending.text || (currentLang === 'ar' ? 'إعادة ضبط اليوم' : 'Reset my day'), result)) {
+        setVoiceLiveStatus(currentLang === 'ar' ? 'لا يوجد تغيير لحفظه.' : 'There is no change to save.', 'done');
+      }
       return;
     }
     if (pending.type === 'ai-plan') {
+      const before = captureRhythmState();
       const result = executeAiAddPlan(pending.plan);
       setCommandFeedback(result || (currentLang === 'ar' ? 'لم أتمكن من تنفيذ الجدول.' : 'I could not apply that schedule.'), result ? 'success' : 'question');
+      if (result) stageScheduleCommit(before, pending.text || commandInput?.value || '', result);
+      else rollbackUncommittedMutation(before);
       return;
     }
     submitCommand({ text: pending.text, forcedLabel: pending.label, skipResetCheck: true });
@@ -8919,10 +9148,12 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     hideCommandConfirmation();
     if (pending.type === 'reset') {
       setCommandFeedback(currentLang === 'ar' ? 'تم إلغاء إعادة الضبط. لم يتغير الجدول.' : 'Reset cancelled. Your schedule was not changed.', 'success');
+      setVoiceLiveStatus(currentLang === 'ar' ? 'تم الإلغاء. لم يتغير شيء.' : 'Cancelled. Nothing changed.', 'idle');
       return;
     }
     if (pending.type === 'ai-plan') {
       setCommandFeedback(currentLang === 'ar' ? 'تم الإلغاء. لم يتغير الجدول.' : 'Cancelled. Your schedule was not changed.', 'success');
+      setVoiceLiveStatus(currentLang === 'ar' ? 'تم الإلغاء. لم يتغير شيء.' : 'Cancelled. Nothing changed.', 'idle');
       return;
     }
     submitCommand({ text: pending.text, skipSuggestion: true, skipResetCheck: true });
@@ -8933,7 +9164,11 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     commandInput.style.height = `${Math.min(Math.max(commandInput.scrollHeight, 124), maxPx)}px`;
   }
   sendBtn.addEventListener('click', submitCommand);
-  commandInput.addEventListener('input', () => { resizeCommandInput(); const r=document.getElementById('multiAddReceipt'); if(r&&!r.hidden){r.hidden=true;r.innerHTML='';} });
+  commandInput.addEventListener('input', () => {
+    if (pendingScheduleCommit) cancelPendingScheduleCommit(currentLang === 'ar' ? 'لم يتم الحفظ — سأستخدم النسخة المعدلة.' : 'Not saved — I’ll use your edited version.');
+    resizeCommandInput();
+    const r=document.getElementById('multiAddReceipt'); if(r&&!r.hidden){r.hidden=true;r.innerHTML='';}
+  });
   commandInput.addEventListener('keydown', (e) => {
     // Enter creates a new line so longer/multi-command requests remain easy to review.
     // Cmd/Ctrl+Enter submits for keyboard users.
@@ -9002,6 +9237,22 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     return `${a}${separator}${b}`;
   }
 
+  function setVoicePhase(phase = 'idle', label = '') {
+    const shell = document.getElementById('homeVoiceShell');
+    const phaseLabel = document.getElementById('voicePhaseLabel');
+    if (shell) {
+      shell.classList.remove('is-listening','is-processing','is-review','is-done');
+      if (phase === 'listening') shell.classList.add('is-listening');
+      if (phase === 'processing') shell.classList.add('is-processing');
+      if (phase === 'review') shell.classList.add('is-review');
+      if (phase === 'done') shell.classList.add('is-done');
+    }
+    const defaults = currentLang === 'ar'
+      ? { idle:'جاهز', listening:'أستمع', processing:'أفهم', review:'راجع قبل الحفظ', done:'تم' }
+      : { idle:'Ready', listening:'Listening', processing:'Understanding', review:'Review before saving', done:'Done' };
+    if (phaseLabel) phaseLabel.textContent = label || defaults[phase] || defaults.idle;
+  }
+
   function setVoiceLiveStatus(message, state = '') {
     const status = document.getElementById('voiceLiveStatus');
     const btn = document.getElementById('voiceListenBtn');
@@ -9012,6 +9263,12 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
         ? (currentLang === 'ar' ? 'إيقاف الاستماع' : 'Stop listening')
         : (currentLang === 'ar' ? 'متابعة التحدث' : 'Continue speaking'));
     }
+    if (state === 'listening') setVoicePhase('listening');
+    else if (state === 'processing') setVoicePhase('processing');
+    else if (state === 'review') setVoicePhase('review');
+    else if (state === 'done') setVoicePhase('done');
+    else if (!document.getElementById('voiceCommitReview')?.hidden) setVoicePhase('review');
+    else setVoicePhase('idle');
   }
 
   function stopVoiceListening() {
@@ -9024,6 +9281,9 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
     if (activeRecognition) {
       stopVoiceListening();
       return;
+    }
+    if (typeof pendingScheduleCommit !== 'undefined' && pendingScheduleCommit) {
+      cancelPendingScheduleCommit(currentLang === 'ar' ? 'لم يتم الحفظ — تابع من حيث توقفت.' : 'Not saved — continue where you left off.');
     }
     if (!SpeechRecognitionCtor) {
       setVoiceLiveStatus(currentLang === 'ar'
@@ -9110,11 +9370,25 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
   const logsSheet = makeSheet('logsSheet', 'logsBackdrop', 'openLogsBtn', 'logsCloseBtn', () => { renderLogs(); });
   const voiceSheet = makeSheet('voiceSheet', 'voiceBackdrop', 'openVoiceBtn', 'voiceCloseBtn', () => {});
   const settingsSheet = makeSheet('settingsSheet', 'settingsBackdrop', 'openSettingsBtn', 'settingsCloseBtn', () => { syncSettingsUI(); });
-  openSheets = [scheduleSheet, logsSheet, voiceSheet, settingsSheet];
+  openSheets = [scheduleSheet, logsSheet, settingsSheet];
+
+  function openHomeVoice(startListening = false) {
+    const panel = document.getElementById('homeVoicePanel');
+    const shell = document.getElementById('homeVoiceShell');
+    const trigger = document.getElementById('homeTalkCta');
+    if (!panel) return;
+    panel.hidden = false;
+    shell?.classList.add('is-open');
+    trigger?.setAttribute('aria-expanded','true');
+    if (startListening) startVoiceListening();
+    else commandInput?.focus();
+  }
 
   document.getElementById('homeTalkCta')?.addEventListener('click', () => {
-    voiceSheet.open();
-    startVoiceListening();
+    const panel = document.getElementById('homeVoicePanel');
+    if (panel?.hidden) openHomeVoice(true);
+    else if (activeRecognition) stopVoiceListening();
+    else startVoiceListening();
   });
   document.getElementById('voiceListenBtn')?.addEventListener('click', () => {
     if (activeRecognition) stopVoiceListening();
@@ -11244,6 +11518,57 @@ html[lang="ar"] .activity-reminder::after{content:"حذف";}
   document.getElementById('settingsOpenBtn')?.addEventListener('click',()=>setTimeout(showHome,0));
   document.getElementById('openSettingsBtn')?.addEventListener('click',()=>setTimeout(showHome,0));
   setTimeout(()=>{showHome();syncCopy()},0);
+})();
+</script>
+
+<script id="mobile-shell-v15-js">
+(() => {
+  const $=id=>document.getElementById(id);
+  const ar=()=>document.documentElement.lang==='ar';
+  const settingsSheet=$('settingsSheet');
+  const settingsHome=$('settingsHome');
+  const settingsClose=$('settingsCloseBtn');
+  const panels=[...document.querySelectorAll('#settingsSheet [data-settings-panel]')];
+  const isChild=()=>panels.some(p=>!p.hidden);
+  function syncSettingsHeader(){
+    const child=isChild();
+    settingsSheet?.classList.toggle('child-open',child);
+    if(settingsClose){settingsClose.setAttribute('aria-label',child?(ar()?'العودة إلى الإعدادات':'Back to Settings'):(ar()?'إغلاق الإعدادات':'Close Settings'));}
+  }
+  document.querySelectorAll('#settingsSheet [data-settings-open],#settingsRemindersOpen,#settingsRemindersStatusButton').forEach(b=>b?.addEventListener('click',()=>setTimeout(syncSettingsHeader,0)));
+  document.querySelectorAll('#settingsSheet [data-settings-back]').forEach(b=>b.addEventListener('click',()=>setTimeout(syncSettingsHeader,0)));
+  settingsClose?.addEventListener('click',e=>{
+    if(isChild()){e.preventDefault();e.stopImmediatePropagation();settingsHome.hidden=false;panels.forEach(p=>p.hidden=true);syncSettingsHeader();}
+  },true);
+  $('openSettingsBtn')?.addEventListener('click',()=>setTimeout(syncSettingsHeader,0));
+  $('openMyPrayerBtn')?.addEventListener('click',()=>{ $('prayerRemainingCard')?.click(); });
+  function syncMyPrayerLabel(){const el=$('navMyPrayerLabel');if(el)el.textContent=ar()?'صلاتي':'My Prayer';}
+  const prompts={
+    en:{capabilities:'What can I do?',free:'Find me a free time',edit:'How do I edit an activity?',help:'What can Daily Rhythm do?'},
+    ar:{capabilities:'ماذا يمكنني أن أفعل؟',free:'ابحث لي عن وقت متاح',edit:'كيف أعدّل نشاطًا؟',help:'ماذا يستطيع Daily Rhythm أن يفعل؟'}
+  };
+  function syncPrompts(){const L=ar()?'ar':'en';document.querySelectorAll('[data-voice-prompt]').forEach(b=>b.textContent=prompts[L][b.dataset.voicePrompt]||b.textContent);syncMyPrayerLabel();}
+  document.querySelectorAll('[data-voice-prompt]').forEach(b=>b.addEventListener('click',()=>{const L=ar()?'ar':'en';const input=$('commandInput');if(input){input.value=prompts[L][b.dataset.voicePrompt]||'';input.dispatchEvent(new Event('input',{bubbles:true}));input.focus();}}));
+  async function paintReminderActions(){
+    const btn=$('enableReminderNotifications'), statusBtn=$('settingsRemindersStatusButton'), statusText=$('settingsRemindersStatusText'), hero=$('settingsRemindersHeroStatus');
+    if(!window.DailyRhythmReminders)return;
+    try{const st=await window.DailyRhythmReminders.status();
+      if(btn){btn.textContent=st.enabled?(ar()?'إيقاف التذكيرات':'Turn off reminders'):(ar()?'تفعيل التذكيرات':'Enable reminders');btn.dataset.enabled=st.enabled?'1':'0';}
+      if(statusBtn)statusBtn.classList.toggle('is-on',!!st.enabled);
+      if(statusText)statusText.textContent=st.enabled?(ar()?'مفعّلة':'On'):(ar()?'متوقفة':'Off');
+      if(hero)hero.textContent=st.enabled?(ar()?'التذكيرات مفعّلة. اضغط لاختيار التوقيت الافتراضي.':'Reminders are on. Tap to choose your default timing.'):(ar()?'اختر متى تريد أن ينبهك Daily Rhythm قبل الأنشطة.':'Choose when Daily Rhythm should remind you before activities.');
+    }catch(_){}
+  }
+  const reminderBtn=$('enableReminderNotifications');
+  if(reminderBtn){
+    reminderBtn.replaceWith(reminderBtn.cloneNode(true));
+    const b=$('enableReminderNotifications');
+    b.addEventListener('click',async()=>{b.disabled=true;try{const st=await window.DailyRhythmReminders.status();if(st.enabled)await window.DailyRhythmReminders.disable();else await window.DailyRhythmReminders.enable();}catch(e){console.warn('Reminder state change failed',e)}finally{b.disabled=false;paintReminderActions();}});
+  }
+  $('settingsRemindersStatusButton')?.addEventListener('click',()=>$('settingsRemindersOpen')?.click());
+  window.addEventListener('dailyRhythm:reminderStatus',paintReminderActions);
+  new MutationObserver(()=>{syncPrompts();paintReminderActions();syncSettingsHeader();}).observe(document.documentElement,{attributes:true,attributeFilter:['lang','dir']});
+  setTimeout(()=>{syncPrompts();paintReminderActions();syncSettingsHeader();},0);
 })();
 </script>
 </body>
