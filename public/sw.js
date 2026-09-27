@@ -1,5 +1,5 @@
-// Daily Rhythm v16.4 My Prayer repair
-const CACHE_VERSION = 'daily-rhythm-v1.0.0-phase1-incremental-voice-settings-v16-5';
+// Daily Rhythm v17.2 My Prayer component bundle
+const CACHE_VERSION = 'daily-rhythm-v1.0.0-dark-only-v17-4';
 const APP_CACHE = `${CACHE_VERSION}-app`;
 const RUNTIME_CACHE = `${CACHE_VERSION}-runtime`;
 
@@ -8,8 +8,25 @@ const APP_SHELL = [
   './index.html',
   './css/command-results.css',
   './css/my-prayer-immersive-v14.css',
+  './css/my-prayer.css',
   './js/command-results.js',
   './js/my-prayer-immersive-v14.js',
+  './js/my-prayer/clock-components.js',
+  './js/my-prayer/screen.js',
+  './assets/my-prayer/frame.png',
+  './assets/my-prayer/scene.jpg',
+  './assets/my-prayer/hour.png',
+  './assets/my-prayer/minute.png',
+  './assets/my-prayer/second.png',
+  './assets/my-prayer/qibla.png',
+  './assets/my-prayer/moons/phase-0.png',
+  './assets/my-prayer/moons/phase-1.png',
+  './assets/my-prayer/moons/phase-2.png',
+  './assets/my-prayer/moons/phase-3.png',
+  './assets/my-prayer/moons/phase-4.png',
+  './assets/my-prayer/moons/phase-5.png',
+  './assets/my-prayer/moons/phase-6.png',
+  './assets/my-prayer/moons/phase-7.png',
   './js/reminders.js',
   './manifest.webmanifest'
 ];
